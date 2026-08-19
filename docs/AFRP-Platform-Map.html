@@ -230,6 +230,29 @@ table.px-table{width:100%;border-collapse:collapse;font-size:13.5px}
   .px-duo > div:last-child{order:1}
 }
 
+/* ── v2 programs: charter grid ─────────────────────────────────────────── */
+.px-charter{max-width:1560px;margin:14px auto 0;padding:0 24px;display:grid;gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.px-chcard{background:var(--px-surface);border:1px solid var(--px-line);border-radius:12px;
+  padding:13px 16px;min-width:0}
+.px-chcard h5{margin:0 0 7px;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--px-ink-3);display:flex;align-items:center;gap:7px}
+.px-chcard h5 i{width:8px;height:8px;border-radius:3px;display:inline-block;background:var(--px-green)}
+.px-chcard--mission h5 i{background:var(--px-green)}
+.px-chcard--committee h5 i{background:var(--px-gold)}
+.px-chcard--budget h5 i{background:var(--px-pine)}
+.px-chcard--activities h5 i{background:var(--px-olive)}
+.px-chcard--metrics h5 i{background:#5b4a80}
+.px-chcard p{margin:0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)}
+.px-chcard p b{color:var(--px-ink)}
+.px-chcard ul{margin:0;padding-left:16px;font-size:12.5px;line-height:1.55;color:var(--px-ink-2)}
+.px-chcard ul li{margin-bottom:3px}
+.px-chcard .px-chsub{font-size:11.5px;color:var(--px-ink-3);margin-top:6px}
+.px-chcard .px-demo{font-size:10px;font-weight:800;letter-spacing:.08em;background:var(--px-red-50);
+  color:var(--px-red);border-radius:99px;padding:1px 7px;vertical-align:1px}
+.px-chcard .px-real{font-size:10px;font-weight:800;letter-spacing:.08em;background:var(--px-pine-50);
+  color:var(--px-pine);border-radius:99px;padding:1px 7px;vertical-align:1px}
+
 </style>
 </head>
 <body class="px-doc">
@@ -376,8 +399,8 @@ table.px-table{width:100%;border-collapse:collapse;font-size:13.5px}
     <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s17">Member 17</a><a href="AFRP-Community-LifeEvents.html#cd1">Community doc</a><a href="prototype.html#/member/rbpn">Prototype</a></div></div>
     <div class="px-mcard"><h4>Hathihe Ramallah, bookstore &amp; ads desk <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Copy freeze, auto-compiled sections, a death held for family approval; member pricing; one ads desk for two publications.</p>
     <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s19">Member 19</a><a href="AFRP-Unified-Member.html#s20">Member 20</a><a href="AFRP-Unified-Operations.html#f19">Ops 19</a><a href="AFRP-Unified-Operations.html#f20">Ops 20</a><a href="AFRP-Community-LifeEvents.html#ad1">Community doc</a><a href="prototype.html#/member/magazine">Prototype</a></div></div>
-    <div class="px-mcard"><h4>Programmes — catalogue, camp, alumni <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Seventeen programmes, one lifecycle, six shared rails; alumni tracing that never hands over contact details.</p>
-    <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s21">Member 21</a><a href="AFRP-Unified-Operations.html#f21">Ops 21</a><a href="AFRP-Unified-Operations.html#f18">Ops 18</a><a href="prototype.html#/program/overview">Prototype</a></div></div>
+    <div class="px-mcard"><h4>Programmes — six sections, each with a charter <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Medical, Cultural, Leadership, Educational, Camp, Convention — every programme carrying a mission, a membership committee, a budget, activities, and success metrics, with real afrp.org content.</p>
+    <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s21">Member 21</a><a href="AFRP-Unified-Operations.html#f21">Ops 21</a><a href="AFRP-Unified-Operations.html#f18">Ops 18</a><a href="AFRP-Programs.html">Programs doc v2.0</a><a href="prototype.html#/program/overview">Prototype</a></div></div>
     <div class="px-mcard"><h4>&#9733; The Convention — its own element <span class="px-badge px-badge--proposed"><i></i>Proposed</span></h4><p>Registration, the 9.1.3 credentialing floor, participant store &amp; communications, organizer backend with club integration.</p>
     <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s10">Member 10</a><a href="AFRP-Unified-Operations.html#f04">Ops 04</a><a href="AFRP-Convention.html#top">Convention doc</a><a href="prototype.html#/fed/credentialing">Prototype</a></div></div>
   </div>
