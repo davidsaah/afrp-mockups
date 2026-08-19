@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AFRP Platform Experience · v1.0 — twelve journeys, red-teamed and settled</title>
+<meta name="description" content="Detailed user-experience journeys for the AFRP platform, adversarially tested by a 90-agent red team: 16 confirmed breaks settled into six platform principles, with worked examples throughout.">
+<style>
+/* ═════════════════════════════════════════════════════════════════════════
+   AFRP UNIFIED PLATFORM — consolidated document chrome (px- namespace)
+   Heritage layer v3.1 values. Everything inside .sc-m / .sc-o keeps its own
+   scoped stylesheet; this layer only draws the consolidated shell around it.
+   ═════════════════════════════════════════════════════════════════════════ */
+:root{
+  --px-ink:#2b2416; --px-ink-2:#57503f; --px-ink-3:#7a7260;
+  --px-bg:#f5f0e1; --px-surface:#fffdf6; --px-surface-2:#f7f1e2;
+  --px-line:#e2d9c2; --px-dark:#211c11; --px-dark-2:#2c261741;
+  --px-cream:#f2ecd9; --px-cream-2:#d8d0b8;
+  --px-green:#4c6414; --px-green-deep:#33430b; --px-green-50:#eef0da;
+  --px-olive:#6d7a19; --px-olive-50:#f2f4dd;
+  --px-gold:#9a720d;  --px-gold-50:#faf2dc; --px-gold-200:#e7d191;
+  --px-pine:#3f6b41;  --px-pine-50:#e6f0e2;
+  --px-red:#8c2f21;   --px-red-50:#f7e4df;
+  --px-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --px-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+svg.sprite{display:none}
+body{margin:0;background:var(--px-bg);color:var(--px-ink);font:16px/1.6 var(--px-font)}
+.px-doc{scroll-behavior:smooth}
+
+/* ── masthead ─────────────────────────────────────────────────────────── */
+.px-mast{background:var(--px-dark);color:var(--px-cream);padding:44px 0 30px;
+  border-bottom:4px solid var(--px-green)}
+.px-mast .px-in{max-width:1560px;margin:0 auto;padding:0 24px}
+.px-lockup{display:flex;align-items:center;gap:12px;color:#d9b45a;margin-bottom:26px}
+.px-lockup svg{width:38px;height:38px}
+.px-lockup b{font-size:20px;letter-spacing:.06em;color:var(--px-cream)}
+.px-lockup small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:#c9b877;font-weight:600}
+.px-kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#b5c24a;
+  font-weight:700;margin:0 0 10px}
+.px-mast h1{font-size:clamp(30px,3vw + 18px,44px);line-height:1.12;margin:0 0 18px;
+  font-weight:800;letter-spacing:-.01em;color:#fffdf6}
+.px-mast .px-lede{max-width:74ch;font-size:16.5px;line-height:1.65;color:#e8e1cb;margin:0 0 14px}
+.px-mast .px-lede b{color:#fffdf6}
+.px-mast .px-lede code{font-family:var(--px-mono);font-size:.86em;background:#ffffff14;
+  padding:1px 6px;border-radius:6px;color:#e7d191}
+.px-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.px-chip{font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px;
+  background:#ffffff12;color:#e8e1cb;border:1px solid #ffffff24}
+.px-chip--green{background:#4c6414;color:#f2f4dd;border-color:#5d7a1a}
+.px-chip--red{background:#8c2f21;color:#f7e4df;border-color:#a1402f}
+.px-chip--gold{background:#9a720d33;color:#e7d191;border-color:#9a720d66}
+
+/* institution nav strip in mast */
+.px-instnav{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.px-instnav a{display:flex;align-items:center;gap:9px;text-decoration:none;
+  background:#ffffff0d;border:1px solid #ffffff22;border-radius:12px;padding:10px 16px;
+  color:#f2ecd9;font-size:14px;font-weight:600;transition:background .15s}
+.px-instnav a:hover{background:#ffffff1c}
+.px-instnav .px-rn{font-family:var(--px-mono);font-size:12px;color:#d9b45a;font-weight:700}
+
+/* ── legend ───────────────────────────────────────────────────────────── */
+.px-legendwrap{background:var(--px-surface);border-bottom:1px solid var(--px-line)}
+.px-legend{max-width:1560px;margin:0 auto;padding:22px 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px 28px}
+.px-legend h4{margin:0 0 5px;font-size:13.5px;display:flex;align-items:center;gap:8px}
+.px-legend p{margin:0;font-size:13px;line-height:1.5;color:var(--px-ink-2)}
+
+/* ── badges ───────────────────────────────────────────────────────────── */
+.px-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.1em;padding:3px 10px;border-radius:999px;text-transform:uppercase;
+  vertical-align:2px}
+.px-badge i{width:7px;height:7px;border-radius:99px;display:inline-block}
+.px-badge--built{background:var(--px-pine-50);color:var(--px-pine);border:1px solid #aecfa6}
+.px-badge--built i{background:var(--px-pine)}
+.px-badge--designed{background:var(--px-gold-50);color:var(--px-gold);border:1px solid var(--px-gold-200)}
+.px-badge--designed i{background:var(--px-gold)}
+.px-badge--proposed{background:#eee9f5;color:#5b4a80;border:1px solid #cfc2e4}
+.px-badge--proposed i{background:#5b4a80}
+.px-badge--partial{background:var(--px-olive-50);color:#525d12;border:1px solid #cdd48f}
+.px-badge--partial i{background:var(--px-olive)}
+
+/* ── TOC ──────────────────────────────────────────────────────────────── */
+.px-toc{max-width:1560px;margin:34px auto 0;padding:0 24px}
+.px-toc h2{font-size:22px;margin:0 0 6px}
+.px-toc > p{margin:0 0 20px;color:var(--px-ink-2);font-size:14.5px;max-width:88ch}
+.px-toccols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.px-toccol{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:18px 20px}
+.px-toccol h3{margin:0 0 2px;font-size:16px;display:flex;gap:9px;align-items:baseline}
+.px-toccol h3 .px-rn{font-family:var(--px-mono);font-size:12px;color:var(--px-gold)}
+.px-toccol .px-bylaw{font-size:12px;color:var(--px-ink-3);margin:0 0 12px}
+.px-toccol a{display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+  padding:7px 2px;text-decoration:none;color:var(--px-ink);font-size:14px;
+  border-top:1px solid var(--px-line)}
+.px-toccol a:hover{color:var(--px-green-deep)}
+.px-toccol a .px-fc{font-size:11.5px;color:var(--px-ink-3);font-family:var(--px-mono);white-space:nowrap}
+.px-toccol a.px-star{font-weight:700}
+
+/* ── institution part header ──────────────────────────────────────────── */
+.px-inst{margin:72px 0 0;background:var(--px-dark);color:var(--px-cream);
+  border-top:4px solid var(--px-gold);padding:34px 0 30px}
+.px-inst .px-in{max-width:1560px;margin:0 auto;padding:0 24px}
+.px-inst .px-rn{font-family:var(--px-mono);font-size:13px;color:#d9b45a;font-weight:700;
+  letter-spacing:.12em}
+.px-inst h2{font-size:clamp(24px,2vw + 15px,32px);margin:6px 0 10px;color:#fffdf6}
+.px-inst p{max-width:80ch;margin:0;font-size:15px;line-height:1.6;color:#e8e1cb}
+.px-inst .px-src{margin-top:12px;font-size:12.5px;color:#c9b877;font-family:var(--px-mono)}
+
+/* ── module head ──────────────────────────────────────────────────────── */
+.px-mod{max-width:1560px;margin:56px auto 0;padding:0 24px}
+.px-mod--star{border-left:4px solid var(--px-gold);padding-left:20px;margin-left:max(24px,calc((100% - 1560px)/2));
+  max-width:1516px;padding-right:24px}
+@media (max-width:1608px){.px-mod--star{margin-left:24px;margin-right:0}}
+.px-mod .px-modkick{font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--px-ink-3);font-weight:700;margin:0 0 4px}
+.px-mod h3{font-size:clamp(20px,1.4vw + 14px,26px);margin:0 0 10px;display:flex;
+  flex-wrap:wrap;align-items:center;gap:12px}
+.px-mod .px-desc{max-width:86ch;margin:0 0 12px;font-size:15px;line-height:1.62;color:var(--px-ink-2)}
+.px-mod .px-desc b{color:var(--px-ink)}
+.px-api{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.px-api span{font-family:var(--px-mono);font-size:11.5px;background:var(--px-surface);
+  border:1px solid var(--px-line);border-radius:7px;padding:3px 8px;color:#57503f}
+.px-api span.px-api--live{border-color:#aecfa6;background:var(--px-pine-50);color:var(--px-pine)}
+.px-api span.px-api--draft{border-style:dashed;color:#5b4a80;border-color:#cfc2e4;background:#f4f1f9}
+.px-subhead{max-width:1560px;margin:34px auto 0;padding:0 24px;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--px-ink-3);font-weight:700;
+  display:flex;align-items:center;gap:10px}
+.px-subhead:after{content:"";flex:1;height:1px;background:var(--px-line)}
+
+/* roadmap cards (ARFHSN / endowment) */
+.px-road{max-width:1560px;margin:22px auto 0;padding:0 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.px-roadcard{background:var(--px-surface);border:1px dashed var(--px-cream-2);
+  border-radius:14px;padding:20px 22px}
+.px-roadcard h4{margin:0 0 8px;font-size:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.px-roadcard p{margin:0 0 8px;font-size:13.5px;line-height:1.55;color:var(--px-ink-2)}
+.px-roadcard .px-blocked{font-size:12.5px;color:var(--px-red);background:var(--px-red-50);
+  border-radius:8px;padding:7px 11px;margin-top:10px}
+
+/* footer */
+.px-foot{margin-top:88px;background:var(--px-dark);color:#c9c0a5;padding:34px 0 46px;
+  border-top:4px solid var(--px-green)}
+.px-foot .px-in{max-width:1560px;margin:0 auto;padding:0 24px;font-size:13px;line-height:1.7}
+.px-foot b{color:#f2ecd9}
+.px-foot a{color:#d9b45a}
+.px-sep{height:26px}
+@media print{.px-mast,.px-inst{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+/* ── v3: sticky top nav, version chip, element matrix ─────────────────── */
+.px-topnav{position:sticky;top:0;z-index:50;background:#211c11f2;backdrop-filter:blur(6px);
+  border-bottom:1px solid #ffffff1c;color:#f2ecd9}
+.px-topnav .px-in{max-width:1560px;margin:0 auto;padding:9px 24px;display:flex;
+  align-items:center;gap:14px;flex-wrap:wrap}
+.px-topnav .px-tbrand{display:flex;align-items:center;gap:9px;font-weight:800;
+  letter-spacing:.05em;color:#fffdf6;text-decoration:none;font-size:15px}
+.px-topnav .px-tver{font-family:var(--px-mono);font-size:10.5px;font-weight:700;
+  background:#4c6414;color:#f2f4dd;border-radius:999px;padding:2px 9px;letter-spacing:.06em}
+.px-topnav .px-tlinks{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.px-topnav .px-tlinks a{color:#e8e1cb;text-decoration:none;font-size:13px;font-weight:600;
+  padding:6px 11px;border-radius:8px}
+.px-topnav .px-tlinks a:hover{background:#ffffff14}
+.px-topnav .px-tlinks a.px-tcta{background:#4c6414;color:#f2f4dd}
+.px-vermeta{font-family:var(--px-mono);font-size:12px;color:#c9b877;margin:0 0 14px}
+
+.px-matrix{max-width:1560px;margin:26px auto 0;padding:0 24px}
+.px-matrix h3{font-size:19px;margin:34px 0 4px}
+.px-matrix .px-mnote{font-size:13.5px;color:var(--px-ink-2);margin:0 0 12px;max-width:88ch}
+.px-tablewrap{overflow-x:auto;background:var(--px-surface);border:1px solid var(--px-line);
+  border-radius:12px}
+table.px-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.px-table th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--px-ink-3);padding:10px 14px;border-bottom:1px solid var(--px-line);
+  background:var(--px-surface-2)}
+.px-table td{padding:9px 14px;border-bottom:1px solid #eee7d4;vertical-align:top}
+.px-table tr:last-child td{border-bottom:0}
+.px-table a{color:var(--px-green-deep);text-decoration:none;font-weight:600}
+.px-table a:hover{text-decoration:underline}
+.px-st{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.08em;padding:2px 9px;border-radius:999px;text-transform:uppercase;white-space:nowrap}
+.px-st i{width:7px;height:7px;border-radius:99px}
+.px-st--p{background:var(--px-pine-50);color:var(--px-pine)}.px-st--p i{background:var(--px-pine)}
+.px-st--part{background:var(--px-olive-50);color:#525d12}.px-st--part i{background:var(--px-olive)}
+.px-st--m{background:var(--px-red-50);color:var(--px-red)}.px-st--m i{background:var(--px-red)}
+.px-st--prop{background:#eee9f5;color:#5b4a80}.px-st--prop i{background:#5b4a80}
+
+.px-cardgrid{max-width:1560px;margin:20px auto 0;padding:0 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px}
+.px-mcard{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:18px 20px}
+.px-mcard h4{margin:0 0 6px;font-size:15.5px;display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.px-mcard p{margin:0 0 10px;font-size:13px;line-height:1.55;color:var(--px-ink-2)}
+.px-mcard .px-mlinks{display:flex;flex-wrap:wrap;gap:6px}
+.px-mcard .px-mlinks a{font-size:12px;font-weight:700;color:var(--px-green-deep);
+  text-decoration:none;background:var(--px-green-50);border:1px solid #c4cd97;
+  border-radius:999px;padding:3px 11px}
+.px-mcard .px-mlinks a:hover{background:#dde2bf}
+.px-mcard .px-mlinks a.px-ml--ext{background:var(--px-gold-50);border-color:var(--px-gold-200);
+  color:var(--px-gold)}
+
+/* ── programs doc: pipelines, duo layout, facts ────────────────────────── */
+.px-pipes{max-width:1560px;margin:30px auto 0;padding:0 24px}
+.px-pipe{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:16px 20px;margin-bottom:14px}
+.px-pipe h4{margin:0 0 2px;font-size:15.5px}
+.px-pipe > p{margin:0 0 12px;font-size:13px;color:var(--px-ink-2)}
+.px-pipe .px-rail{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.px-pipe .px-rail a{display:flex;flex-direction:column;text-decoration:none;background:var(--px-green-50);
+  border:1px solid #c4cd97;border-radius:10px;padding:7px 13px;color:var(--px-green-deep);min-width:0}
+.px-pipe .px-rail a b{font-size:13px}
+.px-pipe .px-rail a small{font-size:10.5px;color:#525d12;font-family:var(--px-mono)}
+.px-pipe .px-rail a:hover{background:#dde2bf}
+.px-pipe .px-rail .px-arr{color:var(--px-ink-3);font-weight:700}
+.px-hostchip{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:3px 11px;
+  color:#fff;vertical-align:2px}
+.px-progflag{max-width:1560px;margin:10px auto 0;padding:0 24px}
+.px-progflag > div{border-left:3px solid var(--px-gold);background:var(--px-gold-50);color:#584106;
+  padding:10px 14px;border-radius:0 10px 10px 0;font-size:13px;max-width:100ch}
+.px-duo{max-width:1560px;margin:18px auto 0;padding:0 24px;display:grid;gap:22px;
+  grid-template-columns:minmax(0,1fr)}
+@media(min-width:1150px){.px-duo{grid-template-columns:minmax(0,7fr) minmax(0,3fr);align-items:start}}
+.px-duo .px-duolabel{font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--px-ink-3);font-weight:700;margin:0 0 8px}
+.px-srcline{max-width:1560px;margin:8px auto 0;padding:0 24px;font-size:12px;color:var(--px-ink-3)}
+.px-srcline a{color:var(--px-green-deep)}
+@media(max-width:1149px){
+  .px-duo > div:first-child{order:2}
+  .px-duo > div:last-child{order:1}
+}
+
+/* ── v2 programs: charter grid ─────────────────────────────────────────── */
+.px-charter{max-width:1560px;margin:14px auto 0;padding:0 24px;display:grid;gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.px-chcard{background:var(--px-surface);border:1px solid var(--px-line);border-radius:12px;
+  padding:13px 16px;min-width:0}
+.px-chcard h5{margin:0 0 7px;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--px-ink-3);display:flex;align-items:center;gap:7px}
+.px-chcard h5 i{width:8px;height:8px;border-radius:3px;display:inline-block;background:var(--px-green)}
+.px-chcard--mission h5 i{background:var(--px-green)}
+.px-chcard--committee h5 i{background:var(--px-gold)}
+.px-chcard--budget h5 i{background:var(--px-pine)}
+.px-chcard--activities h5 i{background:var(--px-olive)}
+.px-chcard--metrics h5 i{background:#5b4a80}
+.px-chcard p{margin:0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)}
+.px-chcard p b{color:var(--px-ink)}
+.px-chcard ul{margin:0;padding-left:16px;font-size:12.5px;line-height:1.55;color:var(--px-ink-2)}
+.px-chcard ul li{margin-bottom:3px}
+.px-chcard .px-chsub{font-size:11.5px;color:var(--px-ink-3);margin-top:6px}
+.px-chcard .px-demo{font-size:10px;font-weight:800;letter-spacing:.08em;background:var(--px-red-50);
+  color:var(--px-red);border-radius:99px;padding:1px 7px;vertical-align:1px}
+.px-chcard .px-real{font-size:10px;font-weight:800;letter-spacing:.08em;background:var(--px-pine-50);
+  color:var(--px-pine);border-radius:99px;padding:1px 7px;vertical-align:1px}
+
+/* ── experience doc: journey blocks, breaks register ───────────────────── */
+.px-journey{max-width:1560px;margin:44px auto 0;padding:0 24px}
+.px-jsteps{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:6px 0;margin-top:14px}
+.px-jstep{display:flex;gap:14px;padding:11px 18px;border-bottom:1px solid #eee7d4;font-size:13.5px}
+.px-jstep:last-child{border-bottom:0}
+.px-jstep .px-jn{flex:none;width:26px;height:26px;border-radius:99px;background:var(--px-green-50);
+  border:1px solid #c4cd97;color:var(--px-green-deep);font-weight:800;font-size:12px;
+  display:grid;place-items:center}
+.px-jstep .px-jbody{min-width:0}
+.px-jstep .px-jbody b{color:var(--px-ink)}
+.px-jstep .px-jbody .px-jrule{display:inline-block;margin-left:6px;font-family:var(--px-mono);
+  font-size:10.5px;background:var(--px-surface-2);border:1px solid var(--px-line);
+  border-radius:6px;padding:1px 7px;color:var(--px-ink-3)}
+.px-jstep .px-jbody .px-jscreen{display:inline-block;margin-left:6px;font-size:11px;font-weight:700}
+.px-jstep .px-jbody .px-jscreen a{color:var(--px-green-deep);text-decoration:none}
+.px-jstep--fix{background:var(--px-gold-50)}
+.px-jstep--fix .px-jn{background:var(--px-gold-50);border-color:var(--px-gold-200);color:var(--px-gold)}
+.px-break{border-left:3px solid var(--px-red);background:var(--px-red-50);border-radius:0 10px 10px 0;
+  padding:11px 15px;margin-top:10px;font-size:13px;color:#5c2418}
+.px-break b{color:var(--px-red)}
+.px-break .px-fix{display:block;margin-top:6px;color:#3d5220}
+.px-break .px-fix b{color:var(--px-green-deep)}
+.px-sev{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.09em;border-radius:99px;
+  padding:1px 8px;text-transform:uppercase;vertical-align:1px;margin-right:6px}
+.px-sev--critical{background:var(--px-red);color:#fff}
+.px-sev--major{background:var(--px-gold);color:#fff}
+.px-sev--minor{background:var(--px-cream-2);color:var(--px-ink-2)}
+
+</style>
+</head>
+<body class="px-doc">
+<nav class="px-topnav"><div class="px-in">
+  <a class="px-tbrand" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="AFRP olive-tree mark" style="color:#f2ecd9;width:26px;height:26px;flex:none">
+  
+
+  
+  <g>
+    <rect x="13" y="66" width="94" height="22" fill="#e7d191"/>
+    <g fill="#d9b45a">
+      <rect x="13" y="67" width="15" height="9" rx="3"/><rect x="31" y="67" width="19" height="9" rx="3"/>
+      <rect x="53" y="67" width="13" height="9" rx="3"/><rect x="69" y="67" width="18" height="9" rx="3"/>
+      <rect x="90" y="67" width="17" height="9" rx="3"/>
+    </g>
+    <g fill="#c9a34a">
+      <rect x="13" y="78" width="10" height="9" rx="3"/><rect x="26" y="78" width="17" height="9" rx="3"/>
+      <rect x="46" y="78" width="14" height="9" rx="3"/><rect x="63" y="78" width="11" height="9" rx="3"/>
+      <rect x="77" y="78" width="18" height="9" rx="3"/><rect x="98" y="78" width="9" height="9" rx="3"/>
+    </g>
+  </g>
+
+  
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M59 97c0-12 0-24-3-33" stroke-width="7.5"/>
+    <path d="M56 64c-3-8-8-13-14-16" stroke-width="6"/>
+    <path d="M56.5 66c2-8 7-14 14-18" stroke-width="6"/>
+    <path d="M47 53c-3-3-5-7-5-12" stroke-width="4.5"/>
+    <path d="M66 53c4-2 7-5 9-9" stroke-width="4.5"/>
+    <path d="M59 97c-5 3-10 4-15 4M59 97c5 3 10 4 15 4M59 97v7" stroke-width="5"/>
+  </g>
+
+  
+  <g fill="#4c6414">
+    <ellipse cx="33" cy="34" rx="6.5" ry="3.1" transform="rotate(-38 33 34)"/>
+    <ellipse cx="45" cy="23" rx="6.5" ry="3.1" transform="rotate(-16 45 23)"/>
+    <ellipse cx="61" cy="18" rx="6.5" ry="3.1" transform="rotate(2 61 18)"/>
+    <ellipse cx="77" cy="22" rx="6.5" ry="3.1" transform="rotate(20 77 22)"/>
+    <ellipse cx="88" cy="33" rx="6.5" ry="3.1" transform="rotate(48 88 33)"/>
+    <ellipse cx="27" cy="47" rx="6.5" ry="3.1" transform="rotate(-66 27 47)"/>
+    <ellipse cx="93" cy="46" rx="6.5" ry="3.1" transform="rotate(66 93 46)"/>
+  </g>
+  <g fill="#6d7a19">
+    <ellipse cx="40" cy="34" rx="6" ry="2.9" transform="rotate(-28 40 34)"/>
+    <ellipse cx="53" cy="27" rx="6" ry="2.9" transform="rotate(-8 53 27)"/>
+    <ellipse cx="68" cy="26" rx="6" ry="2.9" transform="rotate(12 68 26)"/>
+    <ellipse cx="81" cy="32" rx="6" ry="2.9" transform="rotate(36 81 32)"/>
+    <ellipse cx="33" cy="55" rx="6" ry="2.9" transform="rotate(-56 33 55)"/>
+    <ellipse cx="87" cy="55" rx="6" ry="2.9" transform="rotate(56 87 55)"/>
+    <ellipse cx="60" cy="30" rx="6" ry="2.9" transform="rotate(0 60 30)"/>
+  </g>
+  <g fill="#7e9440">
+    <ellipse cx="47" cy="37" rx="5.5" ry="2.7" transform="rotate(-18 47 37)"/>
+    <ellipse cx="60" cy="38" rx="5.5" ry="2.7" transform="rotate(4 60 38)"/>
+    <ellipse cx="73" cy="37" rx="5.5" ry="2.7" transform="rotate(24 73 37)"/>
+    <ellipse cx="39" cy="46" rx="5.5" ry="2.7" transform="rotate(-42 39 46)"/>
+    <ellipse cx="82" cy="45" rx="5.5" ry="2.7" transform="rotate(42 82 45)"/>
+    <ellipse cx="53" cy="46" rx="5.5" ry="2.7" transform="rotate(-8 53 46)"/>
+    <ellipse cx="68" cy="46" rx="5.5" ry="2.7" transform="rotate(14 68 46)"/>
+  </g>
+
+  
+  <g fill="#38430b">
+    <circle cx="43" cy="28" r="2.3"/><circle cx="66" cy="21" r="2.3"/><circle cx="85" cy="28" r="2.3"/>
+    <circle cx="34" cy="41" r="2.3"/><circle cx="64" cy="33" r="2.3"/><circle cx="88" cy="41" r="2.3"/>
+    <circle cx="46" cy="42" r="2.3"/>
+  </g>
+  <g fill="#9a720d">
+    <circle cx="53" cy="22" r="2.1"/><circle cx="74" cy="30" r="2.1"/><circle cx="56" cy="33" r="2.1"/>
+    <circle cx="30" cy="51" r="2.1"/><circle cx="90" cy="51" r="2.1"/>
+  </g>
+
+  
+  <g fill="none" stroke="#4c6414" stroke-width="2" stroke-linecap="round">
+    <path d="M36 60c-2 5-2 10-1 14"/><path d="M83 59c2 5 2 10 1 15"/>
+  </g>
+  <g fill="#38430b">
+    <circle cx="34.6" cy="69" r="2"/><circle cx="35.6" cy="74.5" r="2"/>
+    <circle cx="84.6" cy="68" r="2"/><circle cx="84.2" cy="74" r="2"/>
+  </g>
+
+  
+  <path d="M11 88V60a49 49 0 0 1 98 0v28" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
+  <path d="M4 89.5h17M99 89.5h17" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+</svg>
+<span>AFRP</span></a>
+  <span style="color:#7a7260">/</span><span style="font-weight:700;font-size:14px">Platform Experience</span>
+  <span class="px-tver">v1.0</span>
+  <div class="px-tlinks">
+    <a href="#principles">Principles</a><a href="#register">Breaks register</a>
+    <a href="#j01">Journeys</a>
+    <a href="AFRP-Platform-Map.html">Platform Map</a><a href="prototype.html#/member/scenarios">Prototype scenarios</a>
+    <a href="index.html" class="px-tcta">All docs</a>
+  </div>
+</div></nav>
+<header class="px-mast"><div class="px-in">
+  <p class="px-kicker">AFRP design delivery &middot; the experience, tested</p>
+  <h1>The Platform Experience &mdash; twelve journeys, red-teamed and settled</h1>
+  <p class="px-vermeta">v1.0 &middot; 19 Aug 2026 &middot; red team: 90 agents &middot; 72 attacks &middot; 61 refuted &middot; 16 confirmed &amp; settled</p>
+  <p class="px-lede">Twelve detailed user experiences &mdash; joining, renewing across multiple clubs, a
+  daughter turning eighteen, a death in the family, the convention floor, a scholarship cycle, a camp
+  season, a treasurer&rsquo;s year, the magazine freeze, a committee seat, a professional listing, and
+  multi-entity giving &mdash; each written as a concrete worked example and then <b>attacked by a
+  ninety-agent red team</b> from four lenses. Every candidate break faced an adversarial skeptic;
+  61 of 72 attacks were refuted, which is the spec holding. The
+  16 that survived are settled inline &mdash; amber steps mark what the red team changed
+  &mdash; and generalize into <b>six platform principles</b> that simplify the design exactly where it broke,
+  and nowhere else.</p>
+  <div class="px-chips">
+    <span class="px-chip px-chip--green">12 journeys &middot; every module exercised</span>
+    <span class="px-chip">90 agents &middot; 4 attack lenses &middot; adversarial verification</span>
+    <span class="px-chip px-chip--red">4 critical + 12 major breaks &mdash; all settled</span>
+    <span class="px-chip px-chip--gold">6 principles &middot; S1&ndash;S6</span>
+    <span class="px-chip">3 journeys tested sound, unchanged</span>
+  </div>
+</div></header>
+<div class="px-cardgrid" id="principles" style="margin-top:26px"><div class="px-mcard"><h4>S1 · Verified channel first</h4><p>No money is captured, no PII is emitted, and no consent flips across a channel that has not been verified as belonging to that person. Join, login, and the 18th-birthday refresh collapse into ONE front-door surface: verify the channel, then create; verify the adult&rsquo;s own channel, then refresh. Born from breaks in J01, J03 and J07.</p></div><div class="px-mcard"><h4>S2 · One life-event state machine</h4><p>Every life event runs claimed &rarr; verified-pending &rarr; released-per-surface. Operational effects (billing suspension, storefront/relay stop, assignment freeze) fire at <b>verified-pending</b> and are reversible; publications wait for the approval gate. The reporter is never in their own approval set; death claims need an evidence artifact; an explicit family objection is a blocking veto with a defined window; an empty approval set has a named exit. Born from the five J04 breaks.</p></div><div class="px-mcard"><h4>S3 · One reversal model</h4><p>A refund or chargeback that crosses a remittance or entity boundary creates a <b>receivable</b> — never a negative liability or negative restricted class. Standing changes take an effective date; frozen snapshots are never recomputed but carry a &ldquo;payment reversed post-freeze&rdquo; annotation that downstream checks must honor by rule. One model for dues, gifts, store and conduit money. Born from breaks in J02, J04 and J12.</p></div><div class="px-mcard"><h4>S4 · Weights fix when voting opens</h4><p>Floor extraction re-divides delegate weights only <b>between</b> motions: when voting opens on a motion, weights freeze for that ballot. And a national member with no club counts federally through an at-large roll, so &ldquo;counts exactly once&rdquo; is true for everyone — both drafted as bylaw amendments for the Board, since 9.1.3 is real law. Born from the J05 and cross-journey breaks.</p></div><div class="px-mcard"><h4>S5 · Corrections are held, never lost</h4><p>A member dispute filed before a copy freeze blocks <b>that entry</b> (not the issue) until resolved — an entry in dispute prints as held, not as wrong. Downstream archives (Preservation Project) ingest only consent-classed material; print requires its own switch, and the archive honors it. Born from the J09 breaks.</p></div><div class="px-mcard"><h4>S6 · Refusals name the rule, not the relatives</h4><p>A conflict-of-interest block shows &ldquo;recused &middot; rule 41&rdquo; — never which relationship triggered it, because the refusal must not leak the tree. And Board budget approvals are allocations; only donor designation creates restriction — the words on the screen now say which is which. Born from the J10 breaks.</p></div></div><div class="px-matrix" id="register">
+  <h3 style="margin-top:44px">The breaks register &mdash; every confirmed finding, and its settlement</h3>
+  <p class="px-mnote">Twelve journeys were attacked by 90 agents from four lenses (governance,
+  privacy &amp; consent, money, edge states). 72 candidate breaks were raised; each faced an
+  adversarial skeptic instructed to refute it. <b>61 were refuted</b> &mdash; the spec held &mdash;
+  and <b>16 survived</b> (4 critical, 12 major). Every survivor
+  is settled inline in its journey below and folded into principles S1&ndash;S6.</p>
+  <div class="px-tablewrap"><table class="px-table">
+    <thead><tr><th style="width:90px">Severity</th><th style="width:110px">Journey</th><th>Confirmed break</th></tr></thead>
+    <tbody><tr><td><span class="px-sev px-sev--critical">critical</span></td><td><a href="#j01">J01</a></td><td><b>Pay-then-verify ordering plus magic-link auth hands a paid account (and household access) to a stranger</b></td></tr><tr><td><span class="px-sev px-sev--critical">critical</span></td><td><a href="#j03">J03</a></td><td><b>Parent can capture the adult consent refresh (channel of record is parent-supplied and unverified)</b></td></tr><tr><td><span class="px-sev px-sev--critical">critical</span></td><td><a href="#j04">J04</a></td><td><b>Reporter self-approval: one person can fabricate and publish a death</b></td></tr><tr><td><span class="px-sev px-sev--critical">critical</span></td><td><a href="#j04">J04</a></td><td><b>RBPN takedown and reviewer-seat vacation are wrongly gated behind the publication approval</b></td></tr><tr><td><span class="px-sev px-sev--major">major</span></td><td><a href="#j02">J02</a></td><td><b>Refund after remittance: negative club liability and undefined roster/snapshot reversion</b></td></tr><tr><td><span class="px-sev px-sev--major">major</span></td><td><a href="#j04">J04</a></td><td><b>Empty approval set: deceased-pending is a deadlock state with no exit</b></td></tr><tr><td><span class="px-sev px-sev--major">major</span></td><td><a href="#j04">J04</a></td><td><b>Refund of a deceased member's pre-paid dues breaks gross posting and the club-dues agency liability</b></td></tr><tr><td><span class="px-sev px-sev--major">major</span></td><td><a href="#j04">J04</a></td><td><b>A false or pending death report silently strips a living member of standing across a dues/voting boundary</b></td></tr><tr><td><span class="px-sev px-sev--major">major</span></td><td><a href="#j05">J05</a></td><td><b>Mid-vote extraction re-divides weights after ballots were already cast at the old weight</b></td></tr><tr><td><span class="px-sev px-sev--major">major</span></td><td><a href="#j07">J07</a></td><td><b>No precedence rule for two parents setting a minor's consents — last-write-wins silently</b></td></tr><tr><td><span class="px-sev px-sev--major">major</span></td><td><a href="#j09">J09</a></td><td><b>Proof-and-confirm dispute silently misses the freeze when the correction re-enters a type-gated pipeline</b></td></tr><tr><td><span class="px-sev px-sev--major">major</span></td><td><a href="#j09">J09</a></td><td><b>Preservation Project archive is an unconsented downstream that also freezes leaks and bypasses the paywall</b></td></tr><tr><td><span class="px-sev px-sev--major">major</span></td><td><a href="#j10">J10</a></td><td><b>'Restricted-fund line' from Board approval misstates restricted reporting — designation is not restriction</b></td></tr><tr><td><span class="px-sev px-sev--major">major</span></td><td><a href="#j10">J10</a></td><td><b>Conflict block itself leaks a restricted family relationship</b></td></tr><tr><td><span class="px-sev px-sev--major">major</span></td><td><a href="#j12">J12</a></td><td><b>Chargeback after conduit disbursement drives the W2W restricted class negative with no defined loss-bearer</b></td></tr><tr><td><span class="px-sev px-sev--major">major</span></td><td><a href="#j05">cross-journey</a></td><td><b>Club-less national members count zero federally, not once</b></td></tr></tbody>
+  </table></div>
+</div><div class="px-chips" style="max-width:1560px;margin:24px auto 0;padding:0 24px"><a href="#j01" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">J01 &middot; Join & first login</a><a href="#j02" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">J02 &middot; Multi-club renewal — Samira</a><a href="#j03" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">J03 &middot; Household & the 18th birthday</a><a href="#j04" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">J04 &middot; A death in the family</a><a href="#j05" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">J05 &middot; Convention end-to-end</a><a href="#j06" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">J06 &middot; Scholarship — application to award</a><a href="#j07" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">J07 &middot; Camp parent season</a><a href="#j08" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">J08 &middot; Club treasurer’s year — Houston</a><a href="#j09" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">J09 &middot; Magazine correspondent cycle</a><a href="#j10" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">J10 &middot; Joining a committee</a><a href="#j11" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">J11 &middot; Directory & RBPN listing</a><a href="#j12" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">J12 &middot; Donor & the endowment</a></div>
+<div class="px-journey" id="j01">
+  <section class="px-mod" style="margin:0;padding:0;max-width:none">
+    <p class="px-modkick">Journey 1 of 12 &middot; J01</p>
+    <h3>Join & first login</h3>
+    <p class="px-desc"><b>Omar Sayegh, 34, Houston — not yet a member.</b> The missing front door, specified and then hardened: the red team showed the draft charged money and mailed PII before the email was proven.</p>
+  </section>
+  <div class="px-jsteps"><div class="px-jstep"><span class="px-jn">1</span><div class="px-jbody">Omar hits "Join the Federation", picks Individual ($90, dues-2026.1 provisional).<span class="px-jrule">R2</span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">2</span><div class="px-jbody"><b>Channel verification first:</b> email + mobile verified by code before anything else is stored beyond a draft.<span class="px-jrule">S1</span></div></div>
+<div class="px-jstep"><span class="px-jn">3</span><div class="px-jbody">Identity & lineage: tree search finds his provisional 1995 child record; his claim links PROVISIONAL, pending steward review — membership never waits on lineage.<span class="px-jrule">R3 · R32</span><span class="px-jscreen"><a href="prototype.html#/fed/tree">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">4</span><div class="px-jbody">Household: requests to join his wife’s Houston household; an adult of that household must accept.<span class="px-jrule">R4</span><span class="px-jscreen"><a href="prototype.html#/member/household">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">5</span><div class="px-jbody">Club: adds Ramallah Social Club of Houston ($40) — separate membership, dues held as liability until remitted.<span class="px-jrule">R2 · R21</span><span class="px-jscreen"><a href="prototype.html#/fed/clubs">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">6</span><div class="px-jbody">Consent defaults: marketing OFF, operational ON, directory OFF — all bound to the now-verified channels.<span class="px-jrule">R27 · R28</span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">7</span><div class="px-jbody">One checkout, gross fees, two line groups (national revenue; club liability). Payment only NOW, post-verification.<span class="px-jrule">R20 · S1</span><span class="px-jscreen"><a href="prototype.html#/fed/finance">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">8</span><div class="px-jbody">First login (verified email link) lands on a finish-setup checklist: household, consent, directory, tree claim.<span class="px-jrule">S1</span><span class="px-jscreen"><a href="prototype.html#/member/home">screen &rarr;</a></span></div></div>
+</div>
+  <div class="px-break"><span class="px-sev px-sev--critical">critical</span><b>Pay-then-verify ordering plus magic-link auth hands a paid account (and household access) to a stranger</b><br>J01 charges $130 (step 7) and sends the PII-bearing receipt (operational notices ON at step 6) before email verification (step 8), so a mistyped or hostile email address receives the payer's personal data and the account-controlling login link — leaving a paid identity record in a stranger's hands, a failure the auth-stub flag (which covers only the login mechanism, not the ordering) does not excuse.<span class="px-fix"><b>Settled:</b> Verify email (or at least send zero PII and hold payment authorization uncaptured) before step 7; receipts and login links only after verification; treat pre-verification records as inert drafts that cannot hold a household-join request.</span></div>
+  <p class="px-srcline" style="padding:0;margin-top:10px">Worked example: the typo attack — omar@gmali.com now dies at step 2 with nothing stored, nothing charged, nothing mailed.</p>
+</div>
+<div class="px-journey" id="j02">
+  <section class="px-mod" style="margin:0;padding:0;max-width:none">
+    <p class="px-modkick">Journey 2 of 12 &middot; J02</p>
+    <h3>Multi-club renewal — Samira</h3>
+    <p class="px-desc"><b>Samira Odeh — National Patron + San Jose + San Francisco (lapsed).</b> Three memberships, three lapse clocks, one person. The break was the refund path after remittance; settled with the receivable model.</p>
+  </section>
+  <div class="px-jsteps"><div class="px-jstep"><span class="px-jn">1</span><div class="px-jbody">Home shows three cards with independent states; SF: lapsed 31 Jul, renew $40.<span class="px-jrule">R1 · R2</span><span class="px-jscreen"><a href="prototype.html#/fed/clubs">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">2</span><div class="px-jbody">She renews SF; gross posting; SF dues a liability until the monthly remittance.<span class="px-jrule">R20 · R21</span><span class="px-jscreen"><a href="prototype.html#/fed/finance">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">3</span><div class="px-jbody">SF roster: current as of payment date. San Jose roster: untouched.<span class="px-jrule">R2</span><span class="px-jscreen"><a href="prototype.html#/club/roster">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">4</span><div class="px-jbody">October SF election, record date 15 Aug: she was lapsed then — refused, rule and date named. San Jose (record 1 Oct): she votes.<span class="px-jrule">R12 · R18</span><span class="px-jscreen"><a href="prototype.html#/member/voting">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">5</span><div class="px-jbody">Convention roll (16 Oct): counts once federally via club of record (San Jose). Changing club of record on 20 Oct affects only future record dates.<span class="px-jrule">R16 · R43</span><span class="px-jscreen"><a href="prototype.html#/fed/credentialing">screen &rarr;</a></span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">6</span><div class="px-jbody"><b>Reversal path settled:</b> a chargeback after remittance creates an SF-club receivable; her standing reverts with an effective date; any roll frozen in between carries the reversed-post-freeze annotation that credentialing honors.<span class="px-jrule">S3</span></div></div>
+</div>
+  <div class="px-break"><span class="px-sev px-sev--major">major</span><b>Refund after remittance: negative club liability and undefined roster/snapshot reversion</b><br>Rule 24 defines a refund solely as reversing journal lines while J02 Step 3 derives roster standing from the very payment being reversed, so a post-remittance refund/chargeback leaves Samira's SF membership in an undefined state: she either stays current on a fully-reversed $40 (silent free membership, no rule fires) or re-lapses retroactively by a mechanism no rule specifies.<span class="px-fix"><b>Settled:</b> Define refund side-effects explicitly: refund of a dues payment sets membership state back with an effective date, generates a club-receivable (not negative liability) when already remitted, and frozen rolls are annotated (not recomputed) with a 'payment reversed post-freeze' flag that credential checks must honor per a named rule.</span></div>
+  <p class="px-srcline" style="padding:0;margin-top:10px">Worked example: the 10 Sep special-meeting roll that included her stays frozen — annotated, honored, never recomputed.</p>
+</div>
+<div class="px-journey" id="j03">
+  <section class="px-mod" style="margin:0;padding:0;max-width:none">
+    <p class="px-modkick">Journey 3 of 12 &middot; J03</p>
+    <h3>Household & the 18th birthday</h3>
+    <p class="px-desc"><b>The Khoury household — Layla turns 18 on 3 Oct.</b> Age sets defaults, never rules. The break: the refresh could be captured by a parent-supplied channel; settled under verified-channel-first.</p>
+  </section>
+  <div class="px-jsteps"><div class="px-jstep"><span class="px-jn">1</span><div class="px-jbody">Before 3 Oct: Layla is a minor — never in any directory; parental consents govern.<span class="px-jrule">R7</span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">2</span><div class="px-jbody"><b>Channel of her own:</b> in the 90 days before her birthday the system asks LAYLA (at school-age events, camp check-in, or via the household) to verify a channel that is hers; a parent-supplied channel is never auto-trusted for the refresh.<span class="px-jrule">S1</span></div></div>
+<div class="px-jstep"><span class="px-jn">3</span><div class="px-jbody">On the birthday the consent refresh goes to her verified channel; until she answers, prior marketing consents stop; operational continues; directory stays off.<span class="px-jrule">R5 · R27</span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">4</span><div class="px-jbody"><b>Two-parent precedence settled:</b> while she was a minor, one consent-holder of record per child (changeable by either parent with notice to both) — no silent last-write-wins.<span class="px-jrule">S1</span><span class="px-jscreen"><a href="prototype.html#/member/dirinclusion">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">5</span><div class="px-jbody">Tarek revokes his delegation to Nadia: effective immediately, audited; the auto-renew riding that delegation cancels with notice to both.<span class="px-jrule">R6</span></div></div>
+<div class="px-jstep"><span class="px-jn">6</span><div class="px-jbody">Basim splits into his own household: history stays where it happened; future registrations follow him.<span class="px-jrule">R4</span><span class="px-jscreen"><a href="prototype.html#/member/household">screen &rarr;</a></span></div></div>
+</div>
+  <div class="px-break"><span class="px-sev px-sev--critical">critical</span><b>Parent can capture the adult consent refresh (channel of record is parent-supplied and unverified)</b><br>Because the 18th-birthday consent refresh is delivered to a household-supplied, ownership-unverified channel and the flagged-missing login flow leaves Layla no independent authentication path, a parent who entered her own contact as "Layla's" can complete the refresh and the system records first-party adult consent the adult never gave — directly violating rules 4 and 5 while every downstream consent gate treats it as valid and step 4's claimed parental lockout silently fails.<span class="px-fix"><b>Settled:</b> Require verified channel ownership before the refresh counts: the pre-18 flow must have Layla confirm the channel herself (e.g., verification code at camp check-in or event badge pickup), reject any channel already attached to another household adult's record, and block refresh completion from sessions/devices authenticated as another household member. If no verified channel exists at 18, route to an explicit in-person/ID verification path rather than delivering the refresh to household-supplied contact.</span></div>
+  <p class="px-srcline" style="padding:0;margin-top:10px">Worked example: Nadia can no longer see Layla’s consents on 4 Oct — and the system told Layla, not Nadia, what changed.</p>
+</div>
+<div class="px-journey" id="j04">
+  <section class="px-mod" style="margin:0;padding:0;max-width:none">
+    <p class="px-modkick">Journey 4 of 12 &middot; J04</p>
+    <h3>A death in the family</h3>
+    <p class="px-desc"><b>Rana reports the death of her father Ibrahim — member, subscriber, RBPN CPA, scholarship reviewer.</b> The hardest flow, and the red team’s richest target: five confirmed breaks, all settled by splitting operational effects from publications.</p>
+  </section>
+  <div class="px-jsteps"><div class="px-jstep"><span class="px-jn">1</span><div class="px-jbody">Rana submits Death via L1; gates shown up front.<span class="px-jrule">R33 · R34</span><span class="px-jscreen"><a href="AFRP-Community-LifeEvents.html#lv1">screen &rarr;</a></span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">2</span><div class="px-jbody"><b>Desk verification now includes the fact, not just the identity:</b> an evidence artifact (obituary, funeral-home notice) is required before deceased-pending.<span class="px-jrule">S2</span><span class="px-jscreen"><a href="AFRP-Community-LifeEvents.html#lv2">screen &rarr;</a></span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">3</span><div class="px-jbody"><b>At verified-pending, operational effects fire immediately and reversibly:</b> billing suspends, RBPN listing and relay stop, reviewer assignments freeze, conflicts recompute — none of these are publications and none wait for family.<span class="px-jrule">S2</span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">4</span><div class="px-jbody"><b>Approval set settled:</b> household adults, excluding the reporter; explicit objection is a blocking veto for 14 days; empty set exits via membership secretary + evidence + 30-day wait.<span class="px-jrule">S2</span></div></div>
+<div class="px-jstep"><span class="px-jn">5</span><div class="px-jbody">On family approval, publications release — each surface keeping its own gate: tree closes with privacy blanks; Houston club news; In Memoriam queues for the next freeze.<span class="px-jrule">R35 · R36</span></div></div>
+<div class="px-jstep"><span class="px-jn">6</span><div class="px-jbody">His completed reviews remain valid; his seat is vacated (it froze at step 3); panel conflicts already recomputed.<span class="px-jrule">R41</span><span class="px-jscreen"><a href="prototype.html#/program/conflicts">screen &rarr;</a></span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">7</span><div class="px-jbody"><b>Money settled:</b> pre-paid dues refunds follow Board policy through the reversal model — receivable across remitted boundaries, effective-dated standing, annotated snapshots.<span class="px-jrule">S3</span></div></div>
+<div class="px-jstep"><span class="px-jn">8</span><div class="px-jbody">The frozen convention roll keeps his line, annotated deceased — one fewer possible extractor on the floor; a Board amendment note covers the 9.1.3 reading.<span class="px-jrule">R12 · S4</span></div></div>
+</div>
+  <div class="px-break"><span class="px-sev px-sev--critical">critical</span><b>Reporter self-approval: one person can fabricate and publish a death</b><br>Because a one-degree reporter is inside the family-approval set and a single approval releases, one person can fabricate a death (desk checks identity, never the death), approve it herself, and trigger immediate irreversible fan-out — RBPN takedown, reviewer seat vacated, tree closure, billing cancellation, In Memoriam queued — while the spec defines no un-release and no precedence for a family objection that arrives after the approval lands.<span class="px-fix"><b>Settled:</b> Exclude the reporter from the approval set (or require a second, distinct approver for death). Make an explicit objection a blocking veto for a defined window rather than a parallel escalation, and define release as the LATER of approval and objection-window expiry. Require the desk to attach at least one external evidence artifact (obituary, funeral-home notice) before deceased-pending can be approved.</span></div><div class="px-break"><span class="px-sev px-sev--critical">critical</span><b>RBPN takedown and reviewer-seat vacation are wrongly gated behind the publication approval</b><br>Step 4 gates the RBPN takedown and reviewer-seat vacation behind family approval of the announcement even though the spec itself calls the takedown a non-publication and fires other operational effects at deceased-pending, so an objection-stalled approval leaves a dead member's storefront relaying client inquiries and a dead reviewer silently accruing never-to-be-scored assignments for an unbounded period.<span class="px-fix"><b>Settled:</b> Split the fan-out: at deceased-pending (step 2), immediately suspend billing, take the RBPN listing down (or at minimum stop the relay), freeze reviewer assignments, and recompute conflicts. Reserve the family-approval gate strictly for publications: tree closure display, club news, magazine.</span></div><div class="px-break"><span class="px-sev px-sev--major">major</span><b>Empty approval set: deceased-pending is a deadlock state with no exit</b><br>Because J04 step 3's approval set is exactly "household adults + reporter-if-one-degree" and escalation triggers only on explicit objection, a member who lived alone and is reported dead by anyone beyond one degree yields an empty approval set with no timeout, fallback, or override — deceased-pending becomes a permanent deadlock in which the tree never closes and no publication or seat-vacancy ever releases.<span class="px-fix"><b>Settled:</b> Define a fallback chain (nearest tree-linked adult within N degrees, then membership secretary after a fixed waiting period with documented external evidence) and a maximum dwell time in deceased-pending, after which the secretary may release with a logged rationale.</span></div><div class="px-break"><span class="px-sev px-sev--major">major</span><b>Refund of a deceased member's pre-paid dues breaks gross posting and the club-dues agency liability</b><br>After the club share of nationally-collected dues has been remitted (which deceased-pending does not suspend), a Board-approved refund cannot be executed by step 5's 'reversing line only' mechanism: the rule-21 agency liability is already zero, so the batch must either drive the club's agency account negative with no defined claw-back, post unbalanced in violation of rule 22, or charge national's books through an account the spec never defines.<span class="px-fix"><b>Settled:</b> Refund mechanics need their own spec: reverse revenue/liability net of non-recoverable processing fees (fee stays as a real expense); post-remittance club-dues refunds create an explicit receivable from the club (or deduct from the next remittance batch) rather than a negative liability; refunds against a deceased payer route to the estate/surviving household with a payout-failed state that holds funds in clearing, not a fire-and-forget reversing line.</span></div><div class="px-break"><span class="px-sev px-sev--major">major</span><b>A false or pending death report silently strips a living member of standing across a dues/voting boundary</b><br>Because J04 step 2 suspends billing and dunning on identity resolution alone — before any family approval — a false death claim filed before the voting-dues deadline silently prevents a living member's dues from posting, and when the family rejects the claim no rule defines restoration (retroactive dues, tolling), while rules 12 and 17 make the resulting exclusion from the frozen electorate and remittance-ledger standing check irreversible for the cycle.<span class="px-fix"><b>Settled:</b> Deceased-pending should suspend CHARGES but toll deadlines: record the suspension window, and on rejection of the claim, restore auto-renew, extend any dues/voting deadline that fell inside the window, and back-date standing for certification purposes. Log which ruleset's deadline was applied per rule 18.</span></div>
+  <p class="px-srcline" style="padding:0;margin-top:10px">Worked example: the false-report attack now fails twice — no evidence artifact, and the reporter cannot approve her own claim.</p>
+</div>
+<div class="px-journey" id="j05">
+  <section class="px-mod" style="margin:0;padding:0;max-width:none">
+    <p class="px-modkick">Journey 5 of 12 &middot; J05</p>
+    <h3>Convention end-to-end</h3>
+    <p class="px-desc"><b>Nadia at the 68th — current nationally, lapsed at Detroit.</b> Registration to floor. The break: extraction re-dividing weights mid-vote; settled by fixing weights when voting opens.</p>
+  </section>
+  <div class="px-jsteps"><div class="px-jstep"><span class="px-jn">1</span><div class="px-jbody">Registers self + Marwan; member rate where current, non-member rate where lapsed; membership mandatory.<span class="px-jrule">R19</span><span class="px-jscreen"><a href="AFRP-Convention.html#s10">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">2</span><div class="px-jbody">QR badges rotate per person; holding Marwan’s ticket reveals nothing of his record.<span class="px-jrule">R31</span><span class="px-jscreen"><a href="prototype.html#/member/convlive">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">3</span><div class="px-jbody">Detroit names her delegate — refused, rule named (lapsed at record date). Houston’s 4th delegate blocked by the club’s unposted remittance.<span class="px-jrule">R17 · R18</span><span class="px-jscreen"><a href="prototype.html#/fed/credentialing">screen &rarr;</a></span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">4</span><div class="px-jbody"><b>Floor settled:</b> extraction re-divides weights only between motions — when voting opens on a motion, weights freeze for that ballot; extractors joining mid-vote wait for the next motion. Drafted as a 9.1.3 amendment for the Board.<span class="px-jrule">S4</span><span class="px-jscreen"><a href="prototype.html#/fed/floor">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">5</span><div class="px-jbody">Store: banquet seats are capacity inventory, no oversell; class CONV to the daily close; badge scan closes pickup.<span class="px-jrule">R26 · R23</span><span class="px-jscreen"><a href="prototype.html#/fed/convdesk">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">6</span><div class="px-jbody">Announcements are stamped operational notices; the help desk is the one two-way door, owned and clocked.<span class="px-jrule">R30</span><span class="px-jscreen"><a href="prototype.html#/member/convhelp">screen &rarr;</a></span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">7</span><div class="px-jbody"><b>Registration pause settled:</b> during Jul 12–22 the online state is explicit — payments queue as pending-capture, waitlist positions hold, and the screen says so.<span class="px-jrule">S1-adjacent</span></div></div>
+</div>
+  <div class="px-break"><span class="px-sev px-sev--major">major</span><b>Mid-vote extraction re-divides weights after ballots were already cast at the old weight</b><br>Rule 15 lets certified members extract at any moment while present, but neither the rules nor J05 defines when re-division locks relative to a ballot, so ballots cast before extraction at 18.00 coexist with post-extraction ballots at 16.00 and extractor votes, letting a club's cast weight total 114.00 against its frozen certified count of 108 — and rule 43's no-recompute snapshot pattern forbids correcting the already-cast votes.<span class="px-fix"><b>Settled:</b> Extraction closes when voting on a question opens; weights snapshot per question at gavel. Late extractors keep delegate representation for that question and vote personally from the next question onward.</span></div>
+  <p class="px-srcline" style="padding:0;margin-top:10px">Worked example: Chicago’s 18.00 becomes 16.00 only before Motion M-2 opens — M-1 ballots already cast keep their weights.</p>
+</div>
+<div class="px-journey" id="j06">
+  <section class="px-mod" style="margin:0;padding:0;max-width:none">
+    <p class="px-modkick">Journey 6 of 12 &middot; J06</p>
+    <h3>Scholarship — application to award</h3>
+    <p class="px-desc"><b>Tarek, 21, 3.4 GPA, great-uncle on the committee.</b> The strongest spec in the platform: six attacks, zero survived. Recorded here as tested-sound.</p>
+  </section>
+  <div class="px-jsteps"><div class="px-jstep"><span class="px-jn">1</span><div class="px-jbody">Application: transcripts, need docs, tree-linked lineage (or sponsorship path); 3.0 floor.<span class="px-jrule">R41</span><span class="px-jscreen"><a href="prototype.html#/program/applications">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">2</span><div class="px-jbody">Ghassan blocked from Tarek’s file — within three degrees; recused, not unscored; the refusal names rule 41 and nothing else.<span class="px-jrule">R41 · S6</span><span class="px-jscreen"><a href="prototype.html#/program/conflicts">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">3</span><div class="px-jbody">Median ranking; wide spreads flagged, never averaged; ties stay tied for the committee.<span class="px-jrule">R41</span></div></div>
+<div class="px-jstep"><span class="px-jn">4</span><div class="px-jbody">Budget: encumbrance, endowment capacity as hard input, named awards most-constrained-first.<span class="px-jrule">R41</span><span class="px-jscreen"><a href="prototype.html#/program/budget">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">5</span><div class="px-jbody">Disbursement gated on enrollment verification each term; a miss pauses with a named reason.<span class="px-jrule">R41</span><span class="px-jscreen"><a href="prototype.html#/program/disbursement">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">6</span><div class="px-jbody">Free student membership: $0 national record, standard consent defaults, no club auto-add.<span class="px-jrule">R9</span></div></div>
+<div class="px-jstep"><span class="px-jn">7</span><div class="px-jbody">The entity question (Foundation vs ARFECF) stays flagged for the Board; the platform posts to the configured fund class and says so.<span class="px-jrule">entity-flag</span><span class="px-jscreen"><a href="AFRP-Programs.html#prog-scholarship">screen &rarr;</a></span></div></div>
+</div>
+  <div class="px-break" style="border-left-color:var(--px-pine);background:var(--px-pine-50);color:#1f3a22"><b style="color:var(--px-pine)">Tested sound.</b> Six independent attacks; none survived adversarial verification. This journey ships as specified.</div>
+  <p class="px-srcline" style="padding:0;margin-top:10px">Worked example: two reviewers 57 points apart is a conversation, not an average — the committee sees the spread.</p>
+</div>
+<div class="px-journey" id="j07">
+  <section class="px-mod" style="margin:0;padding:0;max-width:none">
+    <p class="px-modkick">Journey 7 of 12 &middot; J07</p>
+    <h3>Camp parent season</h3>
+    <p class="px-desc"><b>Nadia enrolls Layla, 14 — tree-nut allergy, group-photos-only.</b> Camp as systems. The break was two parents’ consents racing; settled with the consent-holder of record.</p>
+  </section>
+  <div class="px-jsteps"><div class="px-jstep"><span class="px-jn">1</span><div class="px-jbody">Jan–Mar application under the household; ages 13–17, member household.<span class="px-jrule">R40</span><span class="px-jscreen"><a href="AFRP-Programs.html#prog-camp">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">2</span><div class="px-jbody">Health form gates arrival — no form, no check-in; allergy plan flags the kitchen.<span class="px-jrule">R40</span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">3</span><div class="px-jbody"><b>Consent-holder of record</b> set for Layla (Nadia); Marwan sees every setting and may take the pen with notice — never silently.<span class="px-jrule">S1</span></div></div>
+<div class="px-jstep"><span class="px-jn">4</span><div class="px-jbody">Pickup authority reads the household model; changes happen on the household screen, ID checked at the gate.<span class="px-jrule">R6 · R40</span></div></div>
+<div class="px-jstep"><span class="px-jn">5</span><div class="px-jbody">Week of: stamped updates; the scraped-knee incident closes with a 14:20 parent notification.<span class="px-jrule">R40</span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">6</span><div class="px-jbody">Meds double-signed; missed window escalates. Counselor screening tracked as a required pipeline step (was a gap; now specified).<span class="px-jrule">R40</span></div></div>
+<div class="px-jstep"><span class="px-jn">7</span><div class="px-jbody">After camp: photos publish per each camper’s consent — Layla in group shots only, never tagged; roster snapshot retained.<span class="px-jrule">R27 · R43</span></div></div>
+</div>
+  <div class="px-break"><span class="px-sev px-sev--major">major</span><b>No precedence rule for two parents setting a minor's consents — last-write-wins silently</b><br>The spec makes a minor's consents and pickup authority parentally controlled via a household screen both adults can edit, but defines no precedence, dual-approval, lock, or cross-parent notification, so one estranged parent can silently overwrite the other's photo-consent for a minor and step 9's publication tags the child individually with no rule fired and no trace shown to the parent who set it.<span class="px-fix"><b>Settled:</b> Define guardianship over a minor's record explicitly: either any-guardian-may-restrict / all-guardians-must-agree-to-loosen, or dual approval for consent loosening (mirroring rule 34's two-party approval pattern), with change notifications to all guardians.</span></div>
+  <p class="px-srcline" style="padding:0;margin-top:10px">Worked example: the Thursday early pickup — authorized for one named adult, checked against the record, logged.</p>
+</div>
+<div class="px-journey" id="j08">
+  <section class="px-mod" style="margin:0;padding:0;max-width:none">
+    <p class="px-modkick">Journey 8 of 12 &middot; J08</p>
+    <h3>Club treasurer’s year — Houston</h3>
+    <p class="px-desc"><b>A treasurer, a dead QuickBooks token, and a convention gate.</b> Six attacks, zero survived — the queue-and-replay and liability models held. Tested-sound.</p>
+  </section>
+  <div class="px-jsteps"><div class="px-jstep"><span class="px-jn">1</span><div class="px-jbody">Dues collected nationally sit as liability until the monthly remittance; the statement shows mode, gross, due, carried.<span class="px-jrule">R21</span><span class="px-jscreen"><a href="prototype.html#/club/remit">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">2</span><div class="px-jbody">August: the QBO token dies; postings queue with full detail; the national close never waits.<span class="px-jrule">R22</span><span class="px-jscreen"><a href="prototype.html#/fed/qbo">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">3</span><div class="px-jbody">September re-auth replays the queue idempotently — date+fund+kind keys, no duplicates.<span class="px-jrule">R22</span></div></div>
+<div class="px-jstep"><span class="px-jn">4</span><div class="px-jbody">The unposted August remittance surfaces as the convention credentialing gate — same fact, same rule wording, two screens.<span class="px-jrule">R17</span><span class="px-jscreen"><a href="prototype.html#/fed/credentialing">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">5</span><div class="px-jbody">Officer handover: role-scoped grants end dated; sensitive permissions need exact re-grants; audit preserved.<span class="px-jrule">R39</span><span class="px-jscreen"><a href="prototype.html#/fed/roles">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">6</span><div class="px-jbody">Year-end: agency-vs-revenue stays flagged for the CPA; statements label the assumption.<span class="px-jrule">R21-flag</span></div></div>
+</div>
+  <div class="px-break" style="border-left-color:var(--px-pine);background:var(--px-pine-50);color:#1f3a22"><b style="color:var(--px-pine)">Tested sound.</b> Six independent attacks; none survived adversarial verification. This journey ships as specified.</div>
+  <p class="px-srcline" style="padding:0;margin-top:10px">Worked example: the treasurer sees "August remittance unposted" in finance on Tuesday and as the delegate refusal on Friday — one fact, one wording.</p>
+</div>
+<div class="px-journey" id="j09">
+  <section class="px-mod" style="margin:0;padding:0;max-width:none">
+    <p class="px-modkick">Journey 9 of 12 &middot; J09</p>
+    <h3>Magazine correspondent cycle</h3>
+    <p class="px-desc"><b>Hala, Detroit correspondent, at the Winter freeze.</b> Auto sections and the freeze held; the breaks were the dispute path and the archive’s consent downstream — both settled.</p>
+  </section>
+  <div class="px-jsteps"><div class="px-jstep"><span class="px-jn">1</span><div class="px-jbody">No manual path into auto sections: Hala’s job is the data — life events, event listings.<span class="px-jrule">R36</span><span class="px-jscreen"><a href="prototype.html#/program/magazine">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">2</span><div class="px-jbody">She enters a wedding on a member’s behalf; it still needs both named people’s approvals.<span class="px-jrule">R34</span><span class="px-jscreen"><a href="AFRP-Community-LifeEvents.html#lv2">screen &rarr;</a></span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">3</span><div class="px-jbody"><b>Dispute path settled:</b> a proof-and-confirm dispute filed before freeze blocks THAT entry until resolved — it prints as held, not as wrong, and never silently misses the issue.<span class="px-jrule">S5</span></div></div>
+<div class="px-jstep"><span class="px-jn">4</span><div class="px-jbody">Copy freeze 5 Dec snapshots sections; the 6 Dec approval queues for Spring; the frozen issue never reopens.<span class="px-jrule">R36 · R43</span></div></div>
+<div class="px-jstep"><span class="px-jn">5</span><div class="px-jbody">Ads close with the freeze; a missed ad rolls forward with the buyer notified.<span class="px-jrule">R37</span><span class="px-jscreen"><a href="AFRP-Community-LifeEvents.html#ad1">screen &rarr;</a></span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">6</span><div class="px-jbody"><b>Archive settled:</b> the Preservation Project ingests only consent-classed material; print-consent is its own switch and the archive honors it — no unconsented downstream.<span class="px-jrule">S5</span><span class="px-jscreen"><a href="AFRP-Programs.html#prog-preservation">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">7</span><div class="px-jbody">Her scope: submitted news and public entries — never consents, giving, or memberships.<span class="px-jrule">R39</span></div></div>
+</div>
+  <div class="px-break"><span class="px-sev px-sev--major">major</span><b>Proof-and-confirm dispute silently misses the freeze when the correction re-enters a type-gated pipeline</b><br>Step 4's unconditional promise that a proof-and-confirm dispute "re-releases before freeze" is unguaranteeable because rule 34's per-type gates (two approvals for a marriage correction) have no deadline coupling to the rule 36/43 snapshot, so a still-pending correction lets the disputed wrong entry print while — unlike step 5's missed ad, which notifies the buyer — no rule notifies the member their fix missed the freeze.<span class="px-fix"><b>Settled:</b> At freeze, any entry with a pending correction claim is flagged: either pull the entry to next issue (safer default for disputes filed by a named subject) or notify the disputant that the frozen issue carries the prior version, mirroring the ad roll-forward notification of rule 37.</span></div><div class="px-break"><span class="px-sev px-sev--major">major</span><b>Preservation Project archive is an unconsented downstream that also freezes leaks and bypasses the paywall</b><br>J09 step 6 feeds member PII (approved deaths/weddings) and a paid $50/yr product into the Preservation Project — the spec's only downstream with no gate (breaking rule 35's every-pipeline-keeps-its-own-gate pattern), no consent surface (making rule 28's 'exactly what was allowed' unevaluable), no version-supersession rule for post-freeze privacy corrections, and no access rule — and, unlike every other gap in the spec, it is never flagged.<span class="px-fix"><b>Settled:</b> Make archive inclusion an explicit consent surface (default per current per-field settings, re-evaluated at archive ingest); archive stores only latest versions with superseded versions tombstoned; define an embargo window (e.g., archive opens after N issues) to protect the subscription.</span></div>
+  <p class="px-srcline" style="padding:0;margin-top:10px">Worked example: In Memoriam for Ibrahim appears only in the issue whose freeze followed the family’s approval.</p>
+</div>
+<div class="px-journey" id="j10">
+  <section class="px-mod" style="margin:0;padding:0;max-width:none">
+    <p class="px-modkick">Journey 10 of 12 &middot; J10</p>
+    <h3>Joining a committee</h3>
+    <p class="px-desc"><b>Basim joins the Camp Ramallah Committee.</b> Roster = grant held; the breaks were wording (allocation vs restriction) and a leaky refusal — both settled.</p>
+  </section>
+  <div class="px-jsteps"><div class="px-jstep"><span class="px-jn">1</span><div class="px-jbody">Committee Interest Form → intake queue → roster; the roster IS a (person, role, program:camp) grant.<span class="px-jrule">R38 · R39</span><span class="px-jscreen"><a href="AFRP-Programs.html#prog-camp">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">2</span><div class="px-jbody">He sees roster, minutes, the budget line, pipeline counts — never applicant consents or payment methods.<span class="px-jrule">R39</span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">3</span><div class="px-jbody"><b>Words settled:</b> the Board-approved camp budget is an ALLOCATION; only donor designation creates restriction — the budget screen now says which is which.<span class="px-jrule">S6</span><span class="px-jscreen"><a href="prototype.html#/program/budget">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">4</span><div class="px-jbody">Minutes are the system of record between conventions (the committee slice of the missing board workspace).<span class="px-jrule">R38</span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">5</span><div class="px-jbody"><b>Refusal privacy settled:</b> when a counselor applicant is within three degrees of a member, the block reads "recused · rule 41" — the relationship itself is never displayed.<span class="px-jrule">S6</span></div></div>
+<div class="px-jstep"><span class="px-jn">6</span><div class="px-jbody">Basim resigns: grant ends dated; his minutes remain.<span class="px-jrule">R39</span></div></div>
+</div>
+  <div class="px-break"><span class="px-sev px-sev--major">major</span><b>'Restricted-fund line' from Board approval misstates restricted reporting — designation is not restriction</b><br>J10 step 5 turns a Board-approved camp budget into a "restricted-fund line," but rules 23/25 make restriction donor-designated on the gift and fund-class-driven in reporting, so this board designation posts unrestricted money (camp fees, general gifts) under a restricted fund class and misstates donor-restricted net assets in the QBO close.<span class="px-fix"><b>Settled:</b> Rename to 'board-designated budget line'; give payment class codes a three-way fund class (unrestricted / board-designated / donor-restricted) so restricted reporting stays gift-driven; require the budget proposal to name the hosting entity, routing approval to that entity's board.</span></div><div class="px-break"><span class="px-sev px-sev--major">major</span><b>Conflict block itself leaks a restricted family relationship</b><br>Mandatory file-specific conflict blocking (J10 step 6, rule 41) plus rule-naming refusals (rule 18) creates an inference channel: anyone who observes that a member is blocked on applicant X's file — the chair who must reassign scoring, since recusal ≠ unscored, or anyone reading immutable assignment history — thereby learns the member is within three degrees of X, disclosing a privacy-blanked family relationship that rules 27/28/32 exist to withhold, and the spec defines neither the visibility nor the permissible content of conflict-block messages.<span class="px-fix"><b>Settled:</b> Refusal to the CHAIR states only 'conflict rule fired — reassign file,' naming the rule but not the relationship or degree; the full basis is visible only to the blocked member themselves and to a designated conflicts officer under an exact sensitive grant.</span></div>
+  <p class="px-srcline" style="padding:0;margin-top:10px">Worked example: the committee treasurer knows Basim is recused from one file — and cannot tell why, by design.</p>
+</div>
+<div class="px-journey" id="j11">
+  <section class="px-mod" style="margin:0;padding:0;max-width:none">
+    <p class="px-modkick">Journey 11 of 12 &middot; J11</p>
+    <h3>Directory & RBPN listing</h3>
+    <p class="px-desc"><b>Samira lists her practice; a colleague looks her up.</b> Six attacks, zero survived — relay, opt-in and the print switch held. Tested-sound.</p>
+  </section>
+  <div class="px-jsteps"><div class="px-jstep"><span class="px-jn">1</span><div class="px-jbody">Household screen: inclusion ON, per-field; mobile stays relay-only.<span class="px-jrule">R28 · R29</span><span class="px-jscreen"><a href="prototype.html#/member/dirinclusion">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">2</span><div class="px-jbody">RBPN storefront listing + paid subscription on the standard rails.<span class="px-jrule">R29</span><span class="px-jscreen"><a href="prototype.html#/member/rbpn">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">3</span><div class="px-jbody">Both club memberships display; each roster independent.<span class="px-jrule">R2</span></div></div>
+<div class="px-jstep"><span class="px-jn">4</span><div class="px-jbody">Contact relays; her number leaves the relay only if SHE sends it.<span class="px-jrule">R29</span></div></div>
+<div class="px-jstep"><span class="px-jn">5</span><div class="px-jbody">Hiding the profession unpublishes immediately; billing continues until cancelled — with a warning at the moment of hiding.<span class="px-jrule">R29</span></div></div>
+<div class="px-jstep"><span class="px-jn">6</span><div class="px-jbody">Print inclusion is its own switch — print is forever; the magazine section compiles only from print-consented listings.<span class="px-jrule">R36 · S5</span></div></div>
+</div>
+  <div class="px-break" style="border-left-color:var(--px-pine);background:var(--px-pine-50);color:#1f3a22"><b style="color:var(--px-pine)">Tested sound.</b> Six independent attacks; none survived adversarial verification. This journey ships as specified.</div>
+  <p class="px-srcline" style="padding:0;margin-top:10px">Worked example: a deceased member’s storefront comes down at verified-pending (S2) — before any announcement exists.</p>
+</div>
+<div class="px-journey" id="j12">
+  <section class="px-mod" style="margin:0;padding:0;max-width:none">
+    <p class="px-modkick">Journey 12 of 12 &middot; J12</p>
+    <h3>Donor & the endowment</h3>
+    <p class="px-desc"><b>Marwan gives to W2W, Medical, and the endowment.</b> Multi-entity giving. The break: conduit chargebacks driving a restricted class negative; settled under the reversal model.</p>
+  </section>
+  <div class="px-jsteps"><div class="px-jstep"><span class="px-jn">1</span><div class="px-jbody">W2W $500 via the ARFHSN conduit; the receipt names the deductible entity correctly.<span class="px-jrule">R25</span><span class="px-jscreen"><a href="AFRP-Programs.html#prog-w2w">screen &rarr;</a></span></div></div>
+<div class="px-jstep"><span class="px-jn">2</span><div class="px-jbody">Medical $1,000 — same entity, restricted class MED, gross fees.<span class="px-jrule">R20 · R25</span></div></div>
+<div class="px-jstep"><span class="px-jn">3</span><div class="px-jbody">Endowment $10,000 designated to scholarships; the entity question (ARFECF proposed) either blocks or routes to a treasurer-approved holding configuration — never a silent default.<span class="px-jrule">entity-flag</span><span class="px-jscreen"><a href="AFRP-Programs.html#prog-endowed">screen &rarr;</a></span></div></div>
+<div class="px-jstep px-jstep--fix"><span class="px-jn">4</span><div class="px-jbody"><b>Conduit reversal settled:</b> a chargeback after disbursement to Ramallah creates a program receivable — the restricted class never goes negative; the committee sees the receivable on its next statement.<span class="px-jrule">S3</span></div></div>
+<div class="px-jstep"><span class="px-jn">5</span><div class="px-jbody">His giving history shows the correct entity per line; tax letters are per-entity.<span class="px-jrule">R25</span></div></div>
+<div class="px-jstep"><span class="px-jn">6</span><div class="px-jbody">Recurring W2W: failed card retries and notifies; three failures pause with a named reason.<span class="px-jrule">R18-pattern</span></div></div>
+</div>
+  <div class="px-break"><span class="px-sev px-sev--major">major</span><b>Chargeback after conduit disbursement drives the W2W restricted class negative with no defined loss-bearer</b><br>A post-disbursement chargeback on a W2W conduit gift forces a rule-24 reversing entry against restricted cash already sent to Ramallah Foundation, driving ARFHSN's restricted-W2W class negative with no defined loss-bearer — and every recovery path is either unauthorized by the rules or violates rule 25 by spending other donors' restricted money.<span class="px-fix"><b>Settled:</b> Hold conduit gifts in the ARFHSN clearing account through the card-network dispute window (or a fixed 30–60 day buffer) before transferring to Ramallah; define a small unrestricted reserve as the named loss-bearer for post-transfer reversals.</span></div>
+  <p class="px-srcline" style="padding:0;margin-top:10px">Worked example: capacity math — his $10,000 joins the corpus; only its earnings ever reach the scholarship budget line.</p>
+</div>
+<div class="px-sep"></div>
+<footer class="px-foot"><div class="px-in">
+  <p><b>Method.</b> Journey specs and the platform rules dossier were authored from the design corpus, then
+  attacked by independent agents (governance/bylaws, privacy &amp; consent, money, edge states — one breaker
+  per journey plus a cross-journey sweep), with every finding adversarially verified before acceptance.
+  Settlements marked S1&ndash;S6 are design decisions; the two that touch By-Law 9.1.3 are drafted as Board
+  amendment notes, not assumed. People and figures in worked examples are fictional; program facts are real
+  (afrp.org). Part of the AFRP design delivery &mdash; <a href="index.html">all documents</a>. Build remains on hold.</p>
+</div></footer>
+</body>
+</html>
