@@ -1247,7 +1247,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <div class="l-nav-group l-nav-group--lens"><svg class="nav-ico" aria-hidden="true"><use href="#i-lens-member"/></svg>Today &middot; Nadia &middot; 4 Nov 2026</div>
       <a class="l-nav-item" href="#/member/home">Home</a>
       <a class="l-nav-item" href="#/member/voting">Voting <span class="l-nav-item__badge" id="nav-ballot-badge">1 open</span></a>
-      <a class="l-nav-item" href="#/member/scenarios">Guided scenarios <span class="l-nav-item__badge l-nav-item__badge--violet">12</span></a>
+      <a class="l-nav-item" href="#/member/scenarios">Guided scenarios <span class="l-nav-item__badge l-nav-item__badge--violet">16</span></a>
       <div class="l-nav-group">Membership &amp; finance</div>
       <a class="l-nav-item" href="#/member/membership">Membership &amp; dues</a>
       <a class="l-nav-item" href="#/member/household">My household</a>
@@ -1348,14 +1348,20 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" href="#/fed/directory">Directory &amp; consent</a>
       <a class="l-nav-item" href="#/fed/lifeevents">Life events queue <span class="l-nav-item__badge">9</span></a>
       <a class="l-nav-item" href="#/fed/roles">Roles &amp; permissions</a>
-      <div class="l-nav-group">Clubs</div>
-      <a class="l-nav-item" href="#/fed/clubs">Club management <span class="l-nav-item__badge">18</span></a>
+      <div class="l-nav-group">Club management</div>
+      <a class="l-nav-item" href="#/fed/clubs">Club registry &amp; setup <span class="l-nav-item__badge">18</span></a>
+      <a class="l-nav-item" href="#/fed/clubhealth">Club health &amp; integration</a>
+      <div class="l-nav-group">Convention</div>
+      <a class="l-nav-item" href="#/fed/convention">Contract &amp; finance</a>
+      <a class="l-nav-item" href="#/fed/convops">Operations &amp; registration</a>
+      <a class="l-nav-item" href="#/fed/convcmd">Command centre</a>
+      <a class="l-nav-item" href="#/fed/convdesk">Desk &amp; store</a>
+      <a class="l-nav-item" href="#/fed/credentialing">Credentialing &amp; quorum</a>
+      <a class="l-nav-item" href="#/fed/floor">Live voting floor</a>
       <div class="l-nav-group">Governance</div>
       <a class="l-nav-item" href="#/fed/board">Board &amp; officers</a>
       <a class="l-nav-item" href="#/fed/committees">Committees</a>
       <a class="l-nav-item" href="#/fed/calendar">Election calendar</a>
-      <a class="l-nav-item" href="#/fed/credentialing">Credentialing &amp; quorum</a>
-      <a class="l-nav-item" href="#/fed/floor">Live voting floor</a>
       <a class="l-nav-item" href="#/fed/results">Results &amp; certification</a>
       <div class="l-nav-group">Finance</div>
       <a class="l-nav-item" href="#/fed/finance">Daily close</a>
@@ -1365,10 +1371,6 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <div class="l-nav-group">Operations</div>
       <a class="l-nav-item" href="#/fed/events">Event management</a>
       <a class="l-nav-item" href="#/fed/comms">Communications centre</a>
-      <a class="l-nav-item" href="#/fed/convention">Convention &mdash; contract &amp; finance</a>
-      <a class="l-nav-item" href="#/fed/convops">Convention &mdash; operations</a>
-      <a class="l-nav-item" href="#/fed/convcmd">Convention &mdash; command</a>
-      <a class="l-nav-item" href="#/fed/convdesk">Convention &mdash; desk &amp; store</a>
       <div class="l-nav-group">Rules</div>
       <a class="l-nav-item" href="#/fed/workbench">Ruleset workbench</a>
       <div class="sidefoot">
@@ -4083,15 +4085,76 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   </div>
 </section>
 
+<!-- ═══ NEW · club health & integration ═══ -->
+<section class="screen" data-route="fed/clubhealth" data-lens="fed" aria-label="Club health and integration">
+  <div class="page-head">
+    <div><h1>Club health &amp; integration</h1>
+    <p>One row per club, four facts that matter: which door the roster comes through, how fresh it is, whether
+    remittances are current, and the certified count that drives convention weights. <b>The same facts the
+    credentialing gate reads</b> &mdash; a problem shows here on Tuesday and as a delegate refusal on Friday, worded identically.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--ok">13 live feed</span><span class="c-pill c-pill--warn">5 manual</span></div>
+  </div>
+  <div class="panel" style="margin-bottom:var(--s4)">
+    <div class="statbox">
+      <div class="stat"><span class="stat__k">Active clubs</span><span class="stat__v">18</span><span class="stat__d">real list &middot; afrp.org/about-us/local-clubs</span></div>
+      <div class="stat"><span class="stat__k">Remittances current</span><span class="stat__v">16</span><span class="stat__d">2 unposted &mdash; each is also a credentialing gate</span></div>
+      <div class="stat"><span class="stat__k">Manual rosters in window</span><span class="stat__v">4 of 5</span><span class="stat__d">dated within the record-date window &middot; 1 stale</span></div>
+      <div class="stat"><span class="stat__k">Officer grants expiring &le;60d</span><span class="stat__v">7</span><span class="stat__d">role-scoped, end-dated &mdash; re-grant, never inherit</span></div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="toolbar"><span class="toolbar__count">18 clubs &middot; showing 8 &middot; sorted by attention</span><div class="toolbar__end"><span class="c-pill c-pill--muted">counts are demo &middot; clubs are real</span></div></div>
+    <div class="c-table-wrap" style="border:0;border-radius:0"><table class="c-table c-table--dense">
+      <thead><tr><th>Club</th><th>Integration door</th><th>Roster as of</th><th>Remittance</th><th style="text-align:right">Certified 2026</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><b>Ramallah Club of Houston</b><br><small>Houston, TX</small></td><td><span class="c-pill c-pill--ok">live feed</span></td><td class="mono">nightly &middot; 03:00</td><td><span class="c-pill c-pill--danger">Aug unposted</span></td><td class="mono" style="text-align:right">312</td><td><a class="btn-xs" href="#/fed/credentialing">gate</a></td></tr>
+        <tr><td><b>Ramallah Club of Phoenix</b><br><small>Phoenix, AZ</small></td><td><span class="c-pill c-pill--warn">manual roster</span></td><td class="mono">14 Jun &middot; <em>stale</em></td><td><span class="c-pill c-pill--ok">current</span></td><td class="mono" style="text-align:right">64</td><td><a class="btn-xs" href="#/fed/clubs">request</a></td></tr>
+        <tr><td><b>Ramallah Club of San Francisco</b><br><small>San Francisco, CA</small></td><td><span class="c-pill c-pill--warn">manual roster</span></td><td class="mono">02 Aug &middot; in window</td><td><span class="c-pill c-pill--ok">current</span></td><td class="mono" style="text-align:right">128</td><td><a class="btn-xs" href="#/fed/clubs">open</a></td></tr>
+        <tr><td><b>Ramallah Club of San Jose</b><br><small>San Jose, CA</small></td><td><span class="c-pill c-pill--ok">live feed</span></td><td class="mono">nightly &middot; 03:00</td><td><span class="c-pill c-pill--ok">current</span></td><td class="mono" style="text-align:right">141</td><td><a class="btn-xs" href="#/fed/clubs">open</a></td></tr>
+        <tr><td><b>Ramallah Club of Detroit</b><br><small>Detroit, MI</small></td><td><span class="c-pill c-pill--ok">live feed &middot; Breeze delta</span></td><td class="mono">nightly &middot; 03:00</td><td><span class="c-pill c-pill--ok">current</span></td><td class="mono" style="text-align:right">216</td><td><a class="btn-xs" href="#/club/dashboard">open</a></td></tr>
+        <tr><td><b>The Ramallah Club of LA/OC</b><br><small>Los Angeles, CA</small></td><td><span class="c-pill c-pill--ok">live feed</span></td><td class="mono">nightly &middot; 03:00</td><td><span class="c-pill c-pill--ok">current</span></td><td class="mono" style="text-align:right">187</td><td><a class="btn-xs" href="#/fed/clubs">open</a></td></tr>
+        <tr><td><b>Ramallah American Club of Birmingham</b><br><small>Birmingham, AL</small></td><td><span class="c-pill c-pill--ok">live feed</span></td><td class="mono">nightly &middot; 03:00</td><td><span class="c-pill c-pill--warn">Jul carried</span></td><td class="mono" style="text-align:right">92</td><td><a class="btn-xs" href="#/fed/clubs">open</a></td></tr>
+        <tr><td><b>Ramallah Club of New Jersey</b><br><small>NJ</small></td><td><span class="c-pill c-pill--warn">manual roster</span></td><td class="mono">09 Aug &middot; in window</td><td><span class="c-pill c-pill--ok">current</span></td><td class="mono" style="text-align:right">173</td><td><a class="btn-xs" href="#/fed/clubs">open</a></td></tr>
+        <tr><td colspan="4"><small>10 more clubs &mdash; Chicago &middot; Louisville &middot; Lexington &middot; New York &middot; Cleveland &middot; Knoxville &middot; San Diego &middot; Jacksonville &middot; Washington &middot; Palm Beach</small></td><td class="mono" style="text-align:right">&hellip;</td><td></td></tr>
+      </tbody>
+    </table></div>
+    <div class="panel__foot"><span class="why"><b>Two doors, one truth.</b> A live club-system feed is read-only data;
+    the remittance ledger is the truth for standing (rule&nbsp;17) &mdash; when the two disagree the row lands in an
+    exception queue, never a silent pick. Certified counts are club-attested <i>and</i> ledger-verified; neither alone suffices.</span></div>
+  </div>
+  <div class="grid grid--2" style="margin-top:var(--s4)">
+    <div class="panel">
+      <div class="panel__head"><h3>Status changes &mdash; forming &amp; dormant</h3><span class="c-pill c-pill--new">worked example</span></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>Austin organizing committee</b> <small>(fictional example)</small><span>forming &middot; visible in the registry &middot; cannot certify delegates until chartered</span></div><div class="qrow__end"><span class="c-pill c-pill--info">forming</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Dormancy, if a club fails charter minimums</b><span>effective-dated status &middot; members keep club memberships until each expires &middot; they count federally through the at-large roll at the next record date</span></div><div class="qrow__end"><span class="c-pill c-pill--muted">policy</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Prepaid dues of a dormant club</b><span>held as liability &mdash; remitted on reactivation or refunded through the reversal model, never silently absorbed</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">Board policy</span></div></div>
+      </div>
+      <div class="panel__foot"><span class="why">Frozen rolls are never recomputed &mdash; a club going dormant on 20 Oct changes future record dates only.</span></div>
+    </div>
+    <div class="panel">
+      <div class="panel__head"><h3>What federation staff can &mdash; and cannot &mdash; do</h3></div>
+      <div class="panel__body">
+        <p class="why" style="margin:0">Staff configure the club: charter, officers, money, integration door, electorate.
+        Staff <b>never edit a member&rsquo;s club membership record directly</b> &mdash; corrections happen at the source
+        (the club&rsquo;s system or its dated roster), so the club stays the authority on its own roster and every
+        downstream reader sees the same fact with the same label.</p>
+      </div>
+      <div class="panel__foot"><span class="why">Journey <a href="AFRP-Platform-Experience.html#j14">J14 &middot; Federation club management</a> walks this screen end to end.</span></div>
+    </div>
+  </div>
+</section>
+
 
 <!-- ═══ NEW · guided scenarios ═══ -->
 <section class="screen" data-route="member/scenarios" data-lens="member" aria-label="Guided scenarios">
   <div class="page-head">
-    <div><h1>Guided scenarios &mdash; twelve journeys, red-teamed</h1>
+    <div><h1>Guided scenarios &mdash; sixteen journeys, red-teamed</h1>
     <p>Each scenario is a worked example from the <a href="AFRP-Platform-Experience.html">Platform Experience</a>
-    document &mdash; attacked by a ninety-agent red team, settled where it broke, and linked to the live screens
-    that play it out. Amber steps in the journeys mark what the red team changed.</p></div>
-    <div class="page-head__end"><span class="c-pill c-pill--ok">61 attacks refuted</span></div>
+    document &mdash; attacked across <b>two red-team rounds</b>, settled where it broke, and linked to the live
+    screens that play it out. Amber steps in the journeys mark what the red team changed. The
+    <a href="AFRP-Platform-Experience.html#pathways">integrated progression</a> shows how the sixteen chain together.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--ok">2 red-team rounds</span></div>
   </div>
   <div class="grid grid--2">
     <div class="panel">
@@ -4103,6 +4166,8 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 <div class="qrow"><div class="qrow__main"><b>J07 · Camp parent season</b><span>Health-form gate, meds log, pickup authority from the household</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j07">Journey</a><a class="btn-xs" href="#/program/prog/camp" style="margin-left:6px">Start</a></div></div>
 <div class="qrow"><div class="qrow__main"><b>J11 · Directory & RBPN</b><span>Opt-in storefront, relayed contact, the print switch — tested sound</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j11">Journey</a><a class="btn-xs" href="#/member/rbpn" style="margin-left:6px">Start</a></div></div>
 <div class="qrow"><div class="qrow__main"><b>J12 · Donor & endowment</b><span>Three entities, correct receipts, reversals that never go negative</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j12">Journey</a><a class="btn-xs" href="#/member/payments" style="margin-left:6px">Start</a></div></div>
+<div class="qrow"><div class="qrow__main"><b>J15 · How the directory works</b><span>Household to search result to relay to print — what each is allowed to know</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j15">Journey</a><a class="btn-xs" href="#/member/dirinclusion" style="margin-left:6px">Start</a></div></div>
+<div class="qrow"><div class="qrow__main"><b>J16 · The professional network</b><span>Dina, 19 → 34: scholarship to RBPN committee — tracked by aggregates, never surveillance</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j16">Journey</a><a class="btn-xs" href="#/member/rbpn" style="margin-left:6px">Start</a></div></div>
       </div>
     </div>
     <div class="panel">
@@ -4114,8 +4179,10 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 <div class="qrow"><div class="qrow__main"><b>J08 · Treasurer’s year</b><span>Dead QuickBooks token, queued postings, the remittance-credential interlock — tested sound</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j08">Journey</a><a class="btn-xs" href="#/club/remit" style="margin-left:6px">Start</a></div></div>
 <div class="qrow"><div class="qrow__main"><b>J09 · Magazine freeze</b><span>Held-not-wrong disputes, and an archive that honors consent</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j09">Journey</a><a class="btn-xs" href="#/program/magazine" style="margin-left:6px">Start</a></div></div>
 <div class="qrow"><div class="qrow__main"><b>J10 · Joining a committee</b><span>Roster = grant; refusals name the rule, never the relatives</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j10">Journey</a><a class="btn-xs" href="#/fed/roles" style="margin-left:6px">Start</a></div></div>
+<div class="qrow"><div class="qrow__main"><b>J13 · Convention — running the element</b><span>The organizer backend: club integration, store, comms, badges, close-out</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j13">Journey</a><a class="btn-xs" href="#/fed/convcmd" style="margin-left:6px">Start</a></div></div>
+<div class="qrow"><div class="qrow__main"><b>J14 · Federation club management</b><span>The registry of eighteen — chartering, counting, dormancy, the at-large roll</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j14">Journey</a><a class="btn-xs" href="#/fed/clubhealth" style="margin-left:6px">Start</a></div></div>
       </div>
-      <div class="panel__foot"><span class="why">Three journeys (J06, J08, J11) survived all six independent attacks unchanged &mdash; recorded as tested-sound. The sixteen confirmed breaks and their settlements are in the <a href="AFRP-Platform-Experience.html#register">breaks register</a>.</span></div>
+      <div class="panel__foot"><span class="why">Journeys that survived every attack unchanged are recorded as tested-sound. All confirmed breaks and their settlements are in the <a href="AFRP-Platform-Experience.html#register">breaks register</a>; the second round covered J13&ndash;J16 and the integrated progression.</span></div>
     </div>
   </div>
 </section>
@@ -4147,7 +4214,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <div class="panel">
       <div class="panel__head"><h3>Federation lens &mdash; running the Federation</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/fed/dashboard">Dashboard</a><a class="btn-xs" href="#/fed/crm">The CRM today</a><a class="btn-xs" href="#/fed/member360">Member 360</a><a class="btn-xs" href="#/fed/clubs">Club management</a><a class="btn-xs" href="#/fed/identity">Identity &amp; merge queue</a><a class="btn-xs" href="#/fed/tree">Family tree console</a><a class="btn-xs" href="#/fed/directory">Directory &amp; consent</a><a class="btn-xs" href="#/fed/roles">Roles &amp; permissions</a><a class="btn-xs" href="#/fed/board">Board &amp; officers</a><a class="btn-xs" href="#/fed/committees">Committees</a><a class="btn-xs" href="#/fed/calendar">Election calendar</a><a class="btn-xs" href="#/fed/credentialing">Credentialing &amp; quorum</a><a class="btn-xs" href="#/fed/floor">Live voting floor</a><a class="btn-xs" href="#/fed/results">Results &amp; certification</a><a class="btn-xs" href="#/fed/finance">Daily close</a><a class="btn-xs" href="#/fed/qbo">QuickBooks integration</a><a class="btn-xs" href="#/fed/ledger">Multi-entity ledger</a><a class="btn-xs" href="#/fed/controls">Financial controls</a><a class="btn-xs" href="#/fed/events">Event management</a><a class="btn-xs" href="#/fed/comms">Communications centre</a><a class="btn-xs" href="#/fed/convention">Convention &mdash; contract</a><a class="btn-xs" href="#/fed/convcmd">Convention command</a><a class="btn-xs" href="#/fed/convdesk">Convention desk</a><a class="btn-xs" href="#/fed/lifeevents">Life events queue</a><a class="btn-xs" href="#/fed/convops">Convention &mdash; operations</a><a class="btn-xs" href="#/fed/workbench">Ruleset workbench</a>
+        <a class="btn-xs" href="#/fed/dashboard">Dashboard</a><a class="btn-xs" href="#/fed/crm">The CRM today</a><a class="btn-xs" href="#/fed/member360">Member 360</a><a class="btn-xs" href="#/fed/clubs">Club registry &amp; setup</a><a class="btn-xs" href="#/fed/clubhealth">Club health &amp; integration</a><a class="btn-xs" href="#/fed/identity">Identity &amp; merge queue</a><a class="btn-xs" href="#/fed/tree">Family tree console</a><a class="btn-xs" href="#/fed/directory">Directory &amp; consent</a><a class="btn-xs" href="#/fed/roles">Roles &amp; permissions</a><a class="btn-xs" href="#/fed/board">Board &amp; officers</a><a class="btn-xs" href="#/fed/committees">Committees</a><a class="btn-xs" href="#/fed/calendar">Election calendar</a><a class="btn-xs" href="#/fed/credentialing">Credentialing &amp; quorum</a><a class="btn-xs" href="#/fed/floor">Live voting floor</a><a class="btn-xs" href="#/fed/results">Results &amp; certification</a><a class="btn-xs" href="#/fed/finance">Daily close</a><a class="btn-xs" href="#/fed/qbo">QuickBooks integration</a><a class="btn-xs" href="#/fed/ledger">Multi-entity ledger</a><a class="btn-xs" href="#/fed/controls">Financial controls</a><a class="btn-xs" href="#/fed/events">Event management</a><a class="btn-xs" href="#/fed/comms">Communications centre</a><a class="btn-xs" href="#/fed/convention">Convention &mdash; contract</a><a class="btn-xs" href="#/fed/convcmd">Convention command</a><a class="btn-xs" href="#/fed/convdesk">Convention desk</a><a class="btn-xs" href="#/fed/lifeevents">Life events queue</a><a class="btn-xs" href="#/fed/convops">Convention &mdash; operations</a><a class="btn-xs" href="#/fed/workbench">Ruleset workbench</a>
       </div>
     </div>
   </div>
