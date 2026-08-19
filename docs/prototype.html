@@ -1380,6 +1380,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" href="#/club/households">Households</a>
       <div class="l-nav-group">Activity</div>
       <a class="l-nav-item" href="#/club/events">Events &amp; check-in</a>
+      <a class="l-nav-item" href="#/club/newevent">Create an event <span class="l-nav-item__badge l-nav-item__badge--violet">works</span></a>
       <a class="l-nav-item" href="#/club/comms">Communications</a>
       <a class="l-nav-item" href="#/club/voting">Club voting</a>
       <div class="l-nav-group">Finance</div>
@@ -1395,6 +1396,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" href="#/program/overview">All programmes</a>
       <a class="l-nav-item" href="#/program/lifecycle">Lifecycle &amp; pipeline</a>
       <a class="l-nav-item" href="#/program/registry">Programme registry <span class="l-nav-item__badge l-nav-item__badge--violet">1 proposed</span></a>
+      <a class="l-nav-item" href="#/program/newevent">Create an event <span class="l-nav-item__badge l-nav-item__badge--violet">works</span></a>
       <div class="l-nav-group">Medical</div>
       <a class="l-nav-item" href="#/program/prog/medical">Medical Mission</a>
       <a class="l-nav-item" href="#/program/medops">Mission operations <span class="l-nav-item__badge l-nav-item__badge--muted">ARFHSN</span></a>
@@ -1643,8 +1645,11 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   </div>
   <div class="grid grid--2">
     <div class="panel">
-      <div class="panel__head"><h3>November</h3></div>
+      <div class="panel__head"><h3>November &amp; December</h3></div>
       <div class="panel__body panel__body--flush">
+        <div id="evlist-custom"></div>
+        <a class="qrow" href="#/member/event/party"><div class="qrow__main"><b>Detroit Club Christmas Party</b><span>Sat 19 Dec, 7:00 pm &middot; St Mary&rsquo;s Hall &middot; club event &middot; cross-listed by Project Hope</span></div><div class="qrow__end"><span class="mono">$100.00</span><span class="c-pill c-pill--warn" id="ev-party-pill">33 seats left</span></div></a>
+        <a class="qrow" href="#/member/event/lecture"><div class="qrow__main"><b>Reading Ottoman-era Ramallah records</b><span>Thu 3 Dec, 8:00 pm Eastern &middot; Preservation Project &middot; online &middot; ask-a-question</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">free</span><span class="c-pill c-pill--info" id="ev-lec-pill">61 of 80</span></div></a>
         <a class="qrow" href="#/member/event/harvest"><div class="qrow__main"><b>Detroit Harvest Dinner</b><span>Sat 14 Nov, 6:30 pm &middot; St Mary&rsquo;s Hall &middot; club event</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">non-member rate</span></div></a>
         <div class="qrow"><div class="qrow__main"><b>Federation webinar &mdash; the 2027 revision, explained</b><span>Thu 19 Nov, 8:00 pm Eastern &middot; national event &middot; member rate applies</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">free</span></div></div>
         <div class="qrow"><div class="qrow__main"><b>Cleveland Club hafli</b><span>Sat 21 Nov &middot; open to all clubs &middot; guest pricing</span></div><div class="qrow__end"><span class="mono">$35.00</span></div></div>
@@ -4705,6 +4710,49 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   </div>
 </section>
 
+
+<!-- ═══════════════ EVENTS · builder + live examples ═══════════════ -->
+
+<section class="screen" data-route="member/event/party" data-lens="member" aria-label="Christmas party">
+  <div class="page-head">
+    <div><h1>Detroit Club Christmas Party</h1>
+    <p>Saturday 19 December 2026, 7:00 pm Eastern &middot; St Mary&rsquo;s Hall, Livonia &middot; all ages, 21+ bar area.
+    A <b>working signup</b> &mdash; register your household, pay, get your QR. Nothing is stored or charged.</p></div>
+    <div class="page-head__end" id="party-pills"></div>
+  </div>
+  <div id="evparty"></div>
+</section>
+
+<section class="screen" data-route="member/event/lecture" data-lens="member" aria-label="Free lecture">
+  <div class="page-head">
+    <div><h1>Reading Ottoman-era Ramallah records</h1>
+    <p>Thursday 3 December 2026, 8:00 pm Eastern &middot; online &middot; free &middot; a Preservation Project lecture with
+    Dr.&nbsp;S. Muallem (fictional presenter). RSVP, then <b>ask a question</b> &mdash; attributed exactly as you choose.</p></div>
+    <div class="page-head__end" id="lec-pills"></div>
+  </div>
+  <div id="evlecture"></div>
+</section>
+
+<section class="screen" data-route="club/newevent" data-lens="club" aria-label="Create an event">
+  <div class="page-head">
+    <div><h1>Create an event &mdash; Detroit Club</h1>
+    <p>The event builder, live: six steps from a blank form to a published event your members can open on the
+    member lens. The host is fixed &mdash; <b>this club owns the money, the capacity, the roster, and the comms</b>.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info">host: Ramallah Club of Detroit</span><span class="c-pill c-pill--warn">simulation</span></div>
+  </div>
+  <div id="evbuilder-club"></div>
+</section>
+
+<section class="screen" data-route="program/newevent" data-lens="program" aria-label="Create an event">
+  <div class="page-head">
+    <div><h1>Create an event &mdash; programme</h1>
+    <p>The same builder the clubs use, host prefilled to the programme: revenue posts to the programme&rsquo;s
+    budget line, and an ARFHSN programme&rsquo;s event receipts per-entity. One builder, one set of rules.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info">host: Preservation Project</span><span class="c-pill c-pill--warn">simulation</span></div>
+  </div>
+  <div id="evbuilder-program"></div>
+</section>
+
 <section class="screen" data-route="sitemap" data-lens="fed" aria-label="Sitemap">
   <div class="page-head">
     <div><h1>Every screen</h1>
@@ -4726,13 +4774,13 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <div class="panel">
       <div class="panel__head"><h3>Club lens &mdash; running Detroit</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/club/dashboard">Dashboard</a><a class="btn-xs" href="#/club/officers">Officers &amp; affiliation</a><a class="btn-xs" href="#/club/roster">Roster</a><a class="btn-xs" href="#/club/households">Households</a><a class="btn-xs" href="#/club/events">Events &amp; check-in</a><a class="btn-xs" href="#/club/comms">Communications</a><a class="btn-xs" href="#/club/voting">Club voting</a><a class="btn-xs" href="#/club/remit">Remittance &amp; ledger</a>
+        <a class="btn-xs" href="#/club/dashboard">Dashboard</a><a class="btn-xs" href="#/club/officers">Officers &amp; affiliation</a><a class="btn-xs" href="#/club/roster">Roster</a><a class="btn-xs" href="#/club/households">Households</a><a class="btn-xs" href="#/club/events">Events &amp; check-in</a><a class="btn-xs" href="#/club/newevent">Create an event</a><a class="btn-xs" href="#/club/comms">Communications</a><a class="btn-xs" href="#/club/voting">Club voting</a><a class="btn-xs" href="#/club/remit">Remittance &amp; ledger</a>
       </div>
     </div>
     <div class="panel">
       <div class="panel__head"><h3>Program lens &mdash; running the programmes</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/program/overview">All programmes</a><a class="btn-xs" href="#/program/lifecycle">Lifecycle &amp; pipeline</a><a class="btn-xs" href="#/program/registry">Programme registry</a><a class="btn-xs" href="#/program/prog/camp">Camp Ramallah</a><a class="btn-xs btn-xs--retired" href="#/program/prog/award">HS Senior Award (retired)</a><a class="btn-xs" href="#/program/prog/hope">Project Hope</a><a class="btn-xs" href="#/program/prog/medical">Medical Mission</a><a class="btn-xs" href="#/program/prog/leadership">Leadership Ramallah</a><a class="btn-xs" href="#/program/prog/exchange">Exchange Mission</a><a class="btn-xs" href="#/program/prog/congress">Congressional Outreach</a><a class="btn-xs" href="#/program/prog/action">Day of Action</a><a class="btn-xs" href="#/program/prog/arabic">Arabic Course</a><a class="btn-xs" href="#/program/prog/women">Women to Women</a><a class="btn-xs" href="#/program/prog/preservation">Preservation Project</a><a class="btn-xs" href="#/program/senior">Senior Living campaign</a><a class="btn-xs" href="#/program/applications">Scholarship applications</a><a class="btn-xs" href="#/program/conflicts">Conflict of interest</a><a class="btn-xs" href="#/program/budget">Budget &amp; endowment</a><a class="btn-xs" href="#/program/endowment">Endowment management</a><a class="btn-xs" href="#/program/medops">Mission operations</a><a class="btn-xs" href="#/program/intake">Human services intake</a><a class="btn-xs" href="#/program/disbursement">Disbursement</a><a class="btn-xs" href="#/program/alumni">Alumni &amp; recruiting</a><a class="btn-xs" href="#/program/magazine">Magazine ops</a><a class="btn-xs" href="#/program/bookstore">Bookstore ops</a><a class="btn-xs" href="#/program/rbpn">RBPN &amp; sponsorship</a>
+        <a class="btn-xs" href="#/program/overview">All programmes</a><a class="btn-xs" href="#/program/lifecycle">Lifecycle &amp; pipeline</a><a class="btn-xs" href="#/program/registry">Programme registry</a><a class="btn-xs" href="#/program/newevent">Create an event</a><a class="btn-xs" href="#/program/prog/camp">Camp Ramallah</a><a class="btn-xs btn-xs--retired" href="#/program/prog/award">HS Senior Award (retired)</a><a class="btn-xs" href="#/program/prog/hope">Project Hope</a><a class="btn-xs" href="#/program/prog/medical">Medical Mission</a><a class="btn-xs" href="#/program/prog/leadership">Leadership Ramallah</a><a class="btn-xs" href="#/program/prog/exchange">Exchange Mission</a><a class="btn-xs" href="#/program/prog/congress">Congressional Outreach</a><a class="btn-xs" href="#/program/prog/action">Day of Action</a><a class="btn-xs" href="#/program/prog/arabic">Arabic Course</a><a class="btn-xs" href="#/program/prog/women">Women to Women</a><a class="btn-xs" href="#/program/prog/preservation">Preservation Project</a><a class="btn-xs" href="#/program/senior">Senior Living campaign</a><a class="btn-xs" href="#/program/applications">Scholarship applications</a><a class="btn-xs" href="#/program/conflicts">Conflict of interest</a><a class="btn-xs" href="#/program/budget">Budget &amp; endowment</a><a class="btn-xs" href="#/program/endowment">Endowment management</a><a class="btn-xs" href="#/program/medops">Mission operations</a><a class="btn-xs" href="#/program/intake">Human services intake</a><a class="btn-xs" href="#/program/disbursement">Disbursement</a><a class="btn-xs" href="#/program/alumni">Alumni &amp; recruiting</a><a class="btn-xs" href="#/program/magazine">Magazine ops</a><a class="btn-xs" href="#/program/bookstore">Bookstore ops</a><a class="btn-xs" href="#/program/rbpn">RBPN &amp; sponsorship</a>
       </div>
     </div>
     <div class="panel">
@@ -6851,6 +6899,264 @@ var _renderAll = renderAll;
 renderAll = function(){
   _renderAll();
   renderInbox(); renderPathway(); renderRenew(); renderM3(); renderLogin(); renderRec();
+};
+renderAll();
+})();
+</script>
+
+<script>
+/* ═══ Events: builder + two live examples. In-memory; nothing stored or charged. ═══ */
+(function(){
+function esc(s){ return String(s||'').replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function $(id){ return document.getElementById(id); }
+
+window.EVT = {
+  party: { cap:120, sold:87, reg:null },        /* reg: {rows:[[name,tier,price]], total, qr} */
+  lecture: { cap:80, sold:61, reg:false, q:[
+    ['Where are the pre-1917 tax registers held today?', 'Samir H.', 'approved'],
+    ['How do you date an undated marriage record?', 'anonymous', 'approved']
+  ], mine:null },
+  bs: { club:null, program:null }, published: []
+};
+function blank(host, kind){
+  return { title:'', when:'', where:'', desc:'', host:host, kind:kind,
+    free:false, tiers:[['Adult', 25]], cap:60, waitlist:true, age:'all', guests:true,
+    listings:[], cohost:false, split:'', comms:true };
+}
+
+/* ── the Christmas party ── */
+function renderParty(){
+  var el = $('evparty'); if (!el) return;
+  var e = EVT.party, left = e.cap - e.sold - (e.reg ? e.reg.rows.length : 0);
+  var pills = $('party-pills');
+  if (pills) pills.innerHTML = '<span class="c-pill c-pill--warn">' + left + ' of ' + e.cap + ' seats left</span>' + (e.reg ? '<span class="c-pill c-pill--ok">you&rsquo;re registered</span>' : '');
+  var lp = $('ev-party-pill'); if (lp) lp.textContent = left + ' seats left';
+  var h = '<div class="grid grid--2">';
+  /* details & attribution */
+  h += '<div class="panel"><div class="panel__head"><h3>Details &amp; who&rsquo;s behind it</h3></div><div class="panel__body panel__body--flush">' +
+    '<div class="qrow"><div class="qrow__main"><b>Hosted by the Ramallah Club of Detroit</b><span>the host owns the money, the capacity, the roster, and the comms &mdash; proceeds are Detroit&rsquo;s revenue, held for the club until remitted</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">host</span></div></div>' +
+    '<div class="qrow"><div class="qrow__main"><b>Cross-listed by Project Hope</b><span>the listing put this on Hope&rsquo;s calendar and let it send ONE event-promotion notice &mdash; on the MARKETING class, because the invitation class is reserved for milestone handoffs &mdash; it never touches Detroit&rsquo;s books or roster, and Hope sees only end-of-day aggregate counts (S7)</span></div><div class="qrow__end"><span class="c-pill c-pill--info">listing</span></div></div>' +
+    '<div class="qrow"><div class="qrow__main"><b>Dinner, dabke, Santa for the kids, 21+ bar area</b><span>doors 7:00 &middot; dinner 7:45 &middot; program 9:00. Photography follows each registrant&rsquo;s photo consent &mdash; the camp rule, generalized</span></div><div class="qrow__end"><span class="mono">all ages</span></div></div>' +
+    '</div><div class="panel__foot"><span class="why">Announcements about THIS event go to registrants on the operational class; promotion to everyone else rides marketing or a listing&rsquo;s one invitation &mdash; never operational.</span></div></div>';
+  /* signup */
+  h += '<div class="panel"><div class="panel__head"><h3>' + (e.reg ? 'Your registration' : 'Register &mdash; your household') + '</h3></div><div class="panel__body">';
+  if (!e.reg){
+    h += '<div class="calc">' +
+      '<div class="calc__r"><span><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="pp-nadia" checked> Nadia Khoury</label><small>adult &middot; $100.00</small></span><span class="calc__n">$100.00</span></div>' +
+      '<div class="calc__r"><span><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="pp-tarek" checked> Tarek Khoury</label><small>17 &mdash; adult ticket; tier age reads the registrant&rsquo;s record as of EVENT date, never the buyer&rsquo;s claim; the 21+ bar rides a flag in the QR, never a birthdate</small></span><span class="calc__n">$100.00</span></div>' +
+      '<div class="calc__r"><span><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="pp-guest"> A guest &mdash; Salma R. (not a member)</label><small>guest ticket: a seat, never a membership &mdash; a minimal guest-contact record (operational notices only, photos default OFF, purged after the event archives)</small></span><span class="calc__n">$100.00</span></div>' +
+      '<div class="calc__r calc__r--tot"><span>Total<small>gross &mdash; the processing fee is the club&rsquo;s own expense line</small></span><span class="calc__n" id="pp-total">$200.00</span></div></div>' +
+      '<button class="c-btn c-btn--block" style="margin-top:var(--s4)" id="pp-pay" onclick="EVTS.partyPay()">Register &amp; pay &mdash; simulation</button>' +
+      '<p class="why" style="margin:var(--s3) 0 0">You can register yourself and anyone you may act for (Tarek) &mdash; the household model, not a shared login. Under-4s come free and unticketed.</p>';
+  } else {
+    h += '<p class="j-ok">&#10003; Registered &mdash; ' + e.reg.rows.map(function(r){ return r[0]; }).join(', ') + ' &middot; ' + e.reg.total + '</p>' +
+      '<div style="text-align:center;margin:var(--s3) 0"><div class="mono" style="font-size:18px;letter-spacing:.2em;border:1px solid var(--line);border-radius:10px;display:inline-block;padding:10px 18px">' + e.reg.qr + '</div>' +
+      '<p class="why" style="margin:var(--s2) 0 0">One rotating QR per person at the door; the door list shows check-in staff a name and a ticket type &mdash; never giving, consents, or household.</p></div>' +
+      '<div class="rowflex"><button class="btn-xs" onclick="EVTS.partyCancel()">Cancel my registration</button></div>' +
+      '<p class="why" style="margin:var(--s3) 0 0">Cancelling posts <b>reversing lines</b> to the original payment instrument, releases the seats, and &mdash; if Detroit already got its remittance &mdash; creates a receivable on the club&rsquo;s next statement (S3). The payer holds the money choice, each registrant their attendance choice; the unrecovered processor fee stays on the host&rsquo;s fee-expense line, stated, never silently passed on. If the CLUB cancels, refunds auto-queue for everyone &mdash; &ldquo;keep it as a donation&rdquo; is an explicit new gift, never a default.</p>';
+  }
+  h += '</div><div class="panel__foot"><span class="why"><b>Event finance:</b> money routes by the event&rsquo;s HOST field &mdash; the class code stays attribution only (R23). A club event&rsquo;s proceeds are the Detroit Club&rsquo;s own revenue, collected nationally, held as a liability until the monthly remittance &mdash; the agency treatment extended from dues to event revenue under the same open CPA flag.</span></div></div></div>';
+  el.innerHTML = h;
+  ['pp-nadia','pp-tarek','pp-guest'].forEach(function(id){
+    var c = $(id); if (c) c.addEventListener('change', EVTS.partyTotal);
+  });
+}
+window.EVTS = {
+  partyTotal: function(){
+    var n = ['pp-nadia','pp-tarek','pp-guest'].filter(function(id){ var c = $(id); return c && c.checked; }).length;
+    var t = $('pp-total'); if (t) t.textContent = '$' + (n * 100) + '.00';
+    var b = $('pp-pay'); if (b) b.disabled = n === 0;
+  },
+  partyPay: function(){
+    var rows = [];
+    if ($('pp-nadia') && $('pp-nadia').checked) rows.push(['Nadia', 'adult', 100]);
+    if ($('pp-tarek') && $('pp-tarek').checked) rows.push(['Tarek', 'adult', 100]);
+    if ($('pp-guest') && $('pp-guest').checked) rows.push(['Salma (guest)', 'guest', 100]);
+    if (!rows.length) return;
+    var b = $('pp-pay'); if (b){ b.disabled = true; b.textContent = 'Posting gross · one moment…'; }
+    setTimeout(function(){
+      EVT.party.reg = { rows:rows, total:'$' + (rows.length*100) + '.00', qr:'PARTY-' + Math.floor(1000 + Math.random()*9000) + '-KHY' };
+      if (window.SIM) SIM.inbox.unshift({ id:'evparty', cls:'operational', when:'just now',
+        title:'Christmas Party — registration confirmed', sub:rows.length + ' seats · $' + (rows.length*100) + '.00 · held for the Detroit Club until remitted', unread:true });
+      renderAll();
+    }, 850);
+  },
+  partyCancel: function(){
+    EVT.party.reg = null;
+    if (window.SIM) SIM.inbox.unshift({ id:'evpartyx', cls:'operational', when:'just now',
+      title:'Christmas Party — cancelled & refunded', sub:'reversing lines posted · seats released · S3', unread:true });
+    renderAll();
+  },
+  /* lecture */
+  rsvp: function(){
+    EVT.lecture.reg = true;
+    if (window.SIM) SIM.inbox.unshift({ id:'evlec', cls:'operational', when:'just now',
+      title:'Lecture RSVP confirmed — your attendance link', sub:'revealed to registrants only · Thu 3 Dec, 8:00 pm Eastern', unread:true });
+    renderAll();
+  },
+  ask: function(){
+    var q = $('lec-q'), att = $('lec-att');
+    if (!q || !q.value.trim()) return;
+    var who = att.value === 'anon' ? 'anonymous' : (att.value === 'first' ? 'Nadia' : 'Nadia Khoury');
+    EVT.lecture.q.unshift([q.value.trim(), who, 'awaiting moderation']);
+    EVT.lecture.mine = true; q.value = '';
+    renderAll();
+  }
+};
+
+/* ── the lecture ── */
+function renderLecture(){
+  var el = $('evlecture'); if (!el) return;
+  var e = EVT.lecture, taken = e.sold + (e.reg ? 1 : 0);
+  var pills = $('lec-pills');
+  if (pills) pills.innerHTML = '<span class="c-pill c-pill--ok">free</span><span class="c-pill c-pill--info">' + taken + ' of ' + e.cap + '</span>' + (e.reg ? '<span class="c-pill c-pill--ok">RSVP&rsquo;d</span>' : '');
+  var lp = $('ev-lec-pill'); if (lp) lp.textContent = taken + ' of ' + e.cap;
+  var h = '<div class="grid grid--2">';
+  h += '<div class="panel"><div class="panel__head"><h3>' + (e.reg ? 'You&rsquo;re in' : 'RSVP &mdash; free, same flow as paid') + '</h3></div><div class="panel__body">';
+  if (!e.reg){
+    h += '<p class="j-sub" style="margin-top:0">A free event skips payment and keeps everything else: the RSVP is a registration record, capacity is real &mdash; 80 seats, then a FIFO waitlist where a promotion HOLDS inventory with a deadline, and a household needing two seats keeps its position until two open. The attendance link goes to registrants only.</p>' +
+      '<button class="c-btn c-btn--block" onclick="EVTS.rsvp()">RSVP &mdash; one seat</button>';
+  } else {
+    h += '<p class="j-ok">&#10003; RSVP&rsquo;d &middot; your link:</p><div class="mono" style="background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:var(--s2) 0">https://my.afrp.org/live/&bull;&bull;&bull;&bull;&bull;&bull; <span class="c-pill c-pill--info" style="margin-left:8px">registrants only</span></div>' +
+      '<p class="why" style="margin:var(--s2) 0 0">The link is per-registrant and watermarked &mdash; forwarding it identifies the forwarder, which is the honest deterrent.</p>';
+  }
+  h += '</div><div class="panel__foot"><span class="why"><b>Attribution:</b> hosted by the Preservation Project (programme) &mdash; costs ride its budget line (R38); cross-listed by the Ramallah Club of New York, whose members got one marketing-class promotion and whose officers see only an end-of-day count.</span></div></div>';
+  /* Q&A */
+  h += '<div class="panel"><div class="panel__head"><h3>Ask a question</h3><span class="c-pill c-pill--info">attributed as YOU choose</span></div><div class="panel__body">';
+  if (e.reg){
+    h += '<div class="j-field"><label>Your question</label><input id="lec-q" placeholder="What survives of the 1901 church registry?"></div>' +
+      '<div class="j-field"><label>Attribute it as</label><select id="lec-att" style="font:inherit;padding:8px 10px;border:1.5px solid var(--n-300);border-radius:9px"><option value="anon">Anonymous</option><option value="first">First name only</option><option value="full">Full name</option></select></div>' +
+      '<button class="btn-xs btn-xs--go" onclick="EVTS.ask()">Submit for moderation</button>';
+  } else {
+    h += '<p class="why" style="margin:0">RSVP first &mdash; questions come from registrants.</p>';
+  }
+  h += '<div style="margin-top:var(--s4)">' + e.q.map(function(q){
+    return '<div class="qrow" style="padding-left:0"><div class="qrow__main"><b>&ldquo;' + esc(q[0]) + '&rdquo;</b><span>' + esc(q[1]) + '</span></div><div class="qrow__end"><span class="c-pill ' + (q[2] === 'approved' ? 'c-pill--ok' : 'c-pill--warn') + '">' + q[2] + '</span></div></div>';
+  }).join('') + '</div>';
+  h += '</div><div class="panel__foot"><span class="why">Questions are moderated; the attribution you chose is a per-field visibility consent (R27) &mdash; the room and the archive both honor it, moderation logs never deanonymize, and a retraction is a new entry, never an edit (S5).</span></div></div></div>';
+  el.innerHTML = h;
+}
+
+/* ── the builder ── */
+var LISTABLE = { club: ['Project Hope', 'Leadership Ramallah', 'RBPN', 'Preservation Project'],
+                 program: ['Ramallah Club of Detroit', 'Ramallah Club of New York', 'Ramallah Club of San Jose', 'Ramallah Club of Houston'] };
+var BSTEPS = ['Basics','Host & listings','Tickets & cost','Capacity & audience','Comms plan','Review & publish'];
+function curKind(){ return (S.route === 'program/newevent') ? 'program' : 'club'; }
+function bState(kind){
+  if (!EVT.bs[kind]) EVT.bs[kind] = { step:0, d: blank(kind === 'club' ? 'Ramallah Club of Detroit' : 'Preservation Project', kind) };
+  return EVT.bs[kind];
+}
+function renderBuilder(kind){
+  var el = $('evbuilder-' + kind); if (!el) return;
+  var B = bState(kind);
+  var d = B.d;
+  var st = '<div class="j-stepper">';
+  BSTEPS.forEach(function(s, i){
+    st += '<span class="j-seg ' + (i < B.step ? 'is-done' : (i === B.step ? 'is-on' : '')) + '"' + (i < B.step ? ' onclick="EVTB.go(' + i + ')"' : '') + '>' + s + '</span>';
+  });
+  st += '</div>';
+  var body = '';
+  if (B.step === 0){
+    body = '<p class="j-kick">Step 1 · Basics</p><h2 style="margin:0 0 6px;font-size:21px">What, when, where.</h2>' +
+      '<div class="j-field"><label>Title</label><input id="eb-title" value="' + esc(d.title) + '" placeholder="' + (kind === 'club' ? 'Spring Mother&rsquo;s Day Brunch' : 'Oral-history training workshop') + '"></div>' +
+      '<div class="j-field"><label>When — date, time, AND time zone</label><input id="eb-when" value="' + esc(d.when) + '" placeholder="Sun 9 May 2027, 11:00 am Eastern"><div class="j-hint">A federation spanning Pacific to Eastern writes the zone down. Always.</div></div>' +
+      '<div class="j-field"><label>Where</label><input id="eb-where" value="' + esc(d.where) + '" placeholder="Bint Jebail Cultural Center — or &ldquo;online&rdquo;"></div>' +
+      '<div class="j-field"><label>Details — what the details page says</label><input id="eb-desc" value="' + esc(d.desc) + '" placeholder="Brunch, program, and the annual honors"></div>' +
+      '<div class="j-foot"><span></span><button class="j-btn" onclick="EVTB.save0()">Continue</button></div>';
+  } else if (B.step === 1){
+    var boxes = LISTABLE[kind].map(function(u){
+      var on = d.listings.indexOf(u) > -1;
+      return '<div class="j-club' + (on ? ' is-on' : '') + '" onclick="EVTB.list(\'' + u + '\')"><span style="width:18px;height:18px;border-radius:5px;border:1.5px solid ' + (on ? 'var(--lens-deep)' : 'var(--n-300)') + ';background:' + (on ? 'var(--lens-deep)' : 'transparent') + ';color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex:none">' + (on ? '&#10003;' : '') + '</span><b>' + u + '</b><small>listing</small></div>';
+    }).join('');
+    body = '<p class="j-kick">Step 2 · Host &amp; listings</p><h2 style="margin:0 0 6px;font-size:21px">One owner. Any number of listings.</h2>' +
+      '<p class="j-sub"><b>' + esc(d.host) + '</b> hosts: it owns the money, capacity, roster, and comms. A listing puts the event on another unit&rsquo;s calendar and lets it send <b>one</b> event-promotion notice — on the marketing class; the invitation class stays reserved for milestone handoffs — it never touches your books, and the listed unit sees only end-of-day aggregate counts.</p>' +
+      '<div class="j-clubs">' + boxes + '</div>' +
+      '<div class="j-tog" style="border:0;padding-left:0;margin-top:var(--s2)"><span><b>Co-hosting (advanced)</b><small>one HOST OF RECORD plus a split-agreement counterpart — the agreement must name revenue AND refund-liability percentages, the capacity allocation, and the designated comms host</small></span>' +
+      '<button class="j-sw' + (d.cohost ? ' is-on' : '') + '" onclick="EVTB.cohost()"></button></div>' +
+      (d.cohost ? '<div class="j-field"><label>Split agreement — revenue AND refund liability, with settlement dates</label><input id="eb-split" value="' + esc(d.split) + '" placeholder="Detroit 60/40 rev &amp; refunds · capacity 90/60 · comms host: Detroit · signed 12 Sep"><div class="j-hint">Without this, publish will refuse and offer a listing instead — naming the rule.</div></div>' : '') +
+      '<div class="j-foot"><span><button class="j-btn j-btn--quiet" onclick="EVTB.go(0)">&larr; Back</button></span><button class="j-btn" onclick="EVTB.save1()">Continue</button></div>';
+  } else if (B.step === 2){
+    body = '<p class="j-kick">Step 3 · Tickets &amp; cost</p><h2 style="margin:0 0 6px;font-size:21px">Priced, or free — same rails.</h2>' +
+      '<div class="j-tog" style="border:0;padding-left:0"><span><b>Free event (RSVP only)</b><small>skips payment, keeps everything else: registration records, capacity, the operational class</small></span>' +
+      '<button class="j-sw' + (d.free ? ' is-on' : '') + '" onclick="EVTB.free()"></button></div>' +
+      (d.free ? '' :
+        '<div class="j-field"><label>Adult ticket price (USD)</label><input id="eb-p1" inputmode="numeric" value="' + d.tiers[0][1] + '" style="max-width:140px"></div>' +
+        '<div class="j-field"><label>Child ticket price (4–12) — 0 for none</label><input id="eb-p2" inputmode="numeric" value="' + (d.tiers[1] ? d.tiers[1][1] : 0) + '" style="max-width:140px"><div class="j-hint">The tier reads the registrant&rsquo;s birthdate, never the buyer&rsquo;s claim.</div></div>' +
+        '<p class="j-why"><b>Where the money lands</b> — routed by the HOST field, class codes stay attribution (R23): ' + (kind === 'club' ? 'club revenue, held as a liability until the monthly remittance — agency treatment extended from dues under the same open CPA flag.' : 'the programme&rsquo;s budget line (R38); an ARFHSN programme&rsquo;s event receipts stay on that entity&rsquo;s books.') + ' Fees post gross; refunds reverse (S3) to the original payment instrument — sold tickets keep their price, and member rates name their scope (host-club / any-club / national), verified at purchase against the host&rsquo;s integration door.</p>') +
+      '<div class="j-foot"><span><button class="j-btn j-btn--quiet" onclick="EVTB.go(1)">&larr; Back</button></span><button class="j-btn" onclick="EVTB.save2()">Continue</button></div>';
+  } else if (B.step === 3){
+    body = '<p class="j-kick">Step 4 · Capacity &amp; audience</p><h2 style="margin:0 0 6px;font-size:21px">Seats are inventory, not hopes.</h2>' +
+      '<div class="j-field"><label>Capacity</label><input id="eb-cap" inputmode="numeric" value="' + d.cap + '" style="max-width:140px"><div class="j-hint">Full means waitlist, FIFO, with hold windows — never oversell.</div></div>' +
+      '<div class="j-tog"><span><b>Waitlist when full</b></span><button class="j-sw' + (d.waitlist ? ' is-on' : '') + '" onclick="EVTB.tog(\'waitlist\')"></button></div>' +
+      '<div class="j-tog"><span><b>Guests allowed</b><small>a guest ticket is a seat, never a membership, never member data</small></span><button class="j-sw' + (d.guests ? ' is-on' : '') + '" onclick="EVTB.tog(\'guests\')"></button></div>' +
+      '<div class="j-field" style="margin-top:var(--s3)"><label>Age policy</label><select id="eb-age" style="font:inherit;padding:8px 10px;border:1.5px solid var(--n-300);border-radius:9px"><option value="all"' + (d.age === 'all' ? ' selected' : '') + '>All ages — minors via their consent-holder</option><option value="18"' + (d.age === '18' ? ' selected' : '') + '>18+</option><option value="21"' + (d.age === '21' ? ' selected' : '') + '>21+</option></select></div>' +
+      '<div class="j-foot"><span><button class="j-btn j-btn--quiet" onclick="EVTB.go(2)">&larr; Back</button></span><button class="j-btn" onclick="EVTB.save3()">Continue</button></div>';
+  } else if (B.step === 4){
+    body = '<p class="j-kick">Step 5 · Comms plan</p><h2 style="margin:0 0 6px;font-size:21px">Every notice names its class.</h2>' +
+      '<div class="panel__body--flush" style="margin:0 calc(-1*var(--s2))">' +
+      '<div class="qrow"><div class="qrow__main"><b>To registrants</b><span>confirmations, changes, day-of logistics</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">operational</span></div></div>' +
+      '<div class="qrow"><div class="qrow__main"><b>To your own members who haven&rsquo;t registered</b><span>the promo announcement</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">marketing</span></div></div>' +
+      '<div class="qrow"><div class="qrow__main"><b>Via each listing</b><span>' + (d.listings.length ? d.listings.join(' · ') + ' — one event-promotion notice each, to their audience, sent by them' : 'no listings selected') + '</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">marketing</span></div></div></div>' +
+      '<p class="j-why">This preview shows the exact class label each recipient&rsquo;s inbox will display. Promotion never rides operational — the round-3 rule.</p>' +
+      '<div class="j-foot"><span><button class="j-btn j-btn--quiet" onclick="EVTB.go(3)">&larr; Back</button></span><button class="j-btn" onclick="EVTB.go(5)">Continue</button></div>';
+  } else if (B.step === 5){
+    var refuse = d.cohost && !d.split.trim();
+    body = '<p class="j-kick">Step 6 · Review &amp; publish</p><h2 style="margin:0 0 6px;font-size:21px">' + esc(d.title || 'Untitled event') + '</h2>' +
+      '<div class="calc" style="max-width:560px">' +
+      '<div class="calc__r"><span>Host</span><span class="calc__n" style="font-size:13px">' + esc(d.host) + '</span></div>' +
+      '<div class="calc__r"><span>When &middot; where</span><span class="calc__n" style="font-size:13px">' + esc(d.when || '—') + ' &middot; ' + esc(d.where || '—') + '</span></div>' +
+      '<div class="calc__r"><span>Tickets</span><span class="calc__n" style="font-size:13px">' + (d.free ? 'free RSVP' : ('adult $' + d.tiers[0][1] + (d.tiers[1] && d.tiers[1][1] > 0 ? ' · child $' + d.tiers[1][1] : ''))) + '</span></div>' +
+      '<div class="calc__r"><span>Capacity &middot; audience</span><span class="calc__n" style="font-size:13px">' + d.cap + (d.waitlist ? ' + waitlist' : '') + ' &middot; ' + (d.age === 'all' ? 'all ages' : d.age + '+') + (d.guests ? ' &middot; guests ok' : '') + '</span></div>' +
+      '<div class="calc__r"><span>Listings</span><span class="calc__n" style="font-size:13px">' + (d.listings.length ? d.listings.length : 'none') + '</span></div>' +
+      '<div class="calc__r calc__r--tot"><span>Money lands in</span><span class="calc__n" style="font-size:13px">' + (d.free ? '—' : (d.kind === 'club' ? 'Detroit ledger, via remittance' : 'programme budget line')) + '</span></div></div>' +
+      (refuse ? '<div class="j-sad" style="margin-top:var(--s3)"><b>Publish refused — rule named:</b> co-hosting requires a signed split agreement covering revenue AND refund liability. Add one in step 2, or downgrade the co-host to a listing.</div>' : '') +
+      '<div class="j-foot"><span><button class="j-btn j-btn--quiet" onclick="EVTB.go(4)">&larr; Back</button></span><button class="j-btn" ' + (refuse || !d.title ? 'disabled' : '') + ' onclick="EVTB.publish()">Publish — effective-dated &amp; logged</button></div><p class="j-why" style="margin-top:var(--s3)"><b>After publish:</b> editing runs under an event-manage grant (person, role, scope). Sold tickets keep their price; capacity can never drop below sold + held; a tier with holders cannot be removed; every edit is effective-dated and logged. A convention-hosted event runs this same builder under the convention policy pack &mdash; membership mandatory, guest tickets refused naming the rule.</p><div hidden></div>';
+  } else {
+    body = '<div class="j-welcome" style="padding:var(--s5)"><h2 style="font-size:22px">Published.</h2>' +
+      '<p class="j-sub" style="margin:0 auto var(--s3);max-width:52ch"><b>' + esc(EVT.published[EVT.published.length-1].title) + '</b> is live on the member lens — open it, register for it, and watch the same rails you just configured do their work.</p>' +
+      '<div class="j-row" style="justify-content:center"><a class="c-btn c-btn--sm" href="#/member/events">See it on Events</a><button class="j-btn j-btn--ghost" onclick="EVTB.again()">Create another</button></div></div>';
+  }
+  el.innerHTML = st + '<div class="j-card">' + body + '</div>';
+}
+window.EVTB = {
+  go: function(n){ bState(curKind()).step = n; renderAll(); },
+  save0: function(){ var B = bState(curKind()), d = B.d;
+    d.title = ($('eb-title')||{}).value || ''; d.when = ($('eb-when')||{}).value || '';
+    d.where = ($('eb-where')||{}).value || ''; d.desc = ($('eb-desc')||{}).value || '';
+    B.step = 1; renderAll(); },
+  list: function(u){ var L = bState(curKind()).d.listings, i = L.indexOf(u); if (i > -1) L.splice(i,1); else L.push(u); renderAll(); },
+  cohost: function(){ var d = bState(curKind()).d; d.cohost = !d.cohost; renderAll(); },
+  save1: function(){ var B = bState(curKind()); if (B.d.cohost){ var s = $('eb-split'); if (s) B.d.split = s.value; } B.step = 2; renderAll(); },
+  free: function(){ var d = bState(curKind()).d; d.free = !d.free; renderAll(); },
+  save2: function(){ var B = bState(curKind()), d = B.d;
+    if (!d.free){ d.tiers = [['Adult', parseInt(($('eb-p1')||{}).value,10) || 0], ['Child', parseInt(($('eb-p2')||{}).value,10) || 0]]; }
+    B.step = 3; renderAll(); },
+  tog: function(k){ var d = bState(curKind()).d; d[k] = !d[k]; renderAll(); },
+  save3: function(){ var B = bState(curKind()), d = B.d;
+    d.cap = parseInt(($('eb-cap')||{}).value,10) || d.cap;
+    var a = $('eb-age'); if (a) d.age = a.value;
+    B.step = 4; renderAll(); },
+  publish: function(){ var B = bState(curKind()), d = B.d;
+    EVT.published.push(JSON.parse(JSON.stringify(d)));
+    if (window.SIM) SIM.inbox.unshift({ id:'evpub' + EVT.published.length, cls: 'marketing', when:'just now',
+      title: d.host + ' announces: ' + (d.title || 'a new event'), sub:(d.when || 'date tba') + ' · ' + (d.free ? 'free' : 'from $' + d.tiers[0][1]), unread:true });
+    B.step = 6; renderAll(); },
+  again: function(){ var B = bState(curKind()); B.d = blank(B.d.host, B.d.kind); B.step = 0; renderAll(); }
+};
+
+/* published events appear on the member Events list */
+function renderEvList(){
+  var el = $('evlist-custom'); if (!el) return;
+  el.innerHTML = EVT.published.map(function(d, i){
+    return '<div class="qrow"><div class="qrow__main"><b>' + esc(d.title || 'Untitled') + ' <span class="c-pill c-pill--new">just published</span></b><span>' + esc(d.when || 'date tba') + ' &middot; ' + esc(d.where || '') + ' &middot; hosted by ' + esc(d.host) + (d.listings.length ? ' &middot; listed by ' + d.listings.join(', ') : '') + '</span></div><div class="qrow__end"><span class="' + (d.free ? 'c-pill c-pill--ok' : 'mono') + '">' + (d.free ? 'free' : '$' + d.tiers[0][1] + '.00') + '</span></div></div>';
+  }).join('');
+}
+
+var _renderAll2 = renderAll;
+renderAll = function(){
+  _renderAll2();
+  renderParty(); renderLecture(); renderEvList();
+  renderBuilder('club'); renderBuilder('program');
 };
 renderAll();
 })();
