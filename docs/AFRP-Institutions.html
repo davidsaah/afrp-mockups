@@ -1,0 +1,2571 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARFECF & ARFHSN · v1.0</title>
+<meta name="description" content="Parts II and III of the AFRP platform: the ARFECF scholarship program (built) and endowment roadmap, and the ARFHSN Human Services Network roadmap and governance interlock.">
+<style>
+/* ═════════════════════════════════════════════════════════════════════════
+   AFRP UNIFIED PLATFORM — consolidated document chrome (px- namespace)
+   Heritage layer v3.1 values. Everything inside .sc-m / .sc-o keeps its own
+   scoped stylesheet; this layer only draws the consolidated shell around it.
+   ═════════════════════════════════════════════════════════════════════════ */
+:root{
+  --px-ink:#2b2416; --px-ink-2:#57503f; --px-ink-3:#7a7260;
+  --px-bg:#f5f0e1; --px-surface:#fffdf6; --px-surface-2:#f7f1e2;
+  --px-line:#e2d9c2; --px-dark:#211c11; --px-dark-2:#2c261741;
+  --px-cream:#f2ecd9; --px-cream-2:#d8d0b8;
+  --px-green:#4c6414; --px-green-deep:#33430b; --px-green-50:#eef0da;
+  --px-olive:#6d7a19; --px-olive-50:#f2f4dd;
+  --px-gold:#9a720d;  --px-gold-50:#faf2dc; --px-gold-200:#e7d191;
+  --px-pine:#3f6b41;  --px-pine-50:#e6f0e2;
+  --px-red:#8c2f21;   --px-red-50:#f7e4df;
+  --px-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --px-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+svg.sprite{display:none}
+body{margin:0;background:var(--px-bg);color:var(--px-ink);font:16px/1.6 var(--px-font)}
+.px-doc{scroll-behavior:smooth}
+
+/* ── masthead ─────────────────────────────────────────────────────────── */
+.px-mast{background:var(--px-dark);color:var(--px-cream);padding:44px 0 30px;
+  border-bottom:4px solid var(--px-green)}
+.px-mast .px-in{max-width:1560px;margin:0 auto;padding:0 24px}
+.px-lockup{display:flex;align-items:center;gap:12px;color:#d9b45a;margin-bottom:26px}
+.px-lockup svg{width:38px;height:38px}
+.px-lockup b{font-size:20px;letter-spacing:.06em;color:var(--px-cream)}
+.px-lockup small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:#c9b877;font-weight:600}
+.px-kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#b5c24a;
+  font-weight:700;margin:0 0 10px}
+.px-mast h1{font-size:clamp(30px,3vw + 18px,44px);line-height:1.12;margin:0 0 18px;
+  font-weight:800;letter-spacing:-.01em;color:#fffdf6}
+.px-mast .px-lede{max-width:74ch;font-size:16.5px;line-height:1.65;color:#e8e1cb;margin:0 0 14px}
+.px-mast .px-lede b{color:#fffdf6}
+.px-mast .px-lede code{font-family:var(--px-mono);font-size:.86em;background:#ffffff14;
+  padding:1px 6px;border-radius:6px;color:#e7d191}
+.px-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.px-chip{font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px;
+  background:#ffffff12;color:#e8e1cb;border:1px solid #ffffff24}
+.px-chip--green{background:#4c6414;color:#f2f4dd;border-color:#5d7a1a}
+.px-chip--red{background:#8c2f21;color:#f7e4df;border-color:#a1402f}
+.px-chip--gold{background:#9a720d33;color:#e7d191;border-color:#9a720d66}
+
+/* institution nav strip in mast */
+.px-instnav{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.px-instnav a{display:flex;align-items:center;gap:9px;text-decoration:none;
+  background:#ffffff0d;border:1px solid #ffffff22;border-radius:12px;padding:10px 16px;
+  color:#f2ecd9;font-size:14px;font-weight:600;transition:background .15s}
+.px-instnav a:hover{background:#ffffff1c}
+.px-instnav .px-rn{font-family:var(--px-mono);font-size:12px;color:#d9b45a;font-weight:700}
+
+/* ── legend ───────────────────────────────────────────────────────────── */
+.px-legendwrap{background:var(--px-surface);border-bottom:1px solid var(--px-line)}
+.px-legend{max-width:1560px;margin:0 auto;padding:22px 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px 28px}
+.px-legend h4{margin:0 0 5px;font-size:13.5px;display:flex;align-items:center;gap:8px}
+.px-legend p{margin:0;font-size:13px;line-height:1.5;color:var(--px-ink-2)}
+
+/* ── badges ───────────────────────────────────────────────────────────── */
+.px-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.1em;padding:3px 10px;border-radius:999px;text-transform:uppercase;
+  vertical-align:2px}
+.px-badge i{width:7px;height:7px;border-radius:99px;display:inline-block}
+.px-badge--built{background:var(--px-pine-50);color:var(--px-pine);border:1px solid #aecfa6}
+.px-badge--built i{background:var(--px-pine)}
+.px-badge--designed{background:var(--px-gold-50);color:var(--px-gold);border:1px solid var(--px-gold-200)}
+.px-badge--designed i{background:var(--px-gold)}
+.px-badge--proposed{background:#eee9f5;color:#5b4a80;border:1px solid #cfc2e4}
+.px-badge--proposed i{background:#5b4a80}
+.px-badge--partial{background:var(--px-olive-50);color:#525d12;border:1px solid #cdd48f}
+.px-badge--partial i{background:var(--px-olive)}
+
+/* ── TOC ──────────────────────────────────────────────────────────────── */
+.px-toc{max-width:1560px;margin:34px auto 0;padding:0 24px}
+.px-toc h2{font-size:22px;margin:0 0 6px}
+.px-toc > p{margin:0 0 20px;color:var(--px-ink-2);font-size:14.5px;max-width:88ch}
+.px-toccols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.px-toccol{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:18px 20px}
+.px-toccol h3{margin:0 0 2px;font-size:16px;display:flex;gap:9px;align-items:baseline}
+.px-toccol h3 .px-rn{font-family:var(--px-mono);font-size:12px;color:var(--px-gold)}
+.px-toccol .px-bylaw{font-size:12px;color:var(--px-ink-3);margin:0 0 12px}
+.px-toccol a{display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+  padding:7px 2px;text-decoration:none;color:var(--px-ink);font-size:14px;
+  border-top:1px solid var(--px-line)}
+.px-toccol a:hover{color:var(--px-green-deep)}
+.px-toccol a .px-fc{font-size:11.5px;color:var(--px-ink-3);font-family:var(--px-mono);white-space:nowrap}
+.px-toccol a.px-star{font-weight:700}
+
+/* ── institution part header ──────────────────────────────────────────── */
+.px-inst{margin:72px 0 0;background:var(--px-dark);color:var(--px-cream);
+  border-top:4px solid var(--px-gold);padding:34px 0 30px}
+.px-inst .px-in{max-width:1560px;margin:0 auto;padding:0 24px}
+.px-inst .px-rn{font-family:var(--px-mono);font-size:13px;color:#d9b45a;font-weight:700;
+  letter-spacing:.12em}
+.px-inst h2{font-size:clamp(24px,2vw + 15px,32px);margin:6px 0 10px;color:#fffdf6}
+.px-inst p{max-width:80ch;margin:0;font-size:15px;line-height:1.6;color:#e8e1cb}
+.px-inst .px-src{margin-top:12px;font-size:12.5px;color:#c9b877;font-family:var(--px-mono)}
+
+/* ── module head ──────────────────────────────────────────────────────── */
+.px-mod{max-width:1560px;margin:56px auto 0;padding:0 24px}
+.px-mod--star{border-left:4px solid var(--px-gold);padding-left:20px;margin-left:max(24px,calc((100% - 1560px)/2));
+  max-width:1516px;padding-right:24px}
+@media (max-width:1608px){.px-mod--star{margin-left:24px;margin-right:0}}
+.px-mod .px-modkick{font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--px-ink-3);font-weight:700;margin:0 0 4px}
+.px-mod h3{font-size:clamp(20px,1.4vw + 14px,26px);margin:0 0 10px;display:flex;
+  flex-wrap:wrap;align-items:center;gap:12px}
+.px-mod .px-desc{max-width:86ch;margin:0 0 12px;font-size:15px;line-height:1.62;color:var(--px-ink-2)}
+.px-mod .px-desc b{color:var(--px-ink)}
+.px-api{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.px-api span{font-family:var(--px-mono);font-size:11.5px;background:var(--px-surface);
+  border:1px solid var(--px-line);border-radius:7px;padding:3px 8px;color:#57503f}
+.px-api span.px-api--live{border-color:#aecfa6;background:var(--px-pine-50);color:var(--px-pine)}
+.px-api span.px-api--draft{border-style:dashed;color:#5b4a80;border-color:#cfc2e4;background:#f4f1f9}
+.px-subhead{max-width:1560px;margin:34px auto 0;padding:0 24px;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--px-ink-3);font-weight:700;
+  display:flex;align-items:center;gap:10px}
+.px-subhead:after{content:"";flex:1;height:1px;background:var(--px-line)}
+
+/* roadmap cards (ARFHSN / endowment) */
+.px-road{max-width:1560px;margin:22px auto 0;padding:0 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.px-roadcard{background:var(--px-surface);border:1px dashed var(--px-cream-2);
+  border-radius:14px;padding:20px 22px}
+.px-roadcard h4{margin:0 0 8px;font-size:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.px-roadcard p{margin:0 0 8px;font-size:13.5px;line-height:1.55;color:var(--px-ink-2)}
+.px-roadcard .px-blocked{font-size:12.5px;color:var(--px-red);background:var(--px-red-50);
+  border-radius:8px;padding:7px 11px;margin-top:10px}
+
+/* footer */
+.px-foot{margin-top:88px;background:var(--px-dark);color:#c9c0a5;padding:34px 0 46px;
+  border-top:4px solid var(--px-green)}
+.px-foot .px-in{max-width:1560px;margin:0 auto;padding:0 24px;font-size:13px;line-height:1.7}
+.px-foot b{color:#f2ecd9}
+.px-foot a{color:#d9b45a}
+.px-sep{height:26px}
+@media print{.px-mast,.px-inst{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+/* ── v3: sticky top nav, version chip, element matrix ─────────────────── */
+.px-topnav{position:sticky;top:0;z-index:50;background:#211c11f2;backdrop-filter:blur(6px);
+  border-bottom:1px solid #ffffff1c;color:#f2ecd9}
+.px-topnav .px-in{max-width:1560px;margin:0 auto;padding:9px 24px;display:flex;
+  align-items:center;gap:14px;flex-wrap:wrap}
+.px-topnav .px-tbrand{display:flex;align-items:center;gap:9px;font-weight:800;
+  letter-spacing:.05em;color:#fffdf6;text-decoration:none;font-size:15px}
+.px-topnav .px-tver{font-family:var(--px-mono);font-size:10.5px;font-weight:700;
+  background:#4c6414;color:#f2f4dd;border-radius:999px;padding:2px 9px;letter-spacing:.06em}
+.px-topnav .px-tlinks{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.px-topnav .px-tlinks a{color:#e8e1cb;text-decoration:none;font-size:13px;font-weight:600;
+  padding:6px 11px;border-radius:8px}
+.px-topnav .px-tlinks a:hover{background:#ffffff14}
+.px-topnav .px-tlinks a.px-tcta{background:#4c6414;color:#f2f4dd}
+.px-vermeta{font-family:var(--px-mono);font-size:12px;color:#c9b877;margin:0 0 14px}
+
+.px-matrix{max-width:1560px;margin:26px auto 0;padding:0 24px}
+.px-matrix h3{font-size:19px;margin:34px 0 4px}
+.px-matrix .px-mnote{font-size:13.5px;color:var(--px-ink-2);margin:0 0 12px;max-width:88ch}
+.px-tablewrap{overflow-x:auto;background:var(--px-surface);border:1px solid var(--px-line);
+  border-radius:12px}
+table.px-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.px-table th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--px-ink-3);padding:10px 14px;border-bottom:1px solid var(--px-line);
+  background:var(--px-surface-2)}
+.px-table td{padding:9px 14px;border-bottom:1px solid #eee7d4;vertical-align:top}
+.px-table tr:last-child td{border-bottom:0}
+.px-table a{color:var(--px-green-deep);text-decoration:none;font-weight:600}
+.px-table a:hover{text-decoration:underline}
+.px-st{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.08em;padding:2px 9px;border-radius:999px;text-transform:uppercase;white-space:nowrap}
+.px-st i{width:7px;height:7px;border-radius:99px}
+.px-st--p{background:var(--px-pine-50);color:var(--px-pine)}.px-st--p i{background:var(--px-pine)}
+.px-st--part{background:var(--px-olive-50);color:#525d12}.px-st--part i{background:var(--px-olive)}
+.px-st--m{background:var(--px-red-50);color:var(--px-red)}.px-st--m i{background:var(--px-red)}
+.px-st--prop{background:#eee9f5;color:#5b4a80}.px-st--prop i{background:#5b4a80}
+
+.px-cardgrid{max-width:1560px;margin:20px auto 0;padding:0 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px}
+.px-mcard{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:18px 20px}
+.px-mcard h4{margin:0 0 6px;font-size:15.5px;display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.px-mcard p{margin:0 0 10px;font-size:13px;line-height:1.55;color:var(--px-ink-2)}
+.px-mcard .px-mlinks{display:flex;flex-wrap:wrap;gap:6px}
+.px-mcard .px-mlinks a{font-size:12px;font-weight:700;color:var(--px-green-deep);
+  text-decoration:none;background:var(--px-green-50);border:1px solid #c4cd97;
+  border-radius:999px;padding:3px 11px}
+.px-mcard .px-mlinks a:hover{background:#dde2bf}
+.px-mcard .px-mlinks a.px-ml--ext{background:var(--px-gold-50);border-color:var(--px-gold-200);
+  color:var(--px-gold)}
+
+</style>
+<style>
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MY AFRP — DESIGN SYSTEM v2
+   Supersedes the v1.1 tokens in AFRP-Portal-Build-Spec.html.
+
+   What changed from v1.1 and why:
+     • Warmer neutrals. v1's greys were blue-cast and read cold next to the
+       AFRP green. These are neutral-warm, which suits a heritage organisation.
+     • Real elevation scale (3 levels) instead of one shadow.
+     • Fluid type via clamp() — one scale that works phone to desktop.
+     • Motion tokens + prefers-reduced-motion.
+     • Dark mode.
+     • Desktop shell primitives: sidebar app frame, split view, data table.
+     • New components the life-event / directory / club modules need:
+       avatar, tabs, stepper, chip, search, empty state, timeline, sheet,
+       announcement card, tree node.
+
+   Brand colours remain sampled from afrp.org and are unchanged.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.sc-o{
+  /* ── brand ───────────────────────────────────────────────────────────── */
+  --green-900:#013a1a; --green-800:#014f23; --green-700:#02682e;
+  --green:#038c3e;     --green-400:#3aa864; --green-200:#a5d9ba;
+  --green-100:#c9e8d6; --green-50:#e8f5ee;
+  --red-700:#a5121a;   --red:#ed1c24;       --red-100:#fbd0d2; --red-50:#fdeaeb;
+
+  /* ── neutrals: warm, not blue ─────────────────────────────────────────── */
+  --n-950:#14140f; --n-900:#1c1c17; --n-800:#2e2e28; --n-700:#454540;
+  --n-600:#5f5f58; --n-500:#7d7d75; --n-400:#a3a39b; --n-300:#c9c9c1;
+  --n-200:#e2e2db; --n-100:#eeeee9; --n-50:#f7f7f4; --n-0:#ffffff;
+
+  /* ── status ───────────────────────────────────────────────────────────── */
+  --amber-700:#8a4f08; --amber:#b4690e; --amber-50:#fdf3e3;
+  --blue-700:#0e4680;  --blue:#1257a5;  --blue-50:#e9f1fa;
+  --violet:#6b4ba8;    --violet-50:#f0ecf9;
+
+  /* ── semantic ─────────────────────────────────────────────────────────── */
+  --bg:var(--n-50);
+  --surface:var(--n-0);
+  --surface-2:var(--n-50);
+  --surface-sunken:var(--n-100);
+  --ink:var(--n-900);
+  --ink-2:var(--n-700);
+  --ink-3:var(--n-500);
+  --line:var(--n-200);
+  --line-2:var(--n-100);
+  --accent:var(--green);
+  --accent-ink:var(--green-800);
+  --focus:var(--green-200);
+
+  /* ── fluid type ───────────────────────────────────────────────────────── */
+  --fs-display:clamp(26px, 2.2vw + 20px, 34px);
+  --fs-h1:clamp(21px, 1.1vw + 18px, 26px);
+  --fs-h2:clamp(17px, .5vw + 15px, 19px);
+  --fs-h3:16px;
+  --fs-body:16px;          /* HARD FLOOR on inputs — below this iOS zooms */
+  --fs-sm:14px;
+  --fs-xs:12.5px;
+  --fs-micro:11px;
+  --lh-tight:1.2; --lh-snug:1.35; --lh-body:1.55;
+  --tracking-tight:-.02em; --tracking-wide:.06em;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  --font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  /* Tabular figures everywhere money or dates are compared down a column. */
+  --num:"tnum" 1,"lnum" 1;
+
+  /* ── space (4px base) ─────────────────────────────────────────────────── */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px;
+  --s7:28px; --s8:32px; --s10:40px; --s12:48px; --s16:64px;
+
+  /* ── radius ───────────────────────────────────────────────────────────── */
+  --r-xs:6px; --r-sm:8px; --r:12px; --r-lg:16px; --r-xl:22px; --r-pill:999px;
+
+  /* ── elevation ────────────────────────────────────────────────────────── */
+  --e1:0 1px 2px rgba(20,20,15,.05), 0 1px 1px rgba(20,20,15,.04);
+  --e2:0 1px 2px rgba(20,20,15,.06), 0 6px 16px -4px rgba(20,20,15,.08);
+  --e3:0 2px 4px rgba(20,20,15,.06), 0 16px 32px -8px rgba(20,20,15,.14);
+  --ring:0 0 0 3px var(--focus);
+
+  /* ── motion ───────────────────────────────────────────────────────────── */
+  --dur-1:120ms; --dur-2:200ms; --dur-3:320ms;
+  --ease:cubic-bezier(.2,.8,.3,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+
+  /* ── touch & layout ───────────────────────────────────────────────────── */
+  --touch:48px;            /* target; 44px is the WCAG 2.2 AA floor */
+  --gutter:16px;
+  --read-max:640px;        /* forms & prose never exceed this */
+  --shell-max:1320px;
+  --sidebar-w:248px;
+}
+
+@media (min-width:900px){ .sc-o{ --gutter:24px; } }
+
+/* ── dark mode ───────────────────────────────────────────────────────────
+   Opt-in via [data-theme="dark"] as well as system preference, so the
+   mockups can show both without changing OS settings. */
+@media (prefers-color-scheme:dark){
+  .sc-o :root:not([data-theme="light"]){
+    --bg:var(--n-950); --surface:var(--n-900); --surface-2:#232320;
+    --surface-sunken:#111110;
+    --ink:#f2f2ee; --ink-2:#cfcfc8; --ink-3:#9a9a92;
+    --line:#33332d; --line-2:#26261f;
+    --accent:var(--green-400); --accent-ink:var(--green-200);
+    --focus:rgba(58,168,100,.4);
+    --e1:0 1px 2px rgba(0,0,0,.5);
+    --e2:0 1px 2px rgba(0,0,0,.5), 0 6px 16px -4px rgba(0,0,0,.6);
+    --e3:0 2px 4px rgba(0,0,0,.5), 0 16px 32px -8px rgba(0,0,0,.7);
+  }
+}
+.sc-o [data-theme="dark"]{
+  --bg:var(--n-950); --surface:var(--n-900); --surface-2:#232320;
+  --surface-sunken:#111110;
+  --ink:#f2f2ee; --ink-2:#cfcfc8; --ink-3:#9a9a92;
+  --line:#33332d; --line-2:#26261f;
+  --accent:var(--green-400); --accent-ink:var(--green-200);
+  --focus:rgba(58,168,100,.4);
+  --e1:0 1px 2px rgba(0,0,0,.5);
+  --e2:0 1px 2px rgba(0,0,0,.5), 0 6px 16px -4px rgba(0,0,0,.6);
+  --e3:0 2px 4px rgba(0,0,0,.5), 0 16px 32px -8px rgba(0,0,0,.7);
+}
+
+/* ═══ RESET — the three rules that fix the reported overflow defect ═══ */
+.sc-o *,.sc-o *::before,.sc-o *::after{box-sizing:border-box}
+.sc-o,.sc-o{max-width:100%;overflow-x:hidden}
+.sc-o img,.sc-o svg,.sc-o video,.sc-o table,.sc-o pre{max-width:100%}
+
+.sc-o{
+  margin:0;background:var(--bg);color:var(--ink);
+  font:var(--fs-body)/var(--lh-body) var(--font);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  padding-top:env(safe-area-inset-top);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.sc-o h1,.sc-o h2,.sc-o h3,.sc-o h4{margin:0;font-weight:650;line-height:var(--lh-tight);
+  letter-spacing:var(--tracking-tight)}
+.sc-o a{color:var(--accent-ink);text-underline-offset:2px}
+.sc-o :where(button,a,input,select,textarea):focus-visible{
+  outline:0;box-shadow:var(--ring);border-radius:var(--r-xs)}
+
+@media (prefers-reduced-motion:reduce){
+  .sc-o *,.sc-o *::before,.sc-o *::after{animation-duration:.01ms !important;
+    transition-duration:.01ms !important;scroll-behavior:auto !important}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   COMPONENTS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── buttons ─────────────────────────────────────────────────────────────── */
+.sc-o .c-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);
+  min-height:var(--touch);padding:0 var(--s5);
+  background:var(--accent);color:#fff;border:0;border-radius:var(--r-sm);
+  font:600 var(--fs-body)/1 var(--font);cursor:pointer;text-decoration:none;
+  transition:background var(--dur-1) var(--ease), transform var(--dur-1) var(--ease);
+}
+.sc-o .c-btn:hover{background:var(--green-700)}
+.sc-o .c-btn:active{transform:translateY(1px)}
+.sc-o .c-btn[disabled]{background:var(--n-300);color:var(--n-600);cursor:not-allowed}
+.sc-o .c-btn--secondary{background:var(--surface);color:var(--ink-2);border:1px solid var(--line)}
+.sc-o .c-btn--secondary:hover{background:var(--surface-2)}
+.sc-o .c-btn--ghost{background:transparent;color:var(--accent-ink)}
+.sc-o .c-btn--ghost:hover{background:var(--green-50)}
+.sc-o .c-btn--danger{background:var(--red)}
+.sc-o .c-btn--danger:hover{background:var(--red-700)}
+.sc-o .c-btn--block{display:flex;width:100%}
+/* 44px, not 40 — the WCAG 2.2 AA floor. Padding and type shrink, target doesn't. */
+.sc-o .c-btn--sm{min-height:44px;padding:0 var(--s4);font-size:var(--fs-sm)}
+
+/* ── fields (the overflow fix) ───────────────────────────────────────────── */
+.sc-o .c-field{margin-bottom:var(--s5);max-width:100%}
+.sc-o .c-field__label{display:block;font-size:var(--fs-sm);font-weight:640;
+  color:var(--ink-2);margin-bottom:var(--s2)}
+.sc-o .c-field__hint{font-size:var(--fs-xs);color:var(--ink-3);margin-top:var(--s2)}
+.sc-o .c-input,.sc-o .c-select,.sc-o .c-textarea{
+  display:block;width:100%;max-width:100%;min-width:0;   /* min-width:0 is the one people miss */
+  min-height:var(--touch);padding:var(--s3) var(--s4);
+  font:var(--fs-body)/1.4 var(--font);color:var(--ink);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);
+  transition:border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
+}
+.sc-o .c-input:focus,.sc-o .c-select:focus,.sc-o .c-textarea:focus{border-color:var(--accent);box-shadow:var(--ring)}
+.sc-o .c-textarea{min-height:104px;resize:vertical}
+.sc-o .c-field-row{display:grid;grid-template-columns:1fr;gap:var(--s4)}
+@media(min-width:560px){
+  .sc-o .c-field-row--2{grid-template-columns:1fr 1fr}
+  .sc-o .c-field-row--city{grid-template-columns:2fr 1fr 1fr}
+}
+
+/* ── surfaces ────────────────────────────────────────────────────────────── */
+.sc-o .c-card{background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r);padding:var(--s5);box-shadow:var(--e1)}
+.sc-o .c-card--raised{box-shadow:var(--e2);border-color:transparent}
+.sc-o .c-card__title{font-size:var(--fs-h2)}
+.sc-o .c-card__sub{color:var(--ink-3);font-size:var(--fs-xs);margin-top:2px}
+
+/* ── avatar ──────────────────────────────────────────────────────────────── */
+.sc-o .c-avatar{display:grid;place-items:center;flex:0 0 auto;
+  width:40px;height:40px;border-radius:50%;
+  background:var(--green-50);color:var(--green-800);
+  font-weight:700;font-size:var(--fs-sm);letter-spacing:.02em}
+.sc-o .c-avatar--sm{width:32px;height:32px;font-size:var(--fs-xs)}
+.sc-o .c-avatar--lg{width:64px;height:64px;font-size:20px}
+.sc-o .c-avatar--stack{border:2px solid var(--surface);margin-left:-10px}
+
+/* ── pills & chips ───────────────────────────────────────────────────────── */
+.sc-o .c-pill{display:inline-flex;align-items:center;gap:5px;font-size:var(--fs-micro);
+  font-weight:700;padding:4px 10px;border-radius:var(--r-pill);white-space:nowrap}
+.sc-o .c-pill--ok{background:var(--green-50);color:var(--green-800)}
+.sc-o .c-pill--warn{background:var(--amber-50);color:var(--amber-700)}
+.sc-o .c-pill--danger{background:var(--red-50);color:var(--red-700)}
+.sc-o .c-pill--info{background:var(--blue-50);color:var(--blue-700)}
+.sc-o .c-pill--new{background:var(--violet-50);color:var(--violet)}
+.sc-o .c-pill--muted{background:var(--surface-sunken);color:var(--ink-3)}
+
+/* Selectable chip — filters, cause pickers, amount pickers */
+.sc-o .c-chip{display:inline-flex;align-items:center;gap:6px;min-height:40px;
+  padding:0 var(--s4);border:1px solid var(--line);border-radius:var(--r-pill);
+  background:var(--surface);color:var(--ink-2);font:600 var(--fs-sm)/1 var(--font);
+  cursor:pointer;transition:all var(--dur-1) var(--ease)}
+.sc-o .c-chip:hover{border-color:var(--green-200)}
+.sc-o .c-chip.is-on{background:var(--green-50);border-color:var(--accent);color:var(--green-800)}
+
+/* ── tabs ────────────────────────────────────────────────────────────────── */
+.sc-o .c-tabs{display:flex;gap:var(--s1);border-bottom:1px solid var(--line);
+  overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.sc-o .c-tabs::-webkit-scrollbar{display:none}
+.sc-o .c-tab{flex:0 0 auto;min-height:44px;padding:0 var(--s4);border:0;background:none;
+  color:var(--ink-3);font:640 var(--fs-sm)/44px var(--font);cursor:pointer;
+  border-bottom:2px solid transparent;white-space:nowrap}
+.sc-o .c-tab.is-on{color:var(--accent-ink);border-bottom-color:var(--accent)}
+
+/* ── stepper ─────────────────────────────────────────────────────────────── */
+.sc-o .c-steps{display:flex;align-items:center;gap:var(--s2);font-size:var(--fs-xs)}
+.sc-o .c-steps__dot{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
+  background:var(--surface-sunken);color:var(--ink-3);font-weight:700;font-size:var(--fs-micro)}
+.sc-o .c-steps__dot.is-on{background:var(--accent);color:#fff}
+.sc-o .c-steps__dot.is-done{background:var(--green-100);color:var(--green-800)}
+.sc-o .c-steps__bar{flex:1;height:2px;background:var(--line)}
+.sc-o .c-steps__bar.is-done{background:var(--accent)}
+
+/* ── rows & definition lists ─────────────────────────────────────────────── */
+.sc-o .c-row{display:flex;align-items:center;gap:var(--s3);min-height:var(--touch);
+  padding:var(--s3) 0;border-bottom:1px solid var(--line-2)}
+.sc-o .c-row:last-child{border-bottom:0}
+.sc-o .c-row__main{min-width:0}
+.sc-o .c-row__main b{display:block;font-size:var(--fs-body);font-weight:620}
+.sc-o .c-row__main span{display:block;font-size:var(--fs-xs);color:var(--ink-3);
+  overflow-wrap:anywhere}
+.sc-o .c-row__end{margin-left:auto;text-align:right;flex:0 0 auto}
+
+.sc-o .c-dl__row{display:grid;grid-template-columns:minmax(96px,38%) 1fr;gap:var(--s3);
+  padding:var(--s3) 0;border-bottom:1px solid var(--line-2)}
+.sc-o .c-dl__row:last-child{border-bottom:0}
+.sc-o .c-dl__k{font-size:var(--fs-sm);color:var(--ink-3)}
+.sc-o .c-dl__v{font-size:var(--fs-sm);font-weight:600;text-align:right;
+  overflow-wrap:anywhere;min-width:0;font-variant-numeric:var(--num)}
+
+/* ── tiles ───────────────────────────────────────────────────────────────── */
+.sc-o .c-tiles{display:grid;gap:var(--s3);
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.sc-o .c-tile{display:flex;flex-direction:column;gap:var(--s3);min-height:112px;
+  padding:var(--s4);background:var(--green-50);border:1px solid transparent;
+  border-radius:var(--r);color:var(--green-800);text-decoration:none;
+  font-weight:640;font-size:var(--fs-sm);
+  transition:background var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease)}
+.sc-o .c-tile:hover{background:var(--green-100);border-color:var(--green-200)}
+.sc-o .c-tile__label{margin-top:auto;overflow-wrap:anywhere}
+
+/* ── alerts ──────────────────────────────────────────────────────────────── */
+.sc-o .c-alert{display:flex;gap:var(--s3);padding:var(--s4);border-radius:var(--r-sm);
+  font-size:var(--fs-sm);border-left:3px solid}
+.sc-o .c-alert b{display:block;margin-bottom:2px}
+.sc-o .c-alert--ok{background:var(--green-50);border-color:var(--accent);color:var(--green-800)}
+.sc-o .c-alert--warn{background:var(--amber-50);border-color:var(--amber);color:var(--amber-700)}
+.sc-o .c-alert--danger{background:var(--red-50);border-color:var(--red);color:var(--red-700)}
+.sc-o .c-alert--info{background:var(--blue-50);border-color:var(--blue);color:var(--blue-700)}
+
+/* ── empty state ─────────────────────────────────────────────────────────── */
+.sc-o .c-empty{text-align:center;padding:var(--s10) var(--s5);color:var(--ink-3)}
+.sc-o .c-empty__icon{font-size:32px;opacity:.4;margin-bottom:var(--s3)}
+.sc-o .c-empty h4{font-size:var(--fs-h3);color:var(--ink);margin-bottom:var(--s2)}
+.sc-o .c-empty p{margin:0 auto var(--s4);font-size:var(--fs-sm);max-width:36ch}
+
+/* ── search ──────────────────────────────────────────────────────────────── */
+.sc-o .c-search{display:flex;align-items:center;gap:var(--s3);min-height:var(--touch);
+  padding:0 var(--s4);background:var(--surface-sunken);border-radius:var(--r-pill);
+  border:1px solid transparent}
+.sc-o .c-search:focus-within{background:var(--surface);border-color:var(--accent);box-shadow:var(--ring)}
+.sc-o .c-search input{flex:1;min-width:0;border:0;background:none;outline:0;
+  font:var(--fs-body)/1 var(--font);color:var(--ink)}
+
+/* ── timeline (life events, audit, activity) ─────────────────────────────── */
+.sc-o .c-timeline{position:relative;padding-left:var(--s6)}
+.sc-o .c-timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;
+  width:2px;background:var(--line)}
+.sc-o .c-tl-item{position:relative;padding-bottom:var(--s5)}
+.sc-o .c-tl-item::before{content:"";position:absolute;left:calc(-1 * var(--s6) + 2px);top:5px;
+  width:12px;height:12px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 0 3px var(--surface)}
+.sc-o .c-tl-item--muted::before{background:var(--n-300)}
+.sc-o .c-tl-item__when{font-size:var(--fs-micro);color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:var(--tracking-wide);font-weight:650}
+
+/* ── announcement card (weddings, births) ────────────────────────────────── */
+.sc-o .c-ann{border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;
+  background:var(--surface);box-shadow:var(--e1)}
+.sc-o .c-ann__banner{padding:var(--s5);color:#fff;
+  background:linear-gradient(135deg,var(--green-700),var(--green));
+  position:relative;overflow:hidden}
+.sc-o .c-ann__banner--birth{background:linear-gradient(135deg,var(--violet),#8a6cc4)}
+.sc-o .c-ann__banner::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 85% 15%,rgba(255,255,255,.18),transparent 55%)}
+.sc-o .c-ann__kind{font-size:var(--fs-micro);text-transform:uppercase;
+  letter-spacing:var(--tracking-wide);font-weight:700;opacity:.9}
+.sc-o .c-ann__title{font-size:var(--fs-h2);margin-top:var(--s1);position:relative}
+.sc-o .c-ann__body{padding:var(--s5)}
+
+/* ── family tree node ────────────────────────────────────────────────────── */
+.sc-o .c-tnode{display:flex;align-items:center;gap:var(--s3);padding:var(--s3);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm)}
+.sc-o .c-tnode--me{background:var(--green-50);border-color:var(--green-200)}
+.sc-o .c-tnode--provisional{border-style:dashed;border-color:var(--amber);
+  background:var(--amber-50)}
+.sc-o .c-tnode__name{font-weight:640;font-size:var(--fs-sm)}
+.sc-o .c-tnode__meta{font-size:var(--fs-xs);color:var(--ink-3);font-variant-numeric:var(--num)}
+
+/* ── data table (desktop) ────────────────────────────────────────────────── */
+.sc-o .c-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;
+  border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.sc-o .c-table{width:100%;border-collapse:collapse;font-size:var(--fs-sm)}
+.sc-o .c-table th{position:sticky;top:0;z-index:1;background:var(--surface-2);
+  text-align:left;font-size:var(--fs-micro);text-transform:uppercase;
+  letter-spacing:var(--tracking-wide);color:var(--ink-3);font-weight:700;
+  padding:var(--s3) var(--s4);border-bottom:1px solid var(--line);white-space:nowrap}
+.sc-o .c-table td{padding:var(--s3) var(--s4);border-bottom:1px solid var(--line-2);
+  vertical-align:middle}
+.sc-o .c-table tbody tr:hover{background:var(--surface-2)}
+.sc-o .c-table tr:last-child td{border-bottom:0}
+.sc-o .c-table .num{text-align:right;font-variant-numeric:var(--num)}
+
+/* ── switch ──────────────────────────────────────────────────────────────── */
+.sc-o .c-switch{display:flex;align-items:center;justify-content:space-between;
+  gap:var(--s4);min-height:var(--touch);padding:var(--s2) 0}
+.sc-o .c-switch__track{flex:0 0 52px;width:52px;height:31px;border-radius:var(--r-pill);
+  background:var(--n-300);position:relative;transition:background var(--dur-2) var(--ease)}
+.sc-o .c-switch__track::after{content:"";position:absolute;top:2px;left:2px;
+  width:27px;height:27px;border-radius:50%;background:#fff;
+  box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform var(--dur-2) var(--ease-out)}
+.sc-o .c-switch.is-on .c-switch__track{background:var(--accent)}
+.sc-o .c-switch.is-on .c-switch__track::after{transform:translateX(21px)}
+
+.sc-o .c-choice{display:flex;align-items:flex-start;gap:var(--s3);
+  min-height:var(--touch);padding:var(--s2) 0;cursor:pointer}
+.sc-o .c-choice input{width:22px;height:22px;margin:1px 0 0;accent-color:var(--accent);flex:0 0 22px}
+.sc-o .c-choice__text small{display:block;color:var(--ink-3);font-size:var(--fs-xs)}
+
+/* ── sticky action bar ───────────────────────────────────────────────────── */
+.sc-o .c-actionbar{position:sticky;bottom:0;background:var(--surface);
+  border-top:1px solid var(--line);display:flex;gap:var(--s3);
+  padding:var(--s3) var(--gutter);
+  padding-bottom:calc(var(--s3) + env(safe-area-inset-bottom))}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESKTOP SHELL — new in v2. The club portal, directories, tree explorer and
+   moderation queues all need real desktop layouts, not stretched phone screens.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.sc-o .l-shell{display:grid;grid-template-columns:1fr;min-height:100vh}
+@media(min-width:900px){
+  .sc-o .l-shell{grid-template-columns:var(--sidebar-w) 1fr}
+}
+.sc-o .l-sidebar{display:none;background:var(--surface);border-right:1px solid var(--line);
+  padding:var(--s4) var(--s3);position:sticky;top:0;height:100vh;overflow-y:auto}
+@media(min-width:900px){ .sc-o .l-sidebar{display:block} }
+.sc-o .l-nav-group{font-size:var(--fs-micro);text-transform:uppercase;
+  letter-spacing:var(--tracking-wide);color:var(--ink-3);font-weight:700;
+  padding:var(--s4) var(--s3) var(--s2)}
+.sc-o .l-nav-item{display:flex;align-items:center;gap:var(--s3);min-height:42px;
+  padding:0 var(--s3);border-radius:var(--r-sm);color:var(--ink-2);
+  font-size:var(--fs-sm);font-weight:600;text-decoration:none}
+.sc-o .l-nav-item:hover{background:var(--surface-2)}
+.sc-o .l-nav-item.is-on{background:var(--green-50);color:var(--green-800)}
+.sc-o .l-nav-item__badge{margin-left:auto;font-size:var(--fs-micro);font-weight:700;
+  background:var(--amber-50);color:var(--amber-700);padding:2px 7px;border-radius:var(--r-pill)}
+
+.sc-o .l-main{min-width:0;padding:var(--s6) var(--gutter) var(--s16)}
+.sc-o .l-main__inner{max-width:var(--shell-max);margin:0 auto}
+.sc-o .l-page-head{display:flex;align-items:flex-start;gap:var(--s4);
+  flex-wrap:wrap;margin-bottom:var(--s6)}
+.sc-o .l-page-head h1{font-size:var(--fs-h1)}
+.sc-o .l-page-head p{margin:var(--s1) 0 0;color:var(--ink-3);font-size:var(--fs-sm);max-width:70ch}
+.sc-o .l-page-head__actions{margin-left:auto;display:flex;gap:var(--s2);flex-wrap:wrap}
+
+/* Split view — list on the left, detail on the right. Directories, tree,
+   moderation queues. Collapses to a single column on phones. */
+.sc-o .l-split{display:grid;grid-template-columns:1fr;gap:var(--s5)}
+@media(min-width:1000px){ .sc-o .l-split{grid-template-columns:minmax(280px,360px) 1fr} }
+
+.sc-o .l-grid{display:grid;gap:var(--s5);grid-template-columns:1fr}
+@media(min-width:700px){ .sc-o .l-grid--2{grid-template-columns:1fr 1fr} }
+@media(min-width:1000px){
+  .sc-o .l-grid--3{grid-template-columns:repeat(3,1fr)}
+  .sc-o .l-grid--4{grid-template-columns:repeat(4,1fr)}
+}
+.sc-o .l-prose{max-width:var(--read-max)}
+
+/* Mobile bottom tab bar — hidden once the sidebar appears */
+.sc-o .l-tabbar{position:sticky;bottom:0;display:flex;background:var(--surface);
+  border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom)}
+@media(min-width:900px){ .sc-o .l-tabbar{display:none} }
+.sc-o .l-tabbar a{flex:1;display:flex;flex-direction:column;align-items:center;
+  gap:3px;padding:var(--s2) 0;min-height:var(--touch);
+  color:var(--ink-3);font-size:var(--fs-micro);font-weight:640;text-decoration:none}
+.sc-o .l-tabbar a.is-on{color:var(--accent-ink)}
+
+.sc-o .u-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.sc-o .u-num{font-variant-numeric:var(--num)}
+.sc-o .u-truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOCK CHROME — NOT PART OF THE DESIGN SYSTEM
+   Everything above this line is AFRP Design System v2, inlined verbatim.
+   Below: the document shell, browser-window frames, annotation furniture and
+   the alumni primitives (score meters, record comparators, funnels, facets).
+   Every value resolves to a v2 token. No new colours, no new sizes.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.sc-o .doc{max-width:1560px;margin:0 auto;padding:0 var(--gutter) 96px}
+
+/* ── masthead ────────────────────────────────────────────────────────────── */
+.sc-o .masthead{background:var(--n-950);color:#fff;padding:var(--s10) var(--gutter) var(--s8);
+  border-bottom:3px solid var(--green)}
+.sc-o .masthead__in{max-width:1560px;margin:0 auto}
+.sc-o .masthead__eyebrow{font-size:var(--fs-micro);letter-spacing:.16em;text-transform:uppercase;
+  font-weight:700;color:var(--green-200)}
+.sc-o .masthead h1{font-size:var(--fs-display);color:#fff;margin-top:var(--s3)}
+.sc-o .masthead p{margin:var(--s3) 0 0;color:#b6b6ac;font-size:var(--fs-sm);max-width:84ch}
+.sc-o .masthead__meta{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s5)}
+.sc-o .mtag{background:rgba(255,255,255,.10);color:#e8e8e2;font-size:var(--fs-micro);
+  padding:4px 10px;border-radius:var(--r-pill);font-weight:700;letter-spacing:.05em;
+  white-space:nowrap}
+.sc-o .mtag--green{background:var(--green);color:#fff}
+.sc-o .mtag--red{background:var(--red);color:#fff}
+.sc-o .masthead__loop{margin-top:var(--s6);display:flex;flex-wrap:wrap;gap:var(--s2);
+  align-items:center}
+.sc-o .loopstep{display:flex;align-items:baseline;gap:var(--s2);background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.10);border-radius:var(--r-sm);padding:var(--s2) var(--s3);
+  white-space:nowrap}
+.sc-o .loopstep b{font:700 var(--fs-sm)/1 var(--font-mono);color:var(--green-200);
+  font-variant-numeric:var(--num)}
+.sc-o .loopstep span{font-size:var(--fs-xs);color:#e8e8e2;font-weight:600}
+.sc-o .loopstep--now{background:var(--green);border-color:var(--green)}
+.sc-o .loopstep--now b{color:#fff}
+.sc-o .loopstep--now span{color:#fff}
+.sc-o .looparrow{color:#6a6a62;font-size:var(--fs-sm);flex:0 0 auto}
+
+/* ── legend ──────────────────────────────────────────────────────────────── */
+.sc-o .legend{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:var(--s5);margin-top:calc(-1 * var(--s6));position:relative;box-shadow:var(--e2)}
+.sc-o .legend__item{display:flex;gap:var(--s3);align-items:flex-start;font-size:var(--fs-xs);
+  color:var(--ink-3);line-height:var(--lh-snug)}
+.sc-o .legend__item b{display:block;color:var(--ink);font-size:var(--fs-sm)}
+.sc-o .swatch{flex:0 0 auto;width:14px;height:14px;border-radius:4px;margin-top:3px;
+  border:1px solid rgba(0,0,0,.08)}
+.sc-o .swatch--tier1{background:var(--green-50);border:1px solid var(--green)}
+.sc-o .swatch--auto{background:var(--green);border:1px solid var(--green-800)}
+.sc-o .swatch--review{background:var(--amber-50);border:1px solid var(--amber)}
+.sc-o .swatch--block{background:var(--red-50);border:1px solid var(--red)}
+.sc-o .swatch--trace{background:var(--violet-50);border:1px solid var(--violet)}
+.sc-o .swatch--raw{background:var(--surface-sunken);border:1px dashed var(--n-400)}
+
+/* ── section + frame furniture ───────────────────────────────────────────── */
+.sc-o .sec{margin-top:var(--s16)}
+.sc-o .sec__head{display:flex;align-items:baseline;gap:var(--s4);flex-wrap:wrap;
+  padding-bottom:var(--s3);border-bottom:2px solid var(--n-900)}
+.sc-o .sec__letter{font:700 var(--fs-micro)/1 var(--font);letter-spacing:.14em;
+  text-transform:uppercase;color:#fff;background:var(--n-900);padding:6px 10px;
+  border-radius:var(--r-xs)}
+.sc-o .sec__head h2{font-size:var(--fs-h1)}
+.sc-o .sec__head p{margin:0;color:var(--ink-3);font-size:var(--fs-sm);max-width:70ch}
+
+.sc-o .fr{margin-top:var(--s10)}
+.sc-o .fr__head{display:flex;gap:var(--s4);align-items:flex-start}
+.sc-o .fr__num{flex:0 0 auto;width:38px;height:38px;border-radius:var(--r-sm);
+  display:grid;place-items:center;background:var(--n-900);color:#fff;
+  font:700 var(--fs-sm)/1 var(--font);font-variant-numeric:var(--num)}
+.sc-o .fr__head h3{font-size:var(--fs-h2)}
+.sc-o .fr__head p{margin:var(--s2) 0 0;color:var(--ink-2);font-size:var(--fs-sm);max-width:96ch}
+
+/* ── browser window ──────────────────────────────────────────────────────── */
+.sc-o .bw{margin-top:var(--s5);border:1px solid var(--n-300);border-radius:var(--r-lg);
+  overflow:hidden;background:var(--surface);box-shadow:var(--e3)}
+.sc-o .bw__bar{display:flex;align-items:center;gap:var(--s3);padding:var(--s3) var(--s4);
+  background:var(--n-100);border-bottom:1px solid var(--line)}
+.sc-o .bw__dots{display:flex;gap:6px;flex:0 0 auto}
+.sc-o .bw__dot{width:11px;height:11px;border-radius:50%;background:var(--n-300)}
+.sc-o .bw__nav{display:flex;gap:var(--s2);flex:0 0 auto;color:var(--n-400)}
+.sc-o .bw__url{flex:1;min-width:0;display:flex;align-items:center;gap:var(--s2);height:30px;
+  padding:0 var(--s3);background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-pill);font:12px/1 var(--font-mono);color:var(--ink-2)}
+.sc-o .bw__url span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sc-o .bw__url .lock{flex:0 0 auto;color:var(--green)}
+.sc-o .bw__tabtitle{flex:0 0 auto;font-size:var(--fs-micro);font-weight:700;color:var(--ink-3);
+  letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.sc-o .bw__scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--bg)}
+.sc-o .bw__canvas{min-width:1240px;--gutter:24px}
+.sc-o .bw__canvas--wide{min-width:1400px}
+.sc-o .bw__canvas--xwide{min-width:1500px}
+
+/* Force the desktop shell inside every frame regardless of the real viewport —
+   these are pictures of a laptop screen, not responsive instances. */
+.sc-o .bw__canvas .l-shell{grid-template-columns:var(--sidebar-w) 1fr;min-height:0}
+.sc-o .bw__canvas .l-sidebar{display:block;position:static;height:auto}
+.sc-o .bw__canvas .l-main{padding:var(--s6) var(--s6) var(--s8);background:var(--bg)}
+.sc-o .bw__canvas .l-main__inner{max-width:none}
+.sc-o .bw__canvas .l-split{grid-template-columns:minmax(280px,340px) 1fr;align-items:start}
+.sc-o .bw__canvas .l-split--narrow{grid-template-columns:264px 1fr}
+.sc-o .bw__canvas .l-split--flip{grid-template-columns:1fr minmax(330px,380px)}
+.sc-o .bw__canvas .l-split--flipwide{grid-template-columns:1fr minmax(400px,440px)}
+.sc-o .bw__canvas .l-grid{align-items:start}
+.sc-o .bw__canvas .l-grid--2{grid-template-columns:1fr 1fr}
+.sc-o .bw__canvas .l-grid--3{grid-template-columns:repeat(3,1fr)}
+.sc-o .bw__canvas .l-grid--4{grid-template-columns:repeat(4,1fr)}
+.sc-o .bw__canvas .l-grid--5{grid-template-columns:repeat(5,1fr)}
+.sc-o .bw__canvas .l-tabbar{display:none}
+.sc-o .bw__canvas .c-field-row--2{grid-template-columns:1fr 1fr}
+.sc-o .bw__canvas .c-field{margin-bottom:var(--s4)}
+/* Grid and flex children must be allowed to shrink, or a wide table inflates the
+   whole canvas instead of scrolling inside its own wrapper. */
+.sc-o .bw__canvas .l-grid>*,.sc-o .bw__canvas .l-split>*,.sc-o .stack>*,.sc-o .panel{min-width:0}
+
+/* ── in-frame app furniture ──────────────────────────────────────────────── */
+.sc-o .brand{display:flex;align-items:center;gap:var(--s3);padding:var(--s2) var(--s3) var(--s4)}
+.sc-o .brand__mark{flex:0 0 auto;width:34px;height:34px;border-radius:var(--r-xs);
+  background:var(--green-800);color:#fff;display:grid;place-items:center;
+  font:800 12px/1 var(--font);letter-spacing:.02em}
+.sc-o .brand__name{font-size:var(--fs-sm);font-weight:700;line-height:1.15}
+.sc-o .brand__sub{font-size:var(--fs-micro);color:var(--ink-3);font-weight:600}
+.sc-o .l-nav-item svg{flex:0 0 auto;width:17px;height:17px;opacity:.75}
+.sc-o .l-nav-item.is-on svg{opacity:1}
+.sc-o .l-nav-item__badge--red{background:var(--red-50);color:var(--red-700)}
+.sc-o .l-nav-item__badge--green{background:var(--green-50);color:var(--green-800)}
+.sc-o .sidefoot{margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid var(--line-2)}
+.sc-o .rolechip{display:flex;align-items:center;gap:var(--s2);margin:0 var(--s2) var(--s2);
+  padding:var(--s2) var(--s3);background:var(--n-900);color:#fff;border-radius:var(--r-sm);
+  font:650 var(--fs-micro)/1.3 var(--font)}
+.sc-o .rolechip small{display:block;color:var(--green-200);font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;font-size:10px}
+
+.sc-o .toolbar{display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap}
+.sc-o .toolbar--pad{padding:var(--s3) var(--s4);border-bottom:1px solid var(--line);
+  background:var(--surface-2)}
+.sc-o .toolbar__end{margin-left:auto;display:flex;align-items:center;gap:var(--s2)}
+.sc-o .toolbar__count{font-size:var(--fs-xs);color:var(--ink-3);font-variant-numeric:var(--num)}
+.sc-o .mini-search{display:flex;align-items:center;gap:var(--s2);min-height:36px;padding:0 var(--s3);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);
+  font-size:var(--fs-sm);color:var(--ink-3);min-width:200px}
+.sc-o .mini-search svg{width:15px;height:15px;flex:0 0 auto}
+.sc-o .mini-sel{display:inline-flex;align-items:center;gap:var(--s2);min-height:36px;
+  padding:0 var(--s3);background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-sm);font:600 var(--fs-sm)/1 var(--font);color:var(--ink-2);
+  white-space:nowrap}
+.sc-o .mini-sel svg{width:13px;height:13px;color:var(--ink-3)}
+.sc-o .btn-xs{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 var(--s3);
+  border:1px solid var(--line);border-radius:var(--r-sm);background:var(--surface);
+  font:650 var(--fs-xs)/1 var(--font);color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.sc-o .btn-xs:hover{background:var(--surface-2)}
+.sc-o .btn-xs svg{width:13px;height:13px}
+.sc-o .btn-xs--go{background:var(--accent);border-color:var(--accent);color:#fff}
+.sc-o .btn-xs--go:hover{background:var(--green-700)}
+.sc-o .btn-xs--no{color:var(--red-700);border-color:var(--red-100)}
+.sc-o .btn-xs--dark{background:var(--n-900);border-color:var(--n-900);color:#fff}
+.sc-o .btn-xs[disabled]{background:var(--surface-2);color:var(--n-400);cursor:not-allowed}
+
+.sc-o .stat{display:flex;flex-direction:column;gap:2px}
+.sc-o .stat__k{font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:var(--tracking-wide);
+  color:var(--ink-3);font-weight:700}
+.sc-o .stat__v{font-size:28px;line-height:1.1;font-weight:660;letter-spacing:var(--tracking-tight);
+  font-variant-numeric:var(--num);margin-top:var(--s2)}
+.sc-o .stat__v--sm{font-size:21px}
+.sc-o .stat__v--lg{font-size:36px}
+.sc-o .stat__u{font-size:var(--fs-sm);color:var(--ink-3);font-weight:600}
+.sc-o .stat__d{font-size:var(--fs-xs);color:var(--ink-3);margin-top:var(--s1);
+  font-variant-numeric:var(--num);line-height:var(--lh-snug)}
+.sc-o .stat__d b{color:var(--green-800);font-weight:700}
+.sc-o .stat__d i{font-style:normal;color:var(--amber-700);font-weight:700}
+.sc-o .stat__d em{font-style:normal;color:var(--red-700);font-weight:700}
+
+.sc-o .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--e1);overflow:hidden}
+.sc-o .panel--dark{background:var(--n-900);border-color:var(--n-900);color:#e8e8e2}
+.sc-o .panel--dark .panel__head{border-bottom-color:#33332d}
+.sc-o .panel--dark h3{color:#fff}
+.sc-o .panel--dark p{color:#9a9a92}
+.sc-o .panel--flag{border-color:var(--amber);box-shadow:none}
+.sc-o .panel--stop{border-color:var(--red-100)}
+.sc-o .panel__head{display:flex;align-items:center;gap:var(--s3);padding:var(--s4);
+  border-bottom:1px solid var(--line)}
+.sc-o .panel__head h3{font-size:var(--fs-h3)}
+.sc-o .panel__head p{margin:2px 0 0;font-size:var(--fs-xs);color:var(--ink-3)}
+.sc-o .panel__head__end{margin-left:auto;display:flex;gap:var(--s2);align-items:center}
+.sc-o .panel__body{padding:var(--s4)}
+.sc-o .panel__body--flush{padding:0}
+.sc-o .panel__foot{padding:var(--s3) var(--s4);border-top:1px solid var(--line);
+  background:var(--surface-2);display:flex;gap:var(--s2);flex-wrap:wrap;align-items:center}
+.sc-o .sticky-rail{position:sticky;top:var(--s4)}
+.sc-o .span-2{grid-column:span 2}
+.sc-o .span-3{grid-column:span 3}
+.sc-o .stack{display:flex;flex-direction:column;gap:var(--s4)}
+.sc-o .stack--sm{gap:var(--s3)}
+.sc-o .rowflex{display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap}
+
+.sc-o .eyebrow{font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:var(--tracking-wide);
+  color:var(--ink-3);font-weight:700;margin:0 0 var(--s2)}
+.sc-o .navlist{display:flex;flex-direction:column;gap:1px}
+.sc-o .navrow{display:flex;align-items:center;gap:var(--s2);min-height:34px;padding:0 var(--s2);
+  border-radius:var(--r-xs);font-size:var(--fs-sm);color:var(--ink-2);cursor:pointer}
+.sc-o .navrow:hover{background:var(--surface-2)}
+.sc-o .navrow.is-on{background:var(--green-50);color:var(--green-800);font-weight:650}
+.sc-o .navrow .n{margin-left:auto;font-size:var(--fs-xs);color:var(--ink-3);
+  font-variant-numeric:var(--num)}
+.sc-o .navrow__dot{flex:0 0 auto;width:7px;height:7px;border-radius:50%;background:var(--green-200)}
+.sc-o .navrow__dot--a{background:var(--amber)} .sc-o .navrow__dot--r{background:var(--red)}
+.sc-o .navrow__dot--n{background:var(--n-300)} .sc-o .navrow__dot--v{background:var(--violet)}
+
+.sc-o .kv{display:grid;grid-template-columns:150px 1fr;gap:var(--s2) var(--s3);font-size:var(--fs-sm)}
+.sc-o .kv--wide{grid-template-columns:190px 1fr}
+.sc-o .kv--tight{grid-template-columns:118px 1fr}
+.sc-o .kv dt{color:var(--ink-3);font-size:var(--fs-xs);padding-top:2px}
+.sc-o .kv dd{margin:0;font-weight:600;font-variant-numeric:var(--num);overflow-wrap:anywhere}
+.sc-o .kv dd small{display:block;font-weight:500;color:var(--ink-3);font-size:var(--fs-xs)}
+
+.sc-o .bar{height:7px;border-radius:var(--r-pill);background:var(--surface-sunken);overflow:hidden;
+  display:flex}
+.sc-o .bar i{display:block;height:100%}
+.sc-o .bar .g{background:var(--accent)} .sc-o .bar .a{background:var(--amber)}
+.sc-o .bar .r{background:var(--red)} .sc-o .bar .n{background:var(--n-300)}
+.sc-o .bar .b{background:var(--blue)} .sc-o .bar .v{background:var(--violet)}
+
+.sc-o .chk{flex:0 0 auto;width:16px;height:16px;border-radius:4px;border:1.5px solid var(--n-300);
+  background:var(--surface);display:inline-block;vertical-align:middle}
+.sc-o .chk.is-on{background:var(--accent);border-color:var(--accent);position:relative}
+.sc-o .chk.is-on::after{content:"";position:absolute;left:4.5px;top:1px;width:4px;height:8px;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg)}
+.sc-o .chk--r{border-radius:50%}
+.sc-o .chk--r.is-on::after{left:4.5px}
+
+.sc-o .scrollcap{max-height:420px;overflow:auto}
+.sc-o .scrollcap--tall{max-height:640px}
+
+/* ── notes under each frame ──────────────────────────────────────────────── */
+.sc-o .notes{display:grid;gap:var(--s4);grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  margin-top:var(--s4);padding:var(--s5);background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r)}
+.sc-o .notes h4{font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:var(--tracking-wide);
+  color:var(--ink-3);margin-bottom:var(--s2)}
+.sc-o .notes ul{margin:0;padding-left:var(--s5);font-size:var(--fs-sm);color:var(--ink-2);
+  line-height:var(--lh-snug)}
+.sc-o .notes li{margin-bottom:var(--s2)}
+.sc-o .notes li:last-child{margin-bottom:0}
+.sc-o .notes code{font:12px/1.4 var(--font-mono);background:var(--surface-sunken);padding:1px 5px;
+  border-radius:4px;color:var(--ink);overflow-wrap:anywhere}
+.sc-o .decision{display:inline-block;font-size:var(--fs-micro);font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--violet);background:var(--violet-50);
+  padding:2px 8px;border-radius:var(--r-pill);margin-right:6px}
+.sc-o .footnote{margin-top:var(--s16);padding-top:var(--s5);border-top:1px solid var(--line);
+  font-size:var(--fs-xs);color:var(--ink-3);max-width:80ch}
+.sc-o .footnote p{margin:0 0 var(--s3)}
+
+.sc-o .icon{width:16px;height:16px;flex:0 0 auto}
+.sc-o .sprite{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ── dense table variant ─────────────────────────────────────────────────── */
+.sc-o .c-table--dense th{padding:var(--s2) var(--s3)}
+.sc-o .c-table--dense td{padding:var(--s2) var(--s3)}
+.sc-o .c-table--dense td b{font-weight:660}
+.sc-o .c-table td.num{white-space:nowrap}
+.sc-o .c-table tr.is-total td{background:var(--surface-2);font-weight:700;
+  border-top:2px solid var(--n-800);border-bottom:0}
+.sc-o .c-table tr.is-sub td{background:var(--surface-2);font-weight:650}
+.sc-o .c-table tr.is-muted td{color:var(--ink-3)}
+.sc-o .c-table tr.is-flag td{background:var(--amber-50)}
+.sc-o .c-table tr.is-stop td{background:var(--red-50)}
+.sc-o .c-table tr.is-good td{background:var(--green-50)}
+.sc-o .c-table caption{caption-side:top;text-align:left;padding:var(--s3) var(--s4);
+  font-size:var(--fs-xs);color:var(--ink-3);border-bottom:1px solid var(--line);
+  background:var(--surface-2)}
+.sc-o .c-table caption b{color:var(--ink);font-weight:700}
+.sc-o .why{font-size:var(--fs-xs);color:var(--ink-3);line-height:var(--lh-snug)}
+.sc-o .why b{color:var(--ink-2);font-weight:650}
+
+.sc-o .mono{font-family:var(--font-mono);font-size:var(--fs-xs);font-variant-numeric:var(--num)}
+.sc-o .hash{display:block;font:12px/1.5 var(--font-mono);background:var(--surface-sunken);
+  color:var(--ink);padding:var(--s2) var(--s3);border-radius:var(--r-xs);
+  word-break:break-all}
+
+.sc-o .rulestrip{display:flex;flex-wrap:wrap;gap:var(--s6);padding:var(--s4);align-items:center;
+  background:var(--n-900);color:#e8e8e2}
+.sc-o .rulestrip__i{display:flex;flex-direction:column;gap:3px;min-width:0}
+.sc-o .rulestrip__k{font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--green-200);font-weight:700}
+.sc-o .rulestrip__v{font:650 var(--fs-sm)/1.2 var(--font-mono);color:#fff;
+  font-variant-numeric:var(--num);white-space:nowrap}
+.sc-o .rulestrip__n{margin-left:auto;margin-block:0;font-size:var(--fs-xs);color:#9a9a92;max-width:52ch;
+  line-height:var(--lh-snug)}
+
+.sc-o .dot-state{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-xs);
+  font-weight:650;white-space:nowrap}
+.sc-o .dot-state::before{content:"";width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+.sc-o .dot-state--ok{color:var(--green-800)} .sc-o .dot-state--ok::before{background:var(--accent)}
+.sc-o .dot-state--warn{color:var(--amber-700)} .sc-o .dot-state--warn::before{background:var(--amber)}
+.sc-o .dot-state--bad{color:var(--red-700)} .sc-o .dot-state--bad::before{background:var(--red)}
+.sc-o .dot-state--off{color:var(--ink-3)} .sc-o .dot-state--off::before{background:var(--n-300)}
+
+.sc-o .verdict{display:flex;gap:var(--s3);align-items:flex-start;padding:var(--s4);
+  border-radius:var(--r-sm);border-left:3px solid}
+.sc-o .verdict__ic{flex:0 0 auto;width:26px;height:26px;border-radius:50%;display:grid;
+  place-items:center;color:#fff}
+.sc-o .verdict>div>b{display:block;font-size:var(--fs-h3);letter-spacing:var(--tracking-tight)}
+.sc-o .verdict p{margin:var(--s1) 0 0;font-size:var(--fs-sm);line-height:var(--lh-snug)}
+.sc-o .verdict--allow{background:var(--green-50);border-color:var(--accent);color:var(--green-800)}
+.sc-o .verdict--allow .verdict__ic{background:var(--accent)}
+.sc-o .verdict--deny{background:var(--red-50);border-color:var(--red);color:var(--red-700)}
+.sc-o .verdict--deny .verdict__ic{background:var(--red)}
+.sc-o .verdict--hold{background:var(--amber-50);border-color:var(--amber);color:var(--amber-700)}
+.sc-o .verdict--hold .verdict__ic{background:var(--amber)}
+
+.sc-o .trace{counter-reset:t;margin:0;padding:0;list-style:none}
+.sc-o .trace li{counter-increment:t;position:relative;padding:var(--s2) 0 var(--s2) var(--s7);
+  font-size:var(--fs-xs);color:var(--ink-2);border-bottom:1px solid var(--line-2);
+  line-height:var(--lh-snug)}
+.sc-o .trace li:last-child{border-bottom:0}
+.sc-o .trace li::before{content:counter(t);position:absolute;left:0;top:var(--s2);width:19px;
+  height:19px;border-radius:50%;background:var(--surface-sunken);color:var(--ink-3);
+  display:grid;place-items:center;font:700 10px/1 var(--font-mono)}
+.sc-o .trace li.is-pass::before{background:var(--green-50);color:var(--green-800)}
+.sc-o .trace li.is-fail::before{background:var(--red-50);color:var(--red-700)}
+.sc-o .trace li b{color:var(--ink);font-weight:680}
+
+.sc-o .nojoin{display:grid;grid-template-columns:1fr 46px 1fr;gap:0;align-items:stretch}
+.sc-o .nojoin__side{border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;
+  background:var(--surface)}
+.sc-o .nojoin__h{padding:var(--s2) var(--s3);background:var(--n-900);color:#fff;
+  font:700 10px/1.4 var(--font-mono);letter-spacing:.04em}
+.sc-o .nojoin__h span{display:block;color:var(--green-200);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase}
+.sc-o .nojoin__gap{display:grid;place-items:center;position:relative}
+.sc-o .nojoin__gap::before{content:"";position:absolute;top:12px;bottom:12px;left:50%;
+  border-left:2px dashed var(--n-300)}
+.sc-o .nojoin__x{position:relative;width:26px;height:26px;border-radius:50%;background:var(--red-50);
+  border:1px solid var(--red-100);display:grid;place-items:center;color:var(--red-700)}
+.sc-o .nojoin__cap{grid-column:1/-1;text-align:center;font-size:var(--fs-xs);color:var(--red-700);
+  font-weight:700;margin-top:var(--s3)}
+
+.sc-o .stmt{border:1px dashed var(--n-300);border-radius:var(--r-sm);padding:var(--s3);
+  background:var(--surface-2);font-size:var(--fs-xs);color:var(--ink-3);
+  line-height:var(--lh-snug)}
+.sc-o .stmt b{color:var(--ink-2)}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ALUMNI PRIMITIVES — score meters, record comparators, funnels, facets,
+   tracing cards and the raw/parsed pair. Tokens only.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* score meter with the three decision bands marked */
+.sc-o .score{display:flex;flex-direction:column;gap:var(--s2)}
+.sc-o .score__track{position:relative;height:14px;border-radius:var(--r-pill);overflow:hidden;
+  display:flex;background:var(--surface-sunken)}
+.sc-o .score__band{height:100%}
+.sc-o .score__band--new{background:var(--n-200);width:60%}
+.sc-o .score__band--rev{background:var(--amber-50);width:35%}
+.sc-o .score__band--auto{background:var(--green-100);width:5%}
+.sc-o .score__wrap{position:relative;padding-top:var(--s5)}
+.sc-o .score__pin{position:absolute;top:var(--s3);height:22px;width:3px;background:var(--n-900);
+  border-radius:2px;transform:translateX(-1.5px)}
+.sc-o .score__pin span{position:absolute;left:50%;transform:translateX(-50%);top:-17px;
+  font:700 var(--fs-micro)/1 var(--font-mono);color:var(--n-900);white-space:nowrap;
+  font-variant-numeric:var(--num);background:var(--surface);padding:0 4px}
+.sc-o .score__pin--bad{background:var(--red)}
+.sc-o .score__pin--bad span{left:0;transform:none}
+.sc-o .score__pin--bad span{color:var(--red-700)}
+.sc-o .score__ticks{position:relative;height:13px;font:700 10px/1 var(--font-mono);
+  color:var(--ink-3);font-variant-numeric:var(--num)}
+.sc-o .score__ticks span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.sc-o .score__ticks span:first-child{transform:none}
+.sc-o .score__legend{display:flex;gap:var(--s4);flex-wrap:wrap;font-size:var(--fs-xs);
+  color:var(--ink-3);font-variant-numeric:var(--num)}
+.sc-o .score__legend span{display:inline-flex;align-items:center;gap:6px}
+.sc-o .score__legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+
+/* mini score chip used in queue rows */
+.sc-o .sc{display:inline-flex;align-items:center;gap:var(--s2);flex:0 0 auto}
+.sc-o .sc__n{font:700 var(--fs-sm)/1 var(--font-mono);font-variant-numeric:var(--num);
+  min-width:38px;text-align:right}
+.sc-o .sc__b{width:56px;height:6px;border-radius:var(--r-pill);background:var(--surface-sunken);
+  overflow:hidden}
+.sc-o .sc__b i{display:block;height:100%;background:var(--amber)}
+.sc-o .sc--auto .sc__b i{background:var(--accent)} .sc-o .sc--auto .sc__n{color:var(--green-800)}
+.sc-o .sc--bad .sc__n{color:var(--red-700)}
+.sc-o .sc--bad .sc__b i{background:var(--red)}
+
+/* queue row */
+.sc-o .qrow{display:flex;gap:var(--s3);align-items:flex-start;padding:var(--s3);
+  border-bottom:1px solid var(--line-2);cursor:pointer}
+.sc-o .qrow:last-child{border-bottom:0}
+.sc-o .qrow:hover{background:var(--surface-2)}
+.sc-o .qrow.is-on{background:var(--green-50);box-shadow:inset 3px 0 0 var(--accent)}
+.sc-o .qrow.is-blocked{background:var(--red-50);box-shadow:inset 3px 0 0 var(--red)}
+.sc-o .qrow__main{min-width:0;flex:1}
+.sc-o .qrow__main b{display:block;font-size:var(--fs-sm);font-weight:660;
+  line-height:var(--lh-snug);overflow-wrap:anywhere}
+.sc-o .qrow__main span{display:block;font-size:var(--fs-xs);color:var(--ink-3);
+  line-height:var(--lh-snug)}
+.sc-o .qrow__end{flex:0 0 auto;text-align:right;display:flex;flex-direction:column;
+  align-items:flex-end;gap:4px}
+
+/* two-record comparator */
+.sc-o .cmp{border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;background:var(--surface)}
+.sc-o .cmp__head,.sc-o .cmp__row{display:grid;grid-template-columns:128px minmax(0,1fr) minmax(0,1fr) 132px}
+.sc-o .cmp__head{background:var(--n-900);color:#fff}
+.sc-o .cmp__head>div{padding:var(--s3);font:700 var(--fs-micro)/1.35 var(--font);
+  letter-spacing:.06em;text-transform:uppercase;border-right:1px solid #33332d}
+.sc-o .cmp__head>div:last-child{border-right:0}
+.sc-o .cmp__head small{display:block;font-size:10px;color:var(--green-200);letter-spacing:.1em;
+  font-weight:700}
+.sc-o .cmp__row{border-top:1px solid var(--line-2);font-size:var(--fs-sm)}
+.sc-o .cmp__row>div{padding:var(--s3);border-right:1px solid var(--line-2);min-width:0;
+  overflow-wrap:anywhere;font-variant-numeric:var(--num)}
+.sc-o .cmp__row>div:last-child{border-right:0}
+.sc-o .cmp__k{color:var(--ink-3);font-size:var(--fs-xs);background:var(--surface-2);font-weight:650}
+.sc-o .cmp__w{font:700 var(--fs-xs)/1.4 var(--font-mono);font-variant-numeric:var(--num);
+  white-space:nowrap}
+.sc-o .cmp__w small{display:block;font-weight:600;color:var(--ink-3);font-size:10px;
+  font-family:var(--font);letter-spacing:.02em;white-space:normal;line-height:1.3}
+.sc-o .cmp__row--hit{background:var(--green-50)}
+.sc-o .cmp__row--hit .cmp__k{background:var(--green-100);color:var(--green-800)}
+.sc-o .cmp__row--hit .cmp__w{color:var(--green-800)}
+.sc-o .cmp__row--miss .cmp__w{color:var(--ink-3)}
+.sc-o .cmp__row--stop{background:var(--red-50)}
+.sc-o .cmp__row--stop .cmp__k{background:var(--red-100);color:var(--red-700)}
+.sc-o .cmp__row--stop .cmp__w{color:var(--red-700)}
+.sc-o .cmp__row--total{background:var(--surface-2);font-weight:700;border-top:2px solid var(--n-800)}
+.sc-o .cmp__row--total .cmp__k{background:var(--surface-2)}
+
+/* transliteration pair display */
+.sc-o .tlit{display:inline-flex;align-items:center;gap:var(--s2);flex-wrap:wrap;
+  font:700 var(--fs-sm)/1.3 var(--font-mono);font-variant-numeric:var(--num)}
+.sc-o .tlit em{font-style:normal;background:var(--amber-50);color:var(--amber-700);
+  padding:1px 5px;border-radius:4px;border-bottom:2px solid var(--amber)}
+.sc-o .tlit i{font-style:normal;color:var(--ink-3);font-weight:600}
+
+/* raw vs parsed */
+.sc-o .rawpair{display:grid;gap:var(--s2)}
+.sc-o .rawpair__raw{font:11.5px/1.55 var(--font-mono);background:var(--surface-sunken);
+  border:1px dashed var(--n-400);border-radius:var(--r-xs);padding:var(--s2) var(--s3);
+  color:var(--ink-2);word-break:break-word}
+.sc-o .rawpair__lab{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3)}
+
+/* funnel */
+.sc-o .funnel{display:flex;flex-direction:column;gap:var(--s3)}
+.sc-o .funnel__row{display:grid;grid-template-columns:150px 1fr 74px 60px;gap:var(--s3);
+  align-items:center}
+.sc-o .funnel__k{font-size:var(--fs-sm);font-weight:640;min-width:0}
+.sc-o .funnel__k small{display:block;font-size:var(--fs-micro);color:var(--ink-3);font-weight:600}
+.sc-o .funnel__bar{height:22px;border-radius:var(--r-xs);background:var(--surface-sunken);
+  overflow:hidden}
+.sc-o .funnel__bar i{display:block;height:100%;background:var(--accent);border-radius:var(--r-xs)}
+.sc-o .funnel__bar i.b2{background:var(--green-400)}
+.sc-o .funnel__bar i.b3{background:var(--blue)}
+.sc-o .funnel__bar i.b4{background:var(--violet)}
+.sc-o .funnel__n{text-align:right;font:700 var(--fs-sm)/1 var(--font);font-variant-numeric:var(--num)}
+.sc-o .funnel__p{text-align:right;font:700 var(--fs-xs)/1 var(--font);color:var(--ink-3);
+  font-variant-numeric:var(--num)}
+
+/* column chart for decades */
+.sc-o .cols{display:flex;align-items:flex-end;gap:var(--s3);height:168px;padding-top:var(--s5)}
+.sc-o .cols__c{flex:1;display:flex;flex-direction:column;justify-content:flex-end;
+  align-items:center;gap:var(--s2);height:100%}
+.sc-o .cols__bar{width:100%;max-width:76px;background:var(--accent);border-radius:var(--r-xs) var(--r-xs) 0 0;
+  position:relative}
+.sc-o .cols__bar--alt{background:var(--green-400)}
+.sc-o .cols__v{position:absolute;top:-19px;left:0;right:0;text-align:center;
+  font:700 var(--fs-xs)/1 var(--font);font-variant-numeric:var(--num);color:var(--ink-2);
+  white-space:nowrap}
+.sc-o .cols__k{font:700 var(--fs-xs)/1 var(--font);color:var(--ink-3);font-variant-numeric:var(--num)}
+.sc-o .cols__base{height:1px;background:var(--line);margin-top:var(--s2)}
+
+/* facet group */
+.sc-o .facet{border-bottom:1px solid var(--line-2);padding:var(--s3) var(--s4)}
+.sc-o .facet:last-child{border-bottom:0}
+.sc-o .facet__h{display:flex;align-items:center;gap:var(--s2);font-size:var(--fs-xs);
+  font-weight:700;color:var(--ink-3);text-transform:uppercase;
+  letter-spacing:var(--tracking-wide);margin-bottom:var(--s2)}
+.sc-o .facet__h .n{margin-left:auto;font-weight:700;color:var(--ink-3);text-transform:none;
+  letter-spacing:0;font-variant-numeric:var(--num)}
+.sc-o .facet__o{display:flex;align-items:center;gap:var(--s2);min-height:30px;font-size:var(--fs-sm);
+  color:var(--ink-2);cursor:pointer}
+.sc-o .facet__o .n{margin-left:auto;font-size:var(--fs-xs);color:var(--ink-3);
+  font-variant-numeric:var(--num)}
+.sc-o .facet__o.is-on{color:var(--green-800);font-weight:650}
+.sc-o .facet__o.is-off{color:var(--n-400)}
+
+/* count arithmetic strip */
+.sc-o .calc{display:flex;flex-direction:column;gap:0}
+.sc-o .calc__r{display:flex;align-items:baseline;gap:var(--s3);padding:var(--s2) 0;
+  border-bottom:1px solid var(--line-2);font-size:var(--fs-sm)}
+.sc-o .calc__r:last-child{border-bottom:0}
+.sc-o .calc__r span{color:var(--ink-2);min-width:0}
+.sc-o .calc__r small{display:block;color:var(--ink-3);font-size:var(--fs-xs)}
+.sc-o .calc__n{margin-left:auto;font:700 var(--fs-sm)/1.3 var(--font);font-variant-numeric:var(--num);
+  white-space:nowrap}
+.sc-o .calc__r--sub .calc__n{color:var(--red-700)}
+.sc-o .calc__r--tot{border-top:2px solid var(--n-800);border-bottom:0;padding-top:var(--s3)}
+.sc-o .calc__r--tot .calc__n{font-size:var(--fs-h2);color:var(--green-800)}
+
+/* relative candidate card */
+.sc-o .rel{display:grid;grid-template-columns:auto 1fr auto;gap:var(--s3);align-items:start;
+  padding:var(--s4);border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--surface)}
+.sc-o .rel--top{border-color:var(--green-200);background:var(--green-50)}
+.sc-o .rel--out{background:var(--surface-2);border-style:dashed}
+.sc-o .rel__rank{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  background:var(--n-900);color:#fff;font:700 var(--fs-xs)/1 var(--font-mono);
+  font-variant-numeric:var(--num)}
+.sc-o .rel--out .rel__rank{background:var(--n-300);color:var(--n-600)}
+.sc-o .rel__b b{font-size:var(--fs-sm);font-weight:680}
+.sc-o .rel__b p{margin:2px 0 0;font-size:var(--fs-xs);color:var(--ink-3);line-height:var(--lh-snug)}
+.sc-o .rel__tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--s2)}
+.sc-o .rel__end{display:flex;flex-direction:column;align-items:flex-end;gap:var(--s2)}
+.sc-o .deg{display:inline-flex;align-items:center;gap:4px;font:700 10px/1 var(--font-mono);
+  background:var(--violet-50);color:var(--violet);padding:4px 7px;border-radius:4px;
+  white-space:nowrap;letter-spacing:.04em}
+
+/* message preview */
+.sc-o .msg{border:1px solid var(--line);border-radius:var(--r-sm);background:var(--surface);
+  overflow:hidden}
+.sc-o .msg__h{padding:var(--s3) var(--s4);border-bottom:1px solid var(--line-2);
+  background:var(--surface-2);font-size:var(--fs-xs);color:var(--ink-3)}
+.sc-o .msg__h b{color:var(--ink);font-weight:660}
+.sc-o .msg__b{padding:var(--s5);font-size:var(--fs-sm);line-height:var(--lh-body);color:var(--ink-2)}
+.sc-o .msg__b p{margin:0 0 var(--s4)}
+.sc-o .msg__b p:last-child{margin-bottom:0}
+.sc-o .mf{background:var(--green-50);color:var(--green-800);border-bottom:1px dotted var(--green);
+  font-weight:660;padding:0 2px;border-radius:3px}
+.sc-o .msg__card{border:1px solid var(--green-200);background:var(--green-50);border-radius:var(--r-sm);
+  padding:var(--s4);margin:0 0 var(--s4)}
+.sc-o .msg__card dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:var(--s1) var(--s4);
+  font-size:var(--fs-sm)}
+.sc-o .msg__card dt{color:var(--green-800);font-size:var(--fs-xs);font-weight:650}
+.sc-o .msg__card dd{margin:0;font-weight:700;font-variant-numeric:var(--num);color:var(--green-800);
+  text-align:right}
+.sc-o .msg__cta{display:inline-flex;align-items:center;gap:var(--s2);min-height:38px;padding:0 var(--s4);
+  background:var(--accent);color:#fff;border-radius:var(--r-sm);font:700 var(--fs-sm)/1 var(--font);
+  text-decoration:none}
+
+/* template compliance checks */
+.sc-o .checks{display:flex;flex-direction:column;gap:0}
+.sc-o .checks__r{display:flex;gap:var(--s3);align-items:flex-start;padding:var(--s3) 0;
+  border-bottom:1px solid var(--line-2);font-size:var(--fs-sm)}
+.sc-o .checks__r:last-child{border-bottom:0}
+.sc-o .checks__ic{flex:0 0 auto;width:20px;height:20px;border-radius:50%;display:grid;
+  place-items:center;background:var(--green-50);color:var(--green-800);margin-top:1px}
+.sc-o .checks__ic--no{background:var(--red-50);color:var(--red-700)}
+.sc-o .checks__r b{display:block;font-weight:660;font-size:var(--fs-sm)}
+.sc-o .checks__r span{display:block;font-size:var(--fs-xs);color:var(--ink-3);line-height:var(--lh-snug)}
+
+/* tree strip for family links */
+.sc-o .treestrip{display:flex;gap:var(--s3);align-items:center;flex-wrap:wrap}
+.sc-o .treeline{display:flex;align-items:center;gap:var(--s2);font-size:var(--fs-xs);
+  color:var(--ink-3)}
+.sc-o .treeline i{display:block;width:18px;height:1px;background:var(--n-300)}
+
+/* provenance strip */
+.sc-o .prov{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  padding:var(--s4);background:var(--surface-2);border-radius:var(--r-sm);
+  border:1px solid var(--line)}
+.sc-o .prov__i b{display:block;font:700 var(--fs-sm)/1.3 var(--font);font-variant-numeric:var(--num)}
+.sc-o .prov__i span{display:block;font-size:10px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:2px}
+
+@media(max-width:899px){.sc-o .bw__tabtitle,.sc-o .bw__nav{display:none}}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ADDITIONS FOR THE UNIFIED OPERATIONS DOCUMENT
+   Contents list, quorum meters, T-accounts, milestone rails, permission
+   matrices, seat bars, family-tree canvas, stock bars. Tokens only.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── contents ────────────────────────────────────────────────────────────── */
+.sc-o .toc{margin-top:var(--s8);background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r);overflow:hidden;box-shadow:var(--e1)}
+.sc-o .toc__head{padding:var(--s4) var(--s5);border-bottom:1px solid var(--line);
+  background:var(--surface-2);display:flex;align-items:baseline;gap:var(--s3);flex-wrap:wrap}
+.sc-o .toc__head h2{font-size:var(--fs-h2)}
+.sc-o .toc__head p{margin:0;font-size:var(--fs-xs);color:var(--ink-3);max-width:78ch}
+.sc-o .toc__body{display:grid;gap:0;grid-template-columns:1fr}
+@media(min-width:760px){.sc-o .toc__body{grid-template-columns:1fr 1fr}}
+@media(min-width:1180px){.sc-o .toc__body{grid-template-columns:repeat(3,1fr)}}
+.sc-o .toc__col{padding:var(--s4) var(--s5);border-bottom:1px solid var(--line-2);min-width:0}
+@media(min-width:760px){.sc-o .toc__col{border-right:1px solid var(--line-2)}}
+.sc-o .toc__lens{display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s3)}
+.sc-o .toc__badge{flex:0 0 auto;font:700 var(--fs-micro)/1 var(--font);letter-spacing:.12em;
+  text-transform:uppercase;color:#fff;background:var(--n-900);padding:5px 8px;
+  border-radius:var(--r-xs)}
+.sc-o .toc__lens b{font-size:var(--fs-sm);line-height:1.25}
+.sc-o .toc__lens small{display:block;font-size:var(--fs-micro);color:var(--ink-3);font-weight:600}
+.sc-o .toc a{display:grid;grid-template-columns:26px 1fr;gap:var(--s3);align-items:baseline;
+  padding:var(--s2) 0;border-bottom:1px solid var(--line-2);text-decoration:none;
+  color:var(--ink-2);font-size:var(--fs-sm);min-width:0}
+.sc-o .toc a:last-child{border-bottom:0}
+.sc-o .toc a:hover{color:var(--accent-ink)}
+.sc-o .toc a i{font-style:normal;font:700 var(--fs-xs)/1.5 var(--font-mono);color:var(--ink-3);
+  font-variant-numeric:var(--num)}
+.sc-o .toc a b{font-weight:640;display:block;line-height:var(--lh-snug)}
+.sc-o .toc a span{display:block;font-size:var(--fs-xs);color:var(--ink-3);line-height:var(--lh-snug)}
+.sc-o .toc__foot{padding:var(--s3) var(--s5);border-top:1px solid var(--line);
+  background:var(--surface-2);font-size:var(--fs-xs);color:var(--ink-3)}
+
+/* ── meters (quorum, budget, capacity, page budget) ──────────────────────── */
+.sc-o .meter{display:flex;flex-direction:column;gap:var(--s2)}
+.sc-o .meter__top{display:flex;align-items:baseline;gap:var(--s3);font-size:var(--fs-xs);
+  color:var(--ink-3)}
+.sc-o .meter__top b{font-size:var(--fs-sm);color:var(--ink);font-weight:680;
+  font-variant-numeric:var(--num)}
+.sc-o .meter__top .end{margin-left:auto;font-variant-numeric:var(--num);white-space:nowrap}
+.sc-o .meter__track{position:relative;height:18px;border-radius:var(--r-xs);
+  background:var(--surface-sunken);overflow:hidden;display:flex}
+.sc-o .meter__fill{height:100%;background:var(--accent)}
+.sc-o .meter__fill--a{background:var(--amber)} .sc-o .meter__fill--r{background:var(--red)}
+.sc-o .meter__fill--b{background:var(--blue)} .sc-o .meter__fill--v{background:var(--violet)}
+.sc-o .meter__fill--n{background:var(--n-300)}
+.sc-o .meter__mark{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--n-900)}
+.sc-o .meter__mark span{position:absolute;left:50%;transform:translateX(-50%);top:-15px;
+  font:700 10px/1 var(--font-mono);color:var(--n-900);white-space:nowrap;
+  background:var(--surface);padding:0 3px}
+.sc-o .meter__wrap{padding-top:var(--s4);position:relative}
+.sc-o .meter__key{display:flex;gap:var(--s4);flex-wrap:wrap;font-size:var(--fs-xs);
+  color:var(--ink-3);font-variant-numeric:var(--num)}
+.sc-o .meter__key span{display:inline-flex;align-items:center;gap:6px}
+.sc-o .meter__key i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.sc-o .k-g{background:var(--accent)} .sc-o .k-a{background:var(--amber)} .sc-o .k-r{background:var(--red)}
+.sc-o .k-b{background:var(--blue)} .sc-o .k-v{background:var(--violet)} .sc-o .k-n{background:var(--n-300)}
+
+/* ── T-account journal pair ──────────────────────────────────────────────── */
+.sc-o .ta{border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;
+  background:var(--surface)}
+.sc-o .ta__h{padding:var(--s2) var(--s3);background:var(--n-900);color:#fff;
+  font:700 var(--fs-xs)/1.4 var(--font);display:flex;gap:var(--s2);align-items:baseline}
+.sc-o .ta__h small{color:var(--green-200);font:700 10px/1.4 var(--font-mono);
+  letter-spacing:.08em;text-transform:uppercase;margin-left:auto}
+.sc-o .ta__r{display:grid;grid-template-columns:52px minmax(0,1fr) 88px 88px;
+  border-top:1px solid var(--line-2);font-size:var(--fs-xs)}
+.sc-o .ta__r>*{padding:var(--s2) var(--s3);min-width:0;overflow-wrap:anywhere}
+.sc-o .ta__r--head>*{background:var(--surface-2);font-weight:700;color:var(--ink-3);
+  font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.sc-o .ta__acct{font:700 var(--fs-xs)/1.5 var(--font-mono);color:var(--ink-2)}
+.sc-o .ta__d,.sc-o .ta__c{text-align:right;font-variant-numeric:var(--num);
+  font:650 var(--fs-xs)/1.5 var(--font-mono)}
+.sc-o .ta__c{color:var(--green-800)}
+.sc-o .ta__r--tot{border-top:2px solid var(--n-800);background:var(--surface-2);font-weight:700}
+.sc-o .ta__r--liab{background:var(--amber-50)}
+.sc-o .ta__r--liab .ta__c{color:var(--amber-700)}
+.sc-o .ta__note{padding:var(--s2) var(--s3);border-top:1px solid var(--line-2);
+  font-size:var(--fs-xs);color:var(--ink-3);background:var(--surface-2);
+  line-height:var(--lh-snug)}
+.sc-o .ta__note b{color:var(--ink-2)}
+
+/* ── milestone rail (copy freeze, issue lifecycle, cycle lifecycle) ──────── */
+.sc-o .rail{display:flex;gap:0;align-items:stretch;overflow-x:auto;padding-bottom:var(--s2)}
+.sc-o .rail__s{flex:1 1 0;min-width:118px;position:relative;padding:var(--s5) var(--s3) 0;
+  text-align:center}
+.sc-o .rail__s::before{content:"";position:absolute;left:0;right:0;top:9px;height:2px;
+  background:var(--line)}
+.sc-o .rail__s:first-child::before{left:50%}
+.sc-o .rail__s:last-child::before{right:50%}
+.sc-o .rail__s.is-done::before,.sc-o .rail__s.is-now::before{background:var(--accent)}
+.sc-o .rail__s.is-now~.rail__s::before{background:var(--line)}
+.sc-o .rail__d{position:absolute;top:3px;left:50%;transform:translateX(-50%);
+  width:14px;height:14px;border-radius:50%;background:var(--n-200);
+  box-shadow:0 0 0 3px var(--surface)}
+.sc-o .rail__s.is-done .rail__d{background:var(--accent)}
+.sc-o .rail__s.is-now .rail__d{background:var(--n-900);box-shadow:0 0 0 3px var(--surface),0 0 0 6px var(--green-100)}
+.sc-o .rail__s.is-lock .rail__d{background:var(--blue)}
+.sc-o .rail__k{font:700 var(--fs-xs)/1.3 var(--font);color:var(--ink-2)}
+.sc-o .rail__s.is-now .rail__k{color:var(--n-900)}
+.sc-o .rail__v{font:650 var(--fs-micro)/1.4 var(--font-mono);color:var(--ink-3);
+  font-variant-numeric:var(--num);margin-top:2px}
+.sc-o .rail__n{font-size:10px;color:var(--ink-3);margin-top:2px;line-height:1.3}
+
+/* ── permission matrix ───────────────────────────────────────────────────── */
+.sc-o .mx{border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;
+  background:var(--surface);font-size:var(--fs-xs)}
+.sc-o .mx__r{display:grid;grid-template-columns:minmax(150px,1.5fr) repeat(5,minmax(58px,1fr));
+  border-bottom:1px solid var(--line-2)}
+.sc-o .mx__r:last-child{border-bottom:0}
+.sc-o .mx__r>*{padding:var(--s2) var(--s3);min-width:0;text-align:center;
+  border-right:1px solid var(--line-2)}
+.sc-o .mx__r>*:last-child{border-right:0}
+.sc-o .mx__r>*:first-child{text-align:left;font-weight:640;color:var(--ink-2)}
+.sc-o .mx__r--head>*{background:var(--n-900);color:#fff;font:700 10px/1.35 var(--font);
+  letter-spacing:.06em;text-transform:uppercase;border-right-color:#33332d}
+.sc-o .mx__y{color:var(--green-800);font-weight:700}
+.sc-o .mx__n{color:var(--n-400);font-weight:700}
+.sc-o .mx__x{color:var(--red-700);font-weight:700}
+.sc-o .mx__cell--y{background:var(--green-50)}
+.sc-o .mx__cell--x{background:var(--red-50)}
+.sc-o .mx__cell--e{background:var(--amber-50);color:var(--amber-700);font-weight:700}
+
+/* ── seat bar (apportionment) ────────────────────────────────────────────── */
+.sc-o .seats{display:inline-flex;gap:2px;align-items:center}
+.sc-o .seats i{width:7px;height:16px;border-radius:2px;background:var(--accent);display:block}
+.sc-o .seats i.pend{background:var(--n-200)}
+.sc-o .seats i.cap{background:var(--amber)}
+
+/* ── family-tree canvas ──────────────────────────────────────────────────── */
+.sc-o .ftree{position:relative;overflow-x:auto;background:var(--surface-2);
+  border:1px solid var(--line);border-radius:var(--r-sm);padding:var(--s4)}
+.sc-o .ftree__in{position:relative;min-width:660px;height:330px}
+.sc-o .ftree svg{position:absolute;inset:0;width:100%;height:100%;max-width:none}
+.sc-o .fn{position:absolute;width:150px;padding:var(--s2) var(--s3);border-radius:var(--r-sm);
+  background:var(--surface);border:1px solid var(--line);box-shadow:var(--e1)}
+.sc-o .fn b{display:block;font-size:var(--fs-xs);font-weight:680;line-height:1.3}
+.sc-o .fn span{display:block;font-size:10px;color:var(--ink-3);line-height:1.35;
+  font-variant-numeric:var(--num)}
+.sc-o .fn--rev{border-color:var(--violet);background:var(--violet-50)}
+.sc-o .fn--app{border-color:var(--red);background:var(--red-50)}
+.sc-o .fn--path{border-color:var(--amber);background:var(--amber-50)}
+.sc-o .fn__deg{position:absolute;top:-9px;right:-9px;width:20px;height:20px;border-radius:50%;
+  background:var(--n-900);color:#fff;display:grid;place-items:center;
+  font:700 10px/1 var(--font-mono)}
+
+/* ── stock bar ───────────────────────────────────────────────────────────── */
+.sc-o .stock{display:flex;align-items:center;gap:var(--s2);white-space:nowrap}
+.sc-o .stock__b{width:56px;height:6px;border-radius:var(--r-pill);
+  background:var(--surface-sunken);overflow:hidden;flex:0 0 auto}
+.sc-o .stock__b i{display:block;height:100%;background:var(--accent)}
+.sc-o .stock--low .stock__b i{background:var(--amber)}
+.sc-o .stock--out .stock__b i{background:var(--red)}
+.sc-o .stock__n{font:700 var(--fs-xs)/1 var(--font-mono);font-variant-numeric:var(--num)}
+
+/* ── small helpers used across frames ────────────────────────────────────── */
+.sc-o .scope{display:inline-flex;align-items:center;gap:5px;font:700 10px/1.4 var(--font-mono);
+  background:var(--n-900);color:#fff;padding:3px 7px;border-radius:4px;
+  letter-spacing:.04em;white-space:nowrap}
+.sc-o .scope--club{background:var(--blue);}
+.sc-o .scope--prog{background:var(--violet)}
+.sc-o .scope--fed{background:var(--green-800)}
+.sc-o .gridnote{font-size:var(--fs-xs);color:var(--ink-3);line-height:var(--lh-snug)}
+.sc-o .gridnote b{color:var(--ink-2);font-weight:660}
+.sc-o .tiles-sm{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+.sc-o .statbox{padding:var(--s4);border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--surface);min-width:0}
+.sc-o .statbox--flag{border-color:var(--amber);background:var(--amber-50)}
+.sc-o .statbox--stop{border-color:var(--red-100);background:var(--red-50)}
+.sc-o .statbox--good{border-color:var(--green-200);background:var(--green-50)}
+.sc-o .legendrow{display:flex;gap:var(--s4);flex-wrap:wrap;font-size:var(--fs-xs);color:var(--ink-3)}
+.sc-o .legendrow span{display:inline-flex;align-items:center;gap:6px}
+.sc-o .legendrow i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.sc-o .swatch--allow{background:var(--green-50);border:1px solid var(--green)}
+.sc-o .swatch--deny{background:var(--red-50);border:1px solid var(--red)}
+.sc-o .swatch--hold{background:var(--amber-50);border:1px solid var(--amber)}
+.sc-o .swatch--frozen{background:var(--blue-50);border:1px solid var(--blue)}
+.sc-o .swatch--cross{background:var(--violet-50);border:1px solid var(--violet)}
+.sc-o .swatch--queue{background:var(--surface-sunken);border:1px dashed var(--n-400)}
+.sc-o .bignum{font:700 var(--fs-h1)/1.1 var(--font);font-variant-numeric:var(--num);
+  letter-spacing:var(--tracking-tight)}
+.sc-o .subtle{color:var(--ink-3);font-size:var(--fs-xs)}
+.sc-o .pagelinks{display:flex;gap:var(--s2);flex-wrap:wrap;margin-top:var(--s4)}
+.sc-o .pagelink{font-size:var(--fs-xs);font-weight:650;color:var(--ink-3);text-decoration:none;
+  border:1px solid var(--line);border-radius:var(--r-pill);padding:3px 10px}
+.sc-o .pagelink:hover{border-color:var(--green-200);color:var(--accent-ink)}
+.sc-o .backtop{display:inline-flex;align-items:center;gap:6px;margin-top:var(--s3);
+  font-size:var(--fs-xs);font-weight:650;color:var(--ink-3);text-decoration:none}
+.sc-o .backtop:hover{color:var(--accent-ink)}
+
+/* ── refinements found in review ─────────────────────────────────────────── */
+/* Alert lead-in keeps its block behaviour; bold used mid-sentence stays inline. */
+.sc-o .c-alert div>b:not(:first-child){display:inline;margin-bottom:0}
+/* Meter threshold marks need to escape the track, so the track is not clipped
+   and the fills carry the rounding instead. */
+.sc-o .meter__track{overflow:visible}
+.sc-o .meter__fill:first-of-type{border-radius:var(--r-xs) 0 0 var(--r-xs)}
+.sc-o .meter__fill:last-of-type{border-radius:0 var(--r-xs) var(--r-xs) 0}
+.sc-o .meter__wrap{padding-top:0}
+.sc-o .meter__wrap .meter__track{margin-top:18px}
+.sc-o .meter__mark span{top:-16px}
+/* Account column needs room for a four-digit code without wrapping. */
+.sc-o .ta__r{grid-template-columns:62px minmax(0,1fr) 88px 88px}
+/* Funnel labels shrink in a narrow column so the bar stays readable. */
+.sc-o .funnel__row{grid-template-columns:minmax(92px,150px) 1fr 74px 60px}
+/* Family-tree canvas is a fixed drawing, not a fluid one. */
+.sc-o .ftree__in{width:660px;height:384px}
+.sc-o .ftree svg{width:660px;height:384px}
+.sc-o .fn{width:162px}
+.sc-o .fn__deg{width:22px;height:22px;font-size:11px;border:2px solid var(--surface);top:-10px;right:-10px}
+/* .fn span sets a grey block; the degree badge has to win that. */
+.sc-o .fn span.fn__deg{display:grid;place-items:center;color:#fff;font-size:11px;
+  font-family:var(--font-mono);font-weight:700;line-height:1}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN SYSTEM v3.1 — WARM HERITAGE LAYER (addendum)
+   The v2 block above stays byte-identical; everything here is override-only,
+   with every token value sliced verbatim from AFRP-Integrated-Prototype.html
+   so the three documents provably share one palette. Composition: 800-weight
+   display titles, lens-tinted icon chips, low-opacity watermark motifs, and
+   a gold-tipped rule leading each tatreez band.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.sc-o{
+  /* the family — warmed in v3.1: olive stays, gold deepens, and the old teal
+     pine becomes a warm forest green so all four lenses sit in one grove */
+  --olive:#6d7a19;  --olive-deep:#525d12; --olive-ink:#39430c;
+  --olive-50:#f2f4dd; --olive-200:#cdd48f; --olive-bright:#b5c24a;
+  --gold:#9a720d;   --gold-deep:#7c5b09;  --gold-ink:#584106;
+  --gold-50:#faf2dc;  --gold-200:#e7d191;  --gold-bright:#d9b45a;
+  --gold-300:#dcbc6b;
+  --pine:#3f6b41;   --pine-deep:#305233;  --pine-ink:#1f3a22;
+  --pine-50:#e6f0e2;  --pine-200:#aecfa6;  --pine-bright:#6da869;
+  /* default lens = member = the anchor green */
+  --lens:var(--green); --lens-deep:var(--green-700); --lens-ink:var(--green-800);
+  --lens-50:var(--green-50); --lens-200:var(--green-200); --lens-bright:var(--green-400);
+}
+.sc-o{
+  /* warm neutrals — brown-gray, not slate */
+  --n-950:#1b1510; --n-900:#241d15; --n-800:#382f23; --n-700:#4e4434;
+  --n-600:#5d5140; --n-500:#6f624c; --n-400:#a2947c; --n-300:#c8bda6;
+  --n-200:#e1d8c3; --n-100:#ece4d1; --n-50:#f5f0e1; --n-0:#fffdf6;
+
+  /* olive-warm greens replace the cool brand greens */
+  --green-900:#212d06; --green-800:#33430b; --green-700:#40540f;
+  --green:#4c6414;     --green-400:#7e9440; --green-200:#c4cd97;
+  --green-100:#dde2bf; --green-50:#eef0da;
+
+  /* status, warmed to match the ground */
+  --amber-700:#7c4d05; --amber:#a3660c; --amber-50:#f9efd6;
+  --red-700:#96230b;   --red:#bb3013;   --red-100:#f0cfc0; --red-50:#f9e8dd;
+  --blue-700:#1c5062;  --blue:#2a6a7e;  --blue-50:#e3eff0;
+  --violet:#6d4a86;    --violet-50:#f0eaf2;
+
+  /* semantic — cream and ivory across the board */
+  --bg:#f5f0e1; --surface:#fffdf6; --surface-2:#f7f1e2;
+  --surface-sunken:#eee6d2;
+  --focus:#cfd6a0;
+}
+
+/* the brand lockup — gold on the dark masthead */
+.sc-o .sprite{position:absolute;width:0;height:0;overflow:hidden}
+.sc-o .lockup{display:flex;align-items:center;gap:12px;min-width:0;
+  color:var(--gold-300);margin-bottom:var(--s5)}
+.sc-o .lockup__tree{flex:0 0 auto;width:46px;height:46px}
+.sc-o .lockup__word{font:800 24px/1 var(--font);letter-spacing:.045em;color:#fff;
+  white-space:nowrap}
+.sc-o .lockup__sub{display:block;font:700 9.5px/1.3 var(--font);letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold-300);margin-top:3px}
+
+/* the watermark motif — decorative, never behind body text */
+.sc-o .ph-water{position:absolute;right:-18px;top:-26px;width:170px;height:170px;
+  color:var(--lens);opacity:.075;pointer-events:none;z-index:0;
+  fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── lens tints per section group ─────────────────────────────────────────
+   federation pine · finance gold · club olive · programme amber (the warm
+   side of the gold family — finance keeps the metal, programmes the harvest;
+   the two -200/-bright stops are the only values not present verbatim in the
+   prototype, derived inside the same family and contrast-checked below) ── */
+.sc-o #lensA{--lens:var(--pine);--lens-deep:var(--pine-deep);--lens-ink:var(--pine-ink);
+  --lens-50:var(--pine-50);--lens-200:var(--pine-200);--lens-bright:var(--pine-bright)}
+.sc-o #lensB{--lens:var(--gold);--lens-deep:var(--gold-deep);--lens-ink:var(--gold-ink);
+  --lens-50:var(--gold-50);--lens-200:var(--gold-200);--lens-bright:var(--gold-bright)}
+.sc-o #lensC{--lens:var(--olive);--lens-deep:var(--olive-deep);--lens-ink:var(--olive-ink);
+  --lens-50:var(--olive-50);--lens-200:var(--olive-200);--lens-bright:var(--olive-bright)}
+.sc-o #lensD,.sc-o #lensF{--lens:var(--amber);--lens-deep:var(--amber-700);--lens-ink:#5e3a04;
+  --lens-50:var(--amber-50);--lens-200:#ecd6a6;--lens-bright:#c9963b}
+.sc-o #lensE{--lens:var(--green);--lens-deep:var(--green-700);--lens-ink:var(--green-800);
+  --lens-50:var(--green-50);--lens-200:var(--green-200);--lens-bright:var(--green-400)}
+
+/* ── section heads: bold, tinted letter chip, gold-tipped rule, band ────── */
+.sc-o .sec__head{position:relative;border-bottom:0;padding-bottom:var(--s4)}
+.sc-o .sec__head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:9px;
+  border-radius:2px;
+  background:
+    repeating-linear-gradient(45deg,  var(--lens-200) 0 1.6px, transparent 1.6px 8px),
+    repeating-linear-gradient(135deg, var(--lens-200) 0 1.6px, transparent 1.6px 8px),
+    linear-gradient(to right, var(--lens-50), transparent 70%);
+}
+.sc-o .sec__head::before{content:"";position:absolute;left:0;bottom:0;height:9px;width:104px;
+  background:linear-gradient(90deg,var(--lens) 0 82%,var(--gold-bright) 82% 100%);
+  border-radius:2px;z-index:1}
+.sc-o .sec__letter{background:var(--lens-deep)}
+.sc-o .sec__head h2{font-size:clamp(24px,1.7vw + 19px,31px);font-weight:800;
+  letter-spacing:-.03em}
+
+/* ── frame heads: the hero treatment ──────────────────────────────────────── */
+.sc-o .fr__head{position:relative;overflow:hidden;padding-bottom:var(--s4)}
+.sc-o .fr__head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:9px;
+  border-radius:2px;
+  background:
+    repeating-linear-gradient(45deg,  var(--lens-200) 0 1.6px, transparent 1.6px 8px),
+    repeating-linear-gradient(135deg, var(--lens-200) 0 1.6px, transparent 1.6px 8px),
+    linear-gradient(to right, var(--lens-50), transparent 70%);
+}
+.sc-o .fr__head::before{content:"";position:absolute;left:0;bottom:0;height:9px;width:104px;
+  background:linear-gradient(90deg,var(--lens) 0 82%,var(--gold-bright) 82% 100%);
+  border-radius:2px;z-index:1}
+.sc-o .fr__num{background:var(--lens-deep);border-radius:var(--r);box-shadow:var(--e2);
+  width:44px;height:44px;font-size:var(--fs-body)}
+.sc-o .fr__head h3{font-size:clamp(20px,1.3vw + 16px,26px);font-weight:800;
+  letter-spacing:-.03em;line-height:1.1}
+.sc-o .fr__head>div{position:relative;z-index:1}
+
+/* panels step up a notch, staying quieter than the frame heads */
+.sc-o .panel__head h3{font-weight:750;letter-spacing:-.015em}
+
+</style>
+</head>
+<body class="px-doc">
+<svg class="sprite" aria-hidden="true" focusable="false"><symbol id="h-lens-member" viewBox="0 0 20 20"><path d="M4.2 15.8C4 9.6 8.4 4.9 15.8 4.2c.2 6.2-4.2 10.9-11.6 11.6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.2 15.8C7.8 12.2 11.4 8.6 14.6 5.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol><symbol id="h-lens-club" viewBox="0 0 20 20"><path d="M3.2 16.8C7.6 15 12.8 10.8 16.8 3.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9.4 9.4C9 6.8 9.9 4.7 12.2 3.4c.5 2.6-.4 4.7-2.8 6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.9 13.6c-2.6.5-4.7-.4-6-2.7 2.6-.6 4.7.3 6 2.7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="h-lens-program" viewBox="0 0 20 20"><circle cx="6.4" cy="13.4" r="2.9" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="13.6" cy="13.4" r="2.7" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="7" r="2.9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M11 4.3c.4-1.4 1.4-2.1 3-2.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol><symbol id="h-lens-fed" viewBox="0 0 20 20"><path d="M10 2.9c2.2 0 4 .7 5 2 .9 1.1 1.3 2.4 1.1 3.8-.3 2.3-2.1 3.9-4.6 4.1H8.5C6 12.6 4.2 11 3.9 8.7 3.7 7.3 4.1 6 5 4.9c1-1.3 2.8-2 5-2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 12.8v4M3.2 16.8h13.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="7.6" cy="7" r="1" fill="currentColor"/><circle cx="12.4" cy="7" r="1" fill="currentColor"/><circle cx="10" cy="9.6" r="1" fill="currentColor"/></symbol><symbol id="h-coins" viewBox="0 0 20 20"><circle cx="7.4" cy="7.6" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13.5 8.7a4.2 4.2 0 1 1-4.9 4.9M5.9 7.6h3M7.4 6.1v3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol><symbol id="h-quill" viewBox="0 0 20 20"><path d="M16.7 3.3C11 3.9 6.8 7.9 5.3 13.5l-.9 3.1 3.1-.9C13.1 14.2 16.1 9.3 16.7 3.3ZM4.4 16.6C8 10.4 11.6 6.9 15 4.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol></svg>
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.5" cy="8" r="3.2"/><path d="M3.5 19.5a6 6 0 0 1 12 0"/><path d="M16 5.6a3.2 3.2 0 0 1 0 4.8M17.5 14.6a6 6 0 0 1 3 4.9"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+<symbol id="i-bldg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V6l8-3 8 3v15"/><path d="M4 21h16M9 21v-4.5h6V21M8 9h2M14 9h2M8 13h2M14 13h2"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="M8 17v-5M12.5 17V8M17 17v-7"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.4l3.4 2"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v6c0 4.6 3.1 7.9 7.5 9 4.4-1.1 7.5-4.4 7.5-9V6L12 3z"/><path d="m9 12 2.2 2.2L15.4 10"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+<symbol id="i-chevr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></symbol>
+<symbol id="i-chevl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></symbol>
+<symbol id="i-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5h17l-6.6 7.6V19l-3.8 2v-8.4L3.5 5z"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v11M7.5 10.5 12 15l4.5-4.5M4.5 19.5h15"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5v-11M7.5 13.5 12 9l4.5 4.5M4.5 4.5h15"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10" width="15" height="10.5" rx="2.2"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20.5 4v5h-5"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.8 6.5 8.2 6.2 8.2-6.2"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2C11.6 19.2 4.8 12.4 4.5 5.7a2 2 0 0 1 2-2.2z"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 6.5h12M8.5 12h12M8.5 17.5h12M4 6.5h.01M4 12h.01M4 17.5h.01"/></symbol>
+<symbol id="i-bank" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 4l9 5.5M4.5 9.5V18M9.5 9.5V18M14.5 9.5V18M19.5 9.5V18M3 20.5h18"/></symbol>
+<symbol id="i-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M7 20h10M5 8h14M5 8 2.5 14h5zM19 8l-2.5 6h5z"/><circle cx="12" cy="4.5" r="1.3"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="4"/><path d="m11 11 8 8M16.5 16.5l2-2M14.5 14.5l2-2"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21 20H3z"/><path d="M12 9.5v4.5M12 17h.01"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 6 12 6s9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="2.7"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13.5a4 4 0 0 0 5.7 0l2.8-2.8a4 4 0 0 0-5.7-5.7L11.5 6.3"/><path d="M14 10.5a4 4 0 0 0-5.7 0l-2.8 2.8a4 4 0 0 0 5.7 5.7l1.3-1.3"/></symbol>
+<symbol id="i-unlink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 13.5a4 4 0 0 0 5.2-.4l1.8-1.8a4 4 0 0 0-5.7-5.7l-.9.9"/><path d="M13.5 10.5a4 4 0 0 0-5.2.4l-1.8 1.8a4 4 0 0 0 5.7 5.7l.9-.9"/><path d="M3 3l18 18"/></symbol>
+<symbol id="i-tree" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2.5" width="6" height="5" rx="1.5"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.5"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.5"/><path d="M12 7.5V12M5.5 16.5V12h13v4.5"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h6a3 3 0 0 1 3 3V20a2.5 2.5 0 0 0-2.5-2.5H4z"/><path d="M20 4.5h-6a3 3 0 0 0-3 3V20a2.5 2.5 0 0 1 2.5-2.5H20z"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.8 2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 10l5.9-.8z"/></symbol>
+<symbol id="i-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9 12 4.5 21.5 9 12 13.5z"/><path d="M6.5 11v5.2c0 1.6 2.5 2.8 5.5 2.8s5.5-1.2 5.5-2.8V11M21 9.6v4.9"/></symbol>
+<symbol id="i-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16.5v-12M7.5 8.5 12 4l4.5 4.5M4.5 19.5h15"/></symbol>
+<symbol id="i-table" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9.5h18M9.5 9.5V20M3 15h18"/></symbol>
+<symbol id="i-merge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v5.5a4 4 0 0 0 4 4h8"/><path d="M6 21v-5.5a4 4 0 0 1 4-4"/><path d="m15 9.5 3.5 3-3.5 3"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 10.5 13.5M21 3l-6.8 18-3.7-7.5L3 9.8z"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+<symbol id="i-ban" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="m6 6 12 12"/></symbol>
+<symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M3 13.5h18M12 9v12"/><path d="M12 9S10.5 4.5 8 4.5a2.2 2.2 0 0 0 0 4.5zM12 9s1.5-4.5 4-4.5a2.2 2.2 0 0 1 0 4.5z"/></symbol>
+<symbol id="i-hist" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3 4v5h5M12 7.5V12l3.2 2"/></symbol>
+</svg>
+<nav class="px-topnav"><div class="px-in">
+  <a class="px-tbrand" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="AFRP olive-tree mark" style="color:#f2ecd9;width:26px;height:26px;flex:none">
+  
+
+  
+  <g>
+    <rect x="13" y="66" width="94" height="22" fill="#e7d191"/>
+    <g fill="#d9b45a">
+      <rect x="13" y="67" width="15" height="9" rx="3"/><rect x="31" y="67" width="19" height="9" rx="3"/>
+      <rect x="53" y="67" width="13" height="9" rx="3"/><rect x="69" y="67" width="18" height="9" rx="3"/>
+      <rect x="90" y="67" width="17" height="9" rx="3"/>
+    </g>
+    <g fill="#c9a34a">
+      <rect x="13" y="78" width="10" height="9" rx="3"/><rect x="26" y="78" width="17" height="9" rx="3"/>
+      <rect x="46" y="78" width="14" height="9" rx="3"/><rect x="63" y="78" width="11" height="9" rx="3"/>
+      <rect x="77" y="78" width="18" height="9" rx="3"/><rect x="98" y="78" width="9" height="9" rx="3"/>
+    </g>
+  </g>
+
+  
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M59 97c0-12 0-24-3-33" stroke-width="7.5"/>
+    <path d="M56 64c-3-8-8-13-14-16" stroke-width="6"/>
+    <path d="M56.5 66c2-8 7-14 14-18" stroke-width="6"/>
+    <path d="M47 53c-3-3-5-7-5-12" stroke-width="4.5"/>
+    <path d="M66 53c4-2 7-5 9-9" stroke-width="4.5"/>
+    <path d="M59 97c-5 3-10 4-15 4M59 97c5 3 10 4 15 4M59 97v7" stroke-width="5"/>
+  </g>
+
+  
+  <g fill="#4c6414">
+    <ellipse cx="33" cy="34" rx="6.5" ry="3.1" transform="rotate(-38 33 34)"/>
+    <ellipse cx="45" cy="23" rx="6.5" ry="3.1" transform="rotate(-16 45 23)"/>
+    <ellipse cx="61" cy="18" rx="6.5" ry="3.1" transform="rotate(2 61 18)"/>
+    <ellipse cx="77" cy="22" rx="6.5" ry="3.1" transform="rotate(20 77 22)"/>
+    <ellipse cx="88" cy="33" rx="6.5" ry="3.1" transform="rotate(48 88 33)"/>
+    <ellipse cx="27" cy="47" rx="6.5" ry="3.1" transform="rotate(-66 27 47)"/>
+    <ellipse cx="93" cy="46" rx="6.5" ry="3.1" transform="rotate(66 93 46)"/>
+  </g>
+  <g fill="#6d7a19">
+    <ellipse cx="40" cy="34" rx="6" ry="2.9" transform="rotate(-28 40 34)"/>
+    <ellipse cx="53" cy="27" rx="6" ry="2.9" transform="rotate(-8 53 27)"/>
+    <ellipse cx="68" cy="26" rx="6" ry="2.9" transform="rotate(12 68 26)"/>
+    <ellipse cx="81" cy="32" rx="6" ry="2.9" transform="rotate(36 81 32)"/>
+    <ellipse cx="33" cy="55" rx="6" ry="2.9" transform="rotate(-56 33 55)"/>
+    <ellipse cx="87" cy="55" rx="6" ry="2.9" transform="rotate(56 87 55)"/>
+    <ellipse cx="60" cy="30" rx="6" ry="2.9" transform="rotate(0 60 30)"/>
+  </g>
+  <g fill="#7e9440">
+    <ellipse cx="47" cy="37" rx="5.5" ry="2.7" transform="rotate(-18 47 37)"/>
+    <ellipse cx="60" cy="38" rx="5.5" ry="2.7" transform="rotate(4 60 38)"/>
+    <ellipse cx="73" cy="37" rx="5.5" ry="2.7" transform="rotate(24 73 37)"/>
+    <ellipse cx="39" cy="46" rx="5.5" ry="2.7" transform="rotate(-42 39 46)"/>
+    <ellipse cx="82" cy="45" rx="5.5" ry="2.7" transform="rotate(42 82 45)"/>
+    <ellipse cx="53" cy="46" rx="5.5" ry="2.7" transform="rotate(-8 53 46)"/>
+    <ellipse cx="68" cy="46" rx="5.5" ry="2.7" transform="rotate(14 68 46)"/>
+  </g>
+
+  
+  <g fill="#38430b">
+    <circle cx="43" cy="28" r="2.3"/><circle cx="66" cy="21" r="2.3"/><circle cx="85" cy="28" r="2.3"/>
+    <circle cx="34" cy="41" r="2.3"/><circle cx="64" cy="33" r="2.3"/><circle cx="88" cy="41" r="2.3"/>
+    <circle cx="46" cy="42" r="2.3"/>
+  </g>
+  <g fill="#9a720d">
+    <circle cx="53" cy="22" r="2.1"/><circle cx="74" cy="30" r="2.1"/><circle cx="56" cy="33" r="2.1"/>
+    <circle cx="30" cy="51" r="2.1"/><circle cx="90" cy="51" r="2.1"/>
+  </g>
+
+  
+  <g fill="none" stroke="#4c6414" stroke-width="2" stroke-linecap="round">
+    <path d="M36 60c-2 5-2 10-1 14"/><path d="M83 59c2 5 2 10 1 15"/>
+  </g>
+  <g fill="#38430b">
+    <circle cx="34.6" cy="69" r="2"/><circle cx="35.6" cy="74.5" r="2"/>
+    <circle cx="84.6" cy="68" r="2"/><circle cx="84.2" cy="74" r="2"/>
+  </g>
+
+  
+  <path d="M11 88V60a49 49 0 0 1 98 0v28" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
+  <path d="M4 89.5h17M99 89.5h17" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+</svg>
+<span>AFRP</span></a>
+  <span style="color:#7a7260">/</span><span style="font-weight:700;font-size:14px">ARFECF &amp; ARFHSN</span>
+  <span class="px-tver">v1.0</span>
+  <div class="px-tlinks"><a href="AFRP-Platform-Map.html">Platform Map</a><a href="AFRP-Convention.html">Convention</a><a href="AFRP-Community-LifeEvents.html">Community &amp; Life Events</a><a href="prototype.html">Prototype</a><a href="index.html" class="px-tcta">All docs</a></div>
+</div></nav><header class="px-mast"><div class="px-in">
+  <p class="px-kicker">AFRP design delivery &middot; the sister institutions</p>
+  <h1>ARFECF &amp; ARFHSN</h1>
+  <p class="px-vermeta">v1.0 &middot; 19 Aug 2026 &middot; supersedes Parts II&ndash;III of the retired consolidated document</p>
+  <p class="px-lede">Parts II and III of the platform: the <b>Education &amp; Charitable Fund</b>, whose scholarship program is fully operational in the backend prototype, and the <b>Human Services Network</b>, whose programs and governance interlock are roadmap. Both run on AFRP&rsquo;s shared rails &mdash; the tree, the ledger, the programme catalogue &mdash; which is the argument of the platform in one sentence.</p>
+  <div class="px-chips"><span class="px-chip px-chip--green">ARFECF &middot; scholarship BUILT</span><span class="px-chip">ARFHSN &middot; roadmap</span><span class="px-chip px-chip--gold">Rulesets arfecf-2013 &middot; arfhsn-2017</span><span class="px-chip px-chip--red">Fictional demo data</span></div>
+</div></header><section class="px-inst" id="arfecf" style="margin-top:0;border-top:0"><div class="px-in">
+      <div class="px-rn">PART II</div><h2>ARFECF &mdash; Education &amp; Charitable Fund</h2>
+      <p>The federation&rsquo;s charitable arm for education: the scholarship program &mdash; fully operational in the backend prototype &mdash; and the endowment machinery behind it. Scholarship review leans directly on AFRP infrastructure: the family tree powers conflict detection, and the ledger&rsquo;s encumbrance arithmetic keeps named awards honest.</p>
+      <div class="px-src">Governing text: ARFECF By-Laws 2013 (revised 12 Jan) &middot; ruleset arfecf-2013 &middot; region map &amp; interlock cap carried inactive &mdash; not in the 2013 text</div>
+    </div></section><section class="px-mod">
+  <p class="px-modkick">ARFECF · Module 1</p>
+  <h3>Scholarship program <span class="px-badge px-badge--built"><i></i>Built</span></h3>
+  <p class="px-desc">The review queue with median ranking and wide-spread flags, a recusal that is not an empty review; conflict detection in which the family tree does operational work &mdash; a reviewer within three degrees is blocked, with the rule named; and the budget arithmetic of encumbrance, forward commitments, endowment capacity and named awards, matched most-constrained-first.</p>
+  <div class="px-api"><span>src/scholarships/budget.ts</span><span>src/scholarships/committee.ts</span><span>src/scholarships/determinations.ts</span><span>src/scholarships/disbursement.ts</span><span>test/scholarships · determinations</span></div>
+</section><div class="px-subhead">Operations &middot; frames 15&ndash;17 &middot; <a href="AFRP-Unified-Operations.html" style="color:inherit">from Unified Operations v3.1</a></div><div class="sc-o"><div class="doc">
+<article class="fr" id="f15">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-program"/></svg>
+      <div class="fr__num">15</div>
+      <div>
+        <h3>Scholarship applications and review &mdash; median ranking, spread, and a recusal that is not an empty review</h3>
+        <p>Ranking uses the <b>median, not the mean</b>, so one harsh or generous reviewer cannot move an outcome. <b>Spread is surfaced,
+           not smoothed</b>: two reviewers 57 points apart on the same application is a signal the rubric was read differently, and
+           averaging it hides exactly the case the committee should discuss. Ties are left tied and flagged &mdash; Rana Salameh and Basim
+           Yacoub both sit at 75.0 and the system will not separate them. And the third row down carries the distinction this whole
+           screen exists for: Ghassan Haddad&rsquo;s review of Layla Khoury is <b>recused</b>, which is a different state from
+           <em>not scored</em>, with a different count, forever. An audit of a contested award turns on that difference.</p>
+      </div>
+    </header>
+
+    <div class="bw">
+      <div class="bw__bar">
+        <div class="bw__dots"><i class="bw__dot"></i><i class="bw__dot"></i><i class="bw__dot"></i></div>
+        <div class="bw__nav"><svg class="icon" aria-hidden="true"><use href="#i-chevl"/></svg><svg class="icon" aria-hidden="true"><use href="#i-chevr"/></svg><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg></div>
+        <div class="bw__url"><svg class="icon lock" aria-hidden="true" style="width:12px;height:12px"><use href="#i-lock"/></svg><span>ops.afrp.org/programs/scholarship/cycles/2026-27/review</span></div>
+        <div class="bw__tabtitle">Committee review &mdash; scholarship 2026&ndash;27</div>
+      </div>
+      <div class="bw__scroll"><div class="bw__canvas bw__canvas--xwide">
+        <div class="l-shell">
+          <aside class="l-sidebar">
+            <div class="brand"><div class="brand__mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="AFRP olive-tree mark" style="color:#f2ecd9;width:26px;height:26px;flex:none">
+  
+
+  
+  <g>
+    <rect x="13" y="66" width="94" height="22" fill="#e7d191"/>
+    <g fill="#d9b45a">
+      <rect x="13" y="67" width="15" height="9" rx="3"/><rect x="31" y="67" width="19" height="9" rx="3"/>
+      <rect x="53" y="67" width="13" height="9" rx="3"/><rect x="69" y="67" width="18" height="9" rx="3"/>
+      <rect x="90" y="67" width="17" height="9" rx="3"/>
+    </g>
+    <g fill="#c9a34a">
+      <rect x="13" y="78" width="10" height="9" rx="3"/><rect x="26" y="78" width="17" height="9" rx="3"/>
+      <rect x="46" y="78" width="14" height="9" rx="3"/><rect x="63" y="78" width="11" height="9" rx="3"/>
+      <rect x="77" y="78" width="18" height="9" rx="3"/><rect x="98" y="78" width="9" height="9" rx="3"/>
+    </g>
+  </g>
+
+  
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M59 97c0-12 0-24-3-33" stroke-width="7.5"/>
+    <path d="M56 64c-3-8-8-13-14-16" stroke-width="6"/>
+    <path d="M56.5 66c2-8 7-14 14-18" stroke-width="6"/>
+    <path d="M47 53c-3-3-5-7-5-12" stroke-width="4.5"/>
+    <path d="M66 53c4-2 7-5 9-9" stroke-width="4.5"/>
+    <path d="M59 97c-5 3-10 4-15 4M59 97c5 3 10 4 15 4M59 97v7" stroke-width="5"/>
+  </g>
+
+  
+  <g fill="#4c6414">
+    <ellipse cx="33" cy="34" rx="6.5" ry="3.1" transform="rotate(-38 33 34)"/>
+    <ellipse cx="45" cy="23" rx="6.5" ry="3.1" transform="rotate(-16 45 23)"/>
+    <ellipse cx="61" cy="18" rx="6.5" ry="3.1" transform="rotate(2 61 18)"/>
+    <ellipse cx="77" cy="22" rx="6.5" ry="3.1" transform="rotate(20 77 22)"/>
+    <ellipse cx="88" cy="33" rx="6.5" ry="3.1" transform="rotate(48 88 33)"/>
+    <ellipse cx="27" cy="47" rx="6.5" ry="3.1" transform="rotate(-66 27 47)"/>
+    <ellipse cx="93" cy="46" rx="6.5" ry="3.1" transform="rotate(66 93 46)"/>
+  </g>
+  <g fill="#6d7a19">
+    <ellipse cx="40" cy="34" rx="6" ry="2.9" transform="rotate(-28 40 34)"/>
+    <ellipse cx="53" cy="27" rx="6" ry="2.9" transform="rotate(-8 53 27)"/>
+    <ellipse cx="68" cy="26" rx="6" ry="2.9" transform="rotate(12 68 26)"/>
+    <ellipse cx="81" cy="32" rx="6" ry="2.9" transform="rotate(36 81 32)"/>
+    <ellipse cx="33" cy="55" rx="6" ry="2.9" transform="rotate(-56 33 55)"/>
+    <ellipse cx="87" cy="55" rx="6" ry="2.9" transform="rotate(56 87 55)"/>
+    <ellipse cx="60" cy="30" rx="6" ry="2.9" transform="rotate(0 60 30)"/>
+  </g>
+  <g fill="#7e9440">
+    <ellipse cx="47" cy="37" rx="5.5" ry="2.7" transform="rotate(-18 47 37)"/>
+    <ellipse cx="60" cy="38" rx="5.5" ry="2.7" transform="rotate(4 60 38)"/>
+    <ellipse cx="73" cy="37" rx="5.5" ry="2.7" transform="rotate(24 73 37)"/>
+    <ellipse cx="39" cy="46" rx="5.5" ry="2.7" transform="rotate(-42 39 46)"/>
+    <ellipse cx="82" cy="45" rx="5.5" ry="2.7" transform="rotate(42 82 45)"/>
+    <ellipse cx="53" cy="46" rx="5.5" ry="2.7" transform="rotate(-8 53 46)"/>
+    <ellipse cx="68" cy="46" rx="5.5" ry="2.7" transform="rotate(14 68 46)"/>
+  </g>
+
+  
+  <g fill="#38430b">
+    <circle cx="43" cy="28" r="2.3"/><circle cx="66" cy="21" r="2.3"/><circle cx="85" cy="28" r="2.3"/>
+    <circle cx="34" cy="41" r="2.3"/><circle cx="64" cy="33" r="2.3"/><circle cx="88" cy="41" r="2.3"/>
+    <circle cx="46" cy="42" r="2.3"/>
+  </g>
+  <g fill="#9a720d">
+    <circle cx="53" cy="22" r="2.1"/><circle cx="74" cy="30" r="2.1"/><circle cx="56" cy="33" r="2.1"/>
+    <circle cx="30" cy="51" r="2.1"/><circle cx="90" cy="51" r="2.1"/>
+  </g>
+
+  
+  <g fill="none" stroke="#4c6414" stroke-width="2" stroke-linecap="round">
+    <path d="M36 60c-2 5-2 10-1 14"/><path d="M83 59c2 5 2 10 1 15"/>
+  </g>
+  <g fill="#38430b">
+    <circle cx="34.6" cy="69" r="2"/><circle cx="35.6" cy="74.5" r="2"/>
+    <circle cx="84.6" cy="68" r="2"/><circle cx="84.2" cy="74" r="2"/>
+  </g>
+
+  
+  <path d="M11 88V60a49 49 0 0 1 98 0v28" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
+  <path d="M4 89.5h17M99 89.5h17" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+</svg>
+</div><div><div class="brand__name">Scholarship Programme</div><div class="brand__sub">AFRP &middot; program operations</div></div></div>
+            <div class="mini-search" style="margin:0 var(--s2) var(--s3);min-width:0"><svg aria-hidden="true"><use href="#i-search"/></svg>Search applicants, scholars, alumni</div>
+            <div class="l-nav-group">Cycle 2026&ndash;27</div>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-home"/></svg>Programme dashboard</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-doc"/></svg>Applications<span class="l-nav-item__badge">38</span></a>
+            <a class="l-nav-item is-on" href="#"><svg aria-hidden="true"><use href="#i-scale"/></svg>Committee &amp; review<span class="l-nav-item__badge">12</span></a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-shield"/></svg>Conflicts<span class="l-nav-item__badge l-nav-item__badge--red">3</span></a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-bank"/></svg>Budget &amp; awards</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-star"/></svg>Named scholarships</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-send"/></svg>Disbursement<span class="l-nav-item__badge l-nav-item__badge--red">2</span></a>
+            <div class="l-nav-group">Scholars &amp; alumni</div>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-cap"/></svg>Current scholars</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-hist"/></svg>Alumni register</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-tree"/></svg>Tracing<span class="l-nav-item__badge l-nav-item__badge--red">212</span></a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-merge"/></svg>Match queue<span class="l-nav-item__badge">58</span></a>
+            <div class="l-nav-group">Across the federation</div>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-bldg"/></svg>Participation by club</a>
+            <div class="sidefoot">
+              <div class="rolechip"><span><small>acting as</small>program_chair</span></div>
+              <div class="c-row" style="min-height:auto;border:0;padding:var(--s2) var(--s3)"><span class="c-avatar c-avatar--sm">MA</span><span class="c-row__main"><b style="font-size:var(--fs-sm)">Maha Ajluni</b><span>scope: program:scholarship</span></span></div>
+              <div class="stmt" style="margin:var(--s2) var(--s2) 0">One program, all 26 clubs. No club roster, no ledger, no other program &mdash; club and program are siblings.</div>
+            </div>
+          </aside>
+          <main class="l-main"><div class="l-main__inner">
+            <div class="l-page-head">
+              <div>
+                <h1>Committee review &mdash; cycle 2026&ndash;27</h1>
+                <p>38 applications from 14 clubs &middot; 5 reviewers &middot; 3 reviews per application &middot;
+                   rubric <span class="mono">v3</span> (academic 30, need 30, community 20, essay 20) &middot; scoring closes 28 August.</p>
+              </div>
+              <div class="l-page-head__actions">
+                <button class="c-btn c-btn--secondary c-btn--sm" type="button">Reviewer workload</button>
+                <button class="c-btn c-btn--secondary c-btn--sm" type="button"><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>Committee pack</button>
+                <button class="c-btn c-btn--sm" type="button">Rank &amp; match &mdash; frame 17</button>
+              </div>
+            </div>
+
+            <div class="l-grid l-grid--5" style="margin-bottom:var(--s5)">
+              <div class="statbox"><div class="stat"><span class="stat__k">Applications</span><span class="stat__v">38</span><span class="stat__d">14 clubs &middot; 6 with no club</span></div></div>
+              <div class="statbox"><div class="stat"><span class="stat__k">Fully scored</span><span class="stat__v">26</span><span class="stat__d">3 reviews each</span></div></div>
+              <div class="statbox statbox--flag"><div class="stat"><span class="stat__k">Wide spread</span><span class="stat__v">3</span><span class="stat__d"><i>flagged for discussion</i>, never averaged away</span></div></div>
+              <div class="statbox statbox--flag"><div class="stat"><span class="stat__k">Ties at the margin</span><span class="stat__v">2</span><span class="stat__d"><i>left tied</i> &mdash; the committee breaks them</span></div></div>
+              <div class="statbox statbox--stop"><div class="stat"><span class="stat__k">Recusals</span><span class="stat__v">3</span><span class="stat__d"><em>detected</em>, not declared &mdash; frame 16</span></div></div>
+            </div>
+
+            <div class="panel" style="margin-bottom:var(--s5)">
+              <div class="panel__head"><div><h3>Ranked queue</h3><p>Median of the completed reviews. Recusals reduce the panel; they do not count as a zero.</p></div>
+                <div class="panel__head__end"><span class="mini-sel">Median <svg aria-hidden="true"><use href="#i-chev"/></svg></span><span class="btn-xs"><svg aria-hidden="true"><use href="#i-filter"/></svg>Flags only</span></div></div>
+              <div class="c-table-wrap" style="border:0;border-radius:0">
+                <table class="c-table c-table--dense">
+                  <thead><tr><th class="num">Rank</th><th>Applicant</th><th>Club</th><th>Field &middot; GPA</th><th class="num">R1</th><th class="num">R2</th><th class="num">R3</th><th class="num">Median</th><th class="num">Mean</th><th class="num">Spread</th><th>Panel</th><th>Flags</th></tr></thead>
+                  <tbody>
+                    <tr><td class="num">1</td><td><b>Mona Zarou</b></td><td>Los Angeles</td><td class="why">Engineering &middot; 3.9</td><td class="num">90</td><td class="num">88</td><td class="num">86</td><td class="num"><b>88.0</b></td><td class="num">88.0</td><td class="num">4</td><td class="why">3 of 3</td><td>&mdash;</td></tr>
+                    <tr class="is-good"><td class="num">2</td><td><b>Layla Khoury</b></td><td>Detroit</td><td class="why">Medicine &middot; 3.8</td><td class="num">86</td><td class="num">88</td><td class="num" style="color:var(--red-700)">rec.</td><td class="num"><b>87.0</b></td><td class="num">87.0</td><td class="num">2</td><td class="why">2 of 3 &middot; <b>1 recused</b></td><td><span class="c-pill c-pill--danger">conflict, 3&deg;</span></td></tr>
+                    <tr class="is-flag"><td class="num">3=</td><td><b>Rana Salameh</b></td><td>Houston</td><td class="why">Medicine &middot; 3.4</td><td class="num">74</td><td class="num">75</td><td class="num">78</td><td class="num"><b>75.0</b></td><td class="num">75.7</td><td class="num">4</td><td class="why">3 of 3</td><td><span class="c-pill c-pill--warn">tied at 75.0</span></td></tr>
+                    <tr class="is-flag"><td class="num">3=</td><td><b>Basim Yacoub</b></td><td>Detroit</td><td class="why">Business &middot; 3.5</td><td class="num">72</td><td class="num">75</td><td class="num">80</td><td class="num"><b>75.0</b></td><td class="num">75.7</td><td class="num">8</td><td class="why">3 of 3</td><td><span class="c-pill c-pill--warn">tied at 75.0</span></td></tr>
+                    <tr class="is-flag"><td class="num">5</td><td><b>Tarek Jaghab</b></td><td>Jacksonville</td><td class="why">Nursing &middot; 3.2</td><td class="num">88</td><td class="num">68</td><td class="num">31</td><td class="num"><b>68.0</b></td><td class="num">62.3</td><td class="num" style="color:var(--red-700)"><b>57</b></td><td class="why">3 of 3</td><td><span class="c-pill c-pill--danger">wide spread</span></td></tr>
+                    <tr><td class="num">6</td><td><b>Samia Kassis</b></td><td>Washington DC</td><td class="why">Education &middot; 3.6</td><td class="num">66</td><td class="num">67</td><td class="num">64</td><td class="num"><b>66.0</b></td><td class="num">65.7</td><td class="num">3</td><td class="why">3 of 3</td><td>&mdash;</td></tr>
+                    <tr><td class="num">7</td><td><b>Hanna Shaheen</b></td><td>Detroit</td><td class="why">Computer science &middot; 3.3</td><td class="num">64</td><td class="num">63</td><td class="num">66</td><td class="num"><b>64.0</b></td><td class="num">64.3</td><td class="num">3</td><td class="why">3 of 3</td><td>&mdash;</td></tr>
+                    <tr class="is-muted"><td class="num">8</td><td><b>Wadie Ajluni</b></td><td>&mdash;</td><td class="why">Architecture &middot; 3.1</td><td class="num">61</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="why">1 of 3 &middot; <b>2 not scored</b></td><td><span class="c-pill c-pill--muted">incomplete</span></td></tr>
+                    <tr class="is-muted"><td colspan="12" class="why">&hellip; 30 more. Applicants with no club are eligible: the program is open to <b>any Ramallah descendant</b>, verified against the family tree, and a free student membership is created on acceptance. That is the recruitment mechanism, not a perk.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel__foot"><span class="toolbar__count"><b>Recused</b> and <b>not scored</b> are different words in different columns because they are different facts. Layla Khoury has a panel of two by design; Wadie Ajluni has a panel of one by neglect.</span></div>
+            </div>
+
+            <div class="l-grid l-grid--3">
+              <div class="panel panel--stop">
+                <div class="panel__head"><div><h3>Tarek Jaghab &mdash; spread 57</h3><p>Surfaced, not smoothed.</p></div>
+                  <div class="panel__head__end"><span class="c-pill c-pill--danger">discuss</span></div></div>
+                <div class="panel__body">
+                  <div class="funnel">
+                    <div class="funnel__row"><div class="funnel__k">F. Kassis<small>scored 88</small></div><div class="funnel__bar"><i style="width:88%"></i></div><div class="funnel__n">88</div><div class="funnel__p">&nbsp;</div></div>
+                    <div class="funnel__row"><div class="funnel__k">W. Shaheen<small>scored 68</small></div><div class="funnel__bar"><i class="b2" style="width:68%"></i></div><div class="funnel__n">68</div><div class="funnel__p">median</div></div>
+                    <div class="funnel__row"><div class="funnel__k">N. Jaghab<small>scored 31</small></div><div class="funnel__bar"><i class="b4" style="width:31%"></i></div><div class="funnel__n">31</div><div class="funnel__p">&nbsp;</div></div>
+                  </div>
+                  <div class="calc" style="margin-top:var(--s4)">
+                    <div class="calc__r"><span>Need, out of 30<small>88 &rarr; 28 &middot; 68 &rarr; 22 &middot; 31 &rarr; 4</small></span><span class="calc__n">spread 24</span></div>
+                    <div class="calc__r"><span>Academic, out of 30</span><span class="calc__n">spread 3</span></div>
+                    <div class="calc__r"><span>Community, out of 20</span><span class="calc__n">spread 5</span></div>
+                    <div class="calc__r"><span>Essay, out of 20</span><span class="calc__n">spread 25</span></div>
+                    <div class="calc__r calc__r--tot"><span>Total spread</span><span class="calc__n">57</span></div>
+                  </div>
+                  <div class="stmt" style="margin-top:var(--s4)"><b>The disagreement is in need and essay, not academic.</b> Two reviewers
+                    read the same financial disclosure and reached 28 and 4 out of 30. That is a rubric problem the committee can fix in
+                    ten minutes of conversation &mdash; and the mean of 62.3 would have buried it under an unremarkable number.</div>
+                </div>
+              </div>
+
+              <div class="panel panel--stop">
+                <div class="panel__head"><div><h3>A recusal is not an empty review</h3><p>Layla Khoury &middot; reviewer G. Haddad.</p></div></div>
+                <div class="panel__body">
+                  <div class="verdict verdict--deny" style="margin-bottom:var(--s4)">
+                    <span class="verdict__ic"><svg class="icon" aria-hidden="true" style="width:14px;height:14px"><use href="#i-ban"/></svg></span>
+                    <div><b>Recused &mdash; related within 3 degrees</b><p>Detected from the family tree at assignment, before the reviewer
+                      ever saw the application. He did not decline, and he was not asked to.</p></div>
+                  </div>
+                  <table class="c-table c-table--dense">
+                    <thead><tr><th>Review state</th><th class="num">This cycle</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                      <tr><td>Scored</td><td class="num">98</td><td class="why">A judgement was made and recorded</td></tr>
+                      <tr class="is-stop"><td><b>Recused</b></td><td class="num">3</td><td class="why"><b>Could not score.</b> The system prevented it and named the relationship</td></tr>
+                      <tr class="is-flag"><td>Not scored</td><td class="num">12</td><td class="why"><b>Did not score.</b> Assigned, able, and it has not happened</td></tr>
+                      <tr class="is-total"><td>Assignments</td><td class="num">113</td><td class="why">Three distinct facts, three counts, permanently distinguishable</td></tr>
+                    </tbody>
+                  </table>
+                  <p class="gridnote" style="margin:var(--s4) 0 0">Collapsing recused into not-scored would make Layla Khoury&rsquo;s award
+                    look under-reviewed in an audit six years from now, when nobody in the room remembers why. It is one column, and it
+                    is the difference between a defensible award and an awkward silence.</p>
+                </div>
+              </div>
+
+              <div class="stack">
+                <div class="panel">
+                  <div class="panel__head"><div><h3>Ties, left tied</h3><p>Rana Salameh and Basim Yacoub, both 75.0.</p></div></div>
+                  <div class="panel__body">
+                    <div class="c-alert c-alert--warn">
+                      <svg class="icon" aria-hidden="true" style="margin-top:2px"><use href="#i-scale"/></svg>
+                      <div><b>The engine returns them tied and stops.</b> Their means are identical too, at 75.7. Breaking the tie is the
+                        committee&rsquo;s job, in a minuted discussion, on criteria they can state. Software choosing on an alphabetical
+                        sort or a hidden tie-break is how a family finds out a decision was arbitrary.</div>
+                    </div>
+                    <p class="gridnote" style="margin:var(--s4) 0 0">In this cycle it resolves itself: their fields and clubs qualify them
+                      for <em>different</em> named awards, so the most-constrained-first matching on frame&nbsp;17 separates them without
+                      anyone having to rank one above the other.</p>
+                  </div>
+                </div>
+                <div class="panel">
+                  <div class="panel__head"><div><h3>Committee seats</h3><p>Standing is re-checked, not assumed.</p></div></div>
+                  <div class="panel__body panel__body--flush">
+                    <table class="c-table c-table--dense">
+                      <thead><tr><th>Reviewer</th><th>Club</th><th class="num">Scored</th><th>Seat</th></tr></thead>
+                      <tbody>
+                        <tr><td>F. Kassis</td><td>Washington DC</td><td class="num">31</td><td><span class="c-pill c-pill--ok">active</span></td></tr>
+                        <tr><td>W. Shaheen</td><td>Detroit</td><td class="num">29</td><td><span class="c-pill c-pill--ok">active</span></td></tr>
+                        <tr><td>N. Jaghab</td><td>Jacksonville</td><td class="num">24</td><td><span class="c-pill c-pill--ok">active</span></td></tr>
+                        <tr><td>G. Haddad</td><td>Cleveland</td><td class="num">14</td><td><span class="c-pill c-pill--warn">1 recusal</span></td></tr>
+                        <tr class="is-muted"><td>E. Mogannam</td><td>Detroit</td><td class="num">0</td><td><span class="c-pill c-pill--danger">suspended</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="panel__foot"><span class="toolbar__count">A seat requires a member in good standing, re-checked rather than assumed. E. Mogannam&rsquo;s national membership lapsed in September 2025; the seat is <b>suspended, not deleted</b>, so history survives and reinstatement is one row.</span></div>
+                </div>
+              </div>
+            </div>
+          </div></main>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="notes">
+      <div><h4>What this screen decides</h4><ul>
+        <li>Who gets an award, and whether the committee can explain the ordering to a family that did not.</li>
+        <li>Whether the rubric is being read the same way by everyone. Three wide spreads in one cycle is a rubric problem, not three reviewer problems.</li>
+      </ul></div>
+      <div><h4>Rules made visible</h4><ul>
+        <li><span class="decision">Median</span>Ranking uses the median so a single outlier cannot move an outcome. The mean is shown beside it so nobody has to trust the choice blindly.</li>
+        <li><span class="decision">Spread surfaced</span>Flagged for discussion, per rubric section, never smoothed into a total.</li>
+        <li><span class="decision">Recused &ne; not scored</span>Separate states, separate counts, permanently.</li>
+        <li><span class="decision">Standing re-checked</span>A lapsed seat is suspended, not deleted.</li>
+      </ul></div>
+      <div><h4>Detail notes</h4><ul>
+        <li>The rubric weights are illustrative. The committee sets the real ones, and the version is stamped on every review so a mid-cycle change cannot silently rescore anyone.</li>
+        <li>Applicants with no club are eligible and appear with a dash. The program is open to any Ramallah descendant, which makes descent verification &mdash; against the family tree &mdash; the eligibility gate rather than membership.</li>
+        <li>Wadie Ajluni has one review of three and nobody has noticed. That is what the not-scored count is for.</li>
+      </ul></div>
+    </div>
+    <a class="backtop" href="#top"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>Contents</a>
+  </article>
+
+<article class="fr" id="f16">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-program"/></svg>
+      <div class="fr__num">16</div>
+      <div>
+        <h3>Conflict detection &mdash; the family tree doing operational work</h3>
+        <p>AFRP is a federation of families descended from one ancestor. <b>A committee member being related to an applicant is normal,
+           not scandalous</b> &mdash; scoring your own great-niece without saying so is the problem. So conflicts are <b>detected, not
+           merely declared</b>: the tree is walked at assignment, and a relationship within three degrees blocks the review outright.
+           Beyond three degrees it is <b>disclosed on the record and not blocked</b>, because a six-degree bar in this community would
+           leave no committee at all. This is the one screen where the genealogy archive stops being ceremonial. It is the only system
+           that knows a reviewer is an applicant&rsquo;s grand-uncle, and that is precisely the relationship self-declaration misses:
+           near enough to matter, far enough to feel deniable.</p>
+      </div>
+    </header>
+
+    <div class="bw">
+      <div class="bw__bar">
+        <div class="bw__dots"><i class="bw__dot"></i><i class="bw__dot"></i><i class="bw__dot"></i></div>
+        <div class="bw__nav"><svg class="icon" aria-hidden="true"><use href="#i-chevl"/></svg><svg class="icon" aria-hidden="true"><use href="#i-chevr"/></svg><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg></div>
+        <div class="bw__url"><svg class="icon lock" aria-hidden="true" style="width:12px;height:12px"><use href="#i-lock"/></svg><span>ops.afrp.org/programs/scholarship/conflicts/c_318</span></div>
+        <div class="bw__tabtitle">Conflict &mdash; G. Haddad / L. Khoury</div>
+      </div>
+      <div class="bw__scroll"><div class="bw__canvas bw__canvas--wide">
+        <div class="l-shell">
+          <aside class="l-sidebar">
+            <div class="brand"><div class="brand__mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="AFRP olive-tree mark" style="color:#f2ecd9;width:26px;height:26px;flex:none">
+  
+
+  
+  <g>
+    <rect x="13" y="66" width="94" height="22" fill="#e7d191"/>
+    <g fill="#d9b45a">
+      <rect x="13" y="67" width="15" height="9" rx="3"/><rect x="31" y="67" width="19" height="9" rx="3"/>
+      <rect x="53" y="67" width="13" height="9" rx="3"/><rect x="69" y="67" width="18" height="9" rx="3"/>
+      <rect x="90" y="67" width="17" height="9" rx="3"/>
+    </g>
+    <g fill="#c9a34a">
+      <rect x="13" y="78" width="10" height="9" rx="3"/><rect x="26" y="78" width="17" height="9" rx="3"/>
+      <rect x="46" y="78" width="14" height="9" rx="3"/><rect x="63" y="78" width="11" height="9" rx="3"/>
+      <rect x="77" y="78" width="18" height="9" rx="3"/><rect x="98" y="78" width="9" height="9" rx="3"/>
+    </g>
+  </g>
+
+  
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M59 97c0-12 0-24-3-33" stroke-width="7.5"/>
+    <path d="M56 64c-3-8-8-13-14-16" stroke-width="6"/>
+    <path d="M56.5 66c2-8 7-14 14-18" stroke-width="6"/>
+    <path d="M47 53c-3-3-5-7-5-12" stroke-width="4.5"/>
+    <path d="M66 53c4-2 7-5 9-9" stroke-width="4.5"/>
+    <path d="M59 97c-5 3-10 4-15 4M59 97c5 3 10 4 15 4M59 97v7" stroke-width="5"/>
+  </g>
+
+  
+  <g fill="#4c6414">
+    <ellipse cx="33" cy="34" rx="6.5" ry="3.1" transform="rotate(-38 33 34)"/>
+    <ellipse cx="45" cy="23" rx="6.5" ry="3.1" transform="rotate(-16 45 23)"/>
+    <ellipse cx="61" cy="18" rx="6.5" ry="3.1" transform="rotate(2 61 18)"/>
+    <ellipse cx="77" cy="22" rx="6.5" ry="3.1" transform="rotate(20 77 22)"/>
+    <ellipse cx="88" cy="33" rx="6.5" ry="3.1" transform="rotate(48 88 33)"/>
+    <ellipse cx="27" cy="47" rx="6.5" ry="3.1" transform="rotate(-66 27 47)"/>
+    <ellipse cx="93" cy="46" rx="6.5" ry="3.1" transform="rotate(66 93 46)"/>
+  </g>
+  <g fill="#6d7a19">
+    <ellipse cx="40" cy="34" rx="6" ry="2.9" transform="rotate(-28 40 34)"/>
+    <ellipse cx="53" cy="27" rx="6" ry="2.9" transform="rotate(-8 53 27)"/>
+    <ellipse cx="68" cy="26" rx="6" ry="2.9" transform="rotate(12 68 26)"/>
+    <ellipse cx="81" cy="32" rx="6" ry="2.9" transform="rotate(36 81 32)"/>
+    <ellipse cx="33" cy="55" rx="6" ry="2.9" transform="rotate(-56 33 55)"/>
+    <ellipse cx="87" cy="55" rx="6" ry="2.9" transform="rotate(56 87 55)"/>
+    <ellipse cx="60" cy="30" rx="6" ry="2.9" transform="rotate(0 60 30)"/>
+  </g>
+  <g fill="#7e9440">
+    <ellipse cx="47" cy="37" rx="5.5" ry="2.7" transform="rotate(-18 47 37)"/>
+    <ellipse cx="60" cy="38" rx="5.5" ry="2.7" transform="rotate(4 60 38)"/>
+    <ellipse cx="73" cy="37" rx="5.5" ry="2.7" transform="rotate(24 73 37)"/>
+    <ellipse cx="39" cy="46" rx="5.5" ry="2.7" transform="rotate(-42 39 46)"/>
+    <ellipse cx="82" cy="45" rx="5.5" ry="2.7" transform="rotate(42 82 45)"/>
+    <ellipse cx="53" cy="46" rx="5.5" ry="2.7" transform="rotate(-8 53 46)"/>
+    <ellipse cx="68" cy="46" rx="5.5" ry="2.7" transform="rotate(14 68 46)"/>
+  </g>
+
+  
+  <g fill="#38430b">
+    <circle cx="43" cy="28" r="2.3"/><circle cx="66" cy="21" r="2.3"/><circle cx="85" cy="28" r="2.3"/>
+    <circle cx="34" cy="41" r="2.3"/><circle cx="64" cy="33" r="2.3"/><circle cx="88" cy="41" r="2.3"/>
+    <circle cx="46" cy="42" r="2.3"/>
+  </g>
+  <g fill="#9a720d">
+    <circle cx="53" cy="22" r="2.1"/><circle cx="74" cy="30" r="2.1"/><circle cx="56" cy="33" r="2.1"/>
+    <circle cx="30" cy="51" r="2.1"/><circle cx="90" cy="51" r="2.1"/>
+  </g>
+
+  
+  <g fill="none" stroke="#4c6414" stroke-width="2" stroke-linecap="round">
+    <path d="M36 60c-2 5-2 10-1 14"/><path d="M83 59c2 5 2 10 1 15"/>
+  </g>
+  <g fill="#38430b">
+    <circle cx="34.6" cy="69" r="2"/><circle cx="35.6" cy="74.5" r="2"/>
+    <circle cx="84.6" cy="68" r="2"/><circle cx="84.2" cy="74" r="2"/>
+  </g>
+
+  
+  <path d="M11 88V60a49 49 0 0 1 98 0v28" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
+  <path d="M4 89.5h17M99 89.5h17" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+</svg>
+</div><div><div class="brand__name">Scholarship Programme</div><div class="brand__sub">AFRP &middot; program operations</div></div></div>
+            <div class="mini-search" style="margin:0 var(--s2) var(--s3);min-width:0"><svg aria-hidden="true"><use href="#i-search"/></svg>Search applicants, scholars, alumni</div>
+            <div class="l-nav-group">Cycle 2026&ndash;27</div>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-home"/></svg>Programme dashboard</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-doc"/></svg>Applications<span class="l-nav-item__badge">38</span></a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-scale"/></svg>Committee &amp; review<span class="l-nav-item__badge">12</span></a>
+            <a class="l-nav-item is-on" href="#"><svg aria-hidden="true"><use href="#i-shield"/></svg>Conflicts<span class="l-nav-item__badge l-nav-item__badge--red">3</span></a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-bank"/></svg>Budget &amp; awards</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-star"/></svg>Named scholarships</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-send"/></svg>Disbursement<span class="l-nav-item__badge l-nav-item__badge--red">2</span></a>
+            <div class="l-nav-group">Scholars &amp; alumni</div>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-cap"/></svg>Current scholars</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-hist"/></svg>Alumni register</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-tree"/></svg>Tracing<span class="l-nav-item__badge l-nav-item__badge--red">212</span></a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-merge"/></svg>Match queue<span class="l-nav-item__badge">58</span></a>
+            <div class="l-nav-group">Across the federation</div>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-bldg"/></svg>Participation by club</a>
+            <div class="sidefoot">
+              <div class="rolechip"><span><small>acting as</small>program_chair</span></div>
+              <div class="c-row" style="min-height:auto;border:0;padding:var(--s2) var(--s3)"><span class="c-avatar c-avatar--sm">MA</span><span class="c-row__main"><b style="font-size:var(--fs-sm)">Maha Ajluni</b><span>scope: program:scholarship</span></span></div>
+              <div class="stmt" style="margin:var(--s2) var(--s2) 0">One program, all 26 clubs. No club roster, no ledger, no other program &mdash; club and program are siblings.</div>
+            </div>
+          </aside>
+          <main class="l-main"><div class="l-main__inner">
+            <div class="l-page-head">
+              <div>
+                <h1>Conflicts &mdash; cycle 2026&ndash;27</h1>
+                <p>113 reviewer&ndash;applicant pairs tested at assignment &middot; 3 blocked &middot; 7 disclosed &middot;
+                   1 self-declared &middot; tree snapshot 11 Aug 2026, canonical records only.</p>
+              </div>
+              <div class="l-page-head__actions">
+                <button class="c-btn c-btn--secondary c-btn--sm" type="button">Disclosure register (7)</button>
+                <button class="c-btn c-btn--secondary c-btn--sm" type="button">Re-run against the tree</button>
+              </div>
+            </div>
+
+            <div class="panel" style="margin-bottom:var(--s5)">
+              <div class="rulestrip">
+                <div class="rulestrip__i"><span class="rulestrip__k">Reviewer is the applicant</span><span class="rulestrip__v">blocked</span></div>
+                <div class="rulestrip__i"><span class="rulestrip__k">Same household</span><span class="rulestrip__v">blocked</span></div>
+                <div class="rulestrip__i"><span class="rulestrip__k">Within 3 degrees</span><span class="rulestrip__v">blocked</span></div>
+                <div class="rulestrip__i"><span class="rulestrip__k">Beyond 3 degrees</span><span class="rulestrip__v">disclosed</span></div>
+                <div class="rulestrip__i"><span class="rulestrip__k">Self-declared</span><span class="rulestrip__v">always honoured</span></div>
+                <p class="rulestrip__n">Three degrees covers parent and child, sibling, grandparent, aunt or uncle, and first cousin.
+                   Whether three is the right bar is a committee policy question &mdash; it is a configured default, not a rule of nature.</p>
+              </div>
+            </div>
+
+            <div class="l-split l-split--flip">
+              <div class="stack">
+                <div class="panel panel--stop">
+                  <div class="panel__head"><div><h3>Ghassan T. Haddad &rarr; Layla Khoury</h3><p>Shortest path through canonical tree records.</p></div>
+                    <div class="panel__head__end"><span class="c-pill c-pill--danger">3 degrees &middot; blocked</span></div></div>
+                  <div class="panel__body">
+                    <div class="ftree">
+                      <div class="ftree__in">
+                        <svg viewBox="0 0 660 384" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <g fill="none" stroke="#c9c9c1" stroke-width="2">
+                            <path d="M120 78 V96 H320 V78"/>
+                            <path d="M220 96 V112"/>
+                            <path d="M120 112 H320"/>
+                            <path d="M120 112 V130"/>
+                            <path d="M320 112 V130"/>
+                            <path d="M320 190 V206 H520 V190"/>
+                            <path d="M420 206 V225"/>
+                          </g>
+                          <g fill="none" stroke="#b4690e" stroke-width="3">
+                            <path d="M120 130 V112 H320 V130"/>
+                            <path d="M320 190 V206 H420 V225"/>
+                          </g>
+                          <path d="M420 285 V305" fill="none" stroke="#ed1c24" stroke-width="3"/>
+                        </svg>
+                        <div class="fn" style="left:40px;top:20px"><b>Butros Haddad</b><span>1918&ndash;1994</span><span>common ancestor</span></div>
+                        <div class="fn" style="left:240px;top:20px"><b>Milia Haddad</b><span>1922&ndash;2001</span><span>&nbsp;</span></div>
+                        <div class="fn fn--rev" style="left:40px;top:130px"><b>Ghassan T. Haddad</b><span>b. 1955 &middot; Cleveland</span><span>the reviewer</span><span class="fn__deg">1</span></div>
+                        <div class="fn fn--path" style="left:240px;top:130px"><b>Nadia Haddad&#8209;Khoury</b><span>b. 1948</span><span>sister of the reviewer</span><span class="fn__deg">1</span></div>
+                        <div class="fn" style="left:440px;top:130px"><b>Samir Khoury</b><span>1943&ndash;2019</span><span>married in</span></div>
+                        <div class="fn fn--path" style="left:340px;top:225px"><b>Rima N. Khoury</b><span>b. 1971 &middot; Detroit</span><span>the applicant&rsquo;s mother</span><span class="fn__deg">2</span></div>
+                        <div class="fn fn--app" style="left:340px;top:305px"><b>Layla Khoury</b><span>b. 2007 &middot; the applicant</span><span class="fn__deg">3</span></div>
+                      </div>
+                    </div>
+                    <div class="legendrow" style="margin-top:var(--s4)">
+                      <span><i class="swatch--cross" style="border-radius:3px"></i>Reviewer</span>
+                      <span><i class="swatch--hold" style="border-radius:3px"></i>Path</span>
+                      <span><i class="swatch--deny" style="border-radius:3px"></i>Applicant</span>
+                      <span>Degrees are counted along the highlighted path only</span>
+                    </div>
+                    <ol class="trace" style="margin-top:var(--s4)">
+                      <li class="is-pass"><b>Step 1</b> Ghassan T. Haddad &rarr; Nadia Haddad&#8209;Khoury &mdash; <b>sibling</b>, 1 degree. Both canonical.</li>
+                      <li class="is-pass"><b>Step 2</b> Nadia Haddad&#8209;Khoury &rarr; Rima N. Khoury &mdash; <b>child</b>, 2 degrees.</li>
+                      <li class="is-fail"><b>Step 3</b> Rima N. Khoury &rarr; Layla Khoury &mdash; <b>child</b>, 3 degrees. He is her grand&#8209;uncle.</li>
+                      <li class="is-fail"><b>Rule</b> within 3 degrees &rarr; <b>BLOCKED</b>. The assignment was withdrawn before he opened the application.</li>
+                      <li class="is-pass"><b>Recorded</b> as <span class="mono">recused</span> on the review, with this path attached. Not as an unscored review.</li>
+                    </ol>
+                    <div class="stmt" style="margin-top:var(--s4)"><b>What self-declaration would have produced.</b> Ghassan Haddad and Layla
+                      Khoury have different surnames, live in different states and have met perhaps twice. He would not have thought to
+                      declare it, and nobody would have accused him of anything. The tree found it in one query.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stack sticky-rail">
+                <div class="panel">
+                  <div class="panel__head"><div><h3>All conflicts, this cycle</h3><p>Blocked, disclosed, declared.</p></div></div>
+                  <div class="panel__body panel__body--flush">
+                    <div class="qrow is-blocked"><div class="qrow__main"><b>G. Haddad &rarr; L. Khoury</b><span>Grand-uncle &middot; 3 degrees &middot; via the Haddad&ndash;Khoury marriage</span></div><div class="qrow__end"><span class="deg">3&deg;</span><span class="c-pill c-pill--danger">blocked</span></div></div>
+                    <div class="qrow is-blocked"><div class="qrow__main"><b>W. Shaheen &rarr; H. Shaheen</b><span>Same household, Warren &mdash; blocked on the household rule before the tree is even walked</span></div><div class="qrow__end"><span class="deg">HH</span><span class="c-pill c-pill--danger">blocked</span></div></div>
+                    <div class="qrow is-blocked"><div class="qrow__main"><b>N. Jaghab &rarr; T. Jaghab</b><span>First cousin &middot; 3 degrees</span></div><div class="qrow__end"><span class="deg">3&deg;</span><span class="c-pill c-pill--danger">blocked</span></div></div>
+                    <div class="qrow"><div class="qrow__main"><b>F. Kassis &rarr; M. Zarou</b><span>First cousin once removed &middot; 4 degrees &mdash; <b>disclosed, scored, and the disclosure travels with the score</b></span></div><div class="qrow__end"><span class="deg">4&deg;</span><span class="c-pill c-pill--warn">disclosed</span></div></div>
+                    <div class="qrow"><div class="qrow__main"><b>W. Shaheen &rarr; B. Yacoub</b><span>5 degrees &middot; disclosed</span></div><div class="qrow__end"><span class="deg">5&deg;</span><span class="c-pill c-pill--warn">disclosed</span></div></div>
+                    <div class="qrow"><div class="qrow__main"><b>F. Kassis &rarr; S. Kassis</b><span>Self-declared: &ldquo;family friend, no relation I know of&rdquo;. The tree agrees &mdash; no path within 6 degrees. <b>Honoured anyway.</b></span></div><div class="qrow__end"><span class="deg">none</span><span class="c-pill c-pill--new">declared</span></div></div>
+                    <div class="qrow"><div class="qrow__main"><b>5 more disclosed</b><span>Between 4 and 6 degrees. All scored, all on the record.</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">disclosed</span></div></div>
+                  </div>
+                  <div class="panel__foot"><span class="toolbar__count">A self-declared conflict is always honoured and never questioned, even when the tree disagrees. Someone who says they cannot be impartial is telling you something the graph does not know.</span></div>
+                </div>
+
+                <div class="panel">
+                  <div class="panel__head"><div><h3>Why not six degrees</h3><p>The arithmetic of a small community.</p></div></div>
+                  <div class="panel__body">
+                    <div class="meter" style="margin-bottom:var(--s4)">
+                      <div class="meter__top"><b>113</b> reviewer&ndash;applicant pairs<span class="end">at each threshold</span></div>
+                      <div class="meter__track"><div class="meter__fill meter__fill--r" style="width:2.7%"></div><div class="meter__fill meter__fill--a" style="width:6.2%"></div><div class="meter__fill" style="width:91.1%"></div></div>
+                      <div class="meter__key"><span><i class="k-r"></i>within 3&deg; &mdash; 3 pairs</span><span><i class="k-a"></i>4&ndash;6&deg; &mdash; 7 pairs</span><span><i class="k-g"></i>beyond &mdash; 103</span></div>
+                    </div>
+                    <table class="c-table c-table--dense">
+                      <thead><tr><th>Bar</th><th class="num">Blocked</th><th>Effect on the committee</th></tr></thead>
+                      <tbody>
+                        <tr class="is-good"><td>3 degrees</td><td class="num">3</td><td class="why">Workable. Every application keeps at least two reviewers</td></tr>
+                        <tr class="is-flag"><td>4 degrees</td><td class="num">6</td><td class="why">Two applications drop to a single reviewer</td></tr>
+                        <tr class="is-stop"><td>6 degrees</td><td class="num">10</td><td class="why"><b>No committee at all.</b> Everyone descends from one ancestor</td></tr>
+                      </tbody>
+                    </table>
+                    <p class="gridnote" style="margin:var(--s4) 0 0">The bar is not a moral position, it is a threshold chosen so the
+                      program can run. Disclosure carries everything above it, which is why the disclosure register is published to the
+                      board rather than kept as an internal note.</p>
+                  </div>
+                </div>
+
+                <div class="panel">
+                  <div class="panel__head"><div><h3>What the tree is not used for</h3><p>Boundaries on an operational archive.</p></div></div>
+                  <div class="panel__body panel__body--flush">
+                    <div class="c-row" style="padding:var(--s3) var(--s4)"><span class="c-row__main"><b style="font-size:var(--fs-sm)">Provisional records</b><span>Never feed a conflict decision, and never reach print. Only canonical, moderated records are walked.</span></span></div>
+                    <div class="c-row" style="padding:var(--s3) var(--s4)"><span class="c-row__main"><b style="font-size:var(--fs-sm)">Legacy status</b><span>Whether an applicant&rsquo;s parent was a scholar is modelled as context only, deliberately, until the board says otherwise.</span></span></div>
+                    <div class="c-row" style="padding:var(--s3) var(--s4)"><span class="c-row__main"><b style="font-size:var(--fs-sm)">Contact details</b><span>A tree path never reveals contact information &mdash; the rule that governs alumni tracing on frame&nbsp;18 applies here too.</span></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div></main>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="notes">
+      <div><h4>What this screen decides</h4><ul>
+        <li>Whether an award survives being questioned by a family that did not receive one. The path, the degree and the rule are attached to the review forever.</li>
+        <li>Whether the genealogy archive earns its maintenance cost. This is the query no commercial CRM can run, because it needs a tree AFRP has been keeping since 1952.</li>
+      </ul></div>
+      <div><h4>Rules made visible</h4><ul>
+        <li><span class="decision">Detected</span>Walked at assignment, before the reviewer sees the application. Not a checkbox on a form.</li>
+        <li><span class="decision">Disclosed above 3</span>Beyond three degrees the relationship is recorded and the review proceeds. Blocking it would empty the committee.</li>
+        <li><span class="decision">Canonical only</span>Provisional tree records are never walked. An unmoderated submission cannot disqualify a reviewer.</li>
+      </ul></div>
+      <div><h4>Detail notes</h4><ul>
+        <li>The household rule fires before the tree is walked, because two people at one address is a conflict whatever the genealogy says.</li>
+        <li>The tree does two operational jobs in this program: this one, and verifying descent for eligibility &mdash; the program is open to descendants, not to members.</li>
+        <li>Is three degrees the right bar? It is a default, not a rule, and it is one of the open questions for the committee rather than for the software.</li>
+      </ul></div>
+    </div>
+    <a class="backtop" href="#top"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>Contents</a>
+  </article>
+
+<article class="fr" id="f17">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-program"/></svg>
+      <div class="fr__num">17</div>
+      <div>
+        <h3>Budget, encumbrance and named awards &mdash; the arithmetic that quietly breaks programs</h3>
+        <p>A four-year award made in 2026 commits money in 2027, 2028 and 2029. <b>If the committee counts only this year&rsquo;s new
+           awards against this year&rsquo;s budget it will over-commit</b>, and the failure appears two years later as a scholar whose
+           funding evaporates mid-degree &mdash; the worst outcome this program can produce, and it is arithmetic rather than fundraising.
+           So <b>AVAILABLE is the only number the committee is shown</b>: $60,000 less $16,000 already encumbered for continuing scholars
+           less $29,000 committed to new awards equals <b>$15,000</b>. Below it, the endowment capacity check, which found in August what
+           would otherwise have been found after an offer letter: <b>Zarou Engineering cannot fund the award that bears its name.</b></p>
+      </div>
+    </header>
+
+    <div class="bw">
+      <div class="bw__bar">
+        <div class="bw__dots"><i class="bw__dot"></i><i class="bw__dot"></i><i class="bw__dot"></i></div>
+        <div class="bw__nav"><svg class="icon" aria-hidden="true"><use href="#i-chevl"/></svg><svg class="icon" aria-hidden="true"><use href="#i-chevr"/></svg><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg></div>
+        <div class="bw__url"><svg class="icon lock" aria-hidden="true" style="width:12px;height:12px"><use href="#i-lock"/></svg><span>ops.afrp.org/programs/scholarship/cycles/2026-27/budget</span></div>
+        <div class="bw__tabtitle">Budget &amp; named awards &mdash; scholarship 2026&ndash;27</div>
+      </div>
+      <div class="bw__scroll"><div class="bw__canvas bw__canvas--wide">
+        <div class="l-shell">
+          <aside class="l-sidebar">
+            <div class="brand"><div class="brand__mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="AFRP olive-tree mark" style="color:#f2ecd9;width:26px;height:26px;flex:none">
+  
+
+  
+  <g>
+    <rect x="13" y="66" width="94" height="22" fill="#e7d191"/>
+    <g fill="#d9b45a">
+      <rect x="13" y="67" width="15" height="9" rx="3"/><rect x="31" y="67" width="19" height="9" rx="3"/>
+      <rect x="53" y="67" width="13" height="9" rx="3"/><rect x="69" y="67" width="18" height="9" rx="3"/>
+      <rect x="90" y="67" width="17" height="9" rx="3"/>
+    </g>
+    <g fill="#c9a34a">
+      <rect x="13" y="78" width="10" height="9" rx="3"/><rect x="26" y="78" width="17" height="9" rx="3"/>
+      <rect x="46" y="78" width="14" height="9" rx="3"/><rect x="63" y="78" width="11" height="9" rx="3"/>
+      <rect x="77" y="78" width="18" height="9" rx="3"/><rect x="98" y="78" width="9" height="9" rx="3"/>
+    </g>
+  </g>
+
+  
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M59 97c0-12 0-24-3-33" stroke-width="7.5"/>
+    <path d="M56 64c-3-8-8-13-14-16" stroke-width="6"/>
+    <path d="M56.5 66c2-8 7-14 14-18" stroke-width="6"/>
+    <path d="M47 53c-3-3-5-7-5-12" stroke-width="4.5"/>
+    <path d="M66 53c4-2 7-5 9-9" stroke-width="4.5"/>
+    <path d="M59 97c-5 3-10 4-15 4M59 97c5 3 10 4 15 4M59 97v7" stroke-width="5"/>
+  </g>
+
+  
+  <g fill="#4c6414">
+    <ellipse cx="33" cy="34" rx="6.5" ry="3.1" transform="rotate(-38 33 34)"/>
+    <ellipse cx="45" cy="23" rx="6.5" ry="3.1" transform="rotate(-16 45 23)"/>
+    <ellipse cx="61" cy="18" rx="6.5" ry="3.1" transform="rotate(2 61 18)"/>
+    <ellipse cx="77" cy="22" rx="6.5" ry="3.1" transform="rotate(20 77 22)"/>
+    <ellipse cx="88" cy="33" rx="6.5" ry="3.1" transform="rotate(48 88 33)"/>
+    <ellipse cx="27" cy="47" rx="6.5" ry="3.1" transform="rotate(-66 27 47)"/>
+    <ellipse cx="93" cy="46" rx="6.5" ry="3.1" transform="rotate(66 93 46)"/>
+  </g>
+  <g fill="#6d7a19">
+    <ellipse cx="40" cy="34" rx="6" ry="2.9" transform="rotate(-28 40 34)"/>
+    <ellipse cx="53" cy="27" rx="6" ry="2.9" transform="rotate(-8 53 27)"/>
+    <ellipse cx="68" cy="26" rx="6" ry="2.9" transform="rotate(12 68 26)"/>
+    <ellipse cx="81" cy="32" rx="6" ry="2.9" transform="rotate(36 81 32)"/>
+    <ellipse cx="33" cy="55" rx="6" ry="2.9" transform="rotate(-56 33 55)"/>
+    <ellipse cx="87" cy="55" rx="6" ry="2.9" transform="rotate(56 87 55)"/>
+    <ellipse cx="60" cy="30" rx="6" ry="2.9" transform="rotate(0 60 30)"/>
+  </g>
+  <g fill="#7e9440">
+    <ellipse cx="47" cy="37" rx="5.5" ry="2.7" transform="rotate(-18 47 37)"/>
+    <ellipse cx="60" cy="38" rx="5.5" ry="2.7" transform="rotate(4 60 38)"/>
+    <ellipse cx="73" cy="37" rx="5.5" ry="2.7" transform="rotate(24 73 37)"/>
+    <ellipse cx="39" cy="46" rx="5.5" ry="2.7" transform="rotate(-42 39 46)"/>
+    <ellipse cx="82" cy="45" rx="5.5" ry="2.7" transform="rotate(42 82 45)"/>
+    <ellipse cx="53" cy="46" rx="5.5" ry="2.7" transform="rotate(-8 53 46)"/>
+    <ellipse cx="68" cy="46" rx="5.5" ry="2.7" transform="rotate(14 68 46)"/>
+  </g>
+
+  
+  <g fill="#38430b">
+    <circle cx="43" cy="28" r="2.3"/><circle cx="66" cy="21" r="2.3"/><circle cx="85" cy="28" r="2.3"/>
+    <circle cx="34" cy="41" r="2.3"/><circle cx="64" cy="33" r="2.3"/><circle cx="88" cy="41" r="2.3"/>
+    <circle cx="46" cy="42" r="2.3"/>
+  </g>
+  <g fill="#9a720d">
+    <circle cx="53" cy="22" r="2.1"/><circle cx="74" cy="30" r="2.1"/><circle cx="56" cy="33" r="2.1"/>
+    <circle cx="30" cy="51" r="2.1"/><circle cx="90" cy="51" r="2.1"/>
+  </g>
+
+  
+  <g fill="none" stroke="#4c6414" stroke-width="2" stroke-linecap="round">
+    <path d="M36 60c-2 5-2 10-1 14"/><path d="M83 59c2 5 2 10 1 15"/>
+  </g>
+  <g fill="#38430b">
+    <circle cx="34.6" cy="69" r="2"/><circle cx="35.6" cy="74.5" r="2"/>
+    <circle cx="84.6" cy="68" r="2"/><circle cx="84.2" cy="74" r="2"/>
+  </g>
+
+  
+  <path d="M11 88V60a49 49 0 0 1 98 0v28" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
+  <path d="M4 89.5h17M99 89.5h17" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+</svg>
+</div><div><div class="brand__name">Scholarship Programme</div><div class="brand__sub">AFRP &middot; program operations</div></div></div>
+            <div class="mini-search" style="margin:0 var(--s2) var(--s3);min-width:0"><svg aria-hidden="true"><use href="#i-search"/></svg>Search applicants, scholars, alumni</div>
+            <div class="l-nav-group">Cycle 2026&ndash;27</div>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-home"/></svg>Programme dashboard</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-doc"/></svg>Applications<span class="l-nav-item__badge">38</span></a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-scale"/></svg>Committee &amp; review<span class="l-nav-item__badge">12</span></a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-shield"/></svg>Conflicts<span class="l-nav-item__badge l-nav-item__badge--red">3</span></a>
+            <a class="l-nav-item is-on" href="#"><svg aria-hidden="true"><use href="#i-bank"/></svg>Budget &amp; awards</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-star"/></svg>Named scholarships</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-send"/></svg>Disbursement<span class="l-nav-item__badge l-nav-item__badge--red">2</span></a>
+            <div class="l-nav-group">Scholars &amp; alumni</div>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-cap"/></svg>Current scholars</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-hist"/></svg>Alumni register</a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-tree"/></svg>Tracing<span class="l-nav-item__badge l-nav-item__badge--red">212</span></a>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-merge"/></svg>Match queue<span class="l-nav-item__badge">58</span></a>
+            <div class="l-nav-group">Across the federation</div>
+            <a class="l-nav-item" href="#"><svg aria-hidden="true"><use href="#i-bldg"/></svg>Participation by club</a>
+            <div class="sidefoot">
+              <div class="rolechip"><span><small>acting as</small>program_chair</span></div>
+              <div class="c-row" style="min-height:auto;border:0;padding:var(--s2) var(--s3)"><span class="c-avatar c-avatar--sm">MA</span><span class="c-row__main"><b style="font-size:var(--fs-sm)">Maha Ajluni</b><span>scope: program:scholarship</span></span></div>
+              <div class="stmt" style="margin:var(--s2) var(--s2) 0">One program, all 26 clubs. No club roster, no ledger, no other program &mdash; club and program are siblings.</div>
+            </div>
+          </aside>
+          <main class="l-main"><div class="l-main__inner">
+            <div class="l-page-head">
+              <div>
+                <h1>Budget &amp; named awards &mdash; cycle 2026&ndash;27</h1>
+                <p>Committee recommends; the board approves &middot; 8 new awards proposed, 4 continuing scholars encumbered &middot;
+                   endowment values are the trailing three-year average at 30 June 2026 &mdash; platform practice, because
+                   <b>neither governing document states a valuation date or averaging basis</b> (open question 15).</p>
+              </div>
+              <div class="l-page-head__actions">
+                <button class="c-btn c-btn--secondary c-btn--sm" type="button"><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>Board paper</button>
+                <button class="c-btn c-btn--sm" type="button"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Recommend to the board</button>
+              </div>
+            </div>
+
+            <div class="l-grid l-grid--4" style="margin-bottom:var(--s5)">
+              <div class="statbox"><div class="stat"><span class="stat__k">Cycle budget</span><span class="stat__v stat__v--sm">$60,000</span><span class="stat__d">approved by the board, March 2026</span></div></div>
+              <div class="statbox statbox--flag"><div class="stat"><span class="stat__k">Encumbered &mdash; continuing</span><span class="stat__v stat__v--sm">$16,000</span><span class="stat__d"><i>committed before the committee met</i> &middot; 4 scholars</span></div></div>
+              <div class="statbox"><div class="stat"><span class="stat__k">Committed &mdash; new awards</span><span class="stat__v stat__v--sm">$29,000</span><span class="stat__d">8 awards proposed this cycle</span></div></div>
+              <div class="statbox statbox--good"><div class="stat"><span class="stat__k">AVAILABLE</span><span class="stat__v stat__v--lg">$15,000</span><span class="stat__d"><b>the only number the committee should be shown</b></span></div></div>
+            </div>
+
+            <div class="l-grid l-grid--2" style="margin-bottom:var(--s5)">
+              <div class="panel">
+                <div class="panel__head"><div><h3>This cycle</h3><p>Where the $60,000 has already gone.</p></div></div>
+                <div class="panel__body">
+                  <div class="meter__wrap">
+                    <div class="meter">
+                      <div class="meter__top"><b>$45,000</b> committed<span class="end">of $60,000</span></div>
+                      <div class="meter__track">
+                        <div class="meter__fill meter__fill--a" style="width:26.7%"></div>
+                        <div class="meter__fill meter__fill--b" style="width:48.3%"></div>
+                        <div class="meter__mark" style="left:80%"><span>80% warning</span></div>
+                      </div>
+                      <div class="meter__key"><span><i class="k-a"></i>encumbered 16,000</span><span><i class="k-b"></i>new awards 29,000</span><span><i class="k-n"></i>available 15,000</span></div>
+                    </div>
+                  </div>
+                  <div class="calc" style="margin-top:var(--s5)">
+                    <div class="calc__r"><span>Budget<small>board-approved envelope</small></span><span class="calc__n">$60,000</span></div>
+                    <div class="calc__r calc__r--sub"><span>Encumbered &mdash; continuing awards<small>4 multi-year scholars in years 2 and 3</small></span><span class="calc__n">&minus;$16,000</span></div>
+                    <div class="calc__r calc__r--sub"><span>Committed &mdash; new awards<small>8 offers proposed today</small></span><span class="calc__n">&minus;$29,000</span></div>
+                    <div class="calc__r calc__r--tot"><span>AVAILABLE</span><span class="calc__n">$15,000</span></div>
+                  </div>
+                  <div class="c-alert c-alert--info" style="margin-top:var(--s4)">
+                    <svg class="icon" aria-hidden="true" style="margin-top:2px"><use href="#i-alert"/></svg>
+                    <div><b>The 80% rule.</b> The system warns when continuing awards alone exceed 80% of a budget &mdash; $48,000 here.
+                      At that point the program is solvent and has almost no room for new scholars, which is a governance problem before
+                      it is a financial one. Continuing awards are at 26.7% this cycle.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel">
+                <div class="panel__head"><div><h3>Forward commitments</h3><p>What today&rsquo;s decisions cost in future years.</p></div>
+                  <div class="panel__head__end"><span class="c-pill c-pill--info">3 cycles</span></div></div>
+                <div class="panel__body">
+                  <div class="funnel">
+                    <div class="funnel__row"><div class="funnel__k">2026&ndash;27<small>budget $60,000</small></div><div class="funnel__bar"><i style="width:75%"></i></div><div class="funnel__n">45,000</div><div class="funnel__p">75%</div></div>
+                    <div class="funnel__row"><div class="funnel__k">2027&ndash;28<small>budget $60,000</small></div><div class="funnel__bar"><i class="b2" style="width:8.3%"></i></div><div class="funnel__n">5,000</div><div class="funnel__p">8%</div></div>
+                    <div class="funnel__row"><div class="funnel__k">2028&ndash;29<small>budget $45,000 &mdash; indicative</small></div><div class="funnel__bar"><i class="b3" style="width:11.1%"></i></div><div class="funnel__n">5,000</div><div class="funnel__p">11%</div></div>
+                  </div>
+                  <table class="c-table c-table--dense" style="margin-top:var(--s5)">
+                    <thead><tr><th>Cycle</th><th class="num">Committed</th><th class="num">Budget</th><th class="num">Headroom</th></tr></thead>
+                    <tbody>
+                      <tr><td>2026&ndash;27</td><td class="num">45,000</td><td class="num">60,000</td><td class="num">15,000</td></tr>
+                      <tr><td>2027&ndash;28</td><td class="num">5,000</td><td class="num">60,000</td><td class="num">55,000</td></tr>
+                      <tr><td>2028&ndash;29</td><td class="num">5,000</td><td class="num">45,000</td><td class="num">40,000</td></tr>
+                    </tbody>
+                  </table>
+                  <div class="stmt" style="margin-top:var(--s4)"><b>A forfeited year releases its encumbrance.</b> A scholar who withdraws
+                    frees the money to re-award. Not returning it under-awards every year after the first, which is the same failure as
+                    over-committing and considerably harder to notice.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel" style="margin-bottom:var(--s5)">
+              <div class="panel__head"><div><h3>Named scholarships &mdash; capacity, not intention</h3><p>Endowed awards draw the mandatory Annual Distribution &mdash; 4% of assets for scholarships and educational purposes, plus 1% to AFRP for administering ARFECF (the 2015 Policy Statement) &mdash; while ARFECF By-Law 6.4.3 reads the same 5% as a <b>cap</b>. The conflict is flagged, never silently resolved.</p></div>
+                <div class="panel__head__end"><span class="c-pill c-pill--danger">1 underfunded</span></div></div>
+              <div class="c-table-wrap" style="border:0;border-radius:0">
+                <table class="c-table c-table--dense">
+                  <thead><tr><th>Scholarship</th><th>Type</th><th>Criteria</th><th class="num">Corpus / fund</th><th class="num">Rate</th><th class="num">Spendable</th><th class="num">Award</th><th class="num">Funds</th><th style="min-width:260px">Finding</th></tr></thead>
+                  <tbody>
+                    <tr><td><b>Haddad Memorial</b></td><td>endowed</td><td class="why">Medicine</td><td class="num">260,000</td><td class="num">4%</td><td class="num">10,400.00</td><td class="num">5,000</td><td class="num"><b>2 of 2</b></td><td class="why">Fully funds both intended awards with $400 unspent &mdash; which, under a mandatory-distribution reading, must still be distributed rather than accrete. The floor-versus-cap question decides even this row.</td></tr>
+                    <tr class="is-stop"><td><b>Zarou Engineering</b></td><td>endowed</td><td class="why">Engineering</td><td class="num">90,000</td><td class="num">4%</td><td class="num">3,600.00</td><td class="num">6,000</td><td class="num"><b>0 of 1</b></td><td class="why"><b>Cannot fund its own award.</b> $90,000 &times; 4% = $3,600 against a $6,000 award &mdash; zero awards, underfunded. Either the award comes down to $3,600 or the corpus grows to $150,000 &mdash; a conversation to have with the donor&rsquo;s family, in August, rather than after an offer letter.</td></tr>
+                    <tr><td><b>Shaheen Family</b></td><td>annual</td><td class="why">Detroit club members</td><td class="num">4,000</td><td class="num">&mdash;</td><td class="num">4,000.00</td><td class="num">4,000</td><td class="num">1 of 1</td><td class="why">Funded annually by the family. Renewal is confirmed each spring; nothing is committed until it is.</td></tr>
+                    <tr><td><b>General Scholarship Fund</b></td><td>annual</td><td class="why">Open</td><td class="num">15,000</td><td class="num">&mdash;</td><td class="num">15,000.00</td><td class="num">varies</td><td class="num">5 of 5</td><td class="why">The unrestricted pool. It is what makes the constrained awards matchable at all.</td></tr>
+                    <tr class="is-muted"><td><b>Salameh Award</b></td><td>endowed</td><td class="why">Nursing &middot; women</td><td class="num">120,000</td><td class="num">4%</td><td class="num">0.00</td><td class="num">5,000</td><td class="num">&mdash;</td><td class="why">Established March 2026 by a 1994 scholarship recipient. First award in 2027 &mdash; the trailing average needs a full year. <b>Shown with zero rather than omitted, because it is the clearest instance of the loop closing.</b></td></tr>
+                    <tr class="is-total"><td>5 named awards</td><td>3 endowed &middot; 2 annual</td><td>&mdash;</td><td class="num">489,000</td><td class="num">&mdash;</td><td class="num">33,000.00</td><td class="num">&mdash;</td><td class="num">8 of 9</td><td class="why">Every unfilled award is reported with a reason: funding, criteria, or competition.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel__foot"><span class="toolbar__count"><b>The documents disagree with each other.</b> The Policy Statement makes 4% + 1% a mandatory floor, distributed between 1 June and 31 May; ARFECF 6.4.3 limits annual expenditure to 5% of &ldquo;all assets and income derived from the investment of the corpus&rdquo; &mdash; a cap, on a different basis. They agree on 5% in total and disagree on whether it must be spent. Question 14 to the drafting committee; until it is answered, this screen shows the floor and names the cap.</span></div>
+            </div>
+
+            <div class="l-grid l-grid--2">
+              <div class="panel">
+                <div class="panel__head"><div><h3>Matching &mdash; most constrained first</h3><p>Deliberately not a greedy pass down the ranked list.</p></div></div>
+                <div class="panel__body panel__body--flush">
+                  <table class="c-table c-table--dense">
+                    <thead><tr><th class="num">Rank</th><th>Scholar</th><th>Qualifies for</th><th>Matched to</th><th class="num">Amount</th></tr></thead>
+                    <tbody>
+                      <tr class="is-flag"><td class="num">1</td><td><b>Mona Zarou</b><div class="why">88.0 &middot; engineering</div></td><td class="why">Zarou Engineering <span class="c-pill c-pill--danger">no capacity</span> &middot; General</td><td><b>General Scholarship Fund</b></td><td class="num">3,000</td></tr>
+                      <tr><td class="num">2</td><td><b>Layla Khoury</b><div class="why">87.0 &middot; medicine &middot; GPA 3.8</div></td><td class="why">Haddad Memorial &middot; General</td><td><b>Haddad Memorial</b> <span class="c-pill c-pill--ok">restricted</span></td><td class="num">5,000</td></tr>
+                      <tr><td class="num">3=</td><td><b>Rana Salameh</b><div class="why">75.0 &middot; medicine &middot; GPA 3.4</div></td><td class="why">Haddad Memorial &middot; General</td><td><b>Haddad Memorial</b> <span class="c-pill c-pill--ok">restricted</span></td><td class="num">5,000</td></tr>
+                      <tr><td class="num">3=</td><td><b>Basim Yacoub</b><div class="why">75.0 &middot; Detroit</div></td><td class="why">Shaheen Family &middot; General</td><td><b>Shaheen Family</b> <span class="c-pill c-pill--ok">restricted</span></td><td class="num">4,000</td></tr>
+                      <tr class="is-muted"><td class="num">5&ndash;8</td><td class="why">4 further scholars</td><td class="why">General only</td><td class="why">General Scholarship Fund</td><td class="num">12,000</td></tr>
+                      <tr class="is-total"><td>&mdash;</td><td>8 new awards</td><td>&mdash;</td><td>&mdash;</td><td class="num">29,000</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="panel__foot"><span class="toolbar__count">Mona Zarou ranked <b>first overall and did not get the Zarou Engineering award</b>, because that endowment has no capacity this year. Layla, ranked second, took the restricted medical award she uniquely qualified for.</span></div>
+              </div>
+
+              <div class="stack">
+                <div class="panel panel--flag">
+                  <div class="panel__head"><div><h3>Why not top-down</h3><p>The counterfactual, run.</p></div></div>
+                  <div class="panel__body">
+                    <table class="c-table c-table--dense">
+                      <thead><tr><th>Naive greedy pass</th><th>Result</th></tr></thead>
+                      <tbody>
+                        <tr><td class="why">Mona Zarou (1st) takes the General fund</td><td class="why">Same as above</td></tr>
+                        <tr class="is-stop"><td class="why">Layla Khoury (2nd) takes the General fund next</td><td class="why"><b>Haddad Memorial sits unawarded for a year</b> &mdash; a donor&rsquo;s restricted money, unspent, while a qualified applicant took unrestricted funds</td></tr>
+                        <tr class="is-stop"><td class="why">Rana Salameh (3rd) takes Haddad Memorial</td><td class="why">One of two Haddad awards made; the second lapses</td></tr>
+                        <tr class="is-total"><td>Net effect</td><td class="why">$5,000 of restricted money unspent and $5,000 more of general money consumed &mdash; the same scholars, a materially worse year</td></tr>
+                      </tbody>
+                    </table>
+                    <p class="gridnote" style="margin:var(--s4) 0 0">Assignment is a constraint problem, not a sorted list. Filling the
+                      narrowest award first is the difference between a donor family seeing their scholarship awarded and a donor family
+                      asking why it was not.</p>
+                  </div>
+                </div>
+                <div class="panel">
+                  <div class="panel__head"><div><h3>Disbursement gates</h3><p>Nothing moves until every gate is verified.</p></div>
+                    <div class="panel__head__end"><span class="c-pill c-pill--danger">2 held</span></div></div>
+                  <div class="panel__body">
+                    <div class="checks">
+                      <div class="checks__r"><span class="checks__ic"><svg class="icon" aria-hidden="true" style="width:12px;height:12px"><use href="#i-check"/></svg></span><div><b>Proof of enrolment</b><span>Every year, every scholar</span></div></div>
+                      <div class="checks__r"><span class="checks__ic"><svg class="icon" aria-hidden="true" style="width:12px;height:12px"><use href="#i-check"/></svg></span><div><b>Bank details</b><span>Every year &mdash; re-verified, not carried forward</span></div></div>
+                      <div class="checks__r"><span class="checks__ic checks__ic--no"><svg class="icon" aria-hidden="true" style="width:12px;height:12px"><use href="#i-x"/></svg></span><div><b>Tax form W-9 / W-8BEN &mdash; 2 outstanding</b><span><span class="mono">tax_status: unknown</span> is a blocking state, not a shrug. Collect it before the first payment, not after.</span></div></div>
+                      <div class="checks__r"><span class="checks__ic"><svg class="icon" aria-hidden="true" style="width:12px;height:12px"><use href="#i-check"/></svg></span><div><b>Transcript &mdash; years 2 and after</b><span>This <em>is</em> the continuation review; there is no separate step</span></div></div>
+                    </div>
+                    <div class="c-alert c-alert--danger" style="margin-top:var(--s4)">
+                      <svg class="icon" aria-hidden="true" style="margin-top:2px"><use href="#i-lock"/></svg>
+                      <div><b>Two disbursements are flagged and cannot pay.</b> One scholar is a non-resident alien on an F-1 visa with
+                        US-source taxable income; one is studying at Birzeit, where the grant is likely foreign-source and outside US
+                        withholding entirely. <b>The software records facts and flags cases; it never decides.</b> A named adviser clears
+                        each one, and the clearance is recorded against the disbursement.</div>
+                    </div>
+                    <p class="gridnote" style="margin:var(--s3) 0 0">Refusing with a reason matters: &ldquo;the payment didn&rsquo;t go
+                      through&rdquo; with no explanation is how a scholar misses a tuition deadline.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div></main>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="notes">
+      <div><h4>What this screen decides</h4><ul>
+        <li>How many new scholars can be funded without stranding an existing one two years from now. That is $15,000, and it is the only figure the committee should be arguing over.</li>
+        <li>Whether the Zarou family gets a phone call this month or an apology next spring.</li>
+      </ul></div>
+      <div><h4>Rules made visible</h4><ul>
+        <li><span class="decision">Encumbrance</span>Multi-year awards commit future cycles at the moment of offer, not at the moment of payment.</li>
+        <li><span class="decision">Most constrained first</span>Named awards are filled before the general pool, so restricted money is spent as the donor intended.</li>
+        <li><span class="decision">Reported with a reason</span>Every unfilled award and unmatched scholar says whether the constraint was funding, criteria or competition.</li>
+        <li><span class="decision">Flagged cannot pay</span>A tax case waits for a named adviser. The system never computes tax.</li>
+      </ul></div>
+      <div><h4>Detail notes</h4><ul>
+        <li>The Salameh Award was established by a 1994 recipient. It is shown with zero spendable rather than hidden, because a scholarship funded by a former scholar is the whole thesis of the alumni work on frame&nbsp;18.</li>
+        <li>Endowment values use a trailing three-year average so awards do not lurch with the market &mdash; but that is platform practice, not either document&rsquo;s text: nothing states whether &ldquo;all Assets&rdquo; are valued on 31 May, 1 June, or an average, and the difference materially changes every award budget.</li>
+        <li>The 1% administration distribution to AFRP is a real related-party transaction &mdash; expense in ARFECF, revenue in AFRP, disclosed in both sets of books.</li>
+        <li>Whether the committee decides within an envelope or recommends to the board is still open. Modelled here as recommend-and-approve.</li>
+      </ul></div>
+    </div>
+    <a class="backtop" href="#top"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>Contents</a>
+  </article>
+</div></div><div class="px-road">
+  <div class="px-roadcard"><h4>Endowment fund <span class="px-badge px-badge--designed"><i></i>Designed</span></h4>
+    <p>Endowment capacity is already a hard input to the scholarship budget screen above &mdash; the fund itself
+    (corpus, draw policy, named-fund accounting) is designed only as far as the ledger&rsquo;s multi-entity rails.</p>
+    <p class="px-blocked">Blocked on a source document: the <b>Endowment Fund Policy Statement</b> has not been supplied.
+    Listed as an open item in the delivery status.</p></div>
+  <div class="px-roadcard"><h4>Scholarship policy alignment <span class="px-badge px-badge--designed"><i></i>Designed</span></h4>
+    <p>The 2013 ARFECF by-laws in <span style="font-family:var(--px-mono)">docs/bylaws/</span> do not contain the region map
+    or the 4-member interlock cap cited in older analysis &mdash; both are carried <b>inactive</b> until a source is found.
+    The <b>Scholarship Fund Policy Statement 2015</b> is likewise outstanding.</p></div>
+</div>\n<section class="px-inst" id="arfhsn"><div class="px-in">
+      <div class="px-rn">PART III</div><h2>ARFHSN &mdash; Human Services Network</h2>
+      <p>The third institution: a 501(c)(3) with no membership of its own, a 14-seat Board of Trustees elected by the AFRP Board, and by-laws amendable by 60% of that Board. Its programs ride the shared programme rails; its governance is an interlock with AFRP&rsquo;s, not a copy of it. Everything here is roadmap &mdash; badged accordingly.</p>
+      <div class="px-src">Governing text: ARFHSN By-Laws 2015/2017 &middot; ruleset arfhsn-2017 &middot; trustee roster outstanding</div>
+    </div></section><div class="px-road">
+  <div class="px-roadcard"><h4>Medical Mission <span class="px-badge px-badge--proposed"><i></i>Proposed</span></h4>
+    <p>Runs on the programme rails of Part I, Module 8 &mdash; enrolment, cohorts, budget envelopes and disbursement
+    are configurations of machinery that already exists. No dedicated screens yet; the programme catalogue
+    (frame 21) shows where it slots in.</p></div>
+  <div class="px-roadcard"><h4>Human services programs <span class="px-badge px-badge--proposed"><i></i>Proposed</span></h4>
+    <p>Casework-adjacent programs will need an intake surface with stricter confidentiality defaults than any
+    existing module &mdash; deliberately unscoped until ARFHSN&rsquo;s trustees define the program list.</p>
+    <p class="px-blocked">Open item: the <b>ARFHSN trustee roster</b> has not been supplied.</p></div>
+  <div class="px-roadcard"><h4>Governance interlock <span class="px-badge px-badge--designed"><i></i>Designed</span></h4>
+    <p>ARFHSN is a 501(c)(3) with <b>no membership</b>: a 14-seat Board of Trustees elected by the AFRP Board, amended
+    by 60% of the AFRP Board. Its governance surfaces are therefore views of AFRP&rsquo;s own board tooling &mdash;
+    ruleset <span style="font-family:var(--px-mono)">arfhsn-2017.1</span> in the workbench, not a separate portal.</p></div>
+</div>\n<div class="px-sep"></div><footer class="px-foot"><div class="px-in">
+  
+  <p style="margin-top:10px"><b>Every person, number, gift, order and question in this document is fictional.</b>
+  The organisation, its 26 clubs, its three institutions, <i>Hathihe Ramallah</i> and the Annual Convention are real.
+  Part of the AFRP design delivery &mdash; <a href="index.html">all documents</a>.</p>
+</div></footer>
+</body>
+</html>

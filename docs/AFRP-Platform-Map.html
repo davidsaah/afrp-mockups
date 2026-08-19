@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AFRP Platform Map · v1.0 — one system, three institutions</title>
+<meta name="description" content="The map of the AFRP platform: every module by institution with build-status badges, and the element matrix — where every element lives and what is still missing.">
+<style>
+/* ═════════════════════════════════════════════════════════════════════════
+   AFRP UNIFIED PLATFORM — consolidated document chrome (px- namespace)
+   Heritage layer v3.1 values. Everything inside .sc-m / .sc-o keeps its own
+   scoped stylesheet; this layer only draws the consolidated shell around it.
+   ═════════════════════════════════════════════════════════════════════════ */
+:root{
+  --px-ink:#2b2416; --px-ink-2:#57503f; --px-ink-3:#7a7260;
+  --px-bg:#f5f0e1; --px-surface:#fffdf6; --px-surface-2:#f7f1e2;
+  --px-line:#e2d9c2; --px-dark:#211c11; --px-dark-2:#2c261741;
+  --px-cream:#f2ecd9; --px-cream-2:#d8d0b8;
+  --px-green:#4c6414; --px-green-deep:#33430b; --px-green-50:#eef0da;
+  --px-olive:#6d7a19; --px-olive-50:#f2f4dd;
+  --px-gold:#9a720d;  --px-gold-50:#faf2dc; --px-gold-200:#e7d191;
+  --px-pine:#3f6b41;  --px-pine-50:#e6f0e2;
+  --px-red:#8c2f21;   --px-red-50:#f7e4df;
+  --px-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --px-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+svg.sprite{display:none}
+body{margin:0;background:var(--px-bg);color:var(--px-ink);font:16px/1.6 var(--px-font)}
+.px-doc{scroll-behavior:smooth}
+
+/* ── masthead ─────────────────────────────────────────────────────────── */
+.px-mast{background:var(--px-dark);color:var(--px-cream);padding:44px 0 30px;
+  border-bottom:4px solid var(--px-green)}
+.px-mast .px-in{max-width:1560px;margin:0 auto;padding:0 24px}
+.px-lockup{display:flex;align-items:center;gap:12px;color:#d9b45a;margin-bottom:26px}
+.px-lockup svg{width:38px;height:38px}
+.px-lockup b{font-size:20px;letter-spacing:.06em;color:var(--px-cream)}
+.px-lockup small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:#c9b877;font-weight:600}
+.px-kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#b5c24a;
+  font-weight:700;margin:0 0 10px}
+.px-mast h1{font-size:clamp(30px,3vw + 18px,44px);line-height:1.12;margin:0 0 18px;
+  font-weight:800;letter-spacing:-.01em;color:#fffdf6}
+.px-mast .px-lede{max-width:74ch;font-size:16.5px;line-height:1.65;color:#e8e1cb;margin:0 0 14px}
+.px-mast .px-lede b{color:#fffdf6}
+.px-mast .px-lede code{font-family:var(--px-mono);font-size:.86em;background:#ffffff14;
+  padding:1px 6px;border-radius:6px;color:#e7d191}
+.px-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.px-chip{font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px;
+  background:#ffffff12;color:#e8e1cb;border:1px solid #ffffff24}
+.px-chip--green{background:#4c6414;color:#f2f4dd;border-color:#5d7a1a}
+.px-chip--red{background:#8c2f21;color:#f7e4df;border-color:#a1402f}
+.px-chip--gold{background:#9a720d33;color:#e7d191;border-color:#9a720d66}
+
+/* institution nav strip in mast */
+.px-instnav{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.px-instnav a{display:flex;align-items:center;gap:9px;text-decoration:none;
+  background:#ffffff0d;border:1px solid #ffffff22;border-radius:12px;padding:10px 16px;
+  color:#f2ecd9;font-size:14px;font-weight:600;transition:background .15s}
+.px-instnav a:hover{background:#ffffff1c}
+.px-instnav .px-rn{font-family:var(--px-mono);font-size:12px;color:#d9b45a;font-weight:700}
+
+/* ── legend ───────────────────────────────────────────────────────────── */
+.px-legendwrap{background:var(--px-surface);border-bottom:1px solid var(--px-line)}
+.px-legend{max-width:1560px;margin:0 auto;padding:22px 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px 28px}
+.px-legend h4{margin:0 0 5px;font-size:13.5px;display:flex;align-items:center;gap:8px}
+.px-legend p{margin:0;font-size:13px;line-height:1.5;color:var(--px-ink-2)}
+
+/* ── badges ───────────────────────────────────────────────────────────── */
+.px-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.1em;padding:3px 10px;border-radius:999px;text-transform:uppercase;
+  vertical-align:2px}
+.px-badge i{width:7px;height:7px;border-radius:99px;display:inline-block}
+.px-badge--built{background:var(--px-pine-50);color:var(--px-pine);border:1px solid #aecfa6}
+.px-badge--built i{background:var(--px-pine)}
+.px-badge--designed{background:var(--px-gold-50);color:var(--px-gold);border:1px solid var(--px-gold-200)}
+.px-badge--designed i{background:var(--px-gold)}
+.px-badge--proposed{background:#eee9f5;color:#5b4a80;border:1px solid #cfc2e4}
+.px-badge--proposed i{background:#5b4a80}
+.px-badge--partial{background:var(--px-olive-50);color:#525d12;border:1px solid #cdd48f}
+.px-badge--partial i{background:var(--px-olive)}
+
+/* ── TOC ──────────────────────────────────────────────────────────────── */
+.px-toc{max-width:1560px;margin:34px auto 0;padding:0 24px}
+.px-toc h2{font-size:22px;margin:0 0 6px}
+.px-toc > p{margin:0 0 20px;color:var(--px-ink-2);font-size:14.5px;max-width:88ch}
+.px-toccols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.px-toccol{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:18px 20px}
+.px-toccol h3{margin:0 0 2px;font-size:16px;display:flex;gap:9px;align-items:baseline}
+.px-toccol h3 .px-rn{font-family:var(--px-mono);font-size:12px;color:var(--px-gold)}
+.px-toccol .px-bylaw{font-size:12px;color:var(--px-ink-3);margin:0 0 12px}
+.px-toccol a{display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+  padding:7px 2px;text-decoration:none;color:var(--px-ink);font-size:14px;
+  border-top:1px solid var(--px-line)}
+.px-toccol a:hover{color:var(--px-green-deep)}
+.px-toccol a .px-fc{font-size:11.5px;color:var(--px-ink-3);font-family:var(--px-mono);white-space:nowrap}
+.px-toccol a.px-star{font-weight:700}
+
+/* ── institution part header ──────────────────────────────────────────── */
+.px-inst{margin:72px 0 0;background:var(--px-dark);color:var(--px-cream);
+  border-top:4px solid var(--px-gold);padding:34px 0 30px}
+.px-inst .px-in{max-width:1560px;margin:0 auto;padding:0 24px}
+.px-inst .px-rn{font-family:var(--px-mono);font-size:13px;color:#d9b45a;font-weight:700;
+  letter-spacing:.12em}
+.px-inst h2{font-size:clamp(24px,2vw + 15px,32px);margin:6px 0 10px;color:#fffdf6}
+.px-inst p{max-width:80ch;margin:0;font-size:15px;line-height:1.6;color:#e8e1cb}
+.px-inst .px-src{margin-top:12px;font-size:12.5px;color:#c9b877;font-family:var(--px-mono)}
+
+/* ── module head ──────────────────────────────────────────────────────── */
+.px-mod{max-width:1560px;margin:56px auto 0;padding:0 24px}
+.px-mod--star{border-left:4px solid var(--px-gold);padding-left:20px;margin-left:max(24px,calc((100% - 1560px)/2));
+  max-width:1516px;padding-right:24px}
+@media (max-width:1608px){.px-mod--star{margin-left:24px;margin-right:0}}
+.px-mod .px-modkick{font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--px-ink-3);font-weight:700;margin:0 0 4px}
+.px-mod h3{font-size:clamp(20px,1.4vw + 14px,26px);margin:0 0 10px;display:flex;
+  flex-wrap:wrap;align-items:center;gap:12px}
+.px-mod .px-desc{max-width:86ch;margin:0 0 12px;font-size:15px;line-height:1.62;color:var(--px-ink-2)}
+.px-mod .px-desc b{color:var(--px-ink)}
+.px-api{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.px-api span{font-family:var(--px-mono);font-size:11.5px;background:var(--px-surface);
+  border:1px solid var(--px-line);border-radius:7px;padding:3px 8px;color:#57503f}
+.px-api span.px-api--live{border-color:#aecfa6;background:var(--px-pine-50);color:var(--px-pine)}
+.px-api span.px-api--draft{border-style:dashed;color:#5b4a80;border-color:#cfc2e4;background:#f4f1f9}
+.px-subhead{max-width:1560px;margin:34px auto 0;padding:0 24px;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--px-ink-3);font-weight:700;
+  display:flex;align-items:center;gap:10px}
+.px-subhead:after{content:"";flex:1;height:1px;background:var(--px-line)}
+
+/* roadmap cards (ARFHSN / endowment) */
+.px-road{max-width:1560px;margin:22px auto 0;padding:0 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.px-roadcard{background:var(--px-surface);border:1px dashed var(--px-cream-2);
+  border-radius:14px;padding:20px 22px}
+.px-roadcard h4{margin:0 0 8px;font-size:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.px-roadcard p{margin:0 0 8px;font-size:13.5px;line-height:1.55;color:var(--px-ink-2)}
+.px-roadcard .px-blocked{font-size:12.5px;color:var(--px-red);background:var(--px-red-50);
+  border-radius:8px;padding:7px 11px;margin-top:10px}
+
+/* footer */
+.px-foot{margin-top:88px;background:var(--px-dark);color:#c9c0a5;padding:34px 0 46px;
+  border-top:4px solid var(--px-green)}
+.px-foot .px-in{max-width:1560px;margin:0 auto;padding:0 24px;font-size:13px;line-height:1.7}
+.px-foot b{color:#f2ecd9}
+.px-foot a{color:#d9b45a}
+.px-sep{height:26px}
+@media print{.px-mast,.px-inst{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+/* ── v3: sticky top nav, version chip, element matrix ─────────────────── */
+.px-topnav{position:sticky;top:0;z-index:50;background:#211c11f2;backdrop-filter:blur(6px);
+  border-bottom:1px solid #ffffff1c;color:#f2ecd9}
+.px-topnav .px-in{max-width:1560px;margin:0 auto;padding:9px 24px;display:flex;
+  align-items:center;gap:14px;flex-wrap:wrap}
+.px-topnav .px-tbrand{display:flex;align-items:center;gap:9px;font-weight:800;
+  letter-spacing:.05em;color:#fffdf6;text-decoration:none;font-size:15px}
+.px-topnav .px-tver{font-family:var(--px-mono);font-size:10.5px;font-weight:700;
+  background:#4c6414;color:#f2f4dd;border-radius:999px;padding:2px 9px;letter-spacing:.06em}
+.px-topnav .px-tlinks{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.px-topnav .px-tlinks a{color:#e8e1cb;text-decoration:none;font-size:13px;font-weight:600;
+  padding:6px 11px;border-radius:8px}
+.px-topnav .px-tlinks a:hover{background:#ffffff14}
+.px-topnav .px-tlinks a.px-tcta{background:#4c6414;color:#f2f4dd}
+.px-vermeta{font-family:var(--px-mono);font-size:12px;color:#c9b877;margin:0 0 14px}
+
+.px-matrix{max-width:1560px;margin:26px auto 0;padding:0 24px}
+.px-matrix h3{font-size:19px;margin:34px 0 4px}
+.px-matrix .px-mnote{font-size:13.5px;color:var(--px-ink-2);margin:0 0 12px;max-width:88ch}
+.px-tablewrap{overflow-x:auto;background:var(--px-surface);border:1px solid var(--px-line);
+  border-radius:12px}
+table.px-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.px-table th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--px-ink-3);padding:10px 14px;border-bottom:1px solid var(--px-line);
+  background:var(--px-surface-2)}
+.px-table td{padding:9px 14px;border-bottom:1px solid #eee7d4;vertical-align:top}
+.px-table tr:last-child td{border-bottom:0}
+.px-table a{color:var(--px-green-deep);text-decoration:none;font-weight:600}
+.px-table a:hover{text-decoration:underline}
+.px-st{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.08em;padding:2px 9px;border-radius:999px;text-transform:uppercase;white-space:nowrap}
+.px-st i{width:7px;height:7px;border-radius:99px}
+.px-st--p{background:var(--px-pine-50);color:var(--px-pine)}.px-st--p i{background:var(--px-pine)}
+.px-st--part{background:var(--px-olive-50);color:#525d12}.px-st--part i{background:var(--px-olive)}
+.px-st--m{background:var(--px-red-50);color:var(--px-red)}.px-st--m i{background:var(--px-red)}
+.px-st--prop{background:#eee9f5;color:#5b4a80}.px-st--prop i{background:#5b4a80}
+
+.px-cardgrid{max-width:1560px;margin:20px auto 0;padding:0 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px}
+.px-mcard{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:18px 20px}
+.px-mcard h4{margin:0 0 6px;font-size:15.5px;display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.px-mcard p{margin:0 0 10px;font-size:13px;line-height:1.55;color:var(--px-ink-2)}
+.px-mcard .px-mlinks{display:flex;flex-wrap:wrap;gap:6px}
+.px-mcard .px-mlinks a{font-size:12px;font-weight:700;color:var(--px-green-deep);
+  text-decoration:none;background:var(--px-green-50);border:1px solid #c4cd97;
+  border-radius:999px;padding:3px 11px}
+.px-mcard .px-mlinks a:hover{background:#dde2bf}
+.px-mcard .px-mlinks a.px-ml--ext{background:var(--px-gold-50);border-color:var(--px-gold-200);
+  color:var(--px-gold)}
+
+</style>
+</head>
+<body class="px-doc">
+<nav class="px-topnav"><div class="px-in">
+  <a class="px-tbrand" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="AFRP olive-tree mark" style="color:#f2ecd9;width:26px;height:26px;flex:none">
+  
+
+  
+  <g>
+    <rect x="13" y="66" width="94" height="22" fill="#e7d191"/>
+    <g fill="#d9b45a">
+      <rect x="13" y="67" width="15" height="9" rx="3"/><rect x="31" y="67" width="19" height="9" rx="3"/>
+      <rect x="53" y="67" width="13" height="9" rx="3"/><rect x="69" y="67" width="18" height="9" rx="3"/>
+      <rect x="90" y="67" width="17" height="9" rx="3"/>
+    </g>
+    <g fill="#c9a34a">
+      <rect x="13" y="78" width="10" height="9" rx="3"/><rect x="26" y="78" width="17" height="9" rx="3"/>
+      <rect x="46" y="78" width="14" height="9" rx="3"/><rect x="63" y="78" width="11" height="9" rx="3"/>
+      <rect x="77" y="78" width="18" height="9" rx="3"/><rect x="98" y="78" width="9" height="9" rx="3"/>
+    </g>
+  </g>
+
+  
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M59 97c0-12 0-24-3-33" stroke-width="7.5"/>
+    <path d="M56 64c-3-8-8-13-14-16" stroke-width="6"/>
+    <path d="M56.5 66c2-8 7-14 14-18" stroke-width="6"/>
+    <path d="M47 53c-3-3-5-7-5-12" stroke-width="4.5"/>
+    <path d="M66 53c4-2 7-5 9-9" stroke-width="4.5"/>
+    <path d="M59 97c-5 3-10 4-15 4M59 97c5 3 10 4 15 4M59 97v7" stroke-width="5"/>
+  </g>
+
+  
+  <g fill="#4c6414">
+    <ellipse cx="33" cy="34" rx="6.5" ry="3.1" transform="rotate(-38 33 34)"/>
+    <ellipse cx="45" cy="23" rx="6.5" ry="3.1" transform="rotate(-16 45 23)"/>
+    <ellipse cx="61" cy="18" rx="6.5" ry="3.1" transform="rotate(2 61 18)"/>
+    <ellipse cx="77" cy="22" rx="6.5" ry="3.1" transform="rotate(20 77 22)"/>
+    <ellipse cx="88" cy="33" rx="6.5" ry="3.1" transform="rotate(48 88 33)"/>
+    <ellipse cx="27" cy="47" rx="6.5" ry="3.1" transform="rotate(-66 27 47)"/>
+    <ellipse cx="93" cy="46" rx="6.5" ry="3.1" transform="rotate(66 93 46)"/>
+  </g>
+  <g fill="#6d7a19">
+    <ellipse cx="40" cy="34" rx="6" ry="2.9" transform="rotate(-28 40 34)"/>
+    <ellipse cx="53" cy="27" rx="6" ry="2.9" transform="rotate(-8 53 27)"/>
+    <ellipse cx="68" cy="26" rx="6" ry="2.9" transform="rotate(12 68 26)"/>
+    <ellipse cx="81" cy="32" rx="6" ry="2.9" transform="rotate(36 81 32)"/>
+    <ellipse cx="33" cy="55" rx="6" ry="2.9" transform="rotate(-56 33 55)"/>
+    <ellipse cx="87" cy="55" rx="6" ry="2.9" transform="rotate(56 87 55)"/>
+    <ellipse cx="60" cy="30" rx="6" ry="2.9" transform="rotate(0 60 30)"/>
+  </g>
+  <g fill="#7e9440">
+    <ellipse cx="47" cy="37" rx="5.5" ry="2.7" transform="rotate(-18 47 37)"/>
+    <ellipse cx="60" cy="38" rx="5.5" ry="2.7" transform="rotate(4 60 38)"/>
+    <ellipse cx="73" cy="37" rx="5.5" ry="2.7" transform="rotate(24 73 37)"/>
+    <ellipse cx="39" cy="46" rx="5.5" ry="2.7" transform="rotate(-42 39 46)"/>
+    <ellipse cx="82" cy="45" rx="5.5" ry="2.7" transform="rotate(42 82 45)"/>
+    <ellipse cx="53" cy="46" rx="5.5" ry="2.7" transform="rotate(-8 53 46)"/>
+    <ellipse cx="68" cy="46" rx="5.5" ry="2.7" transform="rotate(14 68 46)"/>
+  </g>
+
+  
+  <g fill="#38430b">
+    <circle cx="43" cy="28" r="2.3"/><circle cx="66" cy="21" r="2.3"/><circle cx="85" cy="28" r="2.3"/>
+    <circle cx="34" cy="41" r="2.3"/><circle cx="64" cy="33" r="2.3"/><circle cx="88" cy="41" r="2.3"/>
+    <circle cx="46" cy="42" r="2.3"/>
+  </g>
+  <g fill="#9a720d">
+    <circle cx="53" cy="22" r="2.1"/><circle cx="74" cy="30" r="2.1"/><circle cx="56" cy="33" r="2.1"/>
+    <circle cx="30" cy="51" r="2.1"/><circle cx="90" cy="51" r="2.1"/>
+  </g>
+
+  
+  <g fill="none" stroke="#4c6414" stroke-width="2" stroke-linecap="round">
+    <path d="M36 60c-2 5-2 10-1 14"/><path d="M83 59c2 5 2 10 1 15"/>
+  </g>
+  <g fill="#38430b">
+    <circle cx="34.6" cy="69" r="2"/><circle cx="35.6" cy="74.5" r="2"/>
+    <circle cx="84.6" cy="68" r="2"/><circle cx="84.2" cy="74" r="2"/>
+  </g>
+
+  
+  <path d="M11 88V60a49 49 0 0 1 98 0v28" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
+  <path d="M4 89.5h17M99 89.5h17" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+</svg>
+<span>AFRP</span></a>
+  <span style="color:#7a7260">/</span><span style="font-weight:700;font-size:14px">Platform Map</span>
+  <span class="px-tver">v1.0</span>
+  <div class="px-tlinks">
+    <a href="#elements">Element matrix</a>
+    <a href="AFRP-Convention.html">Convention</a>
+    <a href="AFRP-Community-LifeEvents.html">Community &amp; Life Events</a>
+    <a href="AFRP-Institutions.html">ARFECF &amp; ARFHSN</a>
+    <a href="prototype.html">Prototype</a>
+    <a href="index.html" class="px-tcta">All docs</a>
+  </div>
+</div></nav>
+<header class="px-mast"><div class="px-in">
+  <p class="px-kicker">AFRP design delivery &middot; the map</p>
+  <h1>The Platform Map &mdash; one system, three institutions</h1>
+  <p class="px-vermeta">v1.0 &middot; 19 Aug 2026 &middot; supersedes the retired all-in-one consolidated document</p>
+  <p class="px-lede">This is the index of the design, not another mockup: every module of the platform, organized by
+  the institution that owns it &mdash; <b>AFRP</b> the federation, <b>ARFECF</b> the Education &amp; Charitable Fund,
+  <b>ARFHSN</b> the Human Services Network &mdash; each badged for consistency with the backend prototype (243/243
+  tests) and linked to its canonical frames in the narrative documents, the focused v1.0 documents, and the
+  interactive prototype.</p>
+  <p class="px-lede">Below the map sits the <b>element matrix</b>: every element raised across the project, where it
+  lives, and &mdash; in deliberate red &mdash; what has no screen anywhere yet. The matrix is the working definition
+  of done and not-done. Governing texts are versioned rulesets: <code>bylaws-2012.2</code> in force,
+  <code>bylaws-2024.1</code> parallel with 48 provisional overrides, <code>arfecf-2013</code>, <code>arfhsn-2017</code>.</p>
+  <div class="px-chips">
+    <span class="px-chip px-chip--green">The map &middot; 17 modules &middot; 3 institutions</span>
+    <span class="px-chip">Element matrix &middot; present / proposed / missing</span>
+    <span class="px-chip px-chip--gold">bylaws-2012.2 in force &middot; 2024.1 parallel</span>
+    <span class="px-chip px-chip--red">Missing rows are the backlog</span>
+  </div>
+</div></header>
+<div class="px-legendwrap"><div class="px-legend">
+  <div><h4><span class="px-badge px-badge--built"><i></i>Built</span> In the backend prototype</h4><p>Live routes, source modules and passing tests in AFRP-Portal.</p></div>
+  <div><h4><span class="px-badge px-badge--partial"><i></i>Built &middot; partial</span> Partially built</h4><p>Core objects exist; part of the shown surface is design-only.</p></div>
+  <div><h4><span class="px-badge px-badge--designed"><i></i>Designed</span> Designed, not built</h4><p>Specified and mocked; no backend module. Mockups-only is in force.</p></div>
+  <div><h4><span class="px-badge px-badge--proposed"><i></i>Proposed</span> Proposed</h4><p>New in the v1.0 documents; draft API chips are a build contract, not a claim.</p></div>
+</div></div>
+
+  <div class="px-subhead" style="margin-top:40px">Part I · AFRP</div>
+  <div class="px-cardgrid">
+    <div class="px-mcard"><h4>Federation operations <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>One data model plus a role-scoped policy layer — a grant is (person, role, scope); refusals name the rule that fired.</p>
+    <div class="px-mlinks"><a href="AFRP-Unified-Operations.html#f01">Ops 01</a><a href="AFRP-Unified-Operations.html#f06">Ops 06</a><a href="prototype.html#/fed/dashboard">Prototype</a></div></div>
+    <div class="px-mcard"><h4>Membership, household &amp; identity <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>Dual membership never merged; households where age sets defaults only; per-field consent; the identity merge queue; household-level directory inclusion.</p>
+    <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s01">Member 01</a><a href="AFRP-Unified-Member.html#s02">Member 02</a><a href="AFRP-Unified-Member.html#s03">Member 03</a><a href="AFRP-Unified-Member.html#s04">Member 04</a><a href="AFRP-Unified-Member.html#s05">Member 05</a><a href="AFRP-Unified-Operations.html#f02">Ops 02</a><a href="AFRP-Unified-Operations.html#f03">Ops 03</a><a href="AFRP-Community-LifeEvents.html#mh1">Community doc</a><a href="prototype.html#/member/membership">Prototype</a></div></div>
+    <div class="px-mcard"><h4>Money, giving &amp; finance <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>Gross-fee journals, daily close, club remittance as a liability, per-club ledger health with queued postings.</p>
+    <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s06">Member 06</a><a href="AFRP-Unified-Member.html#s07">Member 07</a><a href="AFRP-Unified-Operations.html#f07">Ops 07</a><a href="AFRP-Unified-Operations.html#f08">Ops 08</a><a href="AFRP-Unified-Operations.html#f09">Ops 09</a><a href="AFRP-Unified-Operations.html#f10">Ops 10</a><a href="prototype.html#/fed/finance">Prototype</a></div></div>
+    <div class="px-mcard"><h4>Events &amp; calendar <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>One calendar, two scopes; household registration that knows who may register whom; rotating QR check-in.</p>
+    <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s08">Member 08</a><a href="AFRP-Unified-Member.html#s09">Member 09</a><a href="prototype.html#/member/events">Prototype</a></div></div>
+    <div class="px-mcard"><h4>Governance &amp; elections <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>Frozen electorates, inclusion-only receipts, certification that shows its arithmetic. The 2024 text kept the mailed CPA ballot — the electronic flow is a future-amendment design.</p>
+    <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s11">Member 11</a><a href="AFRP-Unified-Member.html#s12">Member 12</a><a href="AFRP-Unified-Member.html#s13">Member 13</a><a href="AFRP-Unified-Operations.html#f05">Ops 05</a><a href="AFRP-Unified-Operations.html#f06">Ops 06</a><a href="prototype.html#/member/voting">Prototype</a></div></div>
+    <div class="px-mcard"><h4>Clubs &amp; local club systems <span class="px-badge px-badge--partial"><i></i>Built &middot; partial</span></h4><p>26 clubs as first-class ledger entities the federation reads but never edits — the seam the Convention plugs into.</p>
+    <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s18">Member 18</a><a href="AFRP-Unified-Operations.html#f11">Ops 11</a><a href="AFRP-Unified-Operations.html#f12">Ops 12</a><a href="AFRP-Unified-Operations.html#f13">Ops 13</a><a href="AFRP-Unified-Operations.html#f14">Ops 14</a><a href="prototype.html#/club/dashboard">Prototype</a></div></div>
+    <div class="px-mcard"><h4>Family tree <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>Eight generations, three deliberately blank; operational infrastructure for conflicts, alumni and life events.</p>
+    <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s14">Member 14</a><a href="prototype.html#/fed/tree">Prototype</a></div></div>
+    <div class="px-mcard"><h4>Life events — add, approve, release <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>Members add with the gates shown up front; staff approve in a queue; approval releases into pipelines that keep their own gates.</p>
+    <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s15">Member 15</a><a href="AFRP-Unified-Member.html#s16">Member 16</a><a href="AFRP-Community-LifeEvents.html#m-life">Community doc</a><a href="prototype.html#/member/family">Prototype</a></div></div>
+    <div class="px-mcard"><h4>Community — the two directories <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>The full member directory (blank means blank) and the RBPN professional directory (opt-in storefront, relayed contact).</p>
+    <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s17">Member 17</a><a href="AFRP-Community-LifeEvents.html#cd1">Community doc</a><a href="prototype.html#/member/rbpn">Prototype</a></div></div>
+    <div class="px-mcard"><h4>Hathihe Ramallah, bookstore &amp; ads desk <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Copy freeze, auto-compiled sections, a death held for family approval; member pricing; one ads desk for two publications.</p>
+    <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s19">Member 19</a><a href="AFRP-Unified-Member.html#s20">Member 20</a><a href="AFRP-Unified-Operations.html#f19">Ops 19</a><a href="AFRP-Unified-Operations.html#f20">Ops 20</a><a href="AFRP-Community-LifeEvents.html#ad1">Community doc</a><a href="prototype.html#/member/magazine">Prototype</a></div></div>
+    <div class="px-mcard"><h4>Programmes — catalogue, camp, alumni <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Seventeen programmes, one lifecycle, six shared rails; alumni tracing that never hands over contact details.</p>
+    <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s21">Member 21</a><a href="AFRP-Unified-Operations.html#f21">Ops 21</a><a href="AFRP-Unified-Operations.html#f18">Ops 18</a><a href="prototype.html#/program/overview">Prototype</a></div></div>
+    <div class="px-mcard"><h4>&#9733; The Convention — its own element <span class="px-badge px-badge--proposed"><i></i>Proposed</span></h4><p>Registration, the 9.1.3 credentialing floor, participant store &amp; communications, organizer backend with club integration.</p>
+    <div class="px-mlinks"><a href="AFRP-Unified-Member.html#s10">Member 10</a><a href="AFRP-Unified-Operations.html#f04">Ops 04</a><a href="AFRP-Convention.html#top">Convention doc</a><a href="prototype.html#/fed/credentialing">Prototype</a></div></div>
+  </div>
+  <div class="px-subhead" style="margin-top:40px">Part II · ARFECF</div>
+  <div class="px-cardgrid">
+    <div class="px-mcard"><h4>Scholarship program <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>Median ranking, tree-powered conflict detection, encumbrance arithmetic, named awards matched most-constrained-first.</p>
+    <div class="px-mlinks"><a href="AFRP-Unified-Operations.html#f15">Ops 15</a><a href="AFRP-Unified-Operations.html#f16">Ops 16</a><a href="AFRP-Unified-Operations.html#f17">Ops 17</a><a href="AFRP-Institutions.html#arfecf">Institutions doc</a><a href="prototype.html#/program/applications">Prototype</a></div></div>
+    <div class="px-mcard"><h4>Endowment fund <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Capacity already gates the scholarship budget; the fund itself awaits the Endowment Fund Policy Statement.</p>
+    <div class="px-mlinks"><a href="AFRP-Institutions.html#arfecf">Institutions doc</a></div></div>
+  </div>
+  <div class="px-subhead" style="margin-top:40px">Part III · ARFHSN</div>
+  <div class="px-cardgrid">
+    <div class="px-mcard"><h4>Medical Mission <span class="px-badge px-badge--proposed"><i></i>Proposed</span></h4><p>Rides the shared programme rails; no dedicated screens yet.</p>
+    <div class="px-mlinks"><a href="AFRP-Institutions.html#arfhsn">Institutions doc</a></div></div>
+    <div class="px-mcard"><h4>Human services programs <span class="px-badge px-badge--proposed"><i></i>Proposed</span></h4><p>Deliberately unscoped until the trustees define the program list; will need stricter confidentiality defaults than any existing module.</p>
+    <div class="px-mlinks"><a href="AFRP-Institutions.html#arfhsn">Institutions doc</a></div></div>
+    <div class="px-mcard"><h4>Governance interlock <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>14-seat BOT elected by the AFRP Board; amendments by 60% of that Board; views of AFRP board tooling, not a separate portal.</p>
+    <div class="px-mlinks"><a href="AFRP-Institutions.html#arfhsn">Institutions doc</a></div></div>
+  </div>
+<div class="px-matrix" id="elements">
+  <h2 style="font-size:24px;margin:52px 0 4px">The element matrix &mdash; where everything is, and what is missing</h2>
+  <p class="px-mnote">Every element raised across the project, the screen that covers it, and an honest status.
+  <b>Present</b> links to the canonical frame; <b>Proposed</b> links to the new v1.0 documents; <b>Missing</b> has
+  no screen anywhere yet &mdash; these rows are the design backlog, on purpose in red.</p>
+  <h3>Membership</h3>
+  <div class="px-tablewrap"><table class="px-table">
+    <thead><tr><th style="width:55%">Element</th><th>Where</th><th style="width:110px">Status</th></tr></thead>
+    <tbody><tr><td>Dual membership, national and club, independent lapse</td><td><a href="AFRP-Unified-Member.html#s02">Member 02</a> &middot; <a href="AFRP-Unified-Operations.html#f12">Ops 12</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Household — who may act for whom; the 18th-birthday consent refresh</td><td><a href="AFRP-Unified-Member.html#s03">Member 03</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Stored cards, subscriptions, expiring card</td><td><a href="AFRP-Unified-Member.html#s04">Member 04</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Per-channel consent, per-field privacy</td><td><a href="AFRP-Unified-Member.html#s05">Member 05</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Directory inclusion at the household level — you and your family</td><td><a href="AFRP-Community-LifeEvents.html#mh1">Community doc</a></td><td><span class="px-st px-st--prop"><i></i>Proposed</span></td></tr><tr><td>Member 360 — every linked source record</td><td><a href="AFRP-Unified-Operations.html#f02">Ops 02</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Identity resolution and the merge queue</td><td><a href="AFRP-Unified-Operations.html#f03">Ops 03</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Free student membership for scholarship recipients</td><td><a href="AFRP-Unified-Member.html#s16">Member 16</a> &middot; <a href="AFRP-Unified-Operations.html#f15">Ops 15</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Complimentary Family tier for newlyweds</td><td><a href="AFRP-Unified-Member.html#s15">Member 15</a> &middot; <a href="AFRP-Unified-Member.html#s16">Member 16</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td><b>Join / apply for membership</b> — a new member&rsquo;s first screen</td><td>&mdash;</td><td><span class="px-st px-st--m"><i></i>Missing</span></td></tr><tr><td><b>Login, account creation &amp; recovery</b> — auth is a deliberate backend stub</td><td>&mdash;</td><td><span class="px-st px-st--m"><i></i>Missing</span></td></tr>
+    </tbody></table></div>
+  <h3>Money</h3>
+  <div class="px-tablewrap"><table class="px-table">
+    <thead><tr><th style="width:55%">Element</th><th>Where</th><th style="width:110px">Status</th></tr></thead>
+    <tbody><tr><td>Giving history, designations, tax receipt</td><td><a href="AFRP-Unified-Member.html#s06">Member 06</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Donate — cause, amount, recurring</td><td><a href="AFRP-Unified-Member.html#s07">Member 07</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Daily close, balanced, posted to QuickBooks</td><td><a href="AFRP-Unified-Operations.html#f07">Ops 07</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Journal batch detail, fees booked gross</td><td><a href="AFRP-Unified-Operations.html#f08">Ops 08</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Club remittance, dues as a liability</td><td><a href="AFRP-Unified-Operations.html#f09">Ops 09</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Club ledger modes and connection health</td><td><a href="AFRP-Unified-Operations.html#f10">Ops 10</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td><b>Agency vs revenue treatment of club dues</b> — needs one signature from the CPA</td><td>&mdash;</td><td><span class="px-st px-st--part"><i></i>Partial</span></td></tr>
+    </tbody></table></div>
+  <h3>Events &amp; convention</h3>
+  <div class="px-tablewrap"><table class="px-table">
+    <thead><tr><th style="width:55%">Element</th><th>Where</th><th style="width:110px">Status</th></tr></thead>
+    <tbody><tr><td>One calendar, federation and club</td><td><a href="AFRP-Unified-Member.html#s08">Member 08</a> &middot; <a href="AFRP-Unified-Operations.html#f13">Ops 13</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Register self and household; QR check-in</td><td><a href="AFRP-Unified-Member.html#s08">Member 08</a> &middot; <a href="AFRP-Unified-Member.html#s09">Member 09</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Convention registration and delegate status</td><td><a href="AFRP-Unified-Member.html#s10">Member 10</a> &middot; <a href="AFRP-Unified-Operations.html#f04">Ops 04</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Convention live day — schedule + stamped announcements</td><td><a href="AFRP-Convention.html#cs1">Convention doc</a></td><td><span class="px-st px-st--prop"><i></i>Proposed</span></td></tr><tr><td>Convention store — merch, tickets, programme-book ads</td><td><a href="AFRP-Convention.html#cs2">Convention doc</a></td><td><span class="px-st px-st--prop"><i></i>Proposed</span></td></tr><tr><td>Convention help desk — the only two-way door</td><td><a href="AFRP-Convention.html#cs3">Convention doc</a></td><td><span class="px-st px-st--prop"><i></i>Proposed</span></td></tr><tr><td>Organizer command dashboard with club-by-club sources</td><td><a href="AFRP-Convention.html#co1">Convention doc</a></td><td><span class="px-st px-st--prop"><i></i>Proposed</span></td></tr><tr><td>Credentialing — standing verified against club remittance</td><td><a href="AFRP-Convention.html#co2">Convention doc</a></td><td><span class="px-st px-st--prop"><i></i>Proposed</span></td></tr><tr><td>Store fulfilment, broadcast composer, owned help-desk queue</td><td><a href="AFRP-Convention.html#co3">Convention doc</a></td><td><span class="px-st px-st--prop"><i></i>Proposed</span></td></tr>
+    </tbody></table></div>
+  <h3>Governance &amp; voting</h3>
+  <div class="px-tablewrap"><table class="px-table">
+    <thead><tr><th style="width:55%">Element</th><th>Where</th><th style="width:110px">Status</th></tr></thead>
+    <tbody><tr><td>Delegate apportionment with the arithmetic shown; credentialing and quorum</td><td><a href="AFRP-Unified-Operations.html#f04">Ops 04</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Ballots a member may and may not vote in; secret ballot; one-time receipt</td><td><a href="AFRP-Unified-Member.html#s11">Member 11</a> &middot; <a href="AFRP-Unified-Member.html#s12">Member 12</a> &middot; <a href="AFRP-Unified-Member.html#s13">Member 13</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Results, abstentions excluded, certification</td><td><a href="AFRP-Unified-Operations.html#f05">Ops 05</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Roles, scopes and permission refusals</td><td><a href="AFRP-Unified-Operations.html#f06">Ops 06</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Ruleset workbench — draft a revision, replay history</td><td><a href="AFRP-Ruleset-Workbench.html">Workbench</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td><b>Mailed CPA ballot — the flow current law actually requires</b> (the electronic flow shown is a future amendment)</td><td>&mdash;</td><td><span class="px-st px-st--m"><i></i>Missing</span></td></tr><tr><td><b>Board &amp; committee workspace</b> — motions and minutes between conventions</td><td>&mdash;</td><td><span class="px-st px-st--m"><i></i>Missing</span></td></tr>
+    </tbody></table></div>
+  <h3>Family tree &amp; life events</h3>
+  <div class="px-tablewrap"><table class="px-table">
+    <thead><tr><th style="width:55%">Element</th><th>Where</th><th style="width:110px">Status</th></tr></thead>
+    <tbody><tr><td>Lineage, search, living individuals restricted; provisional records marked</td><td><a href="AFRP-Unified-Member.html#s14">Member 14</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Weddings, births, graduations, deaths — with consent gates</td><td><a href="AFRP-Unified-Member.html#s15">Member 15</a> &middot; <a href="AFRP-Unified-Member.html#s16">Member 16</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Add a life event — gates shown before submission</td><td><a href="AFRP-Community-LifeEvents.html#lv1">Community doc</a></td><td><span class="px-st px-st--prop"><i></i>Proposed</span></td></tr><tr><td>Approval queue — approve is not publish; death held for family</td><td><a href="AFRP-Community-LifeEvents.html#lv2">Community doc</a></td><td><span class="px-st px-st--prop"><i></i>Proposed</span></td></tr><tr><td>Genealogy detecting committee conflicts; tracing lost alumni</td><td><a href="AFRP-Unified-Operations.html#f16">Ops 16</a> &middot; <a href="AFRP-Unified-Operations.html#f18">Ops 18</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr>
+    </tbody></table></div>
+  <h3>Directories</h3>
+  <div class="px-tablewrap"><table class="px-table">
+    <thead><tr><th style="width:55%">Element</th><th>Where</th><th style="width:110px">Status</th></tr></thead>
+    <tbody><tr><td>Member directory, members-only, per-field opt-in</td><td><a href="AFRP-Unified-Member.html#s17">Member 17</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>RBPN professional directory, brokered introductions</td><td><a href="AFRP-Unified-Member.html#s17">Member 17</a> &middot; <a href="AFRP-Community-LifeEvents.html#cd1">Community doc</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Professional listings sold by subscription</td><td><a href="AFRP-Unified-Operations.html#f19">Ops 19</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr>
+    </tbody></table></div>
+  <h3>Clubs</h3>
+  <div class="px-tablewrap"><table class="px-table">
+    <thead><tr><th style="width:55%">Element</th><th>Where</th><th style="width:110px">Status</th></tr></thead>
+    <tbody><tr><td>Club dashboard, roster, events, comms, remittance, Breeze state</td><td><a href="AFRP-Unified-Operations.html#f11">Ops 11</a> &middot; <a href="AFRP-Unified-Operations.html#f12">Ops 12</a> &middot; <a href="AFRP-Unified-Operations.html#f13">Ops 13</a> &middot; <a href="AFRP-Unified-Operations.html#f14">Ops 14</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Member&rsquo;s own club view</td><td><a href="AFRP-Unified-Member.html#s18">Member 18</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td><b>Club onboarding / migration wizard</b> — “which club goes first” has no screen</td><td>&mdash;</td><td><span class="px-st px-st--m"><i></i>Missing</span></td></tr>
+    </tbody></table></div>
+  <h3>Scholarships (ARFECF)</h3>
+  <div class="px-tablewrap"><table class="px-table">
+    <thead><tr><th style="width:55%">Element</th><th>Where</th><th style="width:110px">Status</th></tr></thead>
+    <tbody><tr><td>Applications, rubric, median ranking; conflicts; budget and named awards</td><td><a href="AFRP-Unified-Operations.html#f15">Ops 15</a> &middot; <a href="AFRP-Unified-Operations.html#f16">Ops 16</a> &middot; <a href="AFRP-Unified-Operations.html#f17">Ops 17</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Historic alumni import, match queue, tree tracing</td><td><a href="AFRP-Unified-Operations.html#f18">Ops 18</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td><b>Endowment fund management</b> — blocked on the Endowment Fund Policy Statement</td><td>&mdash;</td><td><span class="px-st px-st--m"><i></i>Missing</span></td></tr>
+    </tbody></table></div>
+  <h3>Magazine &amp; bookstore</h3>
+  <div class="px-tablewrap"><table class="px-table">
+    <thead><tr><th style="width:55%">Element</th><th>Where</th><th style="width:110px">Status</th></tr></thead>
+    <tbody><tr><td>Issue plan, copy freeze, auto sections, proof-and-confirm</td><td><a href="AFRP-Unified-Operations.html#f19">Ops 19</a> &middot; <a href="AFRP-Unified-Member.html#s19">Member 19</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Bookstore, member pricing, digital library</td><td><a href="AFRP-Unified-Member.html#s20">Member 20</a> &middot; <a href="AFRP-Unified-Operations.html#f20">Ops 20</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Ads desk — magazine and programme book, one order flow</td><td><a href="AFRP-Community-LifeEvents.html#ad1">Community doc</a> &middot; <a href="AFRP-Convention.html#cs2">Convention doc</a></td><td><span class="px-st px-st--prop"><i></i>Proposed</span></td></tr>
+    </tbody></table></div>
+  <h3>ARFHSN</h3>
+  <div class="px-tablewrap"><table class="px-table">
+    <thead><tr><th style="width:55%">Element</th><th>Where</th><th style="width:110px">Status</th></tr></thead>
+    <tbody><tr><td><b>Medical Mission screens</b></td><td><a href="AFRP-Institutions.html#arfhsn">Institutions doc</a></td><td><span class="px-st px-st--m"><i></i>Missing</span></td></tr><tr><td><b>Human services intake</b> — needs stricter confidentiality defaults</td><td><a href="AFRP-Institutions.html#arfhsn">Institutions doc</a></td><td><span class="px-st px-st--m"><i></i>Missing</span></td></tr><tr><td><b>Trustee roster &amp; interlock governance views</b> — roster outstanding</td><td><a href="AFRP-Institutions.html#arfhsn">Institutions doc</a></td><td><span class="px-st px-st--m"><i></i>Missing</span></td></tr>
+    </tbody></table></div>
+  <h3>Platform-wide</h3>
+  <div class="px-tablewrap"><table class="px-table">
+    <thead><tr><th style="width:55%">Element</th><th>Where</th><th style="width:110px">Status</th></tr></thead>
+    <tbody><tr><td><b>Notifications centre / activity inbox</b></td><td>&mdash;</td><td><span class="px-st px-st--m"><i></i>Missing</span></td></tr><tr><td><b>Member support desk</b> — the convention help desk pattern, year-round</td><td>&mdash;</td><td><span class="px-st px-st--m"><i></i>Missing</span></td></tr><tr><td>Design system — v2 tokens + v3.1 heritage layer</td><td><a href="AFRP-Design-System-v2.css">CSS</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr><tr><td>Brand — official logo and flat heritage mark</td><td><a href="assets/AFRP_Logo.png">logo</a> &middot; <a href="assets/afrp-mark.svg">mark</a></td><td><span class="px-st px-st--p"><i></i>Present</span></td></tr>
+    </tbody></table></div>
+  </div>
+<div class="px-matrix">
+  <h3>Still open &mdash; the questions that gate work</h3>
+  <div class="px-tablewrap"><table class="px-table"><tbody>
+    <tr><td>Bylaws detail — apportionment, quorum, proxy voting, tie-breaking (48 provisional overrides pending Board ratification)</td></tr>
+    <tr><td>Agency or revenue for club dues — one signature from the CPA</td></tr>
+    <tr><td>Scholarship volume — how many recipients, how many years, in what form</td></tr>
+    <tr><td>Publication calendar — everything in the magazine keys off the press date</td></tr>
+    <tr><td>Missing governing documents — Scholarship Fund Policy Statement 2015, Endowment Fund Policy Statement, Board Rules &amp; Regulations, Strategic Planning Proposal (AFRP 17.1.4), clean ARFECF copy, ARFHSN trustee roster</td></tr>
+    <tr><td>Which club goes first on migration — it should be one that wants to</td></tr>
+  </tbody></table></div>
+</div>
+<div class="px-sep"></div>
+<footer class="px-foot"><div class="px-in">
+  <p><b>Provenance.</b> Canonical frames live in <a href="AFRP-Unified-Member.html">Unified Member v3.1</a> and
+  <a href="AFRP-Unified-Operations.html">Unified Operations v3.1</a>; new elements live in the focused v1.0 documents;
+  the <a href="prototype.html">interactive prototype</a> is kept current with all of them. Build-status badges are
+  audited against the private AFRP-Portal repo (243/243 tests). Missing rows are listed on purpose &mdash; a map that
+  hides its blank spaces is a drawing.</p>
+</div></footer>
+</body>
+</html>
