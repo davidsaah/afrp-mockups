@@ -1211,10 +1211,124 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 .fn span.fn__deg{display:grid;place-items:center;color:#fff;font-size:11px;
   font-family:var(--font-mono);font-weight:700;line-height:1}
 
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN SYSTEM v3.1 — WARM HERITAGE LAYER (addendum)
+   The v2 block above stays byte-identical; everything here is override-only,
+   with every token value sliced verbatim from AFRP-Integrated-Prototype.html
+   so the three documents provably share one palette. Composition: 800-weight
+   display titles, lens-tinted icon chips, low-opacity watermark motifs, and
+   a gold-tipped rule leading each tatreez band.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root{
+  /* the family — warmed in v3.1: olive stays, gold deepens, and the old teal
+     pine becomes a warm forest green so all four lenses sit in one grove */
+  --olive:#6d7a19;  --olive-deep:#525d12; --olive-ink:#39430c;
+  --olive-50:#f2f4dd; --olive-200:#cdd48f; --olive-bright:#b5c24a;
+  --gold:#9a720d;   --gold-deep:#7c5b09;  --gold-ink:#584106;
+  --gold-50:#faf2dc;  --gold-200:#e7d191;  --gold-bright:#d9b45a;
+  --gold-300:#dcbc6b;
+  --pine:#3f6b41;   --pine-deep:#305233;  --pine-ink:#1f3a22;
+  --pine-50:#e6f0e2;  --pine-200:#aecfa6;  --pine-bright:#6da869;
+  /* default lens = member = the anchor green */
+  --lens:var(--green); --lens-deep:var(--green-700); --lens-ink:var(--green-800);
+  --lens-50:var(--green-50); --lens-200:var(--green-200); --lens-bright:var(--green-400);
+}
+:root{
+  /* warm neutrals — brown-gray, not slate */
+  --n-950:#1b1510; --n-900:#241d15; --n-800:#382f23; --n-700:#4e4434;
+  --n-600:#5d5140; --n-500:#6f624c; --n-400:#a2947c; --n-300:#c8bda6;
+  --n-200:#e1d8c3; --n-100:#ece4d1; --n-50:#f5f0e1; --n-0:#fffdf6;
+
+  /* olive-warm greens replace the cool brand greens */
+  --green-900:#212d06; --green-800:#33430b; --green-700:#40540f;
+  --green:#4c6414;     --green-400:#7e9440; --green-200:#c4cd97;
+  --green-100:#dde2bf; --green-50:#eef0da;
+
+  /* status, warmed to match the ground */
+  --amber-700:#7c4d05; --amber:#a3660c; --amber-50:#f9efd6;
+  --red-700:#96230b;   --red:#bb3013;   --red-100:#f0cfc0; --red-50:#f9e8dd;
+  --blue-700:#1c5062;  --blue:#2a6a7e;  --blue-50:#e3eff0;
+  --violet:#6d4a86;    --violet-50:#f0eaf2;
+
+  /* semantic — cream and ivory across the board */
+  --bg:#f5f0e1; --surface:#fffdf6; --surface-2:#f7f1e2;
+  --surface-sunken:#eee6d2;
+  --focus:#cfd6a0;
+}
+
+/* the brand lockup — gold on the dark masthead */
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.lockup{display:flex;align-items:center;gap:12px;min-width:0;
+  color:var(--gold-300);margin-bottom:var(--s5)}
+.lockup__tree{flex:0 0 auto;width:46px;height:46px}
+.lockup__word{font:800 24px/1 var(--font);letter-spacing:.045em;color:#fff;
+  white-space:nowrap}
+.lockup__sub{display:block;font:700 9.5px/1.3 var(--font);letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold-300);margin-top:3px}
+
+/* the watermark motif — decorative, never behind body text */
+.ph-water{position:absolute;right:-18px;top:-26px;width:170px;height:170px;
+  color:var(--lens);opacity:.075;pointer-events:none;z-index:0;
+  fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── lens tints per section group ─────────────────────────────────────────
+   federation pine · finance gold · club olive · programme amber (the warm
+   side of the gold family — finance keeps the metal, programmes the harvest;
+   the two -200/-bright stops are the only values not present verbatim in the
+   prototype, derived inside the same family and contrast-checked below) ── */
+#lensA{--lens:var(--pine);--lens-deep:var(--pine-deep);--lens-ink:var(--pine-ink);
+  --lens-50:var(--pine-50);--lens-200:var(--pine-200);--lens-bright:var(--pine-bright)}
+#lensB{--lens:var(--gold);--lens-deep:var(--gold-deep);--lens-ink:var(--gold-ink);
+  --lens-50:var(--gold-50);--lens-200:var(--gold-200);--lens-bright:var(--gold-bright)}
+#lensC{--lens:var(--olive);--lens-deep:var(--olive-deep);--lens-ink:var(--olive-ink);
+  --lens-50:var(--olive-50);--lens-200:var(--olive-200);--lens-bright:var(--olive-bright)}
+#lensD,#lensF{--lens:var(--amber);--lens-deep:var(--amber-700);--lens-ink:#5e3a04;
+  --lens-50:var(--amber-50);--lens-200:#ecd6a6;--lens-bright:#c9963b}
+#lensE{--lens:var(--green);--lens-deep:var(--green-700);--lens-ink:var(--green-800);
+  --lens-50:var(--green-50);--lens-200:var(--green-200);--lens-bright:var(--green-400)}
+
+/* ── section heads: bold, tinted letter chip, gold-tipped rule, band ────── */
+.sec__head{position:relative;border-bottom:0;padding-bottom:var(--s4)}
+.sec__head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:9px;
+  border-radius:2px;
+  background:
+    repeating-linear-gradient(45deg,  var(--lens-200) 0 1.6px, transparent 1.6px 8px),
+    repeating-linear-gradient(135deg, var(--lens-200) 0 1.6px, transparent 1.6px 8px),
+    linear-gradient(to right, var(--lens-50), transparent 70%);
+}
+.sec__head::before{content:"";position:absolute;left:0;bottom:0;height:9px;width:104px;
+  background:linear-gradient(90deg,var(--lens) 0 82%,var(--gold-bright) 82% 100%);
+  border-radius:2px;z-index:1}
+.sec__letter{background:var(--lens-deep)}
+.sec__head h2{font-size:clamp(24px,1.7vw + 19px,31px);font-weight:800;
+  letter-spacing:-.03em}
+
+/* ── frame heads: the hero treatment ──────────────────────────────────────── */
+.fr__head{position:relative;overflow:hidden;padding-bottom:var(--s4)}
+.fr__head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:9px;
+  border-radius:2px;
+  background:
+    repeating-linear-gradient(45deg,  var(--lens-200) 0 1.6px, transparent 1.6px 8px),
+    repeating-linear-gradient(135deg, var(--lens-200) 0 1.6px, transparent 1.6px 8px),
+    linear-gradient(to right, var(--lens-50), transparent 70%);
+}
+.fr__head::before{content:"";position:absolute;left:0;bottom:0;height:9px;width:104px;
+  background:linear-gradient(90deg,var(--lens) 0 82%,var(--gold-bright) 82% 100%);
+  border-radius:2px;z-index:1}
+.fr__num{background:var(--lens-deep);border-radius:var(--r);box-shadow:var(--e2);
+  width:44px;height:44px;font-size:var(--fs-body)}
+.fr__head h3{font-size:clamp(20px,1.3vw + 16px,26px);font-weight:800;
+  letter-spacing:-.03em;line-height:1.1}
+.fr__head>div{position:relative;z-index:1}
+
+/* panels step up a notch, staying quieter than the frame heads */
+.panel__head h3{font-weight:750;letter-spacing:-.015em}
 </style>
 </head>
 
 <body>
+<svg class="sprite" aria-hidden="true" focusable="false"><symbol id="h-lens-member" viewBox="0 0 20 20"><path d="M4.2 15.8C4 9.6 8.4 4.9 15.8 4.2c.2 6.2-4.2 10.9-11.6 11.6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.2 15.8C7.8 12.2 11.4 8.6 14.6 5.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol><symbol id="h-lens-club" viewBox="0 0 20 20"><path d="M3.2 16.8C7.6 15 12.8 10.8 16.8 3.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9.4 9.4C9 6.8 9.9 4.7 12.2 3.4c.5 2.6-.4 4.7-2.8 6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.9 13.6c-2.6.5-4.7-.4-6-2.7 2.6-.6 4.7.3 6 2.7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="h-lens-program" viewBox="0 0 20 20"><circle cx="6.4" cy="13.4" r="2.9" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="13.6" cy="13.4" r="2.7" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="7" r="2.9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M11 4.3c.4-1.4 1.4-2.1 3-2.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol><symbol id="h-lens-fed" viewBox="0 0 20 20"><path d="M10 2.9c2.2 0 4 .7 5 2 .9 1.1 1.3 2.4 1.1 3.8-.3 2.3-2.1 3.9-4.6 4.1H8.5C6 12.6 4.2 11 3.9 8.7 3.7 7.3 4.1 6 5 4.9c1-1.3 2.8-2 5-2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 12.8v4M3.2 16.8h13.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="7.6" cy="7" r="1" fill="currentColor"/><circle cx="12.4" cy="7" r="1" fill="currentColor"/><circle cx="10" cy="9.6" r="1" fill="currentColor"/></symbol><symbol id="h-coins" viewBox="0 0 20 20"><circle cx="7.4" cy="7.6" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13.5 8.7a4.2 4.2 0 1 1-4.9 4.9M5.9 7.6h3M7.4 6.1v3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol><symbol id="h-quill" viewBox="0 0 20 20"><path d="M16.7 3.3C11 3.9 6.8 7.9 5.3 13.5l-.9 3.1 3.1-.9C13.1 14.2 16.1 9.3 16.7 3.3ZM4.4 16.6C8 10.4 11.6 6.9 15 4.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol></svg>
 
 <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></symbol>
@@ -1266,6 +1380,15 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
 <header class="masthead">
   <div class="masthead__in">
+<div class="lockup" role="img" aria-label="AFRP olive-tree mark, est. 1952"><svg class="lockup__tree" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M18 4.8c6.6 0 11 3.8 11 8.9 0 4.7-3.6 8.3-8.4 8.7h-5.2C10.6 22 7 18.4 7 13.7c0-5.1 4.4-8.9 11-8.9Z"/>
+      <path d="M18 30.2V19.4M18 19.4l-3.6-3.7M18 19.4l3.6-3.7M18 13.8v-2"/>
+      <path d="M5.4 30.2h25.2"/>
+      <circle cx="13.4" cy="10.2" r="1.2" fill="currentColor" stroke="none"/>
+      <circle cx="22.6" cy="10.2" r="1.2" fill="currentColor" stroke="none"/>
+      <circle cx="18" cy="7.8" r="1.2" fill="currentColor" stroke="none"/>
+    </svg><span class="lockup__word">AFRP<span class="lockup__sub">Ramallah, Palestine &middot; est.&nbsp;1952</span></span></div>
+
     <div class="masthead__eyebrow">American Federation of Ramallah, Palestine &middot; Founded 1952</div>
     <h1>Unified Operations &mdash; Twenty-One Staff Screens</h1>
     <p>The whole staff-facing platform in one document. Not four applications: <b style="color:#fff">one data model plus a
@@ -1382,7 +1505,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 01 — FEDERATION DASHBOARD ══════════════════════ -->
   <article class="fr" id="f01">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-fed"/></svg>
       <div class="fr__num">01</div>
       <div>
         <h3>Federation dashboard &mdash; membership health, giving, clubs, open items</h3>
@@ -1596,7 +1719,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 02 — MEMBER 360 ══════════════════════ -->
   <article class="fr" id="f02">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-fed"/></svg>
       <div class="fr__num">02</div>
       <div>
         <h3>Member 360 &mdash; one person, every linked source record</h3>
@@ -1813,7 +1936,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 03 — IDENTITY RESOLUTION ══════════════════════ -->
   <article class="fr" id="f03">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-fed"/></svg>
       <div class="fr__num">03</div>
       <div>
         <h3>Identity resolution &mdash; merge queue with the rules that fired</h3>
@@ -1993,7 +2116,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 04 — CONVENTION GOVERNANCE ══════════════════════ -->
   <article class="fr" id="f04">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-fed"/></svg>
       <div class="fr__num">04</div>
       <div>
         <h3>Convention governance &mdash; weighted delegation, credentialing, quorum</h3>
@@ -2219,7 +2342,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 05 — ELECTION RESULTS ══════════════════════ -->
   <article class="fr" id="f05">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-fed"/></svg>
       <div class="fr__num">05</div>
       <div>
         <h3>Election results and certification &mdash; the President&rsquo;s ballot</h3>
@@ -2444,7 +2567,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 06 — ROLES & PERMISSIONS ══════════════════════ -->
   <article class="fr" id="f06">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-fed"/></svg>
       <div class="fr__num">06</div>
       <div>
         <h3>Roles and permissions &mdash; grants, and the refusals that prove the model</h3>
@@ -2659,7 +2782,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 07 — DAILY CLOSE ══════════════════════ -->
   <article class="fr" id="f07">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-coins"/></svg>
       <div class="fr__num">07</div>
       <div>
         <h3>Daily close &mdash; four fund batches, balanced, posted to QuickBooks</h3>
@@ -2837,7 +2960,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 08 — JOURNAL BATCH DETAIL ══════════════════════ -->
   <article class="fr" id="f08">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-coins"/></svg>
       <div class="fr__num">08</div>
       <div>
         <h3>Journal batch detail &mdash; three gross lines, and the gifts behind them</h3>
@@ -3023,7 +3146,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 09 — CLUB REMITTANCE RUN ══════════════════════ -->
   <article class="fr" id="f09">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-coins"/></svg>
       <div class="fr__num">09</div>
       <div>
         <h3>Club remittance run &mdash; August 2026, and why club dues are a liability</h3>
@@ -3220,7 +3343,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 10 — CLUB LEDGER & CONNECTION HEALTH ══════════════════════ -->
   <article class="fr" id="f10">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-coins"/></svg>
       <div class="fr__num">10</div>
       <div>
         <h3>Club ledger and connection health &mdash; dead connections are expected, not exceptional</h3>
@@ -3412,7 +3535,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 11 — CLUB DASHBOARD ══════════════════════ -->
   <article class="fr" id="f11">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-club"/></svg>
       <div class="fr__num">11</div>
       <div>
         <h3>Club dashboard &mdash; Detroit</h3>
@@ -3618,7 +3741,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 12 — CLUB ROSTER ══════════════════════ -->
   <article class="fr" id="f12">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-club"/></svg>
       <div class="fr__num">12</div>
       <div>
         <h3>Club roster &mdash; dual status, households, groups, bulk actions</h3>
@@ -3793,7 +3916,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 13 — EVENTS & CHECK-IN ══════════════════════ -->
   <article class="fr" id="f13">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-club"/></svg>
       <div class="fr__num">13</div>
       <div>
         <h3>Club events and check-in &mdash; name tags, child security codes, room booking</h3>
@@ -3971,7 +4094,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 14 — CLUB COMMUNICATIONS ══════════════════════ -->
   <article class="fr" id="f14">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-club"/></svg>
       <div class="fr__num">14</div>
       <div>
         <h3>Club communications &mdash; the audience is consent-filtered before the message is written</h3>
@@ -4168,7 +4291,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 15 — APPLICATIONS & REVIEW ══════════════════════ -->
   <article class="fr" id="f15">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-program"/></svg>
       <div class="fr__num">15</div>
       <div>
         <h3>Scholarship applications and review &mdash; median ranking, spread, and a recusal that is not an empty review</h3>
@@ -4364,7 +4487,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 16 — CONFLICT DETECTION ══════════════════════ -->
   <article class="fr" id="f16">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-program"/></svg>
       <div class="fr__num">16</div>
       <div>
         <h3>Conflict detection &mdash; the family tree doing operational work</h3>
@@ -4563,7 +4686,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 17 — BUDGET & NAMED AWARDS ══════════════════════ -->
   <article class="fr" id="f17">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-program"/></svg>
       <div class="fr__num">17</div>
       <div>
         <h3>Budget, encumbrance and named awards &mdash; the arithmetic that quietly breaks programs</h3>
@@ -4791,7 +4914,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 18 — ALUMNI RECRUITING ══════════════════════ -->
   <article class="fr" id="f18">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-program"/></svg>
       <div class="fr__num">18</div>
       <div>
         <h3>Alumni recruiting &mdash; historic matching and family-tree tracing</h3>
@@ -5011,7 +5134,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 19 — MAGAZINE ISSUE ══════════════════════ -->
   <article class="fr" id="f19">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-quill"/></svg>
       <div class="fr__num">19</div>
       <div>
         <h3>Magazine issue &mdash; copy freeze, five auto sections, and a death held for family approval</h3>
@@ -5233,7 +5356,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 20 — BOOKSTORE ADMIN ══════════════════════ -->
   <article class="fr" id="f20">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-quill"/></svg>
       <div class="fr__num">20</div>
       <div>
         <h3>Bookstore admin &mdash; catalogue, member pricing, stock and fulfilment</h3>
@@ -5438,7 +5561,7 @@ a{color:var(--accent-ink);text-underline-offset:2px}
 
   <!-- ══════════════════════ FRAME 21 — PROGRAMME CATALOGUE ══════════════════════ -->
   <article class="fr" id="f21">
-    <header class="fr__head">
+    <header class="fr__head"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-program"/></svg>
       <div class="fr__num">21</div>
       <div>
         <h3>Programme catalogue &mdash; seventeen programmes, one lifecycle, six shared rails</h3>

@@ -1085,13 +1085,122 @@ code{font:13px/1.5 var(--font-mono);background:var(--surface-sunken);
 .footnote{font-size:var(--fs-micro);color:var(--ink-3);line-height:1.55;
   border-top:1px solid var(--line-2);padding-top:var(--s3)}
 
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN SYSTEM v3.1 — WARM HERITAGE LAYER (addendum)
+   The v2 block above stays byte-identical; everything here is override-only,
+   with every token value sliced verbatim from AFRP-Integrated-Prototype.html
+   so the three documents provably share one palette. Composition: 800-weight
+   display titles, lens-tinted icon chips, low-opacity watermark motifs, and
+   a gold-tipped rule leading each tatreez band.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root{
+  /* the family — warmed in v3.1: olive stays, gold deepens, and the old teal
+     pine becomes a warm forest green so all four lenses sit in one grove */
+  --olive:#6d7a19;  --olive-deep:#525d12; --olive-ink:#39430c;
+  --olive-50:#f2f4dd; --olive-200:#cdd48f; --olive-bright:#b5c24a;
+  --gold:#9a720d;   --gold-deep:#7c5b09;  --gold-ink:#584106;
+  --gold-50:#faf2dc;  --gold-200:#e7d191;  --gold-bright:#d9b45a;
+  --gold-300:#dcbc6b;
+  --pine:#3f6b41;   --pine-deep:#305233;  --pine-ink:#1f3a22;
+  --pine-50:#e6f0e2;  --pine-200:#aecfa6;  --pine-bright:#6da869;
+  /* default lens = member = the anchor green */
+  --lens:var(--green); --lens-deep:var(--green-700); --lens-ink:var(--green-800);
+  --lens-50:var(--green-50); --lens-200:var(--green-200); --lens-bright:var(--green-400);
+}
+:root{
+  /* warm neutrals — brown-gray, not slate */
+  --n-950:#1b1510; --n-900:#241d15; --n-800:#382f23; --n-700:#4e4434;
+  --n-600:#5d5140; --n-500:#6f624c; --n-400:#a2947c; --n-300:#c8bda6;
+  --n-200:#e1d8c3; --n-100:#ece4d1; --n-50:#f5f0e1; --n-0:#fffdf6;
+
+  /* olive-warm greens replace the cool brand greens */
+  --green-900:#212d06; --green-800:#33430b; --green-700:#40540f;
+  --green:#4c6414;     --green-400:#7e9440; --green-200:#c4cd97;
+  --green-100:#dde2bf; --green-50:#eef0da;
+
+  /* status, warmed to match the ground */
+  --amber-700:#7c4d05; --amber:#a3660c; --amber-50:#f9efd6;
+  --red-700:#96230b;   --red:#bb3013;   --red-100:#f0cfc0; --red-50:#f9e8dd;
+  --blue-700:#1c5062;  --blue:#2a6a7e;  --blue-50:#e3eff0;
+  --violet:#6d4a86;    --violet-50:#f0eaf2;
+
+  /* semantic — cream and ivory across the board */
+  --bg:#f5f0e1; --surface:#fffdf6; --surface-2:#f7f1e2;
+  --surface-sunken:#eee6d2;
+  --focus:#cfd6a0;
+}
+
+/* the brand lockup — gold on the dark masthead */
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.lockup{display:flex;align-items:center;gap:12px;min-width:0;
+  color:var(--gold-300);margin-bottom:var(--s5)}
+.lockup__tree{flex:0 0 auto;width:46px;height:46px}
+.lockup__word{font:800 24px/1 var(--font);letter-spacing:.045em;color:#fff;
+  white-space:nowrap}
+.lockup__sub{display:block;font:700 9.5px/1.3 var(--font);letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold-300);margin-top:3px}
+
+/* the watermark motif — decorative, never behind body text */
+.ph-water{position:absolute;right:-18px;top:-26px;width:170px;height:170px;
+  color:var(--lens);opacity:.075;pointer-events:none;z-index:0;
+  fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+
+/* the member document is member-lens green throughout — --lens defaults ──── */
+
+/* ── group heads: bold, gold-tipped rule into the band ────────────────────── */
+.grouphead{position:relative;border-bottom:0;padding-bottom:var(--s4)}
+.grouphead::after{content:"";position:absolute;left:0;right:0;bottom:0;height:9px;
+  border-radius:2px;
+  background:
+    repeating-linear-gradient(45deg,  var(--lens-200) 0 1.6px, transparent 1.6px 8px),
+    repeating-linear-gradient(135deg, var(--lens-200) 0 1.6px, transparent 1.6px 8px),
+    linear-gradient(to right, var(--lens-50), transparent 70%);
+}
+.grouphead::before{content:"";position:absolute;left:0;bottom:0;height:9px;width:104px;
+  background:linear-gradient(90deg,var(--lens) 0 82%,var(--gold-bright) 82% 100%);
+  border-radius:2px;z-index:1}
+.grouphead h2{font-size:clamp(23px,1.6vw + 18px,29px);font-weight:800;
+  letter-spacing:-.03em}
+.grouphead .n{color:var(--lens-deep)}
+
+/* ── captions: each screen's title gets the hero treatment, scaled to the
+      member register's airier 375px column ─────────────────────────────── */
+.cap{position:relative;overflow:hidden}
+.cap__top{position:relative;z-index:1;align-items:center;padding-bottom:var(--s3)}
+.cap__top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;
+  border-radius:2px;
+  background:
+    repeating-linear-gradient(45deg,  var(--lens-200) 0 1.6px, transparent 1.6px 8px),
+    repeating-linear-gradient(135deg, var(--lens-200) 0 1.6px, transparent 1.6px 8px),
+    linear-gradient(to right, var(--lens-50), transparent 70%);
+}
+.cap__top::before{content:"";position:absolute;left:0;bottom:0;height:8px;width:84px;
+  background:linear-gradient(90deg,var(--lens) 0 82%,var(--gold-bright) 82% 100%);
+  border-radius:2px;z-index:1}
+.cap__n{background:var(--lens-deep);border-radius:var(--r-sm);width:38px;height:38px;
+  display:grid;place-items:center;padding:0;font-size:var(--fs-sm);box-shadow:var(--e2)}
+.cap h3{font-weight:800;letter-spacing:-.025em;font-size:clamp(18px,1vw + 15px,21px);
+  line-height:1.15}
+.cap p,.cap .chips{position:relative;z-index:1}
+.cap .ph-water{width:130px;height:130px;right:-22px;top:-18px}
 </style>
 </head>
 <body>
+<svg class="sprite" aria-hidden="true" focusable="false"><symbol id="h-lens-member" viewBox="0 0 20 20"><path d="M4.2 15.8C4 9.6 8.4 4.9 15.8 4.2c.2 6.2-4.2 10.9-11.6 11.6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.2 15.8C7.8 12.2 11.4 8.6 14.6 5.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol><symbol id="h-lens-club" viewBox="0 0 20 20"><path d="M3.2 16.8C7.6 15 12.8 10.8 16.8 3.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9.4 9.4C9 6.8 9.9 4.7 12.2 3.4c.5 2.6-.4 4.7-2.8 6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.9 13.6c-2.6.5-4.7-.4-6-2.7 2.6-.6 4.7.3 6 2.7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="h-lens-program" viewBox="0 0 20 20"><circle cx="6.4" cy="13.4" r="2.9" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="13.6" cy="13.4" r="2.7" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="7" r="2.9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M11 4.3c.4-1.4 1.4-2.1 3-2.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol><symbol id="h-lens-fed" viewBox="0 0 20 20"><path d="M10 2.9c2.2 0 4 .7 5 2 .9 1.1 1.3 2.4 1.1 3.8-.3 2.3-2.1 3.9-4.6 4.1H8.5C6 12.6 4.2 11 3.9 8.7 3.7 7.3 4.1 6 5 4.9c1-1.3 2.8-2 5-2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 12.8v4M3.2 16.8h13.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="7.6" cy="7" r="1" fill="currentColor"/><circle cx="12.4" cy="7" r="1" fill="currentColor"/><circle cx="10" cy="9.6" r="1" fill="currentColor"/></symbol><symbol id="h-coins" viewBox="0 0 20 20"><circle cx="7.4" cy="7.6" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13.5 8.7a4.2 4.2 0 1 1-4.9 4.9M5.9 7.6h3M7.4 6.1v3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol><symbol id="h-quill" viewBox="0 0 20 20"><path d="M16.7 3.3C11 3.9 6.8 7.9 5.3 13.5l-.9 3.1 3.1-.9C13.1 14.2 16.1 9.3 16.7 3.3ZM4.4 16.6C8 10.4 11.6 6.9 15 4.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol></svg>
 
 
 <header class="masthead">
   <div class="in">
+<div class="lockup" role="img" aria-label="AFRP olive-tree mark, est. 1952"><svg class="lockup__tree" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M18 4.8c6.6 0 11 3.8 11 8.9 0 4.7-3.6 8.3-8.4 8.7h-5.2C10.6 22 7 18.4 7 13.7c0-5.1 4.4-8.9 11-8.9Z"/>
+      <path d="M18 30.2V19.4M18 19.4l-3.6-3.7M18 19.4l3.6-3.7M18 13.8v-2"/>
+      <path d="M5.4 30.2h25.2"/>
+      <circle cx="13.4" cy="10.2" r="1.2" fill="currentColor" stroke="none"/>
+      <circle cx="22.6" cy="10.2" r="1.2" fill="currentColor" stroke="none"/>
+      <circle cx="18" cy="7.8" r="1.2" fill="currentColor" stroke="none"/>
+    </svg><span class="lockup__word">AFRP<span class="lockup__sub">Ramallah, Palestine &middot; est.&nbsp;1952</span></span></div>
+
     <div class="kicker">American Federation of Ramallah, Palestine &middot; founded 1952 &middot; 26 clubs &middot; 18 states</div>
     <h1>My AFRP &mdash; the unified member experience</h1>
     <p>Twenty-one annotated phone screens covering <b>every member-facing module</b> of the AFRP
@@ -1352,7 +1461,7 @@ Club. Today is Wednesday 4 November 2026.</div>
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">01</span><h3>Home &mdash; one member, ten modules, two memberships</h3></div><p>The whole platform in one thumb-reach. The dual-membership rule is discharged in the first two seconds: two peer cards, two tiers, two dues figures, two statuses, and the member is current in one and lapsed in the other. Nothing on this screen ever says &ldquo;member in good standing&rdquo; unqualified. The tile grid is the map of the other nineteen frames &mdash; a member never has to know which module a thing lives in.</p><div class="chips"><span class="dchip dchip--dec">Dual membership &middot; independent lapse</span><span class="dchip dchip--prov">Club lapsed 31 Aug 2026</span><span class="dchip dchip">&#10003; every module reachable from home</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">01</span><h3>Home &mdash; one member, ten modules, two memberships</h3></div><p>The whole platform in one thumb-reach. The dual-membership rule is discharged in the first two seconds: two peer cards, two tiers, two dues figures, two statuses, and the member is current in one and lapsed in the other. Nothing on this screen ever says &ldquo;member in good standing&rdquo; unqualified. The tile grid is the map of the other nineteen frames &mdash; a member never has to know which module a thing lives in.</p><div class="chips"><span class="dchip dchip--dec">Dual membership &middot; independent lapse</span><span class="dchip dchip--prov">Club lapsed 31 Aug 2026</span><span class="dchip dchip">&#10003; every module reachable from home</span></div></figcaption>
 </figure>
 
 <figure class="fig" id="s02">
@@ -1423,7 +1532,7 @@ Club. Today is Wednesday 4 November 2026.</div>
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">02</span><h3>Dual membership &mdash; two peers, never merged</h3></div><p>The two memberships are rendered as peers with their own tier, term, dues, auto-renew setting and status. The third card is the part most systems omit: a plain list of what the club lapse does and does not reach. It stops the member concluding that a lapse anywhere means a lapse everywhere &mdash; and it puts the renewal button next to the consequence rather than three screens away from it.</p><div class="chips"><span class="dchip dchip--dec">standingAt(scope, date)</span><span class="dchip dchip--prov">Renewal cannot un-freeze an electorate</span><span class="dchip dchip">&#10003; consequences listed, not implied</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">02</span><h3>Dual membership &mdash; two peers, never merged</h3></div><p>The two memberships are rendered as peers with their own tier, term, dues, auto-renew setting and status. The third card is the part most systems omit: a plain list of what the club lapse does and does not reach. It stops the member concluding that a lapse anywhere means a lapse everywhere &mdash; and it puts the renewal button next to the consequence rather than three screens away from it.</p><div class="chips"><span class="dchip dchip--dec">standingAt(scope, date)</span><span class="dchip dchip--prov">Renewal cannot un-freeze an electorate</span><span class="dchip dchip">&#10003; consequences listed, not implied</span></div></figcaption>
 </figure>
 
 <figure class="fig" id="s03">
@@ -1508,7 +1617,7 @@ registration back to you.
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">03</span><h3>Household &mdash; age sets defaults, and eighteen is a refresh</h3></div><p>Five people, three different relationships to the same record. The alert is the rule the platform is most often asked to break: a child who turns 18 is <em>re-asked</em>, not ejected, and the unfinished half of that refresh is still visible three years later because nothing was assumed on his behalf. Tarek and Basim are the same age band and differ only in what they chose &mdash; which is the point. The last card names the two powers that are never delegable in either direction: a vote and a consent.</p><div class="chips"><span class="dchip dchip--dec">Age sets defaults, not rules</span><span class="dchip dchip--priv">Consent refresh at 18 &middot; never ejection</span><span class="dchip dchip--priv">A vote and a consent are never delegable</span><span class="dchip dchip">&#10003; adult child &rarr; parent delegation</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">03</span><h3>Household &mdash; age sets defaults, and eighteen is a refresh</h3></div><p>Five people, three different relationships to the same record. The alert is the rule the platform is most often asked to break: a child who turns 18 is <em>re-asked</em>, not ejected, and the unfinished half of that refresh is still visible three years later because nothing was assumed on his behalf. Tarek and Basim are the same age band and differ only in what they chose &mdash; which is the point. The last card names the two powers that are never delegable in either direction: a vote and a consent.</p><div class="chips"><span class="dchip dchip--dec">Age sets defaults, not rules</span><span class="dchip dchip--priv">Consent refresh at 18 &middot; never ejection</span><span class="dchip dchip--priv">A vote and a consent are never delegable</span><span class="dchip dchip">&#10003; adult child &rarr; parent delegation</span></div></figcaption>
 </figure>
 
 <figure class="fig" id="s04">
@@ -1596,7 +1705,7 @@ a different card if you moved it.</div></div>
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">04</span><h3>Cards &amp; subscriptions &mdash; and what an expiry actually threatens</h3></div><p>Three saved cards with the expiring one called out <em>and</em> qualified: it carries no subscription, so nothing is about to fail. That distinction is the difference between a useful warning and an alarm members learn to ignore. Subscriptions are shown as first-class objects with an amount, a next charge date, a card and a start date, so &ldquo;why was I charged?&rdquo; is answerable from the screen. Card data lives in Authorize.Net; AFRP holds a token and four digits.</p><div class="chips"><span class="dchip dchip--dec">Authorize.Net payment profiles &middot; no PAN stored</span><span class="dchip dchip--prov">Expiring 12/2026, and what it does not break</span><span class="dchip dchip">&#10003; subscriptions the member can actually see</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">04</span><h3>Cards &amp; subscriptions &mdash; and what an expiry actually threatens</h3></div><p>Three saved cards with the expiring one called out <em>and</em> qualified: it carries no subscription, so nothing is about to fail. That distinction is the difference between a useful warning and an alarm members learn to ignore. Subscriptions are shown as first-class objects with an amount, a next charge date, a card and a start date, so &ldquo;why was I charged?&rdquo; is answerable from the screen. Card data lives in Authorize.Net; AFRP holds a token and four digits.</p><div class="chips"><span class="dchip dchip--dec">Authorize.Net payment profiles &middot; no PAN stored</span><span class="dchip dchip--prov">Expiring 12/2026, and what it does not break</span><span class="dchip dchip">&#10003; subscriptions the member can actually see</span></div></figcaption>
 </figure>
 
 <figure class="fig" id="s05">
@@ -1680,7 +1789,7 @@ a different card if you moved it.</div></div>
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">05</span><h3>Consent per channel, visibility per field, nothing assumed</h3></div><p>Five channels, each with its own state and its own dated opt-in, and not one of them pre-checked. SMS carries its full disclosure &mdash; frequency, rates, STOP and HELP, and the statement that consent is not a condition of membership &mdash; at the point of consent rather than in a policy page. Directory visibility is per field, and the two fields with no setting say so in words: <em>no setting recorded &mdash; not visible</em>. Street address cannot be published at any setting. Print consent is a separate switch again, because agreeing to be findable by members is not agreeing to be printed.</p><div class="chips"><span class="dchip dchip--priv">No pre-checked boxes anywhere</span><span class="dchip dchip--priv">Absence of a setting = not visible</span><span class="dchip dchip--dec">SMS full disclosure at the point of consent</span><span class="dchip dchip">&#10003; preferred display name, never derived</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">05</span><h3>Consent per channel, visibility per field, nothing assumed</h3></div><p>Five channels, each with its own state and its own dated opt-in, and not one of them pre-checked. SMS carries its full disclosure &mdash; frequency, rates, STOP and HELP, and the statement that consent is not a condition of membership &mdash; at the point of consent rather than in a policy page. Directory visibility is per field, and the two fields with no setting say so in words: <em>no setting recorded &mdash; not visible</em>. Street address cannot be published at any setting. Print consent is a separate switch again, because agreeing to be findable by members is not agreeing to be printed.</p><div class="chips"><span class="dchip dchip--priv">No pre-checked boxes anywhere</span><span class="dchip dchip--priv">Absence of a setting = not visible</span><span class="dchip dchip--dec">SMS full disclosure at the point of consent</span><span class="dchip dchip">&#10003; preferred display name, never derived</span></div></figcaption>
 </figure>
 </div>
 
@@ -1765,7 +1874,7 @@ gifts; the receipt says so before an accountant has to.</p></div>
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">06</span><h3>Giving &mdash; and the line between a gift and a payment</h3></div><p>Year to date and lifetime on one card, the designation mix on the next, and then the sentence that keeps AFRP out of trouble: dues and bookstore orders are not contributions and are excluded from both the figure and the receipt. Designation is stored on the gift, so the restricted-fund release has something to read later. The 2026 statement is shown before it exists, with its issue date, so nobody has to ask when it is coming.</p><div class="chips"><span class="dchip dchip--dec">Dues &amp; purchases never receipted as gifts</span><span class="dchip dchip--dec">Restricted designation stored on the gift</span><span class="dchip dchip">&#10003; lifetime giving, visible to the member</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">06</span><h3>Giving &mdash; and the line between a gift and a payment</h3></div><p>Year to date and lifetime on one card, the designation mix on the next, and then the sentence that keeps AFRP out of trouble: dues and bookstore orders are not contributions and are excluded from both the figure and the receipt. Designation is stored on the gift, so the restricted-fund release has something to read later. The 2026 statement is shown before it exists, with its issue date, so nobody has to ask when it is coming.</p><div class="chips"><span class="dchip dchip--dec">Dues &amp; purchases never receipted as gifts</span><span class="dchip dchip--dec">Restricted designation stored on the gift</span><span class="dchip dchip">&#10003; lifetime giving, visible to the member</span></div></figcaption>
 </figure>
 
 <figure class="fig" id="s07">
@@ -1861,7 +1970,7 @@ a reminder before any amount changes.</p>
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">07</span><h3>Donate &mdash; cause, amount, and a frequency nobody chose for her</h3></div><p>Every option here is a real radio or checkbox with a real label, sized at the 16&nbsp;px floor and the 48&nbsp;px target. The restricted flag sits on each cause, because a member choosing between six funds is making an accounting decision whether or not anyone tells her. Monthly is offered, never pre-selected, and the screen says up front where the resulting subscription can be cancelled. The fee cover box is off, like every other box in this document.</p><div class="chips"><span class="dchip dchip--dec">Restricted vs unrestricted, shown on the cause</span><span class="dchip dchip--priv">Nothing pre-checked, including the fee cover</span><span class="dchip dchip">&#10003; monthly gift becomes a self-service subscription</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">07</span><h3>Donate &mdash; cause, amount, and a frequency nobody chose for her</h3></div><p>Every option here is a real radio or checkbox with a real label, sized at the 16&nbsp;px floor and the 48&nbsp;px target. The restricted flag sits on each cause, because a member choosing between six funds is making an accounting decision whether or not anyone tells her. Monthly is offered, never pre-selected, and the screen says up front where the resulting subscription can be cancelled. The fee cover box is off, like every other box in this document.</p><div class="chips"><span class="dchip dchip--dec">Restricted vs unrestricted, shown on the cause</span><span class="dchip dchip--priv">Nothing pre-checked, including the fee cover</span><span class="dchip dchip">&#10003; monthly gift becomes a self-service subscription</span></div></figcaption>
 </figure>
 </div>
 
@@ -1969,7 +2078,7 @@ and a delegate seat.</p></div>
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">08</span><h3>One calendar, two scopes, and a household that is not one blob</h3></div><p>Federation and club events sit in one chronological list, each carrying its scope tag, because a member does not think in organisational boundaries. The household registration panel is where the rules from frame&nbsp;03 pay off: Nadia may register Tarek because he delegated, may register Layla because she is her guardian, and may not register Basim at all &mdash; so the product offers to send him a link rather than pretending the row does not exist. Her own line quietly carries the club lapse as a price difference.</p><div class="chips"><span class="dchip dchip--dec">Federation + club, one calendar</span><span class="dchip dchip--dec">Delegation decides who may be registered</span><span class="dchip dchip--prov">Lapse shown as a price, where it bites</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">08</span><h3>One calendar, two scopes, and a household that is not one blob</h3></div><p>Federation and club events sit in one chronological list, each carrying its scope tag, because a member does not think in organisational boundaries. The household registration panel is where the rules from frame&nbsp;03 pay off: Nadia may register Tarek because he delegated, may register Layla because she is her guardian, and may not register Basim at all &mdash; so the product offers to send him a link rather than pretending the row does not exist. Her own line quietly carries the club lapse as a price difference.</p><div class="chips"><span class="dchip dchip--dec">Federation + club, one calendar</span><span class="dchip dchip--dec">Delegation decides who may be registered</span><span class="dchip dchip--prov">Lapse shown as a price, where it bites</span></div></figcaption>
 </figure>
 
 <figure class="fig" id="s09">
@@ -2048,7 +2157,7 @@ and a delegate seat.</p></div>
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">09</span><h3>Event detail &mdash; the ticket, the code, and a $15 lesson in scope</h3></div><p>The check-in code is drawn in SVG, rotates every minute and is per person, so a forwarded screenshot does not admit a stranger. The ticket card is where the dual-membership rule is felt rather than read: $60 instead of $45, the reason dated, and a renewal that refunds the difference automatically. The note on Marwan's code draws the other line the platform has to hold &mdash; holding a household member's ticket is not access to their record.</p><div class="chips"><span class="dchip dchip--dec">Per-person rotating code, not a shared image</span><span class="dchip dchip--prov">Non-member rate, with the fix and the refund</span><span class="dchip dchip--priv">A shared ticket is not a shared record</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">09</span><h3>Event detail &mdash; the ticket, the code, and a $15 lesson in scope</h3></div><p>The check-in code is drawn in SVG, rotates every minute and is per person, so a forwarded screenshot does not admit a stranger. The ticket card is where the dual-membership rule is felt rather than read: $60 instead of $45, the reason dated, and a renewal that refunds the difference automatically. The note on Marwan's code draws the other line the platform has to hold &mdash; holding a household member's ticket is not access to their record.</p><div class="chips"><span class="dchip dchip--dec">Per-person rotating code, not a shared image</span><span class="dchip dchip--prov">Non-member rate, with the fix and the refund</span><span class="dchip dchip--priv">A shared ticket is not a shared record</span></div></figcaption>
 </figure>
 
 <figure class="fig" id="s10">
@@ -2142,7 +2251,7 @@ and a delegate seat.</p></div>
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">10</span><h3>Convention &mdash; registered, not a delegate, and told exactly why</h3></div><p>The delegate answer is the hardest sentence in the product to write well, so it gets a dated four-step timeline instead of a paragraph: the lapse, the record date, the election she could not stand in, and the federation record date where she <em>is</em> eligible. The fix is offered and its limit is stated in the same breath &mdash; renewing works, and it will not retroactively seat her. Detroit&rsquo;s five delegates are shown with the weight each carries &mdash; 5.20 votes, certified &divide; sent under By-Law&nbsp;9.1.3 &mdash; and one of them is her husband, which is exactly the kind of household asymmetry a single-scope system cannot render.</p><div class="chips"><span class="dchip dchip--dec">Eligibility frozen at a record date</span><span class="dchip dchip--dec">Weighted delegation shows its working &middot; 9.1.3</span><span class="dchip dchip--prov">Ineligible, with the reason and the limit of the fix</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">10</span><h3>Convention &mdash; registered, not a delegate, and told exactly why</h3></div><p>The delegate answer is the hardest sentence in the product to write well, so it gets a dated four-step timeline instead of a paragraph: the lapse, the record date, the election she could not stand in, and the federation record date where she <em>is</em> eligible. The fix is offered and its limit is stated in the same breath &mdash; renewing works, and it will not retroactively seat her. Detroit&rsquo;s five delegates are shown with the weight each carries &mdash; 5.20 votes, certified &divide; sent under By-Law&nbsp;9.1.3 &mdash; and one of them is her husband, which is exactly the kind of household asymmetry a single-scope system cannot render.</p><div class="chips"><span class="dchip dchip--dec">Eligibility frozen at a record date</span><span class="dchip dchip--dec">Weighted delegation shows its working &middot; 9.1.3</span><span class="dchip dchip--prov">Ineligible, with the reason and the limit of the fix</span></div></figcaption>
 </figure>
 </div>
 
@@ -2248,7 +2357,7 @@ from choice, and the CPA&rsquo;s sealed box becomes a key split three ways.</p><
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">11</span><h3>Ballots &mdash; including the one she is not allowed to vote in</h3></div><p>The blocked ballot is shown, not hidden, and the reason is arithmetic rather than a shrug: lapsed 31&nbsp;Aug, frozen 1&nbsp;Oct, thirty-one days apart, with today and the record date side by side. The fix is offered and its limit is stated in the same card, because a member who renews expecting to be added would be right to be angry. Secret and recorded ballots are labelled before either is opened, and the counting rule &mdash; abstentions out of the denominator &mdash; is on the list screen, not buried in a result.</p><div class="chips"><span class="dchip dchip--dec">An ineligible member is told why, precisely</span><span class="dchip dchip--dec">Abstentions excluded from the denominator</span><span class="dchip dchip--priv">Secret vs recorded, stated before opening</span><span class="dchip dchip--prov">Renewal cannot join a frozen electorate</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">11</span><h3>Ballots &mdash; including the one she is not allowed to vote in</h3></div><p>The blocked ballot is shown, not hidden, and the reason is arithmetic rather than a shrug: lapsed 31&nbsp;Aug, frozen 1&nbsp;Oct, thirty-one days apart, with today and the record date side by side. The fix is offered and its limit is stated in the same card, because a member who renews expecting to be added would be right to be angry. Secret and recorded ballots are labelled before either is opened, and the counting rule &mdash; abstentions out of the denominator &mdash; is on the list screen, not buried in a result.</p><div class="chips"><span class="dchip dchip--dec">An ineligible member is told why, precisely</span><span class="dchip dchip--dec">Abstentions excluded from the denominator</span><span class="dchip dchip--priv">Secret vs recorded, stated before opening</span><span class="dchip dchip--prov">Renewal cannot join a frozen electorate</span></div></figcaption>
 </figure>
 
 <figure class="fig" id="s12">
@@ -2329,7 +2438,7 @@ extend to this.</div></div>
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">12</span><h3>Casting an electronic secret ballot &mdash; sealed, unchangeable, and said so first</h3></div><p>Candidates are real radios in real labels at the 48&nbsp;px target, and abstain is one of them rather than a link at the bottom &mdash; with its arithmetic consequence written on the option itself. The two acknowledgements are the whole design: a member who has ticked <em>cannot be changed</em> and <em>cannot be reissued</em> before submitting is a member who will not phone the office afterwards. The footer restates who is voting, because a household that shares a tablet is the normal case, not the edge case.</p><div class="chips"><span class="dchip dchip--priv">That you voted is stored; what you chose is not</span><span class="dchip dchip--dec">Abstention counted, excluded from the denominator</span><span class="dchip dchip--priv">A vote is never delegable</span><span class="dchip dchip">&#10003; warned before, not after</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">12</span><h3>Casting an electronic secret ballot &mdash; sealed, unchangeable, and said so first</h3></div><p>Candidates are real radios in real labels at the 48&nbsp;px target, and abstain is one of them rather than a link at the bottom &mdash; with its arithmetic consequence written on the option itself. The two acknowledgements are the whole design: a member who has ticked <em>cannot be changed</em> and <em>cannot be reissued</em> before submitting is a member who will not phone the office afterwards. The footer restates who is voting, because a household that shares a tablet is the normal case, not the edge case.</p><div class="chips"><span class="dchip dchip--priv">That you voted is stored; what you chose is not</span><span class="dchip dchip--dec">Abstention counted, excluded from the denominator</span><span class="dchip dchip--priv">A vote is never delegable</span><span class="dchip dchip">&#10003; warned before, not after</span></div></figcaption>
 </figure>
 
 <figure class="fig" id="s13">
@@ -2426,7 +2535,7 @@ they voted. Nothing in the schema, and no report, joins them.</p>
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">13</span><h3>The receipt &mdash; inclusion only, and the sentence that saves a hundred phone calls</h3></div><p>The token is set in the monospace face at display size so a member can read it aloud or copy it onto paper. The warning is deliberately the loudest thing on the screen and names everyone who cannot help, including the author of the system, because vagueness here produces support calls that end in disappointment. The correction this frame carries is the important one: the receipt proves the ballot is <b>in the box, unaltered &mdash; and nothing about its contents</b>, because a content-revealing receipt is a vote-buying instrument. Custody is split three ways &mdash; Election chair, Credentials chair, independent CPA; any two open, none alone &mdash; and no interim tally exists for anyone. Verification returns presence and nothing else.</p><div class="chips"><span class="dchip dchip--priv">Voter&rarr;token link never stored</span><span class="dchip dchip--prov">Cannot be recovered, resent or recreated</span><span class="dchip dchip--priv">Content-revealing receipts enable vote-buying &mdash; refused by design</span><span class="dchip dchip--dec">Split custody &middot; any two of three keys</span><span class="dchip dchip">&#10003; published tally hash, re-countable</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">13</span><h3>The receipt &mdash; inclusion only, and the sentence that saves a hundred phone calls</h3></div><p>The token is set in the monospace face at display size so a member can read it aloud or copy it onto paper. The warning is deliberately the loudest thing on the screen and names everyone who cannot help, including the author of the system, because vagueness here produces support calls that end in disappointment. The correction this frame carries is the important one: the receipt proves the ballot is <b>in the box, unaltered &mdash; and nothing about its contents</b>, because a content-revealing receipt is a vote-buying instrument. Custody is split three ways &mdash; Election chair, Credentials chair, independent CPA; any two open, none alone &mdash; and no interim tally exists for anyone. Verification returns presence and nothing else.</p><div class="chips"><span class="dchip dchip--priv">Voter&rarr;token link never stored</span><span class="dchip dchip--prov">Cannot be recovered, resent or recreated</span><span class="dchip dchip--priv">Content-revealing receipts enable vote-buying &mdash; refused by design</span><span class="dchip dchip--dec">Split custody &middot; any two of three keys</span><span class="dchip dchip">&#10003; published tally hash, re-countable</span></div></figcaption>
 </figure>
 </div>
 
@@ -2554,7 +2663,7 @@ tree, in the app, and in the magazine.</p></div>
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">14</span><h3>Eight generations, three of them deliberately blank</h3></div><p>The line runs from Rashed El-Haddadeen to Nadia with four generations collapsed, which is how a deep tree fits a phone without becoming a scroll marathon. The two rules the genealogy has to hold are visible rather than described: living individuals show a name and a position and nothing else, and a provisional record sits in the tree marked unverified, with who submitted it and what evidence they had &mdash; because the family is the only realistic moderator, and hiding it until confirmation is how records never get confirmed.</p><div class="chips"><span class="dchip dchip--priv">Living individuals restricted by default</span><span class="dchip dchip--prov">Provisional shown, and marked, until moderated</span><span class="dchip dchip--dec">Provisional never reaches print or export</span><span class="dchip dchip">&#10003; families can confirm their own records</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">14</span><h3>Eight generations, three of them deliberately blank</h3></div><p>The line runs from Rashed El-Haddadeen to Nadia with four generations collapsed, which is how a deep tree fits a phone without becoming a scroll marathon. The two rules the genealogy has to hold are visible rather than described: living individuals show a name and a position and nothing else, and a provisional record sits in the tree marked unverified, with who submitted it and what evidence they had &mdash; because the family is the only realistic moderator, and hiding it until confirmation is how records never get confirmed.</p><div class="chips"><span class="dchip dchip--priv">Living individuals restricted by default</span><span class="dchip dchip--prov">Provisional shown, and marked, until moderated</span><span class="dchip dchip--dec">Provisional never reaches print or export</span><span class="dchip dchip">&#10003; families can confirm their own records</span></div></figcaption>
 </figure>
 
 <figure class="fig" id="s15">
@@ -2652,7 +2761,7 @@ setting below, and no photograph is stored unless a parent uploads one themselve
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">15</span><h3>Four kinds of news, four different sets of gates</h3></div><p>One picker, four very different rule sets behind it. A birth is provisional <em>and</em> restricted &mdash; two independent facts, both stated before the member types anything &mdash; and the three publication consents are separate, unticked, and worthless until a parent confirms. Social media is called out by its absence, in words, because &ldquo;we did not build that&rdquo; is not something a member can see. The death rule is shown on the same screen so the member learns it before the day they need it.</p><div class="chips"><span class="dchip dchip--priv">A birth is provisional and restricted</span><span class="dchip dchip--priv">Never auto-published to social media</span><span class="dchip dchip--dec">A death needs named family approval, no override</span><span class="dchip dchip">&#10003; consent per destination, all off by default</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">15</span><h3>Four kinds of news, four different sets of gates</h3></div><p>One picker, four very different rule sets behind it. A birth is provisional <em>and</em> restricted &mdash; two independent facts, both stated before the member types anything &mdash; and the three publication consents are separate, unticked, and worthless until a parent confirms. Social media is called out by its absence, in words, because &ldquo;we did not build that&rdquo; is not something a member can see. The death rule is shown on the same screen so the member learns it before the day they need it.</p><div class="chips"><span class="dchip dchip--priv">A birth is provisional and restricted</span><span class="dchip dchip--priv">Never auto-published to social media</span><span class="dchip dchip--dec">A death needs named family approval, no override</span><span class="dchip dchip">&#10003; consent per destination, all off by default</span></div></figcaption>
 </figure>
 
 <figure class="fig" id="s16">
@@ -2738,7 +2847,7 @@ setting below, and no photograph is stored unless a parent uploads one themselve
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">16</span><h3>After the announcement &mdash; four processes, none of them the same one</h3></div><p>The confirmation screen exists because the member has just started four separate processes and has no reason to know that. The tree record is provisional; the parents' confirmation is a separate consent that belongs to them; the moderator queue runs on its own clock; and the magazine will ask the parents, not the grandmother. The benefit, by contrast, lands immediately &mdash; and the card says out loud that it is national and buys nobody a club membership, which is the question the Cleveland treasurer would otherwise field.</p><div class="chips"><span class="dchip dchip--dec">Benefit is national; club dues are the club's</span><span class="dchip dchip--priv">Magazine consent asked of the parents, separately</span><span class="dchip dchip--prov">Provisional record, plainly labelled</span><span class="dchip dchip">&#10003; every downstream state visible at once</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">16</span><h3>After the announcement &mdash; four processes, none of them the same one</h3></div><p>The confirmation screen exists because the member has just started four separate processes and has no reason to know that. The tree record is provisional; the parents' confirmation is a separate consent that belongs to them; the moderator queue runs on its own clock; and the magazine will ask the parents, not the grandmother. The benefit, by contrast, lands immediately &mdash; and the card says out loud that it is national and buys nobody a club membership, which is the question the Cleveland treasurer would otherwise field.</p><div class="chips"><span class="dchip dchip--dec">Benefit is national; club dues are the club's</span><span class="dchip dchip--priv">Magazine consent asked of the parents, separately</span><span class="dchip dchip--prov">Provisional record, plainly labelled</span><span class="dchip dchip">&#10003; every downstream state visible at once</span></div></figcaption>
 </figure>
 </div>
 
@@ -2842,7 +2951,7 @@ exported and never sold. Every field you can see below is one its owner switched
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">17</span><h3>Directory &amp; RBPN &mdash; blank means blank on purpose</h3></div><p>The member card renders only the fields Fadi switched on, and the empty rows say <em>not shared</em> rather than disappearing &mdash; so a member searching for a phone number learns the rule instead of assuming the system is broken. The RBPN listing is the commercial half of the same record, and it carries the constraint that makes the network worth joining: contact details are never published anywhere, and an introduction is a request the listed member may decline without ever seeing a lead list.</p><div class="chips"><span class="dchip dchip--priv">Members-only, per-field opt-in</span><span class="dchip dchip--priv">Absence of a setting = not visible</span><span class="dchip dchip--dec">RBPN contact details never published; intros brokered</span><span class="dchip dchip--dec">Listing fees are exchange revenue, not gifts</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">17</span><h3>Directory &amp; RBPN &mdash; blank means blank on purpose</h3></div><p>The member card renders only the fields Fadi switched on, and the empty rows say <em>not shared</em> rather than disappearing &mdash; so a member searching for a phone number learns the rule instead of assuming the system is broken. The RBPN listing is the commercial half of the same record, and it carries the constraint that makes the network worth joining: contact details are never published anywhere, and an introduction is a request the listed member may decline without ever seeing a lead list.</p><div class="chips"><span class="dchip dchip--priv">Members-only, per-field opt-in</span><span class="dchip dchip--priv">Absence of a setting = not visible</span><span class="dchip dchip--dec">RBPN contact details never published; intros brokered</span><span class="dchip dchip--dec">Listing fees are exchange revenue, not gifts</span></div></figcaption>
 </figure>
 
 <figure class="fig" id="s18">
@@ -2924,7 +3033,7 @@ You are still a national <strong>Patron</strong>, and this page is still yours t
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">18</span><h3>The club as a destination &mdash; and where its money comes from</h3></div><p>Officers, events, seats and a member count, with the lapse banner stated honestly and without locking her out of the page &mdash; she is still a national Patron, and the club is still hers to read. The dues card answers the question clubs field more than any other: the $45 is collected nationally for convenience and remitted to Detroit in full, monthly, with the next remittance date printed. Twenty-four of twenty-six current nationally is the kind of number only a dual-membership model can produce.</p><div class="chips"><span class="dchip dchip--dec">Club dues remitted in full, monthly</span><span class="dchip dchip--dec">26 certified &rarr; 5 delegates &times; 5.20 votes</span><span class="dchip dchip--prov">Lapse stated without locking the member out</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">18</span><h3>The club as a destination &mdash; and where its money comes from</h3></div><p>Officers, events, seats and a member count, with the lapse banner stated honestly and without locking her out of the page &mdash; she is still a national Patron, and the club is still hers to read. The dues card answers the question clubs field more than any other: the $45 is collected nationally for convenience and remitted to Detroit in full, monthly, with the next remittance date printed. Twenty-four of twenty-six current nationally is the kind of number only a dual-membership model can produce.</p><div class="chips"><span class="dchip dchip--dec">Club dues remitted in full, monthly</span><span class="dchip dchip--dec">26 certified &rarr; 5 delegates &times; 5.20 votes</span><span class="dchip dchip--prov">Lapse stated without locking the member out</span></div></figcaption>
 </figure>
 </div>
 
@@ -3021,7 +3130,7 @@ pricing, and digital goods held as entitlements rather than emailed as links.</p
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">19</span><h3>The magazine &mdash; shown her own entry before it is set</h3></div><p>The proof-and-confirm card is the single highest-value screen in the magazine module and it is three lines of type: the section heading, the name, the club, exactly as it will be set. She can confirm, correct or withdraw &mdash; and the warning states the rule most systems leave implicit, that <em>silence still publishes</em>. Yasmine's entry appears in her list as <em>not yours</em>, because consent for a birth belongs to the parents. The archive returns what was printed, not what the database now says.</p><div class="chips"><span class="dchip dchip--dec">Appearing requires having told the system</span><span class="dchip dchip--prov">Correct or withdraw before the copy freeze</span><span class="dchip dchip--priv">Silence still publishes &mdash; said in words</span><span class="dchip dchip">&#10003; 218 issues, searchable, frozen as printed</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">19</span><h3>The magazine &mdash; shown her own entry before it is set</h3></div><p>The proof-and-confirm card is the single highest-value screen in the magazine module and it is three lines of type: the section heading, the name, the club, exactly as it will be set. She can confirm, correct or withdraw &mdash; and the warning states the rule most systems leave implicit, that <em>silence still publishes</em>. Yasmine's entry appears in her list as <em>not yours</em>, because consent for a birth belongs to the parents. The archive returns what was printed, not what the database now says.</p><div class="chips"><span class="dchip dchip--dec">Appearing requires having told the system</span><span class="dchip dchip--prov">Correct or withdraw before the copy freeze</span><span class="dchip dchip--priv">Silence still publishes &mdash; said in words</span><span class="dchip dchip">&#10003; 218 issues, searchable, frozen as printed</span></div></figcaption>
 </figure>
 
 <figure class="fig" id="s20">
@@ -3123,7 +3232,7 @@ pricing, and digital goods held as entitlements rather than emailed as links.</p
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">20</span><h3>Bookstore &mdash; member pricing, and goods you cannot lose</h3></div><p>Member pricing is applied automatically and its scope is named: it follows the national membership, so the club lapse does not touch it. Stock on the limited clan-book print run is shown because overselling one is a real risk and an apologetic email afterwards is not a fix. The library is the part worth building deliberately &mdash; digital purchases are entitlements on the member record, re-openable forever, rather than a download link in an email from 2021.</p><div class="chips"><span class="dchip dchip--dec">Member pricing follows the national membership</span><span class="dchip dchip--dec">A purchase is never receipted as a contribution</span><span class="dchip dchip">&#10003; digital goods as entitlements, not links</span><span class="dchip dchip">&#10003; limited print run stock, shown</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">20</span><h3>Bookstore &mdash; member pricing, and goods you cannot lose</h3></div><p>Member pricing is applied automatically and its scope is named: it follows the national membership, so the club lapse does not touch it. Stock on the limited clan-book print run is shown because overselling one is a real risk and an apologetic email afterwards is not a fix. The library is the part worth building deliberately &mdash; digital purchases are entitlements on the member record, re-openable forever, rather than a download link in an email from 2021.</p><div class="chips"><span class="dchip dchip--dec">Member pricing follows the national membership</span><span class="dchip dchip--dec">A purchase is never receipted as a contribution</span><span class="dchip dchip">&#10003; digital goods as entitlements, not links</span><span class="dchip dchip">&#10003; limited print run stock, shown</span></div></figcaption>
 </figure>
 </div>
 
@@ -3219,7 +3328,7 @@ including the place where her own club lapse reaches her daughter.</p></div>
 <div class="homebar" aria-hidden="true"></div>
 </div>
 </div>
-<figcaption class="cap"><div class="cap__top"><span class="cap__n">21</span><h3>My programmes &mdash; the lifecycle, seen from one household</h3></div><p>The Award card is the argument for the whole screen: a benefit three years away, tested against the family&rsquo;s standing today, with the club lapse from frame&nbsp;02 doing the damage and the renewal button offered where the damage shows. Women to Women confirms a restricted gift stays restricted; the Exchange prompt lands because the system knows Tarek&rsquo;s age and stage; and the giving ladder is drawn as life-stage segments the household already occupies rather than amounts to be talked up to. Nothing on this screen asked Nadia for data she had already given.</p><div class="chips"><span class="dchip dchip--dec">Family standing tested where it bites &mdash; and named</span><span class="dchip dchip--dec">Life-stage giving segments, not price points</span><span class="dchip dchip--prov">Award-age child in a lapsing household is a signal</span><span class="dchip dchip">&#10003; stage-aware prompts from data already held</span></div></figcaption>
+<figcaption class="cap"><svg class="ph-water" aria-hidden="true"><use href="#h-lens-member"/></svg><div class="cap__top"><span class="cap__n">21</span><h3>My programmes &mdash; the lifecycle, seen from one household</h3></div><p>The Award card is the argument for the whole screen: a benefit three years away, tested against the family&rsquo;s standing today, with the club lapse from frame&nbsp;02 doing the damage and the renewal button offered where the damage shows. Women to Women confirms a restricted gift stays restricted; the Exchange prompt lands because the system knows Tarek&rsquo;s age and stage; and the giving ladder is drawn as life-stage segments the household already occupies rather than amounts to be talked up to. Nothing on this screen asked Nadia for data she had already given.</p><div class="chips"><span class="dchip dchip--dec">Family standing tested where it bites &mdash; and named</span><span class="dchip dchip--dec">Life-stage giving segments, not price points</span><span class="dchip dchip--prov">Award-age child in a lapsing household is a signal</span><span class="dchip dchip">&#10003; stage-aware prompts from data already held</span></div></figcaption>
 </figure>
 </div>
 
