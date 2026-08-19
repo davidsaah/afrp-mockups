@@ -656,6 +656,7 @@ a.qrow:active,.qrow[data-href]:active{background:var(--surface-sunken)}
 .qrow:last-child{border-bottom:0}
 .qrow__main{min-width:0}
 .qrow__main b{display:block;font-size:var(--fs-sm);font-weight:650}
+.qrow__main span strong{font-weight:750;color:var(--ink)}
 .qrow__main span{display:block;font-size:var(--fs-xs);color:var(--ink-3);overflow-wrap:anywhere}
 .qrow__end{margin-left:auto;flex:0 0 auto;text-align:right;display:flex;align-items:center;gap:var(--s2)}
 a.qrow{text-decoration:none;color:inherit}
@@ -1303,7 +1304,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <span>Find a screen</span> <kbd>/</kbd>
   </button>
   <button type="button" class="rulebadge" onclick="openDrawer()" aria-haspopup="dialog" title="The governing ruleset — open settings">
-    <i>governed by</i> bylaws-2012.2
+    <i>governed by</i> <span id="topbar-ruleset">bylaws-2012.2</span>
   </button>
   <button type="button" class="iconbtn sitemapbtn" onclick="navigate('sitemap')" aria-label="Sitemap — every screen" title="Sitemap">
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><use href="#i-grid"/></svg>
@@ -1477,6 +1478,9 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" href="#/fed/comms">Communications centre</a>
       <a class="l-nav-item" href="#/fed/supportdesk">Member support desk <span class="l-nav-item__badge l-nav-item__badge--violet">new</span></a>
       <div class="l-nav-group">Institutions</div>
+      <a class="l-nav-item" href="#/fed/institutions">Institution registry <span class="l-nav-item__badge">4</span></a>
+      <a class="l-nav-item" href="#/fed/inst">Institution detail</a>
+      <a class="l-nav-item" href="#/fed/newinst">Add an institution <span class="l-nav-item__badge l-nav-item__badge--violet">works</span></a>
       <a class="l-nav-item" href="#/fed/hsn">ARFHSN &mdash; trustees &amp; interlock <span class="l-nav-item__badge l-nav-item__badge--muted">separate 501(c)(3)</span></a>
       <div class="l-nav-group">Rules</div>
       <a class="l-nav-item" href="#/fed/workbench">Ruleset workbench</a>
@@ -4494,7 +4498,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
         <div class="qrow"><div class="qrow__main"><b>M-2026-14 &middot; Ratify override #7 &mdash; dues authority to the Board</b><span>links to the workbench divergence view &middot; roll-call required</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">discussion</span></div></div>
         <div class="qrow"><div class="qrow__main"><b>M-2026-15 &middot; Dormant-club prepaid dues policy</b><span>the decision J14 waits on &middot; drafted from the platform&rsquo;s flag</span></div><div class="qrow__end"><span class="c-pill c-pill--info">seconded</span></div></div>
         <div class="qrow"><div class="qrow__main"><b>M-2026-16 &middot; 9.1.3 amendment &mdash; weights fix when voting opens</b><span>the S4 draft &middot; convention floor required for adoption</span></div><div class="qrow__end"><span class="c-pill c-pill--info">draft</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Ratification queue</b><span>48 provisional overrides of bylaws-2024.1 &middot; 7 ratified &middot; 41 pending &mdash; each one a motion like any other</span></div><div class="qrow__end"><span class="mono">41 pending</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Ratification queue</b><span>48 provisional overrides across three entity-lineages &mdash; 18 AFRP-2024 &middot; 22 ARFECF-2013 &middot; 8 ARFHSN-2017 &middot; 7 ratified &middot; 41 pending &mdash; each one a motion in its own entity&rsquo;s scope</span></div><div class="qrow__end"><span class="mono">41 pending</span></div></div>
       </div>
       <div class="panel__foot"><span class="why">A resolution is append-only once adopted; corrections are new entries (S5). Votes record per the rules in force.</span></div>
     </div>
@@ -4592,7 +4596,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 <section class="screen" data-route="fed/hsn" data-lens="fed" aria-label="ARFHSN trustees">
   <div class="page-head">
     <div><h1>ARFHSN &mdash; trustees &amp; interlock</h1>
-    <p>The Human Services Network&rsquo;s governance, administered without being absorbed.</p></div>
+    <p>The Human Services Network&rsquo;s governance, administered without being absorbed. This is a <b>program-context rendering</b> of the entity&rsquo;s <a href="#/fed/inst">institution record</a> &mdash; that Board tab is the system of record; this screen holds no seat state of its own.</p></div>
     <div class="page-head__end"><span class="c-pill c-pill--info">14-seat BOT</span></div>
   </div>
   <div style="margin:0 0 var(--s4);padding:10px 14px;border:1px solid var(--gold);border-left:4px solid var(--gold);border-radius:10px;background:color-mix(in srgb,var(--gold) 8%,transparent);font-size:13px"><b>ARFHSN &mdash; a separate 501(c)(3).</b> No membership of its own; a 14-seat Board of Trustees elected by the AFRP Board; by-laws amendable by 60% of the AFRP Board. Everything on this screen belongs to that entity &mdash; the platform administers it without merging it into AFRP. Figures are demo.</div>
@@ -4753,6 +4757,40 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   <div id="evbuilder-program"></div>
 </section>
 
+
+<!-- ═══════════════ INSTITUTION MANAGEMENT ═══════════════ -->
+
+<section class="screen" data-route="fed/institutions" data-lens="fed" aria-label="Institution registry">
+  <div class="page-head">
+    <div><h1>Institution registry</h1>
+    <p>The federation administers four legal entities and can charter a fifth. This is where each one&rsquo;s
+    board, governing text, money, minutes, programs, filings and agreements live &mdash; <b>administered without
+    being merged</b>.</p></div>
+    <div class="page-head__end"><a class="btn-xs" href="#/fed/newinst" style="background:var(--lens);color:#fff;border-color:var(--lens)">Add an institution</a></div>
+  </div>
+  <div id="instreg"></div>
+</section>
+
+<section class="screen" data-route="fed/inst" data-lens="fed" aria-label="Institution detail">
+  <div class="page-head">
+    <div><h1 id="inst-title">Institution</h1>
+    <p id="inst-sub">Everything the federation holds about one entity.</p></div>
+    <div class="page-head__end" id="inst-pills"></div>
+  </div>
+  <div id="instdetail"></div>
+</section>
+
+<section class="screen" data-route="fed/newinst" data-lens="fed" aria-label="Add an institution">
+  <div class="page-head">
+    <div><h1>Add an institution</h1>
+    <p>A <b>working wizard</b> &mdash; six steps that prepare the charter packet. Staff prepare; <b>the Board
+    adopts</b>: until a motion carries, the institution is <i>forming</i> &mdash; visible, configurable, and
+    load-bearing for nothing.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--warn">simulation</span></div>
+  </div>
+  <div id="instwiz"></div>
+</section>
+
 <section class="screen" data-route="sitemap" data-lens="fed" aria-label="Sitemap">
   <div class="page-head">
     <div><h1>Every screen</h1>
@@ -4786,7 +4824,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <div class="panel">
       <div class="panel__head"><h3>Federation lens &mdash; running the Federation</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/fed/dashboard">Dashboard</a><a class="btn-xs" href="#/fed/crm">The CRM today</a><a class="btn-xs" href="#/fed/member360">Member 360</a><a class="btn-xs" href="#/fed/clubs">Club registry &amp; setup</a><a class="btn-xs" href="#/fed/clubhealth">Club health &amp; integration</a><a class="btn-xs" href="#/fed/migration">Onboarding &amp; migration</a><a class="btn-xs" href="#/fed/boardroom">Board workspace</a><a class="btn-xs" href="#/fed/mailedballot">Mailed ballot (CPA)</a><a class="btn-xs" href="#/fed/supportdesk">Support desk</a><a class="btn-xs" href="#/fed/hsn">ARFHSN trustees</a><a class="btn-xs" href="#/fed/identity">Identity &amp; merge queue</a><a class="btn-xs" href="#/fed/tree">Family tree console</a><a class="btn-xs" href="#/fed/directory">Directory &amp; consent</a><a class="btn-xs" href="#/fed/roles">Roles &amp; permissions</a><a class="btn-xs" href="#/fed/board">Board &amp; officers</a><a class="btn-xs" href="#/fed/committees">Committees</a><a class="btn-xs" href="#/fed/calendar">Election calendar</a><a class="btn-xs" href="#/fed/credentialing">Credentialing &amp; quorum</a><a class="btn-xs" href="#/fed/floor">Live voting floor</a><a class="btn-xs" href="#/fed/results">Results &amp; certification</a><a class="btn-xs" href="#/fed/finance">Daily close</a><a class="btn-xs" href="#/fed/qbo">QuickBooks integration</a><a class="btn-xs" href="#/fed/ledger">Multi-entity ledger</a><a class="btn-xs" href="#/fed/controls">Financial controls</a><a class="btn-xs" href="#/fed/events">Event management</a><a class="btn-xs" href="#/fed/comms">Communications centre</a><a class="btn-xs" href="#/fed/convention">Convention &mdash; contract</a><a class="btn-xs" href="#/fed/convcmd">Convention command</a><a class="btn-xs" href="#/fed/convdesk">Convention desk</a><a class="btn-xs" href="#/fed/lifeevents">Life events queue</a><a class="btn-xs" href="#/fed/convops">Convention &mdash; operations</a><a class="btn-xs" href="#/fed/workbench">Ruleset workbench</a>
+        <a class="btn-xs" href="#/fed/dashboard">Dashboard</a><a class="btn-xs" href="#/fed/crm">The CRM today</a><a class="btn-xs" href="#/fed/member360">Member 360</a><a class="btn-xs" href="#/fed/clubs">Club registry &amp; setup</a><a class="btn-xs" href="#/fed/clubhealth">Club health &amp; integration</a><a class="btn-xs" href="#/fed/migration">Onboarding &amp; migration</a><a class="btn-xs" href="#/fed/boardroom">Board workspace</a><a class="btn-xs" href="#/fed/mailedballot">Mailed ballot (CPA)</a><a class="btn-xs" href="#/fed/supportdesk">Support desk</a><a class="btn-xs" href="#/fed/institutions">Institution registry</a><a class="btn-xs" href="#/fed/inst">Institution detail</a><a class="btn-xs" href="#/fed/newinst">Add an institution</a><a class="btn-xs" href="#/fed/hsn">ARFHSN trustees</a><a class="btn-xs" href="#/fed/identity">Identity &amp; merge queue</a><a class="btn-xs" href="#/fed/tree">Family tree console</a><a class="btn-xs" href="#/fed/directory">Directory &amp; consent</a><a class="btn-xs" href="#/fed/roles">Roles &amp; permissions</a><a class="btn-xs" href="#/fed/board">Board &amp; officers</a><a class="btn-xs" href="#/fed/committees">Committees</a><a class="btn-xs" href="#/fed/calendar">Election calendar</a><a class="btn-xs" href="#/fed/credentialing">Credentialing &amp; quorum</a><a class="btn-xs" href="#/fed/floor">Live voting floor</a><a class="btn-xs" href="#/fed/results">Results &amp; certification</a><a class="btn-xs" href="#/fed/finance">Daily close</a><a class="btn-xs" href="#/fed/qbo">QuickBooks integration</a><a class="btn-xs" href="#/fed/ledger">Multi-entity ledger</a><a class="btn-xs" href="#/fed/controls">Financial controls</a><a class="btn-xs" href="#/fed/events">Event management</a><a class="btn-xs" href="#/fed/comms">Communications centre</a><a class="btn-xs" href="#/fed/convention">Convention &mdash; contract</a><a class="btn-xs" href="#/fed/convcmd">Convention command</a><a class="btn-xs" href="#/fed/convdesk">Convention desk</a><a class="btn-xs" href="#/fed/lifeevents">Life events queue</a><a class="btn-xs" href="#/fed/convops">Convention &mdash; operations</a><a class="btn-xs" href="#/fed/workbench">Ruleset workbench</a>
       </div>
     </div>
   </div>
@@ -5757,7 +5795,9 @@ function setLedgerMode(btn, mode){
 /* ── render everything reactive ─────────────────────────────────────────── */
 function renderAll(){
   var pill = document.getElementById('voting-ruleset-pill');
-  if (pill) pill.textContent = 'bylaws-2012.2 · standing ' + S.ruleset.standing;
+  if (pill) pill.textContent = S.ruleset.version + ' · standing ' + S.ruleset.standing;
+  var tb = document.getElementById('topbar-ruleset');
+  if (tb) tb.textContent = S.ruleset.version;
   renderEligibility();
   renderBallot();
   renderConfirm();
@@ -7158,6 +7198,380 @@ renderAll = function(){
   renderParty(); renderLecture(); renderEvList();
   renderBuilder('club'); renderBuilder('program');
 };
+renderAll();
+})();
+</script>
+
+<script>
+/* ═══ Institution management: registry, detail tabs, onboarding wizard, live bylaw adoption ═══ */
+(function(){
+function esc(s){ return String(s||'').replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function $(id){ return document.getElementById(id); }
+
+window.INST = {
+  cur: 'afrp', tab: 'overview', adopted: false, showInflight: false,
+  wiz: null,
+  list: {
+    afrp: {
+      name:'American Federation of Ramallah, Palestine', short:'AFRP', rel:'self',
+      state:'Michigan', type:'non-profit corporation', ein:'38-•••••41', formed:'1959 (organized 1952)',
+      agent:'Farmington Hills, MI', fy:'1 Jun – 31 May',
+      rulesets:[
+        ['afrp-bylaws-2024.1','ratified','ratified at Jacksonville but NOT yet governing — 18 provisional overrides of THIS lineage pending','—'],
+        ['afrp-bylaws-2012.2','in force','the text every current process is governed by','eff. 2012'],
+        ['afrp-bylaws-2009.1','superseded','readable forever; still governs decisions stamped with it','2009–2012']
+      ],
+      board:{ seats:21, filled:21, term:'2 years, staggered', seating:'elected by the General Assembly (delegates)',
+        threshold:'amendments by 2/3 delegate vote', note:'Selection Committee (Art. XVII, 2024 text) gates every seat — a 2024.1 change carried as a provisional override.' },
+      funding:[['General operating','unrestricted','$1.42M','dues, convention, magazine'],
+               ['Convention fund','restricted by contract','$310k','host-city agency money — Federation property held by an agent'],
+               ['Relief fund','donor-restricted','$96k','never absorbed into operating']],
+      minutes:[['Board — 14 Jun 2026','approved 12 Jul','append-only'],['Mid-Year — 8 Feb 2026','approved','append-only'],['General Assembly — 68th Convention','pending','draft']],
+      programs:'15 of the 19 programs — camp, scholarship administration, magazine, convention, advocacy',
+      filings:[['990','FY2025','filed 12 Feb 2026','ok'],['MI annual report','2026','filed 1 Oct','ok'],['Charitable solicitation — 14 states','2026','2 renewals due 30 Nov','due'],['Registered agent','2026','renewed','ok']],
+      agreements:[['ARFECF administration','AFRP administers ARFECF for a 1% fee','review due 31 Dec 2026','active'],
+                  ['ARFHSN conduit accounts','W2W and Medical restricted classes flow through ARFHSN','evergreen','active'],
+                  ['Ramallah Foundation — joint scholarship','shared selection, separate receipting','review 2027','active']],
+      insurance:[['D&O liability','$2M','expires 31 Mar 2027','ok'],['General liability','$1M','expires 31 Mar 2027','ok'],
+                 ['Audit','FY2025 audited — clean opinion','firm: demo CPA LLP','ok'],['Conflict-of-interest attestations','19 of 21 board members','2 outstanding','due']]
+    },
+    arfecf: {
+      name:'American Ramallah Federation Education &amp; Charitable Fund', short:'ARFECF', rel:'administered',
+      state:'Michigan', type:'non-profit corporation', ein:'38-•••••07', formed:'2013 by-laws',
+      agent:'shared with AFRP', fy:'1 Jun – 31 May',
+      rulesets:[['arfecf-bylaws-2013.1','in force','the verified 2013 text; 22 provisional overrides of this lineage','eff. 2013'],['arfecf-bylaws-pre2013','ingested','scanned artifact, asserted adoption date, attesting officer — no synthetic motion','pre-platform']],
+      board:{ seats:9, filled:8, term:'3 years', seating:'elected by ARFECF membership',
+        threshold:'amendments by 2/3 MEMBERSHIP vote — not the delegate franchise',
+        note:'A 4-member interlock cap appears in prior analysis but NOT in the 2013 text — carried visibly INACTIVE, never enforced silently.' },
+      funding:[['Scholarship fund','donor-restricted','$1.90M corpus','named awards matched most-constrained-first'],
+               ['Endowed Fund','proposed home','—','pending the Policy Statement and the entity decision'],
+               ['Administration fee','payable to AFRP','1% of assets','an agreement, not a setting']],
+      minutes:[['ARFECF board — 14 Jun 2026','approved','append-only'],['Scholarship committee — 3 May 2026','approved','append-only']],
+      programs:'Scholarship program; proposed home of the Endowed Fund',
+      filings:[['990','FY2025','filed 12 Feb 2026','ok'],['MI annual report','2026','filed 1 Oct','ok'],['Charitable solicitation — 6 states','2026','current','ok']],
+      agreements:[['AFRP administration','AFRP staff administer for a 1% fee','review due 31 Dec 2026','review due'],
+                  ['Ramallah Foundation — joint scholarship','shared selection','review 2027','active']],
+      insurance:[['D&O liability','$1M','expires 31 Mar 2027','ok'],['Audit','FY2025 reviewed (not audited)','firm: demo CPA LLP','ok'],
+                 ['Conflict-of-interest attestations','8 of 8 seated','current','ok']]
+    },
+    arfhsn: {
+      name:'American Ramallah Federation Human Services Network', short:'ARFHSN', rel:'administered',
+      state:'Michigan', type:'501(c)(3), no membership', ein:'38-•••••88', formed:'2015 / 2017 by-laws',
+      agent:'shared with AFRP', fy:'1 Jun – 31 May',
+      rulesets:[['arfhsn-bylaws-2017.1','in force','8 provisional overrides of this lineage','eff. 2017']],
+      board:{ seats:14, filled:14, term:'staggered', seating:'elected by the AFRP Board',
+        threshold:'by-laws amendable by 60% of the AFRP BOARD',
+        note:'Elected by, and amendable by, the AFRP Board — the tightest control relationship in the federation. Every seating links its electing motion.' },
+      funding:[['Medical Mission (MED)','donor-restricted','$212k','gross fees; reversals become receivables'],
+               ['Women to Women (W2W)','conduit','$104k','conduit account — restriction travels with the gift'],
+               ['Human services operating','unrestricted','$61k','intake services']],
+      minutes:[['BOT — 20 Jun 2026','approved','append-only'],['BOT — 14 Feb 2026','approved','append-only']],
+      programs:'Medical Mission; Women to Women; human services intake',
+      filings:[['990','FY2025','filed 12 Feb 2026','ok'],['MI annual report','2026','filed','ok'],['Charitable solicitation — 4 states','2026','1 lapses 15 Sep','due']],
+      agreements:[['AFRP conduit accounts','W2W and Medical flow through ARFHSN','evergreen','active'],
+                  ['In-country partner — Ramallah','clinical delivery; patients never become platform records','annual','active']],
+      insurance:[['D&O liability','$1M','expires 31 Mar 2027','ok'],['Medical mission liability','$3M','per-mission rider','ok'],
+                 ['Audit','FY2025 audited — clean opinion','firm: demo CPA LLP','ok'],['Conflict-of-interest attestations','14 of 14','current','ok']]
+    },
+    foundation: {
+      name:'Ramallah Foundation Inc.', short:'Foundation', rel:'partner',
+      state:'New York', type:'501(c)(3)', ein:'13-•••••52', formed:'1943',
+      agent:'own counsel', fy:'calendar year',
+      rulesets:[], board:null,
+      funding:[['Joint scholarship contribution','per agreement','$120k/yr','receipted by the Foundation, not AFRP'],
+               ['Senior living campaign','joint appeal','—','each entity receipts its own gifts']],
+      minutes:[], programs:'Hospitals, the senior home, and the scholarship run jointly with AFRP',
+      filings:[['Their 990','FY2025','public copy on file','reference only']],
+      agreements:[['Joint scholarship','shared selection, separate receipting','review 2027','active'],
+                  ['Senior living campaign','joint appeal, per-entity receipting','2026–28','active']],
+      insurance:[['Certificate of insurance on file','—','expires 30 Jun 2027','reference only']]
+    }
+  },
+  forming: []   /* wizard output */
+};
+
+var TABS = [['overview','Overview'],['board','Board &amp; interlock'],['bylaws','Bylaws &amp; rulesets'],
+            ['funding','Funding'],['minutes','Minutes'],['programs','Programs'],
+            ['filings','Filings &amp; compliance'],['agreements','Agreements'],['insurance','Insurance &amp; audit']];
+var REL = { self:['the federation itself','c-pill--ok'], administered:['administered entity','c-pill--info'], partner:['partner — no governance surfaces','c-pill--warn'] };
+
+/* ── registry ── */
+function renderReg(){
+  var el = $('instreg'); if (!el) return;
+  var rows = '';
+  Object.keys(INST.list).forEach(function(k){
+    var e = INST.list[k], rf = e.rulesets.length ? e.rulesets.filter(function(r){ return r[1] === 'in force'; })[0] : null;
+    var due = e.filings.filter(function(f){ return f[3] === 'due'; }).length;
+    rows += '<tr><td><b>' + e.short + '</b><br><small>' + e.name + '</small></td>' +
+      '<td>' + e.state + '<br><small>' + e.type + '</small></td>' +
+      '<td><span class="c-pill ' + REL[e.rel][1] + '">' + REL[e.rel][0] + '</span></td>' +
+      '<td class="mono">' + (rf ? rf[0] : '—') + '</td>' +
+      '<td class="mono" style="text-align:right">' + (e.board ? e.board.filled + '/' + e.board.seats : '—') + '</td>' +
+      '<td>' + (due ? '<span class="c-pill c-pill--warn">' + due + ' due</span>' : '<span class="c-pill c-pill--ok">current</span>') + '</td>' +
+      '<td><button class="btn-xs btn-xs--go" onclick="INSTS.open(\'' + k + '\')">open</button></td></tr>';
+  });
+  INST.forming.forEach(function(f){
+    rows += '<tr style="opacity:.75"><td><b>' + esc(f.short || f.name || 'New institution') + '</b><br><small>' + esc(f.name || '') + '</small></td>' +
+      '<td>' + esc(f.state || '—') + '<br><small>' + esc(f.type || '—') + '</small></td>' +
+      '<td><span class="c-pill c-pill--muted">forming — awaiting Board motion</span></td>' +
+      '<td class="mono">' + esc(f.slug || '—') + '</td><td class="mono" style="text-align:right">0/' + (f.seats || 0) + '</td>' +
+      '<td><span class="c-pill c-pill--muted">n/a</span></td><td><span class="mono">—</span></td></tr>';
+  });
+  el.innerHTML = '<div class="panel" style="margin-bottom:var(--s4)"><div class="statbox">' +
+    '<div class="stat"><span class="stat__k">Entities administered</span><span class="stat__v">3</span><span class="stat__d">AFRP · ARFECF · ARFHSN — plus 1 partner</span></div>' +
+    '<div class="stat"><span class="stat__k">Rulesets in force</span><span class="stat__v">3</span><span class="stat__d">one per administered entity; no entity operates without one</span></div>' +
+    '<div class="stat"><span class="stat__k">Board seats</span><span class="stat__v">43</span><span class="stat__d">21 AFRP · 9 ARFECF (1 vacant) · 14 ARFHSN BOT</span></div>' +
+    '<div class="stat"><span class="stat__k">Obligations due &le;90d</span><span class="stat__v">4</span><span class="stat__d">2 state renewals · 1 lapsing registration · 1 agreement review</span></div>' +
+    '</div></div>' +
+    '<div class="panel"><div class="toolbar"><span class="toolbar__count">' + (4 + INST.forming.length) + ' institutions</span><div class="toolbar__end"><span class="c-pill c-pill--muted">EINs masked · figures demo · entity facts real</span></div></div>' +
+    '<div class="c-table-wrap" style="border:0;border-radius:0"><table class="c-table c-table--dense">' +
+    '<thead><tr><th>Institution</th><th>Jurisdiction</th><th>Relationship</th><th>Ruleset in force</th><th style="text-align:right">Board</th><th>Filings</th><th></th></tr></thead>' +
+    '<tbody>' + rows + '</tbody></table></div>' +
+    '<div class="panel__foot"><span class="why"><b>Administered vs partner is the most consequential field in this table.</b> An administered entity gets governance rails — ruleset lineage, board management, minutes — and none of them may operate without a named ruleset in force. A partner shows those columns as <b>n/a</b> by rule: the platform holds the relationship and the agreements, never their governance. Changing the relationship is itself a Board motion with an effective date and a prerequisite set — never a dropdown.</span></div></div>';
+}
+
+/* ── detail ── */
+function relBlock(e){
+  return '<div style="margin:0 0 var(--s4);padding:10px 14px;border:1px solid var(--gold);border-left:4px solid var(--gold);border-radius:10px;background:color-mix(in srgb,var(--gold) 8%,transparent);font-size:13px">' +
+    '<b>' + e.name + '</b> &mdash; ' + e.state + ' ' + e.type + ' &middot; EIN ' + e.ein + ' &middot; formed ' + e.formed +
+    ' &middot; fiscal year ' + e.fy + '. <b>' + REL[e.rel][0] + '</b>. Figures are demo; entity facts are real.</div>';
+}
+function tabOverview(e){
+  var rf = e.rulesets.filter(function(r){ return r[1] === 'in force'; })[0];
+  return '<div class="grid grid--2"><div class="panel"><div class="panel__head"><h3>Identity</h3></div><div class="panel__body panel__body--flush">' +
+    ['Legal name|' + e.name, 'Jurisdiction & type|' + e.state + ' · ' + e.type, 'EIN|' + e.ein + ' (masked — exact grant to view)',
+     'Formed|' + e.formed, 'Registered agent|' + e.agent, 'Fiscal year|' + e.fy,
+     'Ruleset in force|' + (rf ? rf[0] : 'none — partner relationship')].map(function(r){
+      var p = r.split('|');
+      return '<div class="qrow"><div class="qrow__main"><b>' + p[0] + '</b><span>' + p[1] + '</span></div></div>';
+    }).join('') + '</div></div>' +
+    '<div class="panel"><div class="panel__head"><h3>Health</h3></div><div class="panel__body panel__body--flush">' +
+    '<div class="qrow"><div class="qrow__main"><b>Filings</b><span>' + e.filings.length + ' tracked obligations</span></div><div class="qrow__end">' + (e.filings.filter(function(f){ return f[3] === 'due'; }).length ? '<span class="c-pill c-pill--warn">action due</span>' : '<span class="c-pill c-pill--ok">current</span>') + '</div></div>' +
+    '<div class="qrow"><div class="qrow__main"><b>Agreements</b><span>' + e.agreements.length + ' recorded</span></div><div class="qrow__end">' + (e.agreements.filter(function(a){ return a[3] !== 'active'; }).length ? '<span class="c-pill c-pill--warn">review due</span>' : '<span class="c-pill c-pill--ok">active</span>') + '</div></div>' +
+    '<div class="qrow"><div class="qrow__main"><b>Board</b><span>' + (e.board ? e.board.filled + ' of ' + e.board.seats + ' seats filled' : 'not applicable — partner') + '</span></div><div class="qrow__end">' + (e.board ? (e.board.filled < e.board.seats ? '<span class="c-pill c-pill--warn">vacancy</span>' : '<span class="c-pill c-pill--ok">full</span>') : '<span class="c-pill c-pill--muted">n/a</span>') + '</div></div>' +
+    '<div class="qrow"><div class="qrow__main"><b>Insurance &amp; audit</b><span>' + e.insurance.length + ' items tracked</span></div><div class="qrow__end">' + (e.insurance.filter(function(i){ return i[3] === 'due'; }).length ? '<span class="c-pill c-pill--warn">attestations outstanding</span>' : '<span class="c-pill c-pill--ok">current</span>') + '</div></div>' +
+    '</div></div></div>';
+}
+function tabBoard(e){
+  if (!e.board) return '<div class="panel"><div class="panel__body"><div class="verdict verdict--deny"><span class="verdict__ic">&times;</span><div><b>No governance surface for a partner.</b><p>The Ramallah Foundation is a separate 501(c)(3) that AFRP works with &mdash; it is not administered. Board management, ruleset lineage and minutes deliberately do not exist here; the relationship lives in <b>Agreements</b> and its public filings are held for reference only. <span class="mono">relationship: partner</span></p></div></div></div></div>';
+  var b = e.board;
+  return '<div class="grid grid--2"><div class="panel"><div class="panel__head"><h3>Seats &amp; how they are filled</h3><span class="c-pill c-pill--info">' + b.filled + ' of ' + b.seats + '</span></div><div class="panel__body panel__body--flush">' +
+    '<div class="qrow"><div class="qrow__main"><b>Seating rule</b><span>' + b.seating + '</span></div></div>' +
+    '<div class="qrow"><div class="qrow__main"><b>Terms</b><span>' + b.term + '</span></div></div>' +
+    '<div class="qrow"><div class="qrow__main"><b>Amendment threshold</b><span>' + b.threshold + ' &mdash; read from this entity&rsquo;s record, never a global default</span></div></div>' +
+    '<div class="qrow"><div class="qrow__main"><b>Quorum &amp; ordinary motions</b><span>each entity carries its own quorum, ordinary-motion and special thresholds &mdash; the workspace records every vote against THIS entity&rsquo;s rules, not the federation&rsquo;s</span></div></div>' +
+    '<div class="qrow"><div class="qrow__main"><b>Officers, classes &amp; vacancies</b><span>officers are roles distinct from seats; staggered classes and term limits are structure, not notes; vacancy-filling and removal each name their own rule</span></div></div>' +
+    (b.filled < b.seats ? '<div class="qrow"><div class="qrow__main"><b>' + (b.seats - b.filled) + ' vacancy</b><span>filling a seat is a motion in this entity&rsquo;s boardroom; the seating links to it</span></div><div class="qrow__end"><a class="btn-xs" href="#/fed/boardroom">boardroom</a></div></div>' : '') +
+    '</div><div class="panel__foot"><span class="why">' + b.note + '</span></div></div>' +
+    '<div class="panel"><div class="panel__head"><h3>Interlock &amp; related parties</h3><span class="c-pill c-pill--warn">disclosed, not silently permitted</span></div><div class="panel__body panel__body--flush">' +
+    '<div class="qrow"><div class="qrow__main"><b>3 people sit on two of these boards</b><span>(demo) interlock types are defined, not guessed: <strong>shared seat</strong>, <strong>family</strong>, <strong>business relationship</strong>. Shared seats read the board records; family reads the tree only within the living-person restrictions and never displays the relationship (S6); business relationships are self-disclosed.</span></div><div class="qrow__end"><span class="mono">3</span></div></div>' +
+    '<div class="qrow"><div class="qrow__main"><b>Related-party transactions register</b><span>feeds Schedule L, and a disclosed conflict links to <strong>motion-level recusal</strong> in the boardroom &mdash; disclosure without recusal is just paperwork</span></div><div class="qrow__end"><a class="btn-xs" href="#/fed/boardroom">register</a></div></div>' +
+    '<div class="qrow"><div class="qrow__main"><b>ARFECF 4-member interlock cap</b><span>cited in prior analysis, absent from the 2013 text &mdash; carried visibly INACTIVE and never enforced silently</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">inactive</span></div></div>' +
+    '<div class="qrow"><div class="qrow__main"><b>Conflict-of-interest attestations</b><span>per board member, per year &mdash; a lapse is visible, not blocking-by-surprise</span></div><div class="qrow__end"><a class="btn-xs" onclick="INSTS.tab(\'insurance\')">view</a></div></div>' +
+    '</div></div></div>';
+}
+function tabBylaws(e){
+  if (!e.rulesets.length) return '<div class="panel"><div class="panel__body"><p class="why" style="margin:0"><b>A partner keeps its own governing text.</b> The platform holds no ruleset lineage for the Foundation &mdash; only the agreements that bind the two entities to each other.</p></div></div>';
+  var isAfrp = e.short === 'AFRP';
+  var rows = e.rulesets.map(function(r){
+    var st = r[1] === 'in force' ? 'c-pill--ok' : (r[1] === 'parallel' ? 'c-pill--warn' : 'c-pill--muted');
+    var label = r[1];
+    if (isAfrp && INST.adopted){
+      if (r[0] === 'bylaws-2024.1'){ label = 'in force'; st = 'c-pill--ok'; }
+      else if (r[0] === 'bylaws-2012.2'){ label = 'superseded'; st = 'c-pill--muted'; }
+    }
+    return '<div class="qrow"><div class="qrow__main"><b class="mono">' + r[0] + '</b><span>' + r[2] + '</span></div><div class="qrow__end"><span class="c-pill ' + st + '">' + label + '</span><span class="mono" style="margin-left:8px">' + r[3] + '</span></div></div>';
+  }).join('');
+  var h2 = '<div class="grid grid--2"><div class="panel"><div class="panel__head"><h3>Ruleset lineage</h3><span class="c-pill c-pill--info">the archive</span></div>' +
+    '<div class="panel__body panel__body--flush">' + rows + '</div>' +
+    '<div class="panel__foot"><span class="why"><b>States:</b> draft &rarr; ratified &rarr; in force &rarr; superseded (&ldquo;parallel&rdquo; is a run mode, not a state); <b>ingested</b> marks a pre-platform text &mdash; a scanned artifact with an asserted adoption date and an attesting officer, never a synthetic motion. Loading a new text creates a DRAFT and a divergence report; adoption is a motion with an effective date. The override register is <b>per entity-lineage</b> &mdash; 18 AFRP-2024 &middot; 22 ARFECF-2013 &middot; 8 ARFHSN-2017, 48 in total across the federation. A superseded version stays readable forever &mdash; decisions stamped with it are still governed by it.</span></div></div>';
+  if (isAfrp){
+    h2 += '<div class="panel"><div class="panel__head"><h3>' + (INST.adopted ? 'Adopted &mdash; and what did not move' : 'Adopt bylaws-2024.1') + '</h3>' +
+      '<div class="panel__head__end">' + (INST.adopted ? '<span class="c-pill c-pill--ok">in force since today</span>' : '<span class="c-pill c-pill--warn">18 overrides of this lineage</span>') + '</div></div><div class="panel__body">';
+    if (!INST.adopted && !INST.showInflight){
+      h2 += '<p class="why" style="margin:0 0 var(--s3)"><b>Divergence report &mdash; 2012.2 &rarr; 2024.1.</b> Membership year moves to Jan&ndash;Dec; dues authority moves to the Board; the voting-dues deadline becomes 30 Apr received-or-postmarked; a 9-member Selection Committee gates every seat; Credentials and Election committees become phantom. 18 provisional overrides of THIS lineage are entered and flagged (the federation&rsquo;s 48 span three entities).</p>' +
+        '<button class="c-btn c-btn--sm" onclick="INSTS.inflight()">Put the adoption motion &mdash; show me what is in flight first</button>';
+    } else if (!INST.adopted){
+      h2 += '<p class="why" style="margin:0 0 var(--s3)"><b>Before the motion is put, every in-flight process is listed and sorted by which side of the line it falls on.</b> The stamp binds to the <b>process at its first freeze</b> &mdash; never to each snapshot separately, which is how an election with two freeze points would otherwise end up counted under two different texts. Unratified overrides must be dispositioned in this motion.</p>' +
+        '<div class="panel__body--flush" style="margin:0 calc(-1*var(--s4))">' +
+        '<div class="qrow"><div class="qrow__main"><b>Deputy President 2027 ballot &mdash; roll frozen 15 Oct</b><span>the <strong>process</strong> was stamped at its FIRST freeze, so every later gate of it &mdash; canvass, weights when voting opens, certification &mdash; also runs under <span class="mono">afrp-bylaws-2012.2</span>. No mixed-ruleset election is possible.</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">stays 2012.2</span></div></div>' +
+        '<div class="qrow"><div class="qrow__main"><b>&mdash; its weights gate, opening 12 Nov</b><span>would have been a second freeze point under a per-snapshot rule; bound to the process instead, it cannot drift to the new text mid-election</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">stays 2012.2</span></div></div>' +
+        '<div class="qrow"><div class="qrow__main"><b>2026 certified roll (971 members)</b><span>frozen; never recomputed; stamped 2012.2 forever</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">stays 2012.2</span></div></div>' +
+        '<div class="qrow"><div class="qrow__main"><b>2027 membership renewals &mdash; not yet opened</b><span>picks up the new membership year (Jan&ndash;Dec) at its next gate</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">moves to 2024.1</span></div></div>' +
+        '<div class="qrow"><div class="qrow__main"><b>Dues schedule for 2028</b><span>authority moves to the Board under 2024.1</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">moves to 2024.1</span></div></div>' +
+        '</div><div class="rowflex" style="margin-top:var(--s3)"><button class="c-btn c-btn--sm" onclick="INSTS.adopt()">Adopt &mdash; effective today</button><button class="btn-xs" onclick="INSTS.cancelAdopt()">not yet</button></div>';
+    } else {
+      h2 += '<div class="verdict verdict--allow"><span class="verdict__ic">&#10003;</span><div><b>bylaws-2024.1 is in force.</b><p>The governed-by chip in the top bar changed, and live rules moved with it. Check the <a href="#/fed/credentialing">credentialing</a> and <a href="#/member/voting">voting</a> screens &mdash; and note what did <i>not</i> move: the frozen 2026 roll still reads 971 under <span class="mono">bylaws-2012.2</span>, because a snapshot keeps the ruleset it froze under. Nothing was recomputed.</p></div></div>' +
+        '<div class="rowflex" style="margin-top:var(--s3)"><button class="btn-xs" onclick="INSTS.unadopt()">rewind the demo</button><a class="btn-xs" href="#/fed/workbench">open the workbench</a></div>';
+    }
+    h2 += '</div></div>';
+  } else {
+    h2 += '<div class="panel"><div class="panel__head"><h3>Amendment path</h3></div><div class="panel__body"><p class="why" style="margin:0"><b>' + (e.board ? e.board.threshold : '—') + '.</b> The platform reads the threshold from this entity&rsquo;s record &mdash; two entities meeting on the same day under different franchises never share a default. Loading a new text here would create a draft, a divergence report, and provisional overrides exactly as it does for AFRP.</p></div></div>';
+  }
+  return h2 + '</div>';
+}
+function tabTable(title, cols, rows, foot, pillFor){
+  return '<div class="panel"><div class="panel__head"><h3>' + title + '</h3></div>' +
+    '<div class="c-table-wrap" style="border:0;border-radius:0"><table class="c-table c-table--dense"><thead><tr>' +
+    cols.map(function(c){ return '<th>' + c + '</th>'; }).join('') + '</tr></thead><tbody>' +
+    (rows.length ? rows.map(function(r){
+      return '<tr>' + r.map(function(cell, i){
+        if (pillFor && i === r.length - 1){
+          var cls = cell === 'ok' || cell === 'active' ? 'c-pill--ok' : (cell === 'due' || cell === 'review due' ? 'c-pill--warn' : 'c-pill--muted');
+          return '<td><span class="c-pill ' + cls + '">' + cell + '</span></td>';
+        }
+        return '<td>' + (i === 0 ? '<b>' + cell + '</b>' : cell) + '</td>';
+      }).join('') + '</tr>';
+    }).join('') : '<tr><td colspan="' + cols.length + '"><small>none recorded</small></td></tr>') +
+    '</tbody></table></div>' + (foot ? '<div class="panel__foot"><span class="why">' + foot + '</span></div>' : '') + '</div>';
+}
+function tabBody(e, t){
+  if (t === 'overview') return tabOverview(e);
+  if (t === 'board') return tabBoard(e);
+  if (t === 'bylaws') return tabBylaws(e);
+  if (t === 'funding') return tabTable('Funding', ['Fund / class','Treatment','Balance (demo)','Notes'], e.funding,
+    'Money crosses an entity line <b>only under a recorded agreement</b>, and the agreement authorizes named grants rather than opening the books. Balances here are this entity&rsquo;s own; another entity&rsquo;s restricted balances are never readable across the line by default. The <b>1% administration fee is a computed charge</b> &mdash; agreement-versioned base, stated accrual timing, three journal lines &mdash; visible from BOTH sides as an inter-entity receivable/payable position. Each entity keeps its own books with an entity dimension on the daily close; restricted classes keep their restriction, and a reversal becomes a receivable rather than driving a class negative (S3).');
+  if (t === 'minutes') return tabTable('Minutes &amp; resolutions', ['Meeting','Status','Record'], e.minutes,
+    'This tab is a <b>read-only view</b> of the one governance workspace, scoped <span class="mono">entity:' + e.short.toLowerCase() + '</span> &mdash; one design, one audit, no second system of record. Adopted minutes are append-only; a correction is a new entry, never an edit (S5). Board-confidential material is an exact grant that no scope inherits, so it never crosses the entity line &mdash; not even through an interlocked director. Pre-platform minute books enter as <b>ingested</b> artifacts with an attesting officer, visibly distinct from platform-adopted entries.');
+  if (t === 'programs') return '<div class="panel"><div class="panel__head"><h3>Programs hosted by ' + e.short + '</h3></div><div class="panel__body"><p class="why" style="margin:0">' + e.programs + '</p></div><div class="panel__foot"><span class="why">Each program carries a charter &mdash; mission, membership committee, budget, activities, metrics &mdash; and its money posts to this entity&rsquo;s books. <a href="AFRP-Programs.html">Programs doc</a> &middot; <a href="#/program/overview">programme lens</a></span></div></div>';
+  if (t === 'filings') return tabTable('Filings &amp; compliance calendar', ['Obligation','Period','Status','&nbsp;'], e.filings,
+    'Obligations are <b>dated</b> and surface before they lapse. The <b>990 form and its due date are derived</b> from this entity&rsquo;s subsection, gross receipts and fiscal-year end &mdash; and the derivation is shown, not asserted. Each filing runs a state machine with a named signer, and the <b>public-inspection copy</b> is stored as its own redacted artifact under the export-minimization rule. A lapsed state charitable-solicitation registration blocks the fundraising surface it authorizes &mdash; refusing with the rule named, and pausing recurring gifts in that state rather than stranding captured money.', true);
+  if (t === 'agreements') return tabTable('Inter-entity agreements', ['Agreement','Terms','Review','&nbsp;'], e.agreements,
+    'An agreement is what <b>authorizes</b> money or data crossing an entity line &mdash; it never confers access itself: it permits issuing named (person, role, scope) grants, which stay exact, and it can never reach the six sensitive permissions or board-confidential material. Both boards adopt it by motion; each shows its review date and a <b>named block</b> that fires if it lapses &mdash; the administration fee stops accruing rather than drawing on a lapsed agreement. The other side links to the counterpart entity&rsquo;s record.', true);
+  if (t === 'insurance') return tabTable('Insurance, audit &amp; attestations', ['Item','Coverage / scope','Detail','&nbsp;'], e.insurance,
+    'Coverage expiry, audit status and per-member conflict-of-interest attestations are tracked as dated obligations like any other. An expiring D&amp;O policy against a live board term is exactly the kind of quiet gap this page exists to make loud.', true);
+  return '';
+}
+function renderDetail(){
+  var el = $('instdetail'); if (!el) return;
+  var e = INST.list[INST.cur];
+  var t = $('inst-title'), sb = $('inst-sub'), pl = $('inst-pills');
+  if (t) t.innerHTML = e.short;
+  if (sb) sb.innerHTML = e.name;
+  if (pl) pl.innerHTML = '<span class="c-pill ' + REL[e.rel][1] + '">' + REL[e.rel][0] + '</span>' +
+    (e.rulesets.length ? '<span class="c-pill c-pill--info mono">' + (INST.adopted && e.short === 'AFRP' ? 'bylaws-2024.1' : e.rulesets.filter(function(r){ return r[1] === 'in force'; })[0][0]) + '</span>' : '');
+  var picker = '<div class="pillrow" style="gap:var(--s2);margin-bottom:var(--s3)">' +
+    Object.keys(INST.list).map(function(k){
+      return '<button class="btn-xs' + (k === INST.cur ? ' btn-xs--go' : '') + '" onclick="INSTS.open(\'' + k + '\')">' + INST.list[k].short + '</button>';
+    }).join('') + '</div>';
+  var tabs = '<div class="pillrow" style="gap:var(--s2);margin-bottom:var(--s4);border-bottom:1px solid var(--line);padding-bottom:var(--s3)">' +
+    TABS.map(function(tb){
+      return '<button class="btn-xs' + (tb[0] === INST.tab ? ' btn-xs--go' : '') + '" onclick="INSTS.tab(\'' + tb[0] + '\')">' + tb[1] + '</button>';
+    }).join('') + '</div>';
+  el.innerHTML = picker + relBlock(e) + tabs + tabBody(e, INST.tab);
+}
+window.INSTS = {
+  open: function(k){ INST.cur = k; if (!INST.list[k].board && (INST.tab === 'board' || INST.tab === 'bylaws')) { /* keep, it explains itself */ } navigate('fed/inst'); },
+  tab: function(t){ INST.tab = t; renderAll(); },
+  inflight: function(){ INST.showInflight = true; renderAll(); },
+  cancelAdopt: function(){ INST.showInflight = false; renderAll(); },
+  adopt: function(){
+    INST.adopted = true; INST.showInflight = false;
+    S.ruleset.version = 'bylaws-2024.1';
+    if (window.SIM) SIM.inbox.unshift({ id:'adopt', cls:'operational', when:'just now',
+      title:'Bylaws 2024.1 adopted — effective today', sub:'live rules moved; frozen snapshots keep their stamp', unread:true });
+    renderAll();
+  },
+  unadopt: function(){ INST.adopted = false; INST.showInflight = false; S.ruleset.version = 'bylaws-2012.2'; renderAll(); }
+};
+
+/* ── the add-an-institution wizard ── */
+var WSTEPS = ['Identity','Governing text','Board','Money','Programs &amp; agreements','Compliance'];
+function wblank(){ return { name:'', short:'', state:'', type:'', ein:'', formed:'', rel:'administered',
+  slug:'', textName:'', eff:'', seats:'', term:'', seating:'own members', threshold:'', fee:'', classes:'',
+  programs:'', agreement:'', filings:'', step:0, done:false }; }
+function renderWiz(){
+  var el = $('instwiz'); if (!el) return;
+  if (!INST.wiz) INST.wiz = wblank();
+  var w = INST.wiz;
+  var st = '<div class="j-stepper">' + WSTEPS.map(function(s, i){
+    return '<span class="j-seg ' + (i < w.step ? 'is-done' : (i === w.step ? 'is-on' : '')) + '"' + (i < w.step && !w.done ? ' onclick="INSTW.go(' + i + ')"' : '') + '>' + s + '</span>';
+  }).join('') + '</div>';
+  var b = '';
+  if (w.done){
+    b = '<div class="j-welcome" style="padding:var(--s5)"><h2 style="font-size:22px">Charter packet prepared.</h2>' +
+      '<p class="j-sub" style="margin:0 auto var(--s3);max-width:56ch"><b>' + esc(w.name || 'The new institution') + '</b> is in the registry as <b>forming</b> — visible, configurable, and load-bearing for nothing. It routes no money, hosts no programs, and has no governance surfaces until a <b>Board motion adopts it</b>.</p>' +
+      '<div class="j-row" style="justify-content:center"><a class="c-btn c-btn--sm" href="#/fed/institutions">See it in the registry</a><a class="btn-xs" href="#/fed/boardroom">Put the motion</a><button class="j-btn j-btn--ghost" onclick="INSTW.again()">Add another</button></div></div>';
+  } else if (w.step === 0){
+    b = '<p class="j-kick">Step 1 &middot; Identity &amp; incorporation</p><h2 style="margin:0 0 6px;font-size:21px">Who, legally, is this?</h2>' +
+      '<div class="j-field"><label>Legal name</label><input id="iw-name" value="' + esc(w.name) + '" placeholder="AFRP Housing Trust"></div>' +
+      '<div class="j-field"><label>Short name</label><input id="iw-short" value="' + esc(w.short) + '" placeholder="Trust" style="max-width:220px"></div>' +
+      '<div class="j-field"><label>State &amp; entity type</label><div class="j-row"><input id="iw-state" value="' + esc(w.state) + '" placeholder="Michigan" style="max-width:180px"><input id="iw-type" value="' + esc(w.type) + '" placeholder="501(c)(3)" style="max-width:220px"></div></div>' +
+      '<div class="j-field"><label>EIN &amp; formation date</label><div class="j-row"><input id="iw-ein" value="' + esc(w.ein) + '" placeholder="38-0000000" style="max-width:180px"><input id="iw-formed" value="' + esc(w.formed) + '" placeholder="2027" style="max-width:160px"></div></div>' +
+      '<div class="j-field"><label>Relationship &mdash; the most consequential field on this screen</label>' +
+      '<div class="j-opts j-opts--2" style="margin-top:8px">' +
+      '<button class="j-opt' + (w.rel === 'administered' ? ' is-on' : '') + '" onclick="INSTW.rel(\'administered\')"><b>Administered</b><small>gets governance rails: ruleset lineage, board management, minutes, money routing</small></button>' +
+      '<button class="j-opt' + (w.rel === 'partner' ? ' is-on' : '') + '" onclick="INSTW.rel(\'partner\')"><b>Partner</b><small>agreements and contacts only &mdash; never governance surfaces, never their bylaws</small></button>' +
+      '</div></div>' +
+      '<div class="j-foot"><span></span><button class="j-btn" onclick="INSTW.save0()">Continue</button></div>';
+  } else if (w.step === 1){
+    if (w.rel === 'partner'){
+      b = '<p class="j-kick">Step 2 &middot; Governing text</p><h2 style="margin:0 0 6px;font-size:21px">Not for a partner &mdash; and that is the rule working.</h2>' +
+        '<p class="j-sub">A partner keeps its own governing text and its own board. The platform will hold your <b>agreements</b> with it and a reference copy of its public filings, and nothing else. No ruleset lineage is created.</p>' +
+        '<div class="j-foot"><span><button class="j-btn j-btn--quiet" onclick="INSTW.go(0)">&larr; Back</button></span><button class="j-btn" onclick="INSTW.go(2)">Continue</button></div>';
+    } else {
+      b = '<p class="j-kick">Step 2 &middot; Governing text</p><h2 style="margin:0 0 6px;font-size:21px">The founding bylaws start a lineage.</h2>' +
+        '<p class="j-sub">No administered entity operates without a <b>named ruleset in force</b> — every screen that applies a rule names the version it came from.</p>' +
+        '<div class="j-field"><label>Ruleset slug</label><input id="iw-slug" value="' + esc(w.slug) + '" placeholder="trust-2027.1" style="max-width:260px"><div class="j-hint">Convention: {entity}-{year}.{revision}.</div></div>' +
+        '<div class="j-field"><label>Document</label><input id="iw-text" value="' + esc(w.textName) + '" placeholder="Trust By-Laws, adopted 14 Mar 2027"></div>' +
+        '<div class="j-field"><label>Effective date</label><input id="iw-eff" value="' + esc(w.eff) + '" placeholder="14 Mar 2027" style="max-width:220px"></div>' +
+        '<p class="j-why">A founding text has no divergence report &mdash; there is nothing to diverge from. Every later version gets one, plus provisional overrides pending ratification, tracked <b>per entity-lineage</b>. A text that predates the platform enters as <b>ingested</b> instead: a scanned artifact with an asserted adoption date and an attesting officer &mdash; never a synthetic motion pretending the platform witnessed it.</p>' +
+        '<div class="j-foot"><span><button class="j-btn j-btn--quiet" onclick="INSTW.go(0)">&larr; Back</button></span><button class="j-btn" onclick="INSTW.save1()">Continue</button></div>';
+    }
+  } else if (w.step === 2){
+    b = '<p class="j-kick">Step 3 &middot; Board &amp; how seats are filled</p><h2 style="margin:0 0 6px;font-size:21px">Seats begin empty.</h2>' +
+      (w.rel === 'partner' ? '<p class="j-sub">Skipped for a partner &mdash; their board is theirs.</p>' :
+      '<div class="j-field"><label>Seats &amp; term</label><div class="j-row"><input id="iw-seats" value="' + esc(w.seats) + '" placeholder="7" style="max-width:120px"><input id="iw-term" value="' + esc(w.term) + '" placeholder="3 years, staggered" style="max-width:260px"></div></div>' +
+      '<div class="j-field"><label>Seating rule</label><select id="iw-seating" style="font:inherit;padding:8px 10px;border:1.5px solid var(--n-300);border-radius:9px">' +
+      ['own members|elected by its own members','afrp board|elected by the AFRP Board','appointed|appointed','ex officio|ex officio'].map(function(o){
+        var p = o.split('|'); return '<option value="' + p[0] + '"' + (w.seating === p[0] ? ' selected' : '') + '>' + p[1] + '</option>'; }).join('') + '</select></div>' +
+      '<div class="j-field"><label>Amendment threshold</label><input id="iw-thr" value="' + esc(w.threshold) + '" placeholder="2/3 of the membership — or 60% of the AFRP Board"><div class="j-hint">Read from this entity&rsquo;s record forever after; never a global default.</div></div>' +
+      '<p class="j-why">Each seating is a motion in this entity&rsquo;s own boardroom, and the seat links to the motion that filled it.</p>') +
+      '<div class="j-foot"><span><button class="j-btn j-btn--quiet" onclick="INSTW.go(1)">&larr; Back</button></span><button class="j-btn" onclick="INSTW.save2()">Continue</button></div>';
+  } else if (w.step === 3){
+    b = '<p class="j-kick">Step 4 &middot; Money &amp; entity ledger</p><h2 style="margin:0 0 6px;font-size:21px">Whose books, on what terms.</h2>' +
+      '<div class="j-field"><label>Fund classes</label><input id="iw-classes" value="' + esc(w.classes) + '" placeholder="operating · restricted-housing · donor-advised"></div>' +
+      '<div class="j-field"><label>Administered by AFRP? On what fee terms?</label><input id="iw-fee" value="' + esc(w.fee) + '" placeholder="AFRP staff administer for 1% of assets — or: self-administered"><div class="j-hint">An administration fee is an <b>agreement</b>, recorded in the next step &mdash; never a hidden setting.</div></div>' +
+      '<p class="j-why">Money never crosses an entity line without a recorded agreement. Receipting is per entity; a reversal crossing the line becomes a receivable (S3), never a negative class.</p>' +
+      '<div class="j-foot"><span><button class="j-btn j-btn--quiet" onclick="INSTW.go(2)">&larr; Back</button></span><button class="j-btn" onclick="INSTW.save3()">Continue</button></div>';
+  } else if (w.step === 4){
+    b = '<p class="j-kick">Step 5 &middot; Programs &amp; inter-entity agreements</p><h2 style="margin:0 0 6px;font-size:21px">What it runs, and what binds it.</h2>' +
+      '<div class="j-field"><label>Programs this entity will host</label><input id="iw-programs" value="' + esc(w.programs) + '" placeholder="Housing assistance; senior transport"></div>' +
+      '<div class="j-field"><label>First inter-entity agreement</label><input id="iw-agree" value="' + esc(w.agreement) + '" placeholder="AFRP administration — 1% fee, annual review, terminable on 90 days"><div class="j-hint">Each agreement records terms, effective and review dates, and <b>what breaks if it lapses</b>.</div></div>' +
+      '<div class="j-foot"><span><button class="j-btn j-btn--quiet" onclick="INSTW.go(3)">&larr; Back</button></span><button class="j-btn" onclick="INSTW.save4()">Continue</button></div>';
+  } else if (w.step === 5){
+    b = '<p class="j-kick">Step 6 &middot; Compliance calendar</p><h2 style="margin:0 0 6px;font-size:21px">Obligations become dated, or they become surprises.</h2>' +
+      '<div class="j-field"><label>Filings to track</label><input id="iw-filings" value="' + esc(w.filings) + '" placeholder="990 · MI annual report · charitable registration (3 states) · agent renewal"></div>' +
+      '<div class="calc" style="max-width:560px;margin-top:var(--s3)">' +
+      '<div class="calc__r"><span>' + esc(w.name || 'New institution') + '<small>' + esc(w.state || '—') + ' · ' + esc(w.type || '—') + '</small></span><span class="calc__n" style="font-size:13px">' + (w.rel === 'partner' ? 'partner' : 'administered') + '</span></div>' +
+      '<div class="calc__r"><span>Ruleset<small>' + (w.rel === 'partner' ? 'none — a partner keeps its own text' : 'named and in force from its effective date') + '</small></span><span class="calc__n mono" style="font-size:13px">' + esc(w.slug || '—') + '</span></div>' +
+      '<div class="calc__r"><span>Board<small>' + esc(w.seating === 'afrp board' ? 'elected by the AFRP Board' : (w.seating || '—')) + '</small></span><span class="calc__n" style="font-size:13px">' + (w.seats ? w.seats + ' seats, empty' : '—') + '</span></div>' +
+      '<div class="calc__r calc__r--tot"><span>Status on save</span><span class="calc__n" style="font-size:13px">forming</span></div></div>' +
+      '<p class="j-why"><b>Staff prepare; the Board adopts.</b> Saving puts this in the registry as <i>forming</i>: no money routing, no programs, no governance surfaces, until a Board motion carries.</p>' +
+      '<div class="j-foot"><span><button class="j-btn j-btn--quiet" onclick="INSTW.go(4)">&larr; Back</button></span><button class="j-btn" ' + (w.name ? '' : 'disabled') + ' onclick="INSTW.finish()">Prepare the charter packet</button></div>';
+  }
+  el.innerHTML = st + '<div class="j-card">' + b + '</div>';
+}
+function v(id){ var e = $(id); return e ? e.value : ''; }
+window.INSTW = {
+  go: function(n){ INST.wiz.step = n; renderAll(); },
+  rel: function(r){ INST.wiz.rel = r; renderAll(); },
+  save0: function(){ var w = INST.wiz;
+    w.name = v('iw-name'); w.short = v('iw-short'); w.state = v('iw-state'); w.type = v('iw-type');
+    w.ein = v('iw-ein'); w.formed = v('iw-formed'); w.step = 1; renderAll(); },
+  save1: function(){ var w = INST.wiz; w.slug = v('iw-slug'); w.textName = v('iw-text'); w.eff = v('iw-eff'); w.step = 2; renderAll(); },
+  save2: function(){ var w = INST.wiz; w.seats = v('iw-seats'); w.term = v('iw-term');
+    var s = $('iw-seating'); if (s) w.seating = s.value; w.threshold = v('iw-thr'); w.step = 3; renderAll(); },
+  save3: function(){ var w = INST.wiz; w.classes = v('iw-classes'); w.fee = v('iw-fee'); w.step = 4; renderAll(); },
+  save4: function(){ var w = INST.wiz; w.programs = v('iw-programs'); w.agreement = v('iw-agree'); w.step = 5; renderAll(); },
+  finish: function(){ var w = INST.wiz; w.filings = v('iw-filings'); w.done = true;
+    INST.forming.push({ name:w.name, short:w.short || w.name, state:w.state, type:w.type, slug:w.slug, seats:w.seats });
+    renderAll(); },
+  again: function(){ INST.wiz = wblank(); renderAll(); }
+};
+
+var _renderAll3 = renderAll;
+renderAll = function(){ _renderAll3(); renderReg(); renderDetail(); renderWiz(); };
 renderAll();
 })();
 </script>
