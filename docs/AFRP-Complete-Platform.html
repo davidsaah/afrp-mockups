@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AFRP · The Complete Platform · v1.0 — every element, documented and red-teamed</title>
+<meta name="description" content="The consolidated documentation of the AFRP platform design: the front door, membership and money, clubs, governance including the mailed CPA ballot, the Convention, programs and the integrated progression, community, institutions, and member operations — every element red-teamed across three rounds.">
+<style>
+/* ═════════════════════════════════════════════════════════════════════════
+   AFRP UNIFIED PLATFORM — consolidated document chrome (px- namespace)
+   Heritage layer v3.1 values. Everything inside .sc-m / .sc-o keeps its own
+   scoped stylesheet; this layer only draws the consolidated shell around it.
+   ═════════════════════════════════════════════════════════════════════════ */
+:root{
+  --px-ink:#2b2416; --px-ink-2:#57503f; --px-ink-3:#7a7260;
+  --px-bg:#f5f0e1; --px-surface:#fffdf6; --px-surface-2:#f7f1e2;
+  --px-line:#e2d9c2; --px-dark:#211c11; --px-dark-2:#2c261741;
+  --px-cream:#f2ecd9; --px-cream-2:#d8d0b8;
+  --px-green:#4c6414; --px-green-deep:#33430b; --px-green-50:#eef0da;
+  --px-olive:#6d7a19; --px-olive-50:#f2f4dd;
+  --px-gold:#9a720d;  --px-gold-50:#faf2dc; --px-gold-200:#e7d191;
+  --px-pine:#3f6b41;  --px-pine-50:#e6f0e2;
+  --px-red:#8c2f21;   --px-red-50:#f7e4df;
+  --px-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --px-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+svg.sprite{display:none}
+body{margin:0;background:var(--px-bg);color:var(--px-ink);font:16px/1.6 var(--px-font)}
+.px-doc{scroll-behavior:smooth}
+
+/* ── masthead ─────────────────────────────────────────────────────────── */
+.px-mast{background:var(--px-dark);color:var(--px-cream);padding:44px 0 30px;
+  border-bottom:4px solid var(--px-green)}
+.px-mast .px-in{max-width:1560px;margin:0 auto;padding:0 24px}
+.px-lockup{display:flex;align-items:center;gap:12px;color:#d9b45a;margin-bottom:26px}
+.px-lockup svg{width:38px;height:38px}
+.px-lockup b{font-size:20px;letter-spacing:.06em;color:var(--px-cream)}
+.px-lockup small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:#c9b877;font-weight:600}
+.px-kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#b5c24a;
+  font-weight:700;margin:0 0 10px}
+.px-mast h1{font-size:clamp(30px,3vw + 18px,44px);line-height:1.12;margin:0 0 18px;
+  font-weight:800;letter-spacing:-.01em;color:#fffdf6}
+.px-mast .px-lede{max-width:74ch;font-size:16.5px;line-height:1.65;color:#e8e1cb;margin:0 0 14px}
+.px-mast .px-lede b{color:#fffdf6}
+.px-mast .px-lede code{font-family:var(--px-mono);font-size:.86em;background:#ffffff14;
+  padding:1px 6px;border-radius:6px;color:#e7d191}
+.px-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.px-chip{font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px;
+  background:#ffffff12;color:#e8e1cb;border:1px solid #ffffff24}
+.px-chip--green{background:#4c6414;color:#f2f4dd;border-color:#5d7a1a}
+.px-chip--red{background:#8c2f21;color:#f7e4df;border-color:#a1402f}
+.px-chip--gold{background:#9a720d33;color:#e7d191;border-color:#9a720d66}
+
+/* institution nav strip in mast */
+.px-instnav{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.px-instnav a{display:flex;align-items:center;gap:9px;text-decoration:none;
+  background:#ffffff0d;border:1px solid #ffffff22;border-radius:12px;padding:10px 16px;
+  color:#f2ecd9;font-size:14px;font-weight:600;transition:background .15s}
+.px-instnav a:hover{background:#ffffff1c}
+.px-instnav .px-rn{font-family:var(--px-mono);font-size:12px;color:#d9b45a;font-weight:700}
+
+/* ── legend ───────────────────────────────────────────────────────────── */
+.px-legendwrap{background:var(--px-surface);border-bottom:1px solid var(--px-line)}
+.px-legend{max-width:1560px;margin:0 auto;padding:22px 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px 28px}
+.px-legend h4{margin:0 0 5px;font-size:13.5px;display:flex;align-items:center;gap:8px}
+.px-legend p{margin:0;font-size:13px;line-height:1.5;color:var(--px-ink-2)}
+
+/* ── badges ───────────────────────────────────────────────────────────── */
+.px-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.1em;padding:3px 10px;border-radius:999px;text-transform:uppercase;
+  vertical-align:2px}
+.px-badge i{width:7px;height:7px;border-radius:99px;display:inline-block}
+.px-badge--built{background:var(--px-pine-50);color:var(--px-pine);border:1px solid #aecfa6}
+.px-badge--built i{background:var(--px-pine)}
+.px-badge--designed{background:var(--px-gold-50);color:var(--px-gold);border:1px solid var(--px-gold-200)}
+.px-badge--designed i{background:var(--px-gold)}
+.px-badge--proposed{background:#eee9f5;color:#5b4a80;border:1px solid #cfc2e4}
+.px-badge--proposed i{background:#5b4a80}
+.px-badge--partial{background:var(--px-olive-50);color:#525d12;border:1px solid #cdd48f}
+.px-badge--partial i{background:var(--px-olive)}
+
+/* ── TOC ──────────────────────────────────────────────────────────────── */
+.px-toc{max-width:1560px;margin:34px auto 0;padding:0 24px}
+.px-toc h2{font-size:22px;margin:0 0 6px}
+.px-toc > p{margin:0 0 20px;color:var(--px-ink-2);font-size:14.5px;max-width:88ch}
+.px-toccols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.px-toccol{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:18px 20px}
+.px-toccol h3{margin:0 0 2px;font-size:16px;display:flex;gap:9px;align-items:baseline}
+.px-toccol h3 .px-rn{font-family:var(--px-mono);font-size:12px;color:var(--px-gold)}
+.px-toccol .px-bylaw{font-size:12px;color:var(--px-ink-3);margin:0 0 12px}
+.px-toccol a{display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+  padding:7px 2px;text-decoration:none;color:var(--px-ink);font-size:14px;
+  border-top:1px solid var(--px-line)}
+.px-toccol a:hover{color:var(--px-green-deep)}
+.px-toccol a .px-fc{font-size:11.5px;color:var(--px-ink-3);font-family:var(--px-mono);white-space:nowrap}
+.px-toccol a.px-star{font-weight:700}
+
+/* ── institution part header ──────────────────────────────────────────── */
+.px-inst{margin:72px 0 0;background:var(--px-dark);color:var(--px-cream);
+  border-top:4px solid var(--px-gold);padding:34px 0 30px}
+.px-inst .px-in{max-width:1560px;margin:0 auto;padding:0 24px}
+.px-inst .px-rn{font-family:var(--px-mono);font-size:13px;color:#d9b45a;font-weight:700;
+  letter-spacing:.12em}
+.px-inst h2{font-size:clamp(24px,2vw + 15px,32px);margin:6px 0 10px;color:#fffdf6}
+.px-inst p{max-width:80ch;margin:0;font-size:15px;line-height:1.6;color:#e8e1cb}
+.px-inst .px-src{margin-top:12px;font-size:12.5px;color:#c9b877;font-family:var(--px-mono)}
+
+/* ── module head ──────────────────────────────────────────────────────── */
+.px-mod{max-width:1560px;margin:56px auto 0;padding:0 24px}
+.px-mod--star{border-left:4px solid var(--px-gold);padding-left:20px;margin-left:max(24px,calc((100% - 1560px)/2));
+  max-width:1516px;padding-right:24px}
+@media (max-width:1608px){.px-mod--star{margin-left:24px;margin-right:0}}
+.px-mod .px-modkick{font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--px-ink-3);font-weight:700;margin:0 0 4px}
+.px-mod h3{font-size:clamp(20px,1.4vw + 14px,26px);margin:0 0 10px;display:flex;
+  flex-wrap:wrap;align-items:center;gap:12px}
+.px-mod .px-desc{max-width:86ch;margin:0 0 12px;font-size:15px;line-height:1.62;color:var(--px-ink-2)}
+.px-mod .px-desc b{color:var(--px-ink)}
+.px-api{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.px-api span{font-family:var(--px-mono);font-size:11.5px;background:var(--px-surface);
+  border:1px solid var(--px-line);border-radius:7px;padding:3px 8px;color:#57503f}
+.px-api span.px-api--live{border-color:#aecfa6;background:var(--px-pine-50);color:var(--px-pine)}
+.px-api span.px-api--draft{border-style:dashed;color:#5b4a80;border-color:#cfc2e4;background:#f4f1f9}
+.px-subhead{max-width:1560px;margin:34px auto 0;padding:0 24px;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--px-ink-3);font-weight:700;
+  display:flex;align-items:center;gap:10px}
+.px-subhead:after{content:"";flex:1;height:1px;background:var(--px-line)}
+
+/* roadmap cards (ARFHSN / endowment) */
+.px-road{max-width:1560px;margin:22px auto 0;padding:0 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.px-roadcard{background:var(--px-surface);border:1px dashed var(--px-cream-2);
+  border-radius:14px;padding:20px 22px}
+.px-roadcard h4{margin:0 0 8px;font-size:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.px-roadcard p{margin:0 0 8px;font-size:13.5px;line-height:1.55;color:var(--px-ink-2)}
+.px-roadcard .px-blocked{font-size:12.5px;color:var(--px-red);background:var(--px-red-50);
+  border-radius:8px;padding:7px 11px;margin-top:10px}
+
+/* footer */
+.px-foot{margin-top:88px;background:var(--px-dark);color:#c9c0a5;padding:34px 0 46px;
+  border-top:4px solid var(--px-green)}
+.px-foot .px-in{max-width:1560px;margin:0 auto;padding:0 24px;font-size:13px;line-height:1.7}
+.px-foot b{color:#f2ecd9}
+.px-foot a{color:#d9b45a}
+.px-sep{height:26px}
+@media print{.px-mast,.px-inst{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+/* ── v3: sticky top nav, version chip, element matrix ─────────────────── */
+.px-topnav{position:sticky;top:0;z-index:50;background:#211c11f2;backdrop-filter:blur(6px);
+  border-bottom:1px solid #ffffff1c;color:#f2ecd9}
+.px-topnav .px-in{max-width:1560px;margin:0 auto;padding:9px 24px;display:flex;
+  align-items:center;gap:14px;flex-wrap:wrap}
+.px-topnav .px-tbrand{display:flex;align-items:center;gap:9px;font-weight:800;
+  letter-spacing:.05em;color:#fffdf6;text-decoration:none;font-size:15px}
+.px-topnav .px-tver{font-family:var(--px-mono);font-size:10.5px;font-weight:700;
+  background:#4c6414;color:#f2f4dd;border-radius:999px;padding:2px 9px;letter-spacing:.06em}
+.px-topnav .px-tlinks{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.px-topnav .px-tlinks a{color:#e8e1cb;text-decoration:none;font-size:13px;font-weight:600;
+  padding:6px 11px;border-radius:8px}
+.px-topnav .px-tlinks a:hover{background:#ffffff14}
+.px-topnav .px-tlinks a.px-tcta{background:#4c6414;color:#f2f4dd}
+.px-vermeta{font-family:var(--px-mono);font-size:12px;color:#c9b877;margin:0 0 14px}
+
+.px-matrix{max-width:1560px;margin:26px auto 0;padding:0 24px}
+.px-matrix h3{font-size:19px;margin:34px 0 4px}
+.px-matrix .px-mnote{font-size:13.5px;color:var(--px-ink-2);margin:0 0 12px;max-width:88ch}
+.px-tablewrap{overflow-x:auto;background:var(--px-surface);border:1px solid var(--px-line);
+  border-radius:12px}
+table.px-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.px-table th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--px-ink-3);padding:10px 14px;border-bottom:1px solid var(--px-line);
+  background:var(--px-surface-2)}
+.px-table td{padding:9px 14px;border-bottom:1px solid #eee7d4;vertical-align:top}
+.px-table tr:last-child td{border-bottom:0}
+.px-table a{color:var(--px-green-deep);text-decoration:none;font-weight:600}
+.px-table a:hover{text-decoration:underline}
+.px-st{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.08em;padding:2px 9px;border-radius:999px;text-transform:uppercase;white-space:nowrap}
+.px-st i{width:7px;height:7px;border-radius:99px}
+.px-st--p{background:var(--px-pine-50);color:var(--px-pine)}.px-st--p i{background:var(--px-pine)}
+.px-st--part{background:var(--px-olive-50);color:#525d12}.px-st--part i{background:var(--px-olive)}
+.px-st--m{background:var(--px-red-50);color:var(--px-red)}.px-st--m i{background:var(--px-red)}
+.px-st--prop{background:#eee9f5;color:#5b4a80}.px-st--prop i{background:#5b4a80}
+
+.px-cardgrid{max-width:1560px;margin:20px auto 0;padding:0 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px}
+.px-mcard{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:18px 20px}
+.px-mcard h4{margin:0 0 6px;font-size:15.5px;display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.px-mcard p{margin:0 0 10px;font-size:13px;line-height:1.55;color:var(--px-ink-2)}
+.px-mcard .px-mlinks{display:flex;flex-wrap:wrap;gap:6px}
+.px-mcard .px-mlinks a{font-size:12px;font-weight:700;color:var(--px-green-deep);
+  text-decoration:none;background:var(--px-green-50);border:1px solid #c4cd97;
+  border-radius:999px;padding:3px 11px}
+.px-mcard .px-mlinks a:hover{background:#dde2bf}
+.px-mcard .px-mlinks a.px-ml--ext{background:var(--px-gold-50);border-color:var(--px-gold-200);
+  color:var(--px-gold)}
+
+/* ── programs doc: pipelines, duo layout, facts ────────────────────────── */
+.px-pipes{max-width:1560px;margin:30px auto 0;padding:0 24px}
+.px-pipe{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:16px 20px;margin-bottom:14px}
+.px-pipe h4{margin:0 0 2px;font-size:15.5px}
+.px-pipe > p{margin:0 0 12px;font-size:13px;color:var(--px-ink-2)}
+.px-pipe .px-rail{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.px-pipe .px-rail a{display:flex;flex-direction:column;text-decoration:none;background:var(--px-green-50);
+  border:1px solid #c4cd97;border-radius:10px;padding:7px 13px;color:var(--px-green-deep);min-width:0}
+.px-pipe .px-rail a b{font-size:13px}
+.px-pipe .px-rail a small{font-size:10.5px;color:#525d12;font-family:var(--px-mono)}
+.px-pipe .px-rail a:hover{background:#dde2bf}
+.px-pipe .px-rail .px-arr{color:var(--px-ink-3);font-weight:700}
+.px-hostchip{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:3px 11px;
+  color:#fff;vertical-align:2px}
+.px-progflag{max-width:1560px;margin:10px auto 0;padding:0 24px}
+.px-progflag > div{border-left:3px solid var(--px-gold);background:var(--px-gold-50);color:#584106;
+  padding:10px 14px;border-radius:0 10px 10px 0;font-size:13px;max-width:100ch}
+.px-duo{max-width:1560px;margin:18px auto 0;padding:0 24px;display:grid;gap:22px;
+  grid-template-columns:minmax(0,1fr)}
+@media(min-width:1150px){.px-duo{grid-template-columns:minmax(0,7fr) minmax(0,3fr);align-items:start}}
+.px-duo .px-duolabel{font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--px-ink-3);font-weight:700;margin:0 0 8px}
+.px-srcline{max-width:1560px;margin:8px auto 0;padding:0 24px;font-size:12px;color:var(--px-ink-3)}
+.px-srcline a{color:var(--px-green-deep)}
+@media(max-width:1149px){
+  .px-duo > div:first-child{order:2}
+  .px-duo > div:last-child{order:1}
+}
+
+/* ── v2 programs: charter grid ─────────────────────────────────────────── */
+.px-charter{max-width:1560px;margin:14px auto 0;padding:0 24px;display:grid;gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.px-chcard{background:var(--px-surface);border:1px solid var(--px-line);border-radius:12px;
+  padding:13px 16px;min-width:0}
+.px-chcard h5{margin:0 0 7px;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--px-ink-3);display:flex;align-items:center;gap:7px}
+.px-chcard h5 i{width:8px;height:8px;border-radius:3px;display:inline-block;background:var(--px-green)}
+.px-chcard--mission h5 i{background:var(--px-green)}
+.px-chcard--committee h5 i{background:var(--px-gold)}
+.px-chcard--budget h5 i{background:var(--px-pine)}
+.px-chcard--activities h5 i{background:var(--px-olive)}
+.px-chcard--metrics h5 i{background:#5b4a80}
+.px-chcard p{margin:0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)}
+.px-chcard p b{color:var(--px-ink)}
+.px-chcard ul{margin:0;padding-left:16px;font-size:12.5px;line-height:1.55;color:var(--px-ink-2)}
+.px-chcard ul li{margin-bottom:3px}
+.px-chcard .px-chsub{font-size:11.5px;color:var(--px-ink-3);margin-top:6px}
+.px-chcard .px-demo{font-size:10px;font-weight:800;letter-spacing:.08em;background:var(--px-red-50);
+  color:var(--px-red);border-radius:99px;padding:1px 7px;vertical-align:1px}
+.px-chcard .px-real{font-size:10px;font-weight:800;letter-spacing:.08em;background:var(--px-pine-50);
+  color:var(--px-pine);border-radius:99px;padding:1px 7px;vertical-align:1px}
+
+/* ── experience doc: journey blocks, breaks register ───────────────────── */
+.px-journey{max-width:1560px;margin:44px auto 0;padding:0 24px}
+.px-jsteps{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:6px 0;margin-top:14px}
+.px-jstep{display:flex;gap:14px;padding:11px 18px;border-bottom:1px solid #eee7d4;font-size:13.5px}
+.px-jstep:last-child{border-bottom:0}
+.px-jstep .px-jn{flex:none;width:26px;height:26px;border-radius:99px;background:var(--px-green-50);
+  border:1px solid #c4cd97;color:var(--px-green-deep);font-weight:800;font-size:12px;
+  display:grid;place-items:center}
+.px-jstep .px-jbody{min-width:0}
+.px-jstep .px-jbody b{color:var(--px-ink)}
+.px-jstep .px-jbody .px-jrule{display:inline-block;margin-left:6px;font-family:var(--px-mono);
+  font-size:10.5px;background:var(--px-surface-2);border:1px solid var(--px-line);
+  border-radius:6px;padding:1px 7px;color:var(--px-ink-3)}
+.px-jstep .px-jbody .px-jscreen{display:inline-block;margin-left:6px;font-size:11px;font-weight:700}
+.px-jstep .px-jbody .px-jscreen a{color:var(--px-green-deep);text-decoration:none}
+.px-jstep--fix{background:var(--px-gold-50)}
+.px-jstep--fix .px-jn{background:var(--px-gold-50);border-color:var(--px-gold-200);color:var(--px-gold)}
+.px-break{border-left:3px solid var(--px-red);background:var(--px-red-50);border-radius:0 10px 10px 0;
+  padding:11px 15px;margin-top:10px;font-size:13px;color:#5c2418}
+.px-break b{color:var(--px-red)}
+.px-break .px-fix{display:block;margin-top:6px;color:#3d5220}
+.px-break .px-fix b{color:var(--px-green-deep)}
+.px-sev{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.09em;border-radius:99px;
+  padding:1px 8px;text-transform:uppercase;vertical-align:1px;margin-right:6px}
+.px-sev--critical{background:var(--px-red);color:#fff}
+.px-sev--major{background:var(--px-gold);color:#fff}
+.px-sev--minor{background:var(--px-cream-2);color:var(--px-ink-2)}
+
+</style>
+</head>
+<body class="px-doc">
+<nav class="px-topnav"><div class="px-in">
+  <a class="px-tbrand" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="AFRP olive-tree mark" style="color:#f2ecd9;width:26px;height:26px;flex:none">
+  
+
+  
+  <g>
+    <rect x="13" y="66" width="94" height="22" fill="#e7d191"/>
+    <g fill="#d9b45a">
+      <rect x="13" y="67" width="15" height="9" rx="3"/><rect x="31" y="67" width="19" height="9" rx="3"/>
+      <rect x="53" y="67" width="13" height="9" rx="3"/><rect x="69" y="67" width="18" height="9" rx="3"/>
+      <rect x="90" y="67" width="17" height="9" rx="3"/>
+    </g>
+    <g fill="#c9a34a">
+      <rect x="13" y="78" width="10" height="9" rx="3"/><rect x="26" y="78" width="17" height="9" rx="3"/>
+      <rect x="46" y="78" width="14" height="9" rx="3"/><rect x="63" y="78" width="11" height="9" rx="3"/>
+      <rect x="77" y="78" width="18" height="9" rx="3"/><rect x="98" y="78" width="9" height="9" rx="3"/>
+    </g>
+  </g>
+
+  
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M59 97c0-12 0-24-3-33" stroke-width="7.5"/>
+    <path d="M56 64c-3-8-8-13-14-16" stroke-width="6"/>
+    <path d="M56.5 66c2-8 7-14 14-18" stroke-width="6"/>
+    <path d="M47 53c-3-3-5-7-5-12" stroke-width="4.5"/>
+    <path d="M66 53c4-2 7-5 9-9" stroke-width="4.5"/>
+    <path d="M59 97c-5 3-10 4-15 4M59 97c5 3 10 4 15 4M59 97v7" stroke-width="5"/>
+  </g>
+
+  
+  <g fill="#4c6414">
+    <ellipse cx="33" cy="34" rx="6.5" ry="3.1" transform="rotate(-38 33 34)"/>
+    <ellipse cx="45" cy="23" rx="6.5" ry="3.1" transform="rotate(-16 45 23)"/>
+    <ellipse cx="61" cy="18" rx="6.5" ry="3.1" transform="rotate(2 61 18)"/>
+    <ellipse cx="77" cy="22" rx="6.5" ry="3.1" transform="rotate(20 77 22)"/>
+    <ellipse cx="88" cy="33" rx="6.5" ry="3.1" transform="rotate(48 88 33)"/>
+    <ellipse cx="27" cy="47" rx="6.5" ry="3.1" transform="rotate(-66 27 47)"/>
+    <ellipse cx="93" cy="46" rx="6.5" ry="3.1" transform="rotate(66 93 46)"/>
+  </g>
+  <g fill="#6d7a19">
+    <ellipse cx="40" cy="34" rx="6" ry="2.9" transform="rotate(-28 40 34)"/>
+    <ellipse cx="53" cy="27" rx="6" ry="2.9" transform="rotate(-8 53 27)"/>
+    <ellipse cx="68" cy="26" rx="6" ry="2.9" transform="rotate(12 68 26)"/>
+    <ellipse cx="81" cy="32" rx="6" ry="2.9" transform="rotate(36 81 32)"/>
+    <ellipse cx="33" cy="55" rx="6" ry="2.9" transform="rotate(-56 33 55)"/>
+    <ellipse cx="87" cy="55" rx="6" ry="2.9" transform="rotate(56 87 55)"/>
+    <ellipse cx="60" cy="30" rx="6" ry="2.9" transform="rotate(0 60 30)"/>
+  </g>
+  <g fill="#7e9440">
+    <ellipse cx="47" cy="37" rx="5.5" ry="2.7" transform="rotate(-18 47 37)"/>
+    <ellipse cx="60" cy="38" rx="5.5" ry="2.7" transform="rotate(4 60 38)"/>
+    <ellipse cx="73" cy="37" rx="5.5" ry="2.7" transform="rotate(24 73 37)"/>
+    <ellipse cx="39" cy="46" rx="5.5" ry="2.7" transform="rotate(-42 39 46)"/>
+    <ellipse cx="82" cy="45" rx="5.5" ry="2.7" transform="rotate(42 82 45)"/>
+    <ellipse cx="53" cy="46" rx="5.5" ry="2.7" transform="rotate(-8 53 46)"/>
+    <ellipse cx="68" cy="46" rx="5.5" ry="2.7" transform="rotate(14 68 46)"/>
+  </g>
+
+  
+  <g fill="#38430b">
+    <circle cx="43" cy="28" r="2.3"/><circle cx="66" cy="21" r="2.3"/><circle cx="85" cy="28" r="2.3"/>
+    <circle cx="34" cy="41" r="2.3"/><circle cx="64" cy="33" r="2.3"/><circle cx="88" cy="41" r="2.3"/>
+    <circle cx="46" cy="42" r="2.3"/>
+  </g>
+  <g fill="#9a720d">
+    <circle cx="53" cy="22" r="2.1"/><circle cx="74" cy="30" r="2.1"/><circle cx="56" cy="33" r="2.1"/>
+    <circle cx="30" cy="51" r="2.1"/><circle cx="90" cy="51" r="2.1"/>
+  </g>
+
+  
+  <g fill="none" stroke="#4c6414" stroke-width="2" stroke-linecap="round">
+    <path d="M36 60c-2 5-2 10-1 14"/><path d="M83 59c2 5 2 10 1 15"/>
+  </g>
+  <g fill="#38430b">
+    <circle cx="34.6" cy="69" r="2"/><circle cx="35.6" cy="74.5" r="2"/>
+    <circle cx="84.6" cy="68" r="2"/><circle cx="84.2" cy="74" r="2"/>
+  </g>
+
+  
+  <path d="M11 88V60a49 49 0 0 1 98 0v28" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
+  <path d="M4 89.5h17M99 89.5h17" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+</svg>
+<span>AFRP</span></a>
+  <span style="color:#7a7260">/</span><span style="font-weight:700;font-size:14px">The Complete Platform</span>
+  <span class="px-tver">v1.0</span>
+  <div class="px-tlinks">
+    <a href="#principles">Principles</a><a href="#frontdoor">Front door</a><a href="#governance">Governance</a>
+    <a href="#institutions">Institutions</a><a href="#register">Red team</a>
+    <a href="prototype.html#/door/landing">Prototype</a>
+    <a href="index.html" class="px-tcta">All docs</a>
+  </div>
+</div></nav>
+<header class="px-mast"><div class="px-in">
+  <p class="px-kicker">AFRP design delivery &middot; the definitive reference</p>
+  <h1>The Complete Platform &mdash; every element, documented</h1>
+  <p class="px-vermeta">v1.0 &middot; 19 Aug 2026 &middot; consolidates all learning &middot; three red-team rounds &middot; 67 agents in round 3 alone</p>
+  <p class="px-lede">One document for the whole design: the <b>front door</b> the platform never had (join,
+  passwordless sign-in, recovery, the 18th-birthday refresh), membership and the money engine, the real 18
+  clubs with their migration wizard, governance including <b>the mailed CPA ballot current law requires</b>
+  and the board workspace that runs between conventions, the Convention as its own element, nineteen
+  chartered programs riding the integrated progression, the consent-gated community, the institutions with
+  their open decisions <b>flagged on-screen instead of buried in memos</b>, and the member operations that tie
+  it together. Every new element here was attacked by a red team <i>before</i> this document was written —
+  all 30 attacks were refuted, and the 16 reconciliations the
+  consistency sweep forced are folded into the prose; the full register is at the bottom. Mockups and
+  documentation only &mdash; the build remains on hold.</p>
+  <div class="px-chips">
+    <span class="px-chip px-chip--green">9 sections &middot; every module of the platform</span>
+    <span class="px-chip px-chip--gold">14 new screens in the prototype</span>
+    <span class="px-chip">principles S1&ndash;S7 &middot; 43 rules &middot; 4 entities</span>
+    <span class="px-chip px-chip--red">round-3 red team: 30 attacks &middot; ALL refuted &middot; 16 reconciliations folded in</span>
+  </div>
+</div></header>
+<div class="px-chips" style="max-width:1560px;margin:24px auto 0;padding:0 24px"><a href="#frontdoor" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">I · The front door</a><a href="#membership" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">II · Membership, household & money</a><a href="#clubs" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">III · Clubs</a><a href="#governance" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">IV · Governance & voting</a><a href="#convention" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">V · The Convention — its own element</a><a href="#programs" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">VI · Programs & the integrated progression</a><a href="#community" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">VII · Community — directory, tree, life events, magazine</a><a href="#institutions" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">VIII · Institutions — ARFECF, ARFHSN, the Foundation</a><a href="#operations" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">IX · Member operations — inbox & support</a></div>
+
+<section class="px-mod" id="p-principles" style="margin-top:44px">
+  <p class="px-modkick">The seven settlements &middot; three red-team rounds</p>
+  <h3 id="principles">The platform principles, S1&ndash;S7</h3>
+  <p class="px-desc">Everything below obeys these. They were not designed up front — each one was forced by a
+  confirmed break and then generalized, which is why they simplify the platform exactly where it failed and
+  nowhere else.</p>
+</section>
+<div class="px-cardgrid" id="principles" style="margin-top:14px"><div class="px-mcard"><h4><span class="px-badge px-badge--built"><i></i>S1</span> Verified channel first</h4><p>No money, no PII, no consent across an unverified channel. Join, login and the 18th-birthday refresh are one front door.</p></div><div class="px-mcard"><h4><span class="px-badge px-badge--built"><i></i>S2</span> One life-event state machine</h4><p>Claimed → verified-pending → released-per-surface. Operational effects fire at verified-pending, reversibly; publications wait for the gate.</p></div><div class="px-mcard"><h4><span class="px-badge px-badge--built"><i></i>S3</span> One reversal model</h4><p>Receivables across remitted or entity boundaries; effective-dated standing; frozen snapshots annotated, never recomputed.</p></div><div class="px-mcard"><h4><span class="px-badge px-badge--built"><i></i>S4</span> Weights fix when voting opens</h4><p>Floor extraction re-divides between motions only; club-less members count through an at-large roll. Both drafted as bylaw amendments.</p></div><div class="px-mcard"><h4><span class="px-badge px-badge--built"><i></i>S5</span> Corrections held, never lost</h4><p>A dispute blocks the entry, not the issue; archives ingest only consent-classed material; adopted records are append-only, corrected by new entries.</p></div><div class="px-mcard"><h4><span class="px-badge px-badge--built"><i></i>S6</span> Refusals name the rule, not the relatives</h4><p>Conflict blocks never leak the tree; allocations are not restrictions and the words say which is which.</p></div><div class="px-mcard"><h4><span class="px-badge px-badge--built"><i></i>S7</span> Suppression must survive composition</h4><p>Aggregates publish as frozen snapshots with complementary suppression — a cell shows only when the cell AND its complement clear the floor, across tabs, time and public surfaces.</p></div></div>
+<section class="px-mod">
+  <p class="px-modkick">Four entities, one administration</p>
+  <h3>The entity map</h3>
+  <p class="px-desc">The platform administers all four without merging any of them. Money reports per entity;
+  scope rules end at each entity&rsquo;s edge; crossings ride standing data-sharing agreements.</p>
+</section>
+<div class="px-cardgrid" style="margin-top:14px"><div class="px-mcard"><h4>The Federation <span class="px-badge px-badge--partial"><i></i>AFRP</span></h4><p>Est. 1952, formalized 1959. The membership, the clubs, the convention, most programs. bylaws-2012.2 in force; bylaws-2024.1 parallel with 48 provisional overrides.</p></div><div class="px-mcard"><h4>Education & Charitable Fund <span class="px-badge px-badge--partial"><i></i>ARFECF</span></h4><p>Separate Michigan non-profit (2013 by-laws), administered by AFRP staff for a 1% fee. Proposed home of the Endowed Fund. Not named on the public site.</p></div><div class="px-mcard"><h4>Human Services Network <span class="px-badge px-badge--partial"><i></i>ARFHSN</span></h4><p>501(c)(3) with no membership; 14-seat BOT elected by the AFRP Board; by-laws amendable by 60% of the AFRP Board. Hosts Medical Mission and the W2W conduit.</p></div><div class="px-mcard"><h4>Ramallah Foundation Inc. <span class="px-badge px-badge--partial"><i></i>Foundation</span></h4><p>Separate NY 501(c)(3), est. 1943 — hospitals, senior home, scholarship run jointly. A partner, not a program.</p></div></div>
+
+<section class="px-mod" id="frontdoor">
+  <p class="px-modkick">new — red-teamed round 3</p>
+  <h3>I · The front door</h3>
+  <p class="px-desc">The piece the platform never had: how a person becomes a member, signs in, recovers, and comes of age — all under S1.</p>
+</section>
+<div class="px-cardgrid" style="margin-top:14px"><div class="px-mcard" id="m-landing"><h4>Public landing <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Public, member-data-free, and honest: what membership is, the real 18 clubs, real programs, dues tiers under the named ruleset. Exactly two doors — Join and Sign in. Signed-out pages never reveal whether any person is a member.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">S1 · R8-closed</p><div class="px-mlinks"><a href="prototype.html#/door/landing">Landing</a></div></div><div class="px-mcard" id="m-join"><h4>Join — the seven-step wizard <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Payment is last, on purpose. A tier choice creates only a 30-day, PII-minimal draft; email and mobile verify by code before anything else is stored; then identity & lineage (optional, provisional), household (an adult of the target household accepts), clubs (0..N, each its own record), consent defaults (marketing OFF, operational ON, program invitations ON — the Pathways class, directory OFF), and one gross-fee checkout — which also collects the postal address recovery and the mailed ballot both need — with national revenue and club liability on separate line groups.</p><p style="margin:8px 0 0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)"><b>The typo attack.</b> omar@gmali.com dies at step 2 with nothing stored, charged, or mailed. An abandoned draft is contacted at most once, on the channel that started verifying.</p><p style="margin:8px 0 0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)"><b>The family branch.</b> A household joining together (including the newlywed Family tier) is N wizards sharing one checkout: each adult verifies their OWN channels before their record exists; consent steps are per person; minor records are created via the consent-holder, with no credentials.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">S1 · R2 · R4 · R20 · R21 · R27 · R32</p><div class="px-mlinks"><a href="prototype.html#/door/join">Join wizard</a><a href="AFRP-Platform-Experience.html#j01">Journey J01</a></div></div><div class="px-mcard" id="m-login"><h4>Sign in, sessions & passkeys <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Passwordless: a one-time code to any verified channel, with one constant reply — “If this channel is on a record, a code is on its way.” Same wording, same timing, account or not: absence is not signal, applied to authentication. Optional per-device passkeys after first sign-in; a sessions screen lists every device and revokes any within a minute. Every credential change notifies every verified channel, with undo windows.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">S1 · R18 · J15-absence</p><div class="px-mlinks"><a href="prototype.html#/door/login">Sign in</a></div></div><div class="px-mcard" id="m-recovery"><h4>Recovery — deliberately slow <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Lost one channel: sign in with the other, add a verified replacement, and notice goes to ALL channels — including the one replaced — with a 72-hour undo. Lost both: a support-desk case with identity evidence, a 7-day delay, and a mailed notice to the postal address on file before any credential moves. No postal address on file? A slower path: in-person or notarized evidence and a longer delay — never a faster one. A household adult never recovers for another adult; a delegate never signs in as you — delegation excludes credentials.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">S1 · R4 · R6</p><div class="px-mlinks"><a href="prototype.html#/door/recovery">Recovery</a><a href="prototype.html#/fed/supportdesk">Support desk</a></div></div><div class="px-mcard" id="m-staffid"><h4>Staff, officers & partners <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>The front door authenticates more than members: staff, club officers, program leads and third parties (the CPA) get sponsored accounts on the same passwordless and passkey rails — each one a (person, role, scope) grant, provisioned by role, de-provisioned when the role ends, and scoped to its one surface: the CPA sees the mailed-ballot roll export and the scan-return channel, and nothing else.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R39 · S1</p><div class="px-mlinks"><a href="prototype.html#/fed/roles">Roles & permissions</a></div></div><div class="px-mcard" id="m-refresh"><h4>Minors & the 18th-birthday refresh <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Under 16: no credentials — the record exists, interaction surfaces through the household. 16–17: sign-in with the consent-holder’s co-consent, in a flagged minor session (no payments, no directory, no consent changes beyond her own program forms). In the 90 days before the 18th birthday the system asks the minor — at program touchpoints — to verify a channel of her own; on the birthday the consent refresh goes there, never to a parent-supplied channel. If no channel was ever verified by the birthday, the record stays active but consent-gated actions and publications hold until she claims it through the front door — a defined state, not a void.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">S1 · R5 · R7</p><div class="px-mlinks"><a href="prototype.html#/door/refresh">The refresh</a><a href="AFRP-Platform-Experience.html#j03">Journey J03</a></div></div></div>
+
+<section class="px-mod" id="membership">
+  <p class="px-modkick">built</p>
+  <h3>II · Membership, household & money</h3>
+  <p class="px-desc">One person, one identity; N memberships, each its own record; money that posts gross and reverses by rule.</p>
+</section>
+<div class="px-cardgrid" style="margin-top:14px"><div class="px-mcard" id="m-identity"><h4>Identity, household & consent <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>National and club memberships are separate peer records, never merged (R1/R2). One person, one identity; merges go through a queue, never automatically (R3). A household registers together but is never one consent — each adult owns their own record (R4); minors never appear in any directory (R7). Consent is per channel, visibility per field (R27/R28); delegation is explicit, dated, revocable, scoped — and excludes credentials (R6).</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R1–R7 · R27 · R28</p><div class="px-mlinks"><a href="prototype.html#/member/household">Household</a><a href="prototype.html#/fed/member360">Member 360</a><a href="prototype.html#/fed/identity">Identity queue</a></div></div><div class="px-mcard" id="m-dues"><h4>Dues, renewal & multi-club <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>A member belongs to as many clubs as will have them — three memberships, three lapse clocks, one person (J02). Club dues collected nationally sit as liability until remitted (R21, agency treatment pending one CPA signature). The member votes in each club where current and counts exactly once federally through the club-of-record pointer (R16).</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R2 · R16 · R21</p><div class="px-mlinks"><a href="prototype.html#/member/membership">Membership & dues</a><a href="AFRP-Platform-Experience.html#j02">Journey J02</a></div></div><div class="px-mcard" id="m-money"><h4>The money engine <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>Fees post gross — three journal lines (R20). Daily close batches are idempotent, balanced, posted to QuickBooks; a dead QBO connection queues, never blocks (R22). Every payment carries class codes; campaigns never enter the chart of accounts (R23). Refunds are reversing lines (R24); anything crossing a remittance or entity boundary becomes a receivable under S3. Restricted gifts keep their restriction through the ledger (R25).</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R20–R26 · S3</p><div class="px-mlinks"><a href="prototype.html#/fed/finance">Daily close</a><a href="prototype.html#/fed/ledger">Multi-entity ledger</a><a href="AFRP-Platform-Experience.html#j08">Journey J08</a><a href="AFRP-Platform-Experience.html#j12">Journey J12</a></div></div></div>
+
+<section class="px-mod" id="clubs">
+  <p class="px-modkick">designed</p>
+  <h3>III · Clubs</h3>
+  <p class="px-desc">The real eighteen, as first-class entities the federation reads but never edits.</p>
+</section>
+<div class="px-cardgrid" style="margin-top:14px"><div class="px-mcard" id="m-clubmgmt"><h4>Club registry, setup & health <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>The registry is the single list — 18 real clubs with status, officers, integration door, remittance schedule, certified count. Setup is five steps: charter → officers → money → integration door → electorate; forming → active is a Board action. Two doors, one truth: a live club-system feed is data, the remittance ledger is truth for standing (R17/R42); disagreement lands in an exception queue. Certified counts are club-attested AND ledger-verified, deduplicated against club-of-record before any weight computes.</p><p style="margin:8px 0 0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)"><b>Dormancy.</b> Effective-dated; members keep memberships until each expires; multi-club members redesignate club of record; only the club-less fall to the at-large roll. Prepaid dues stay a liability — remitted on reactivation or refunded via S3.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R17 · R42 · R16 · S4</p><div class="px-mlinks"><a href="prototype.html#/fed/clubs">Registry & setup</a><a href="prototype.html#/fed/clubhealth">Club health</a><a href="AFRP-Platform-Experience.html#j14">Journey J14</a></div></div><div class="px-mcard" id="m-migration"><h4>Onboarding & migration wizard <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>“Which club goes first” — the club decides, always. Five stages: the club chooses; full import with identity resolution (duplicates to the merge queue, never auto-merged; nothing written back; club-only people become club-membership records with provisional identity); reconciliation to the cent with the treasurer; one-way nightly delta sync, pausable indefinitely; a cutover vote under the club’s own rules; legacy retired to read-only archive. Reversible until cutover; the labelled door never changes silently; an electorate frozen mid-migration reads the door as of its record date. Cutover adds the registry’s third door value — platform-native, effective-dated — which credentialing and the convention read first-class.</p><p style="margin:8px 0 0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)"><b>Verification outreach before cutover.</b> Imported emails and phones are UNVERIFIED channels, and S1 forbids money or consent across them. Before the cutover vote, each member verifies a channel front-door-style; the unverified land on a hygiene queue with postal fallback. Billing stays with the club’s own system through stage 3 — the platform bills only what it has always billed nationally, until cutover.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R3 · R42 · R43 · S1 · S3</p><div class="px-mlinks"><a href="prototype.html#/fed/migration">Migration wizard</a><a href="prototype.html#/club/dashboard">Detroit — the live example</a></div></div><div class="px-mcard" id="m-clubrun"><h4>Running a club <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>Dashboard, roster with two status columns (club and national lapse independently), households, events & check-in, communications under club scope, club voting under club rules, remittance statements showing mode, gross, due, carried.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R2 · R21 · R39</p><div class="px-mlinks"><a href="prototype.html#/club/dashboard">Club dashboard</a><a href="prototype.html#/club/remit">Remittance</a></div></div></div>
+
+<section class="px-mod" id="governance">
+  <p class="px-modkick">extended — mailed ballot + board workspace new</p>
+  <h3>IV · Governance & voting</h3>
+  <p class="px-desc">Frozen electorates, receipts that prove inclusion never content — and now the flow current law actually requires.</p>
+</section>
+<div class="px-cardgrid" style="margin-top:14px"><div class="px-mcard" id="m-mailedballot"><h4>The mailed CPA ballot <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Both the 2012 text in force and the 2024 text keep the mailed CPA secret ballot; the platform’s authority ends at the frozen roll and the envelope IDs — ballot content never enters it. Record-date snapshot → address hygiene (no valid address still means ON the roll, surfaced) → watermarked expiring roll export to the CPA, logged → double-envelope mail (outer envelope IDs the voter for roll-checking; inner is anonymous) → member sees mailed/received for their own row only → received-or-postmarked deadline named per ruleset → the CPA counts; the platform imports certified totals and the certification artifact.</p><p style="margin:8px 0 0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)"><b>Exceptions.</b> Duplicate returns: first validly received counts, later logged unopened. Address fixed after export: exception queue to the CPA, re-mail before the cutoff (a Board-set date, named on screen) only — the export is never regenerated, and a re-mail VOIDS the original envelope ID before a new one issues, so two live IDs never exist.</p><p style="margin:8px 0 0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)"><b>Status, not receipt.</b> The member panel is live inclusion STATUS — their own row, mailed/received — not a receipt. The one-time, non-reissuable receipt of R14 belongs to the electronic future-amendment flow.</p><p style="margin:8px 0 0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)"><b>The scan-return channel.</b> Envelope-ID scans come back from the CPA as signed daily batch files validated against the frozen roll; scans for IDs not on the roll are rejected and logged. Disputes get a stage: retention named per ruleset, a recount produces a SECOND certification artifact imported append-only — superseding, never editing, the first (S5).</p><p style="margin:8px 0 0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)"><b>The electronic flow.</b> Everything electronic in this prototype is a future-amendment design and is labelled as such on every screen.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R12 · R13 · R14 · R39 · S3</p><div class="px-mlinks"><a href="prototype.html#/fed/mailedballot">Mailed ballot ops</a><a href="prototype.html#/member/voting">Member voting</a></div></div><div class="px-mcard" id="m-boardroom"><h4>Board & committee workspace <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>The system of record between conventions. Motions: draft → seconded → discussion → vote → resolution, append-only once adopted (S5). Minutes approved at the next meeting, then append-only. The 48 provisional overrides form a ratification queue, each linking to the workbench divergence view. Action items escalate to the next agenda when stale. Committees get the same rails scoped down — one design, one audit — and the separate legal entities get entity-scoped boardrooms on those rails (the ARFHSN BOT is not an AFRP committee; the ARFECF board’s roster feeds the interlock view): AFRP-side motions link across, confidential documents never cross the entity line.</p><p style="margin:8px 0 0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)"><b>Board-confidential is a grant, not a scope.</b> R39’s federation scope satisfies club and program for reads — so a “board” scope cannot exist. Board-confidential is an exact-grant class, the sixth sensitive permission: no scope, including federation, reads it by inheritance.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R38 · R39 · S5 · S6</p><div class="px-mlinks"><a href="prototype.html#/fed/boardroom">Board workspace</a><a href="prototype.html#/fed/workbench">Ruleset workbench</a><a href="AFRP-Platform-Experience.html#j10">Journey J10</a></div></div><div class="px-mcard" id="m-elections"><h4>Elections, credentialing & the floor <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>Electorates freeze at record dates and are never recomputed (R12); receipts prove inclusion, never content, and cannot be reissued (R14). Delegate standing verifies against the remittance ledger (R17). Weighted delegation per 9.1.3 with the S4 settlements: weights fix when voting opens; the at-large roll covers club-less members — both drafted as Board amendments because 9.1.3 is real law.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R12–R18 · S4</p><div class="px-mlinks"><a href="prototype.html#/fed/credentialing">Credentialing</a><a href="prototype.html#/fed/floor">Live floor</a><a href="prototype.html#/fed/results">Results</a><a href="AFRP-Platform-Experience.html#j05">Journey J05</a></div></div></div>
+
+<section class="px-mod" id="convention">
+  <p class="px-modkick">designed</p>
+  <h3>V · The Convention — its own element</h3>
+  <p class="px-desc">A standing module that re-instantiates every year, walked from both sides of the desk (J05 · J13).</p>
+</section>
+<div class="px-cardgrid" style="margin-top:14px"><div class="px-mcard" id="m-convorg"><h4>Organizer backend <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>A year record with hard boundaries — nothing carries from the prior year without logged review-and-adopt (one standing exception: missed program-book ads roll forward via the ads desk, surfaced, per R37). Club integration through the two labelled doors; registration with capacity-inventory banquet seats; the simple store plus program-book ad sales; operational-vs-marketing comms; rotating QR badges where a reissue kills the old badge; the floor on the frozen snapshot; close-out with unclaimed pickups refunded via S3 and unsold inventory to the bookstore.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R17 · R19 · R26 · R30 · R31 · R37 · R42 · R43</p><div class="px-mlinks"><a href="prototype.html#/fed/convcmd">Command centre</a><a href="prototype.html#/fed/convdesk">Desk & store</a><a href="prototype.html#/fed/convention">Contract & finance</a><a href="AFRP-Platform-Experience.html#j13">Journey J13</a></div></div><div class="px-mcard" id="m-convpart"><h4>Participant experience <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>Registration (membership mandatory — the “non-member rate” bundles the membership it requires, created through the front door at checkout), live day with stamped announcements, the store, the help desk as the one two-way door, and a badge that is possession, not identity: holding someone’s ticket reveals nothing of their record.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R19 · R30 · R31 · S1</p><div class="px-mlinks"><a href="prototype.html#/member/convention">Member convention</a><a href="prototype.html#/member/convlive">Convention live</a><a href="AFRP-Platform-Experience.html#j05">Journey J05</a></div></div></div>
+
+<section class="px-mod" id="programs">
+  <p class="px-modkick">designed</p>
+  <h3>VI · Programs & the integrated progression</h3>
+  <p class="px-desc">Nineteen programs in six sections, each with a charter — and four rails that hand off to each other.</p>
+</section>
+<div class="px-cardgrid" style="margin-top:14px"><div class="px-mcard" id="m-charters"><h4>Six sections, every program chartered <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Medical, Cultural, Leadership, Educational, Camp, Convention — every program carries a mission, a membership committee (joined via the Committee Interest Form), a budget, activities, and success metrics, with real afrp.org content throughout (R38). Camp runs full summer-camp systems (health-form gates, double-signed meds, incident-to-parent-notification, pickup authority from the household model). Grants are (person, role, scope); club and program are siblings, never a hierarchy (R39).</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R38 · R39 · R40 · R41</p><div class="px-mlinks"><a href="AFRP-Programs.html">Programs doc v2.0</a><a href="prototype.html#/program/overview">All programmes</a><a href="AFRP-Platform-Experience.html#j07">Journey J07</a></div></div><div class="px-mcard" id="m-progression"><h4>The integrated progression <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Four rails — youth (camp to career), advocacy, heritage, Palestine-direct — convened yearly by the Convention and continuously by the clubs. A handoff is a program invitation (its own consent class — recruitment is never operational), triggered by an enrollment milestone, opt-in, undated-neutral when declined. Windows, not gates: skipping legs is normal. The cross-program funnel publishes annually as a frozen snapshot with S7 complementary suppression, custodied by the executive director’s office, owned by no committee.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R38 · S7 · Pathways</p><div class="px-mlinks"><a href="AFRP-Platform-Experience.html#pathways">Pathways</a><a href="prototype.html#/program/lifecycle">Lifecycle & pipeline</a><a href="AFRP-Platform-Experience.html#j16">Journey J16</a></div></div><div class="px-mcard" id="m-scholarship"><h4>Scholarship — the strongest spec <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>Three-degree conflict blocks with rule-only refusals (S6); recusal is not unscored; median ranking, never mean; encumbrance budgeting with endowment capacity as a hard input; named awards most-constrained-first; disbursement gated on per-term enrollment verification. Tested sound across six attacks in round one.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R41 · S6</p><div class="px-mlinks"><a href="prototype.html#/program/applications">Applications</a><a href="AFRP-Platform-Experience.html#j06">Journey J06</a></div></div></div>
+
+<section class="px-mod" id="community">
+  <p class="px-modkick">designed</p>
+  <h3>VII · Community — directory, tree, life events, magazine</h3>
+  <p class="px-desc">What members share with each other, gated by consent at every surface.</p>
+</section>
+<div class="px-cardgrid" style="margin-top:14px"><div class="px-mcard" id="m-directory"><h4>The directory & RBPN <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Inclusion decided person by person on the household screen — the household is the place, each adult the authority (J15). Per-field switches default OFF; postal address is asked for only when print inclusion is on. Search is members-only and composes only allowed fields; absence is never signal. Contact relays by default. Rosters are operational records, not a directory workaround — labelled, watermarked, expiring. The row binds to person-level standing: it stays while ANY membership is current; grace is a named ruleset parameter. RBPN is a separate opt-in storefront.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R28 · R29 · R39 · S2 · J15</p><div class="px-mlinks"><a href="prototype.html#/member/dirinclusion">Directory inclusion</a><a href="prototype.html#/member/rbpn">Professional network</a><a href="AFRP-Platform-Experience.html#j15">Journey J15</a><a href="AFRP-Platform-Experience.html#j11">Journey J11</a></div></div><div class="px-mcard" id="m-lifeevents"><h4>Life events & the family tree <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>A submission is a claim, not an announcement (R33). One state machine (S2): operational effects at verified-pending, reversibly; publications wait for gates that vary by type — death held for family everywhere with an evidence artifact, the reporter excluded from their own approval set; marriage needs both named people; birth resolves onto the tree first; relocation prompts, never auto-transfers. The tree keeps living-individual restrictions and three-generation privacy blanks (R32).</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R32–R35 · S2</p><div class="px-mlinks"><a href="prototype.html#/member/lifeevent">Add a life event</a><a href="prototype.html#/fed/lifeevents">Approval queue</a><a href="AFRP-Platform-Experience.html#j04">Journey J04</a></div></div><div class="px-mcard" id="m-magazine"><h4>Hathihe Ramallah & the ads desk <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>Auto-compiled sections with no manual entry path; the copy freeze snapshots content; a correction after freeze is a new version (R36). A dispute filed before freeze holds THAT entry — printed as held, not as wrong (S5). The archive ingests only consent-classed material; print consent is its own switch. One ads desk serves two publications, each placement carrying its publication’s real deadline; a missed deadline rolls forward with the buyer notified (R37).</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R36 · R37 · S5</p><div class="px-mlinks"><a href="prototype.html#/program/magazine">Magazine ops</a><a href="prototype.html#/member/ads">Advertise</a><a href="AFRP-Platform-Experience.html#j09">Journey J09</a></div></div></div>
+
+<section class="px-mod" id="institutions">
+  <p class="px-modkick">new — flagged where policy is open</p>
+  <h3>VIII · Institutions — ARFECF, ARFHSN, the Foundation</h3>
+  <p class="px-desc">Four entities, administered without being merged. Every screen names its entity and its open decisions.</p>
+</section>
+<div class="px-cardgrid" style="margin-top:14px"><div class="px-mcard" id="m-endowment"><h4>Endowment fund management <span class="px-badge px-badge--proposed"><i></i>Flagged · pending decision</span></h4><p>Mocked now, flagged everywhere: pending the Endowment Fund Policy Statement and the entity decision (ARFECF proposed). The corpus ledger never spends gifts; a versioned spending policy computes the draw and shows its arithmetic; the distributable amount is THE capacity number the scholarship budget consumes — one figure, one source, frozen at budget adoption so a mid-year market drop surfaces as next year’s input, never a mid-cycle clawback. Underwater named funds suppress their draw per policy, visibly. Donor reporting is aggregate under S7.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R25 · R41 · R43 · S7 · flag</p><div class="px-mlinks"><a href="prototype.html#/program/endowment">Endowment management</a><a href="prototype.html#/program/budget">Scholarship budget</a><a href="AFRP-Platform-Experience.html#j12">Journey J12</a></div></div><div class="px-mcard" id="m-arfhsn"><h4>ARFHSN — trustees, mission ops, human services <span class="px-badge px-badge--proposed"><i></i>Flagged · pending decision</span></h4><p>A separate 501(c)(3) with no membership; every screen carries the entity banner. Trustees: the 14-seat BOT with terms and the electing AFRP Board motion linked; the 60% amendment threshold beside any amendment; the ARFECF interlock cap carried visibly INACTIVE (absent from the 2013 text). Medical Mission ops: volunteer rosters with the camp-grade safeguarding rails (R40) — credential and licensure verification gates the manifest, incidents close with a notification — shipment logistics with signed handoffs, and a hard line: patients are never platform records; aggregate counts only, under S7. Human services intake: confidential non-member records in a separate store, exact grants only (federation scope does not read in), no tree links, no member-joins ever — the client store sits explicitly OUTSIDE identity resolution, a stated carve-out from R3 — append-only case notes, all access logged.</p><p style="margin:8px 0 0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)"><b>Clients can see their own record.</b> A client has no credentials — so access, correction and expungement requests run through the support desk: evidence-based, case-scoped, against a named retention policy. Confidential never means unaccountable to the person it is about.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R3-carveout · R39 · R40 · S3 · S5 · S7 · entity</p><div class="px-mlinks"><a href="prototype.html#/fed/hsn">Trustees & interlock</a><a href="prototype.html#/program/medops">Mission operations</a><a href="prototype.html#/program/intake">Human services intake</a></div></div><div class="px-mcard" id="m-foundation"><h4>Ramallah Foundation Inc. <span class="px-badge px-badge--built"><i></i>Built</span></h4><p>The NY 501(c)(3), est. 1943 — hospitals, the senior home, the scholarship run jointly. A partner the platform reports to and receipts correctly per entity (R25), never a program it administers.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R25</p><div class="px-mlinks"><a href="prototype.html#/program/senior">Senior Living campaign</a></div></div></div>
+
+<section class="px-mod" id="operations">
+  <p class="px-modkick">new</p>
+  <h3>IX · Member operations — inbox & support</h3>
+  <p class="px-desc">The connective tissue: every notice explained, every problem one door away.</p>
+</section>
+<div class="px-cardgrid" style="margin-top:14px"><div class="px-mcard" id="m-inbox"><h4>Notifications centre <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>Every notice the platform sent, with the consent class that authorized it — operational, marketing, or program invitation (the Pathways class). Mute by class; marketing mutes immediately and audited; operational cannot be muted away. Deleting an entry never unsends or edits the audit. Relay content stays between the two members — staff see that a relay happened, never what it said. Bounces feed the hygiene queues the mailed-ballot roll reads.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R27 · R30 · Pathways</p><div class="px-mlinks"><a href="prototype.html#/member/inbox">Inbox</a></div></div><div class="px-mcard" id="m-supportdesk"><h4>Member support desk <span class="px-badge px-badge--designed"><i></i>Designed</span></h4><p>The convention help desk made year-round: one two-way door, owned and clocked, SLAs visible to the member. A case carries a scope — the agent sees the slice the case needs and nothing else; the five sensitive permissions still need exact grants; identity-sensitive actions keep their front-door delays — the desk confers process, never permissions. A case about two members shows each only their own side.</p><p style="margin:10px 0 8px;font-size:11px;letter-spacing:.06em;color:var(--px-ink-3);font-family:var(--px-mono)">R39 · S1 · S6</p><div class="px-mlinks"><a href="prototype.html#/fed/supportdesk">Support desk</a></div></div></div>
+
+<div class="px-matrix" id="register">
+  <h3 style="margin-top:56px">Round-3 red team &mdash; the new elements, attacked before they shipped</h3>
+  <p class="px-mnote">The nine new elements were specified first and attacked by <b>67 agents</b>
+  before this document was written: 30 candidate breaks, each facing two adversarial skeptics.
+  <b>All 30 were refuted</b> &mdash; the first round in three where nothing survived, which is
+  what designing under settled principles buys. The consistency &amp; coverage sweeps returned
+  <b>16 reconciliations</b> &mdash; contradictions between the new specs and the existing
+  corpus, and genuine gaps &mdash; every one folded into the prose above and the prototype. Rounds one and two
+  live in the <a href="AFRP-Platform-Experience.html#register">Experience doc&rsquo;s register</a>.</p>
+  <h3 style="font-size:16px;margin-top:26px">The 16 reconciliations &mdash; what the sweep changed</h3>
+  <div class="px-tablewrap"><table class="px-table">
+    <thead><tr><th style="width:100px">Status</th><th style="width:120px">Spec</th><th>Issue &rarr; reconciliation</th></tr></thead>
+    <tbody><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>PATHWAYS</td><td><b>Direct contradiction on which consent class carries a program handoff invitation. PATHWAYS says invitations are 'sent on operational rails, opt-in.' GOVWORK defines a third class '…</b><br><span style="color:var(--px-ink-3)">→ Amend PATHWAYS step 1 to 'sent on the program-invitation class, opt-in' (GOVWORK's model is safer under R30). Add the class's join-time default to FRONTDOOR step 6, which currently sets only marketing/operational/directo</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>MIGRATION</td><td><b>R42, J13, and J14 all model club integration as exactly two doors (live feed | manual roster), labelled at every point of use. MIGRATION's cutover makes the platform the club's sys…</b><br><span style="color:var(--px-ink-3)">→ Add a third door value 'platform-native (post-cutover, effective-dated)' to R42 and the J14 registry; credentialing and J13 read it first-class. Detroit/Breeze already implies this state.</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>GOVWORK</td><td><b>Scope-model drift. R39's scope enum is federation | club | program, and federation scope satisfies club and program for READS. 'Board-confidential documents never leak into committ…</b><br><span style="color:var(--px-ink-3)">→ Make board-confidential an exact-grant class alongside R39's five sensitive permissions (a sixth), rather than a scope — federation reads never satisfy it. State this in GOVWORK's doc-library bullet.</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>MAILEDBALLOT</td><td><b>Same fact described two ways inside one element. Step 5 gives a persistent member/voting panel showing 'mailed on X / received on Y' — re-viewable on every visit — while the same s…</b><br><span style="color:var(--px-ink-3)">→ Define the panel as live inclusion STATUS (own row only), not a receipt; scope R14's one-time non-reissuable receipt to the receipt artifact of the electronic future-amendment flow.</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>INSTITUTIONS</td><td><b>R3 says one person = one identity record, with the merge queue existing to unify duplicates. Intake mandates a second, permanently unjoined record for a client who IS a member ('th…</b><br><span style="color:var(--px-ink-3)">→ Annotate R3 as scoped to membership records, with the HSN client store explicitly outside identity resolution (INSTITUTIONS' 'no shared identifiers' already implies this — make it a stated R3 carve-out).</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>INSTITUTIONS</td><td><b>The 'one capacity number' is computed two ways. J12: 'annual capacity computed from corpus earnings' (income model). INSTITUTIONS: 'banded draw (4-5% of trailing average)' (total-r…</b><br><span style="color:var(--px-ink-3)">→ Amend J12 step 4 to 'capacity per the spending-policy calculator (INSTITUTIONS)'; the calculator, which already names its policy version, is the single source. Drop 'corpus earnings.'</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>PATHWAYS</td><td><b>Terminology drift: both cite R39 as a data-minimization rule ('names + addresses only... — R39'; 'contact + eligibility only, per rule 39 scope'). R39 defines access grants, not ex…</b><br><span style="color:var(--px-ink-3)">→ Add one minimization clause to the rules ('any export or cross-boundary payload carries the minimum fields its purpose names') and cite it from both, or cite J15's export rule plus S7 instead of R39.</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>RULES</td><td><b>Stale gap flags now state falsehoods: R8 says join/login are 'DESIGN GAPS (flagged MISSING)', R13 says the mailed-ballot flow 'has NO screen', J10 calls the board/committee workspa…</b><br><span style="color:var(--px-ink-3)">→ Update the three flags to 'specified (FRONTDOOR / MAILEDBALLOT / GOVWORK), pending build' so gap status and the new element specs describe the same fact one way.</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>FRONTDOOR</td><td><b>The join wizard is single-adult. R9's complimentary Family tier for newlyweds and any household-together registration (R4) have no flow: how the second adult's own channels get ver…</b><br><span style="color:var(--px-ink-3)">→ Add a family/household join branch: each adult verifies their own channels before their record exists; one checkout, per-person consent steps; minor records created via the consent-holder, no credentials.</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>FRONTDOOR</td><td><b>Recovery for both-channels-lost requires a mailed notice to 'the postal address on file', but the join wizard never collects or verifies a postal address. Undefined: recovery when …</b><br><span style="color:var(--px-ink-3)">→ Collect postal address at join step 6 (or checkout); define a no-address recovery path (in-person/notarized evidence, longer delay); define the 18th-birthday fallback state (record active, publications/consent-gated acti</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>FRONTDOOR</td><td><b>Every spec references non-member actors — staff seeing recovery audits, the CPA, club officers/treasurers, the HSN director, in-country partners — but the front door only authentic…</b><br><span style="color:var(--px-ink-3)">→ Add a staff/partner identity section: sponsored accounts with (person, role, scope) grants per R39, same passwordless/passkey rails, offboarding tied to role end, third parties (CPA) scoped to their one surface.</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>MAILEDBALLOT</td><td><b>Step 5 shows members 'return envelope received on Y', but the mechanism by which envelope-ID scans travel from the CPA back into the platform is unspecified: feed format, cadence, …</b><br><span style="color:var(--px-ink-3)">→ Specify a CPA scan-return channel: signed batch file against roll envelope IDs, daily import, rejects logged and queued; name the re-mail cutoff's source (Board motion via GOVWORK) on screen.</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>MAILEDBALLOT</td><td><b>No challenge/recount flow. Step 8 imports certified totals, but a contested result — recount request, envelope retention duration, who may inspect the CPA's materials, and how a co…</b><br><span style="color:var(--px-ink-3)">→ Add a certification-dispute stage: retention period named per ruleset, recount produces a second certification artifact imported as a new append-only entry superseding, never editing, the first.</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>GOVWORK</td><td><b>'A committee workspace is the board workspace scoped down' does not cover separate legal entities. The ARFHSN 14-seat BOT needs its own motions/minutes rails (it is not an AFRP com…</b><br><span style="color:var(--px-ink-3)">→ Add entity-scoped boardrooms: same rails, entity banner, own audit; AFRP-side motions (BOT election, 60% amendments) link across but confidential documents never cross the entity boundary; ARFECF roster feeds the interlo</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>MIGRATION</td><td><b>Post-cutover contact bootstrap is missing. Imported emails/phones are unverified channels, and S1 forbids money, PII, or consent across them — so after cutover the platform cannot …</b><br><span style="color:var(--px-ink-3)">→ Add a verification-outreach stage before cutover vote: each member verifies a channel FRONTDOOR-style; unverified members flagged on a hygiene queue, postal-only fallback; define club-only imports as club-membership reco</span></td></tr><tr><td><span class="px-st px-st--prop"><i></i>folded in</span></td><td>INSTITUTIONS</td><td><b>Medical Mission volunteers get only a roster: no licensure/credential verification, background checks, health forms, travel consent, emergency contacts, or incident reporting — the…</b><br><span style="color:var(--px-ink-3)">→ Give medops the R40 rails (credential gate before manifest, incidents close with notification); add a client-side access path via the support desk (evidence-based, case-scoped) plus a named retention/expungement policy f</span></td></tr></tbody>
+  </table></div>
+  <h3 style="font-size:16px;margin-top:26px">All 30 attacks, refuted</h3>
+  <div class="px-tablewrap"><table class="px-table">
+    <thead><tr><th style="width:100px">Verdict</th><th style="width:170px">Element</th><th>Attack</th></tr></thead>
+    <tbody><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#frontdoor">Front door</a></td><td>72-hour undo is delivered to the very channel being removed, handing reversal power to the party you're recovering away from</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#frontdoor">Front door</a></td><td>Passkey on a shared family device lets one adult authenticate as another, which R4 and Recovery explicitly forbid</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#frontdoor">Front door</a></td><td>Deceased-pending state suspends billing and publication but never freezes credentials or recovery, so a dead member's account is recoverable in violation of R4</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#frontdoor">Front door</a></td><td>18th-birthday 'refresh-pending' voids parental consent mid-camp, leaving photo/health consent in an undefined state</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#frontdoor">Front door</a></td><td>16-17 minor session forbids payments, but a self-eligible 17-year-old camper's registration requires payment and a consent-holder-signed health form with no defined handoff</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#frontdoor">Front door</a></td><td>Channel uniqueness across drafts and records is undefined, creating either an existence-oracle/griefing block or colliding double claims</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#governance">Mailed ballot</a></td><td>Re-mail creates a second live envelope ID: double vote or silent disenfranchisement, no contest path</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#governance">Mailed ballot</a></td><td>S3 post-freeze reversal annotations never reach the CPA: platform roll and counted roll diverge</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#governance">Mailed ballot</a></td><td>Exception operations require a per-voter who-voted list that the visibility invariant forgot</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#governance">Mailed ballot</a></td><td>Persistent received-status panel is an infinitely reissuable receipt — R14 contradiction enabling turnout coercion</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#governance">Mailed ballot</a></td><td>Expiring export vs never-regenerate: the J15 export rule cannot hold for a months-long election, and re-mail traffic is an unlogged PII side channel</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#governance">Mailed ballot</a></td><td>The postmark prong silently never applies to prepaid return envelopes, and the deadline's ruleset source is undefined under 2012.2</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#operations">Workspace · inbox · desk</a></td><td>Ratification vote on a quorum-changing override is governed by the rule it is deciding</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#operations">Workspace · inbox · desk</a></td><td>No unwind when a provisionally-operative override is rejected — dues money collected without authority</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#operations">Workspace · inbox · desk</a></td><td>Append-only adopted minutes are an ungated publication surface — a false death (or defamation) can never come down</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#operations">Workspace · inbox · desk</a></td><td>The spec's own example case type — a relay dispute — is unadjudicable without breaking the relay-content invariant</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#operations">Workspace · inbox · desk</a></td><td>Program-invitation consent class contradicts PATHWAYS' 'operational rails' — the inbox must display a class that disagrees with what fired</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#operations">Workspace · inbox · desk</a></td><td>Stale action-item auto-escalation writes executive-session content onto an agenda with no scope check</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#clubs">Migration</a></td><td>Nightly delta sync resurrects a deceased-pending member and re-arms dunning</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#clubs">Migration</a></td><td>Stage-2 'resolved with the treasurer' edits standing and money with no S3 lines — and the next delta silently un-resolves it</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#clubs">Migration</a></td><td>Two clubs migrating in parallel can each 'resolve' the same national payment into their own balance</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#clubs">Migration</a></td><td>A merge-queue candidate pending at the record date leaves one person in two 9.1.3 numerators — frozen forever</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#clubs">Migration</a></td><td>'Reversible without data loss' at stage 3 is unsatisfiable: rollback vs no-write-back vs append-only merges</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#clubs">Migration</a></td><td>Cutover between a record date's postmark deadline and processing leaves a timely payment with no door</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#institutions">Institutions</a></td><td>Payment rail and identity queue join member and human-services client records the platform swears never to join</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#institutions">Institutions</a></td><td>Four-year scholarship encumbrance vs underwater-fund draw suppression is a money deadlock with no defined loser</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#institutions">Institutions</a></td><td>Conduit chargeback creates a receivable pointing the wrong way across the entity boundary</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#institutions">Institutions</a></td><td>Trustee removal motion pipes HSN-confidential client material into append-only, federation-readable AFRP minutes</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#institutions">Institutions</a></td><td>Medops holds only partner-supplied aggregates, so S7 complementary suppression is uncomputable by design</td></tr><tr><td><span class="px-st px-st--p"><i></i>refuted</span></td><td><a href="#institutions">Institutions</a></td><td>The inactive interlock cap surfaces at the moment of election with no defined behavior when exceeded</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="px-sep"></div>
+<footer class="px-foot"><div class="px-in">
+  <p><b>Method.</b> This document consolidates the whole design corpus &mdash; the Platform Map, the sixteen
+  red-teamed journeys, the Programs charters, and the element specs written for this round &mdash; into one
+  reference. The nine new elements were specified first, attacked by an adversarial red team (breakers per
+  element, two skeptics per finding, plus consistency and coverage sweeps), and settled before documentation.
+  Flags are real: where a Board or CPA decision is open, the screen says so rather than assuming. People and
+  figures in examples are fictional; program facts, clubs, committees and by-law citations are real
+  (afrp.org and the governing texts). Part of the AFRP design delivery &mdash; <a href="index.html">all
+  documents</a>. Build remains on hold.</p>
+</div></footer>
+</body>
+</html>

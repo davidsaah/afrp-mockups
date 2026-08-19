@@ -800,6 +800,7 @@ input[type="range"].wt{width:100%;accent-color:var(--green);min-height:44px;marg
   --lens:var(--green); --lens-deep:var(--green-700); --lens-ink:var(--green-800);
   --lens-50:var(--green-50); --lens-200:var(--green-200); --lens-bright:var(--green-400);
 }
+body[data-lens="door"]{ --lens:var(--green); --lens-deep:var(--green-700); --lens-ink:var(--green-800); }
 body[data-lens="club"]{ --lens:var(--olive); --lens-deep:var(--olive-deep);
   --lens-ink:var(--olive-ink); --lens-50:var(--olive-50); --lens-200:var(--olive-200);
   --lens-bright:var(--olive-bright) }
@@ -1214,6 +1215,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <span class="lockup__word">AFRP<span class="lockup__sub">Ramallah, Palestine &middot; est.&nbsp;1952</span></span>
   </a>
   <nav class="lensbar" aria-label="Lens">
+    <button type="button" data-lens-btn="door" data-desc="Front door — signed out: join, sign in, recover" onclick="setLens('door')"><svg aria-hidden="true"><use href="#i-person"/></svg>Front door</button>
     <button type="button" data-lens-btn="member" data-desc="Member — what one person sees" onclick="setLens('member')"><svg aria-hidden="true"><use href="#i-lens-member"/></svg>Member</button>
     <button type="button" data-lens-btn="club" data-desc="Club — running one club, Detroit" onclick="setLens('club')"><svg aria-hidden="true"><use href="#i-lens-club"/></svg>Club</button>
     <button type="button" data-lens-btn="program" data-desc="Program — running the programmes" onclick="setLens('program')"><svg aria-hidden="true"><use href="#i-lens-program"/></svg>Program</button>
@@ -1243,9 +1245,25 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 <div class="app-shell">
   <aside class="app-side" id="appside" aria-label="Sidebar">
 
+    <nav data-lens-nav="door" aria-label="Front door screens" hidden>
+      <div class="l-nav-group l-nav-group--lens"><svg class="nav-ico" aria-hidden="true"><use href="#i-person"/></svg>Signed out</div>
+      <a class="l-nav-item" href="#/door/landing">Welcome &mdash; afrp.org/my</a>
+      <a class="l-nav-item" href="#/door/join">Join the Federation <span class="l-nav-item__badge l-nav-item__badge--violet">S1</span></a>
+      <a class="l-nav-item" href="#/door/login">Sign in</a>
+      <a class="l-nav-item" href="#/door/recovery">Recover access</a>
+      <div class="l-nav-group">Coming of age</div>
+      <a class="l-nav-item" href="#/door/refresh">The 18th-birthday refresh</a>
+      <div class="sidefoot">
+        <p class="why" style="padding:0 var(--s2)">No one is signed in on this lens. Everything here runs
+        <b>verified channel first</b> (S1): no money, no PII, no consent moves across a channel that
+        has not been proven. These screens never reveal whether an account exists.</p>
+      </div>
+    </nav>
+
     <nav data-lens-nav="member" aria-label="Member screens">
       <div class="l-nav-group l-nav-group--lens"><svg class="nav-ico" aria-hidden="true"><use href="#i-lens-member"/></svg>Today &middot; Nadia &middot; 4 Nov 2026</div>
       <a class="l-nav-item" href="#/member/home">Home</a>
+      <a class="l-nav-item" href="#/member/inbox">Inbox &mdash; notifications <span class="l-nav-item__badge">4</span></a>
       <a class="l-nav-item" href="#/member/voting">Voting <span class="l-nav-item__badge" id="nav-ballot-badge">1 open</span></a>
       <a class="l-nav-item" href="#/member/scenarios">Guided scenarios <span class="l-nav-item__badge l-nav-item__badge--violet">16</span></a>
       <div class="l-nav-group">Membership &amp; finance</div>
@@ -1301,6 +1319,8 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" href="#/program/registry">Programme registry <span class="l-nav-item__badge l-nav-item__badge--violet">1 proposed</span></a>
       <div class="l-nav-group">Medical</div>
       <a class="l-nav-item" href="#/program/prog/medical">Medical Mission</a>
+      <a class="l-nav-item" href="#/program/medops">Mission operations <span class="l-nav-item__badge l-nav-item__badge--muted">ARFHSN</span></a>
+      <a class="l-nav-item" href="#/program/intake">Human services intake <span class="l-nav-item__badge l-nav-item__badge--muted">ARFHSN</span></a>
       <a class="l-nav-item" href="#/program/prog/women">Women to Women</a>
       <a class="l-nav-item" href="#/program/senior">Senior Living campaign <span class="l-nav-item__badge l-nav-item__badge--muted">w/ Foundation</span></a>
       <div class="l-nav-group">Cultural</div>
@@ -1319,6 +1339,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" href="#/program/applications">Applications &amp; rubric</a>
       <a class="l-nav-item" href="#/program/conflicts">Conflict of interest</a>
       <a class="l-nav-item" href="#/program/budget">Budget &amp; endowment</a>
+      <a class="l-nav-item" href="#/program/endowment">Endowment management <span class="l-nav-item__badge l-nav-item__badge--violet">pending policy</span></a>
       <a class="l-nav-item" href="#/program/disbursement">Disbursement &amp; verification</a>
       <a class="l-nav-item" href="#/program/alumni">Alumni &amp; recruiting</a>
       <a class="l-nav-item" href="#/program/prog/award">HS Senior Award <span class="l-nav-item__badge l-nav-item__badge--muted">retired</span></a>
@@ -1351,6 +1372,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <div class="l-nav-group">Club management</div>
       <a class="l-nav-item" href="#/fed/clubs">Club registry &amp; setup <span class="l-nav-item__badge">18</span></a>
       <a class="l-nav-item" href="#/fed/clubhealth">Club health &amp; integration</a>
+      <a class="l-nav-item" href="#/fed/migration">Onboarding &amp; migration <span class="l-nav-item__badge l-nav-item__badge--violet">new</span></a>
       <div class="l-nav-group">Convention</div>
       <a class="l-nav-item" href="#/fed/convention">Contract &amp; finance</a>
       <a class="l-nav-item" href="#/fed/convops">Operations &amp; registration</a>
@@ -1360,8 +1382,10 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" href="#/fed/floor">Live voting floor</a>
       <div class="l-nav-group">Governance</div>
       <a class="l-nav-item" href="#/fed/board">Board &amp; officers</a>
+      <a class="l-nav-item" href="#/fed/boardroom">Board workspace <span class="l-nav-item__badge l-nav-item__badge--violet">new</span></a>
       <a class="l-nav-item" href="#/fed/committees">Committees</a>
       <a class="l-nav-item" href="#/fed/calendar">Election calendar</a>
+      <a class="l-nav-item" href="#/fed/mailedballot">Mailed ballot &mdash; CPA <span class="l-nav-item__badge l-nav-item__badge--violet">current law</span></a>
       <a class="l-nav-item" href="#/fed/results">Results &amp; certification</a>
       <div class="l-nav-group">Finance</div>
       <a class="l-nav-item" href="#/fed/finance">Daily close</a>
@@ -1371,6 +1395,9 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <div class="l-nav-group">Operations</div>
       <a class="l-nav-item" href="#/fed/events">Event management</a>
       <a class="l-nav-item" href="#/fed/comms">Communications centre</a>
+      <a class="l-nav-item" href="#/fed/supportdesk">Member support desk <span class="l-nav-item__badge l-nav-item__badge--violet">new</span></a>
+      <div class="l-nav-group">Institutions</div>
+      <a class="l-nav-item" href="#/fed/hsn">ARFHSN &mdash; trustees &amp; interlock <span class="l-nav-item__badge l-nav-item__badge--muted">separate 501(c)(3)</span></a>
       <div class="l-nav-group">Rules</div>
       <a class="l-nav-item" href="#/fed/workbench">Ruleset workbench</a>
       <div class="sidefoot">
@@ -4187,6 +4214,497 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   </div>
 </section>
 
+
+<!-- ═══════════════ FRONT DOOR LENS · signed out ═══════════════ -->
+
+<section class="screen" data-route="door/landing" data-lens="door" aria-label="Welcome">
+  <div class="page-head">
+    <div><h1>American Federation of Ramallah, Palestine</h1>
+    <p>Est. 1952, formalized 1959 &middot; 18 local clubs &middot; the 68th Convention meets in Houston.
+    This page is public: it holds <b>no member data</b> and reads no member state. There are exactly two doors.</p></div>
+    <div class="page-head__end"><a class="btn-xs" href="#/door/join" style="background:var(--lens);color:#fff;border-color:var(--lens)">Join the Federation</a><a class="btn-xs" href="#/door/login">Sign in</a></div>
+  </div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>What membership is</h3></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>A national membership</b><span>voice and vote in the Federation &mdash; and any club memberships you choose, each its own record</span></div><div class="qrow__end"><span class="mono">$90/yr Individual</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>The programs</b><span>Camp Ramallah, the Scholarship, Project Hope, Medical Mission, Hathihe Ramallah since 1952 &mdash; four rails from camp to career</span></div><div class="qrow__end"><span class="c-pill c-pill--info">19 programs</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>The community</b><span>a member directory you control field by field, a family tree 30,000 strong, a professional network</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">opt-in</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>The Convention</b><span>every year since 1959 &mdash; registration opens to members first</span></div><div class="qrow__end"><span class="mono">Houston 2026</span></div></div>
+      </div>
+      <div class="panel__foot"><span class="why">Dues tiers and club dues are set under the ruleset in force and shown before any payment step.</span></div>
+    </div>
+    <div class="panel">
+      <div class="panel__head"><h3>Newlywed? Student on scholarship?</h3></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>Complimentary Family tier for newlyweds</b><span>first year &mdash; congratulations counts as policy here</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">$0</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Free student membership for scholarship recipients</b><span>a real national record at $0 &mdash; standard consents, no club auto-add</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">$0</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Eighteen local clubs</b><span>Birmingham to Washington &mdash; join as many as will have you</span></div><div class="qrow__end"><span class="mono">multi-club</span></div></div>
+      </div>
+      <div class="panel__foot"><span class="why">Signed-out pages never reveal whether any particular person is a member &mdash; that is a rule, not a styling choice.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" data-route="door/join" data-lens="door" aria-label="Join">
+  <div class="page-head">
+    <div><h1>Join &mdash; verified channel first</h1>
+    <p>The J01 wizard. Until your email and mobile are proven yours, only a <b>draft</b> exists &mdash; PII-minimal,
+    expires in 30 days, never billed, never mailed, contacted at most once (on the channel that started verifying).</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info">step 2 of 7</span><span class="c-pill c-pill--warn">draft &middot; expires 18 Sep</span></div>
+  </div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>The seven steps &mdash; payment is last, on purpose</h3></div>
+      <div class="panel__body">
+        <ol class="trace">
+          <li class="is-pass"><b>1 &middot; Pick a tier.</b> Omar chose Individual, $90 &mdash; dues-2026.1 provisional, named on screen.</li>
+          <li><b>2 &middot; Verify your channels &mdash; you are here.</b> A code to omar.sayegh@example.com and one to (713) 555-01&bull;&bull;. Nothing else is stored until both clear. <b>S1.</b></li>
+          <li><b>3 &middot; Identity &amp; lineage (optional).</b> Tree search; a claim links PROVISIONAL pending steward review &mdash; membership never waits on lineage.</li>
+          <li><b>4 &middot; Household.</b> Create one, or request to join one &mdash; an adult of that household must accept; you see only &ldquo;request sent&rdquo;.</li>
+          <li><b>5 &middot; Clubs.</b> Add any of the 18 &mdash; each its own membership, its own dues, held for the club until remitted.</li>
+          <li><b>6 &middot; Consent defaults.</b> Marketing OFF &middot; operational ON &middot; program invitations ON (the Pathways class) &middot; directory OFF &mdash; bound to your now-verified channels.</li>
+          <li><b>7 &middot; One checkout.</b> Gross fees, two line groups (national revenue; club liability) &mdash; and the postal address that recovery and the mailed ballot both need. The first dollar moves <i>after</i> step 2 cleared. A household joining together is N wizards sharing this one checkout: each adult verifies their own channels first.</li>
+        </ol>
+      </div>
+      <div class="panel__foot"><span class="why">The typo attack dies here: omar@gmali.com never receives a code, and nothing was stored, charged, or mailed.</span></div>
+    </div>
+    <div class="stack" style="display:grid;gap:var(--s5)">
+      <div class="panel">
+        <div class="panel__head"><h3>Verify: email</h3><span class="c-pill c-pill--ok">code sent</span></div>
+        <div class="panel__body">
+          <p class="why" style="margin:0 0 var(--s3)">Enter the 6-digit code sent to <b>omar.sayegh@example.com</b>. Codes expire in 10 minutes; five wrong tries pause this draft for an hour.</p>
+          <div class="calc"><div class="calc__r"><span>Code<small>demo &mdash; screens never show real codes</small></span><span class="calc__n mono">&bull; &bull; &bull; &bull; &bull; &bull;</span></div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel__head"><h3>Verify: mobile</h3><span class="c-pill c-pill--warn">waiting</span></div>
+        <div class="panel__body"><p class="why" style="margin:0">SMS to (713) 555-01&bull;&bull;. Both channels verify independently; either alone can later sign you in, which is exactly why both are proven now.</p></div>
+        <div class="panel__foot"><span class="why">First login lands on a finish-setup checklist: household &middot; consent &middot; directory &middot; tree claim.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" data-route="door/login" data-lens="door" aria-label="Sign in">
+  <div class="page-head">
+    <div><h1>Sign in</h1>
+    <p>Passwordless by default: a one-time code to a verified channel. There is nothing here to phish,
+    reuse, or forget &mdash; and this screen <b>never reveals whether an account exists</b>.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info">absence is not signal</span></div>
+  </div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>One-time code</h3></div>
+      <div class="panel__body">
+        <div class="calc"><div class="calc__r"><span>Email or mobile<small>any verified channel on your record</small></span><span class="calc__n mono">samira@&bull;&bull;&bull;</span></div></div>
+        <p class="why" style="margin:var(--s3) 0 0">The response is always the same sentence: <b>&ldquo;If this
+        channel is on a record, a code is on its way.&rdquo;</b> Same wording, same timing, whether or not the
+        channel exists &mdash; the J15 absence rule applied to authentication.</p>
+      </div>
+      <div class="panel__foot"><span class="why">Refusals name their rule &mdash; but account existence is never the named fact.</span></div>
+    </div>
+    <div class="stack" style="display:grid;gap:var(--s5)">
+      <div class="panel">
+        <div class="panel__head"><h3>Passkeys</h3><span class="c-pill c-pill--ok">optional</span></div>
+        <div class="panel__body panel__body--flush">
+          <div class="qrow"><div class="qrow__main"><b>Enrol after first sign-in</b><span>per device, revocable &mdash; a passkey never leaves the device that made it</span></div><div class="qrow__end"><span class="c-pill c-pill--info">add</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>Samira&rsquo;s iPhone</b><span>enrolled 2 Mar 2026 &middot; last used today</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">active</span></div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel__head"><h3>Sessions</h3></div>
+        <div class="panel__body panel__body--flush">
+          <div class="qrow"><div class="qrow__main"><b>This device &mdash; Houston, TX</b><span>signed in 09:14 today</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">current</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>iPad &mdash; last seen 14 Aug</b><span>revoke ends the session within a minute</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">revoke</span></div></div>
+        </div>
+        <div class="panel__foot"><span class="why">Every credential change notifies every verified channel &mdash; with an undo window.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" data-route="door/recovery" data-lens="door" aria-label="Recover access">
+  <div class="page-head">
+    <div><h1>Recover access</h1>
+    <p>Two paths, chosen by what you still hold. Neither is same-day for a full takeover &mdash; that slowness is the security.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--warn">no shortcuts, by design</span></div>
+  </div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>Lost one channel</h3><span class="c-pill c-pill--ok">self-serve</span></div>
+      <div class="panel__body">
+        <ol class="trace">
+          <li class="is-pass"><b>Sign in with the other verified channel.</b></li>
+          <li class="is-pass"><b>Add the replacement</b> &mdash; verified by code before it can ever sign you in.</li>
+          <li><b>Notice goes to ALL channels</b> &mdash; including the one being replaced &mdash; with a <b>72-hour undo</b>. A hijacker&rsquo;s swap announces itself to the very channel they were trying to remove.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel__head"><h3>Lost both channels</h3><span class="c-pill c-pill--warn">support case</span></div>
+      <div class="panel__body">
+        <ol class="trace">
+          <li><b>A support-desk case</b> with evidence of identity &mdash; the desk cannot shortcut this.</li>
+          <li><b>A 7-day delay</b>, and a mailed notice to the postal address on file, before any credential moves. No address on file? A slower path &mdash; in-person or notarized evidence and a longer delay &mdash; never a faster one.</li>
+          <li><b>New channels verified by code</b>, old sessions revoked, the whole event on the audit.</li>
+        </ol>
+        <p class="why" style="margin:var(--s3) 0 0"><b>What never happens:</b> a household adult recovering
+        for another adult (each adult owns their own record), or a delegate signing in as you &mdash; delegation
+        is scoped to acting <i>within</i> the platform and explicitly excludes credentials.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" data-route="door/refresh" data-lens="door" aria-label="18th-birthday refresh">
+  <div class="page-head">
+    <div><h1>Turning eighteen &mdash; the consent refresh</h1>
+    <p>Age sets defaults, never rules. On 3 October, Layla&rsquo;s consents become <b>hers</b> &mdash; and the
+    refresh goes to a channel that is provably hers, never a parent-supplied one.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info">S1 &middot; J03</span></div>
+  </div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>The 90 days before</h3></div>
+      <div class="panel__body">
+        <ol class="trace">
+          <li class="is-pass"><b>5 Jul &mdash; camp check-in</b> asks Layla to verify a channel of her own. She gives her email; the code clears. Nothing else changes yet.</li>
+          <li class="is-pass"><b>Under 16?</b> No credentials at all. <b>16&ndash;17:</b> sign-in allowed with the consent-holder&rsquo;s co-consent &mdash; a flagged minor session: no payments, no directory, no consent changes.</li>
+          <li><b>3 Oct &mdash; her birthday.</b> The refresh lands on <i>her</i> verified email. Until she answers: prior marketing consents stop, operational continues, directory stays off.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel__head"><h3>What her parents see change</h3></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>Before 3 Oct</b><span>one consent-holder of record (Nadia) governs; changeable by either parent with notice to both</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">minor</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>On 3 Oct</b><span>parental visibility of her consents ends; the system tells LAYLA what changed, not her parents</span></div><div class="qrow__end"><span class="c-pill c-pill--info">adult</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Directory</b><span>nothing auto-appears at 18 &mdash; she appears only when SHE turns inclusion on</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">off</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ NEW · member inbox ═══════════════ -->
+
+<section class="screen" data-route="member/inbox" data-lens="member" aria-label="Inbox">
+  <div class="page-head">
+    <div><h1>Inbox &mdash; every notice, and why you got it</h1>
+    <p>Everything the platform ever sent you, with the <b>consent class that authorized it</b>. Mute by class
+    &mdash; operational notices can&rsquo;t be muted away, marketing mutes immediately.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--warn">4 unread</span></div>
+  </div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>Recent</h3></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>Your SF club renewal posted</b><span>today 09:02 &middot; email</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">operational</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Ballot open: Deputy President 2027</b><span>yesterday &middot; email + push</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">operational</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Project Hope &rsquo;27 cohort &mdash; you&rsquo;re invited</b><span>Mon &middot; email</span></div><div class="qrow__end"><span class="c-pill c-pill--info">program invitation</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Convention early-bird ends Friday</b><span>Sun &middot; email</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">marketing</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>A member asked to reach you via the directory</b><span>12 Aug &middot; relay &mdash; staff can see THAT it happened, never what it said</span></div><div class="qrow__end"><span class="c-pill c-pill--info">relay</span></div></div>
+      </div>
+      <div class="panel__foot"><span class="why">Deleting an entry clears your view. It never unsends anything and never edits the audit.</span></div>
+    </div>
+    <div class="panel">
+      <div class="panel__head"><h3>Your classes</h3></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>Operational</b><span>renewals, ballots, receipts, schedule changes &mdash; always on while you are a member</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">on</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Program invitations</b><span>the Pathways class &mdash; handoffs like Hope or RBPN; recruitment is never dressed as operational</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">on</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Marketing</b><span>mute is immediate and audited</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">muted 12 Aug</span></div></div>
+      </div>
+      <div class="panel__foot"><span class="why">Bounced sends feed the address &amp; channel hygiene queues &mdash; the mailed-ballot roll reads them before it ships.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ NEW · federation screens ═══════════════ -->
+
+<section class="screen" data-route="fed/mailedballot" data-lens="fed" aria-label="Mailed ballot">
+  <div class="page-head">
+    <div><h1>Mailed ballot &mdash; the CPA&rsquo;s election, the platform&rsquo;s roll</h1>
+    <p>The flow current law requires (kept by the 2024 text). The platform&rsquo;s authority ends at the frozen
+    roll and the envelope IDs: <b>ballot content never enters it</b>. The electronic flow elsewhere in this
+    prototype is a future-amendment design and says so.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info">Deputy President 2027</span><span class="c-pill c-pill--ok">roll frozen 15 Oct</span></div>
+  </div>
+  <div class="panel" style="margin-bottom:var(--s4)">
+    <div class="statbox">
+      <div class="stat"><span class="stat__k">On the frozen roll</span><span class="stat__v">2,847</span><span class="stat__d">record date 15 Oct &middot; never recomputed</span></div>
+      <div class="stat"><span class="stat__k">Mailed by CPA</span><span class="stat__v">2,847</span><span class="stat__d">22 Oct &middot; double-envelope standard</span></div>
+      <div class="stat"><span class="stat__k">Return envelopes received</span><span class="stat__v">1,204</span><span class="stat__d">scanned envelope IDs &mdash; inclusion, never content</span></div>
+      <div class="stat"><span class="stat__k">Exceptions</span><span class="stat__v">31</span><span class="stat__d">19 undeliverable &middot; 9 re-mails &middot; 3 duplicates</span></div>
+    </div>
+  </div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>The flow</h3></div>
+      <div class="panel__body">
+        <ol class="trace">
+          <li class="is-pass"><b>Record date.</b> The electorate freezes as a snapshot; post-freeze reversals carry the S3 annotation, they never rewrite the roll.</li>
+          <li class="is-pass"><b>Address hygiene.</b> Undeliverable-flagged members prompted on operational rails. No valid address? The member stays ON the roll &mdash; surfaced, never dropped.</li>
+          <li class="is-pass"><b>Roll export to the CPA.</b> Names + addresses only. Watermarked, expiring, logged: who exported, when.</li>
+          <li class="is-pass"><b>Print &amp; mail (CPA).</b> Outer return envelope carries a scannable ID naming the VOTER; the inner envelope is anonymous and holds the ballot.</li>
+          <li><b>Returns.</b> Received-or-postmarked deadline per the ruleset in force, named on screen. Late envelopes logged, unopened, retained.</li>
+          <li><b>Count &amp; certify (CPA).</b> The platform imports certified totals and the certification artifact &mdash; it never claims to have counted.</li>
+        </ol>
+      </div>
+      <div class="panel__foot"><span class="why">Address fixed after export? It goes on the exception queue to the CPA &mdash; the export is never regenerated.</span></div>
+    </div>
+    <div class="stack" style="display:grid;gap:var(--s5)">
+      <div class="panel">
+        <div class="panel__head"><h3>Exception queue</h3><span class="c-pill c-pill--warn">3 open</span></div>
+        <div class="panel__body panel__body--flush">
+          <div class="qrow"><div class="qrow__main"><b>Duplicate return &mdash; envelope IDs 4471 &amp; 5502, same voter</b><span>first validly received counts; the later logged unopened &mdash; policy named</span></div><div class="qrow__end"><span class="c-pill c-pill--info">CPA</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>Undeliverable, address since fixed</b><span>re-mail before the cutoff (5 Nov, Board-set) only &mdash; the re-mail VOIDS the original envelope ID before a new one issues</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">re-mail</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>CPA scan-return channel</b><span>signed daily batch, validated against the frozen roll; unknown IDs rejected &amp; logged. A recount produces a second certification artifact &mdash; imported append-only, superseding, never editing</span></div><div class="qrow__end"><span class="c-pill c-pill--info">S5</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>Envelope ID scanned twice</b><span>cannot be marked received twice &mdash; refused, rule named</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">blocked</span></div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel__head"><h3>What the member sees</h3></div>
+        <div class="panel__body panel__body--flush">
+          <div class="qrow"><div class="qrow__main"><b>&ldquo;Your ballot was mailed 22 Oct&rdquo;</b><span>and &ldquo;your return envelope was received 30 Oct&rdquo; &mdash; their own row only. This is live inclusion STATUS, not a receipt: R14&rsquo;s one-time receipt belongs to the electronic flow</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">status</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>Never their vote, never anyone else&rsquo;s status</b><span>credentialing sees counts; club officers see nothing per-member</span></div><div class="qrow__end"><span class="c-pill c-pill--info">R14</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" data-route="fed/boardroom" data-lens="fed" aria-label="Board workspace">
+  <div class="page-head">
+    <div><h1>Board &amp; committee workspace</h1>
+    <p>The system of record <b>between</b> conventions: motions, minutes, action items, and the queue of 48
+    provisional overrides awaiting ratification. Committees get the same rails, scoped down &mdash; one design,
+    one audit.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--warn">next meeting 12 Sep</span></div>
+  </div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>Motions</h3><span class="c-pill c-pill--info">3 on the agenda</span></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>M-2026-14 &middot; Ratify override #7 &mdash; dues authority to the Board</b><span>links to the workbench divergence view &middot; roll-call required</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">discussion</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>M-2026-15 &middot; Dormant-club prepaid dues policy</b><span>the decision J14 waits on &middot; drafted from the platform&rsquo;s flag</span></div><div class="qrow__end"><span class="c-pill c-pill--info">seconded</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>M-2026-16 &middot; 9.1.3 amendment &mdash; weights fix when voting opens</b><span>the S4 draft &middot; convention floor required for adoption</span></div><div class="qrow__end"><span class="c-pill c-pill--info">draft</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Ratification queue</b><span>48 provisional overrides of bylaws-2024.1 &middot; 7 ratified &middot; 41 pending &mdash; each one a motion like any other</span></div><div class="qrow__end"><span class="mono">41 pending</span></div></div>
+      </div>
+      <div class="panel__foot"><span class="why">A resolution is append-only once adopted; corrections are new entries (S5). Votes record per the rules in force.</span></div>
+    </div>
+    <div class="stack" style="display:grid;gap:var(--s5)">
+      <div class="panel">
+        <div class="panel__head"><h3>Decisions the platform is waiting on</h3><span class="c-pill c-pill--warn">5</span></div>
+        <div class="panel__body panel__body--flush">
+          <div class="qrow"><div class="qrow__main"><b>Agency vs revenue &mdash; club dues</b><span>one CPA signature; statements label the assumption meanwhile</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">CPA</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>Endowment Fund Policy Statement + entity</b><span>program/endowment is mocked and flagged, waiting</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">Board</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>Scholarship&rsquo;s legal home</b><span>Foundation vs ARFECF &mdash; the platform posts to the configured fund class and says so</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">Board</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>Directory grace parameter</b><span>J15 settled it as a named parameter, default 0, until set here</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">Board</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>At-large roll amendment</b><span>the S4 companion draft</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">floor</span></div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel__head"><h3>Minutes &amp; actions</h3></div>
+        <div class="panel__body panel__body--flush">
+          <div class="qrow"><div class="qrow__main"><b>14 Jun minutes</b><span>approved 12 Jul &mdash; now append-only</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">sealed</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>Action: convention contract addendum</b><span>owner: treasurer &middot; due 1 Sep &middot; stale items escalate to the next agenda automatically</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">due soon</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>Document library</b><span>board-confidential is an EXACT GRANT &mdash; the sixth sensitive permission, satisfied by no scope, federation included</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">exact grant</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>Entity boardrooms</b><span>ARFHSN BOT and ARFECF get the same rails, entity-bannered, own audit &mdash; motions link across, confidential papers never cross</span></div><div class="qrow__end"><span class="c-pill c-pill--info">entity</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" data-route="fed/supportdesk" data-lens="fed" aria-label="Support desk">
+  <div class="page-head">
+    <div><h1>Member support desk</h1>
+    <p>The convention help desk, made year-round: <b>one two-way door</b>, owned and clocked. A case carries a
+    scope &mdash; the agent sees the slice the case needs, and the desk confers <b>process, never permissions</b>.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--warn">7 open</span><span class="c-pill c-pill--ok">SLA: 96% on time</span></div>
+  </div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>Queue</h3></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>#1182 &middot; Dues receipt missing &mdash; Samira O.</b><span>scope: membership + payments &middot; first response due 2h</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">2h left</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>#1181 &middot; Badge reprint &mdash; convention</b><span>scope: convention only &mdash; this agent sees no giving, no household</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">in progress</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>#1179 &middot; Both channels lost &mdash; recovery</b><span>identity-sensitive: evidence + 7-day delay + mailed notice &mdash; the desk cannot shortcut FRONTDOOR</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">day 3 of 7</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>#1175 &middot; Relay dispute between two members</b><span>each member sees only their own side of the case</span></div><div class="qrow__end"><span class="c-pill c-pill--info">mediating</span></div></div>
+      </div>
+      <div class="panel__foot"><span class="why">The five sensitive permissions still need exact grants &mdash; a case never confers them.</span></div>
+    </div>
+    <div class="panel">
+      <div class="panel__head"><h3>Case #1181, as the agent sees it</h3></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>Marwan K. &mdash; badge QR-88213 reported lost</b><span>reissue kills the old badge instantly; ID checked at pickup</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">visible</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Registration &amp; banquet seat</b><span>needed for the reprint &mdash; in scope</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">visible</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Giving history &middot; household &middot; consents</b><span>not needed for a badge &mdash; not in the case scope</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">not shown</span></div></div>
+      </div>
+      <div class="panel__foot"><span class="why">Members see their own case history and the clocks the desk is held to.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" data-route="fed/migration" data-lens="fed" aria-label="Club onboarding and migration">
+  <div class="page-head">
+    <div><h1>Club onboarding &amp; migration</h1>
+    <p>&ldquo;Which club goes first&rdquo; finally has a screen &mdash; and the answer is always <b>the club
+    decides</b>. The Detroit/Breeze pattern, generalized: five stages, reversible until cutover, the labelled
+    door never changing silently.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--ok">1 migrating</span><span class="c-pill c-pill--info">17 as-is</span></div>
+  </div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>The five stages</h3></div>
+      <div class="panel__body">
+        <ol class="trace">
+          <li class="is-pass"><b>0 &middot; The club chooses.</b> Its own vote or officer action &mdash; never HQ-forced. Until then, its door stays as-is.</li>
+          <li class="is-pass"><b>1 &middot; Full import.</b> Identity resolution against national records; candidate duplicates to the merge queue &mdash; never auto-merged; nothing written back.</li>
+          <li class="is-pass"><b>2 &middot; Reconciliation.</b> Dues matched to the cent against the remittance ledger; every discrepancy resolved WITH the treasurer, logged.</li>
+          <li><b>3 &middot; Delta sync.</b> The club system stays writable at the club; one-way nightly feed, labelled. A club may pause here indefinitely &mdash; a supported state.</li>
+          <li><b>3&frac12; &middot; Verification outreach.</b> Imported emails and phones are UNVERIFIED channels &mdash; before the cutover vote each member verifies one, front-door style; the unverified land on a hygiene queue with postal fallback. Billing stays with the club&rsquo;s system until cutover.</li>
+          <li><b>4 &middot; Cutover vote</b> by the club, under its own rules. Only then does the platform become its system of record &mdash; effective-dated, the registry gaining its <b>third door value: platform-native</b>, which credentialing and the convention read first-class.</li>
+          <li><b>5 &middot; Legacy retired</b> to read-only archive; final state snapshotted.</li>
+        </ol>
+      </div>
+      <div class="panel__foot"><span class="why">An electorate frozen mid-migration reads the door of record as of the record date &mdash; migration state is part of the snapshot&rsquo;s label.</span></div>
+    </div>
+    <div class="panel">
+      <div class="panel__head"><h3>Club by club</h3><span class="c-pill c-pill--info">federation view &mdash; each club sees only its own</span></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>Detroit</b><span>stage 3 &middot; delta sync since 22 Jul &middot; cutover pending the club&rsquo;s vote</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">delta sync</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Houston</b><span>evaluating &mdash; asked for the Detroit reconciliation report</span></div><div class="qrow__end"><span class="c-pill c-pill--info">stage 0</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>San Francisco &middot; Phoenix &middot; New Jersey + 2 more</b><span>manual roster clubs &mdash; migration optional, the manual door is first-class forever</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">as-is</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Multi-club members during migration</b><span>only the migrating club&rsquo;s membership is touched; the other membership and the club-of-record pointer move only if the member acts</span></div><div class="qrow__end"><span class="c-pill c-pill--info">R2 &middot; R16</span></div></div>
+      </div>
+      <div class="panel__foot"><span class="why">Rollback at any stage before cutover, without data loss.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" data-route="fed/hsn" data-lens="fed" aria-label="ARFHSN trustees">
+  <div class="page-head">
+    <div><h1>ARFHSN &mdash; trustees &amp; interlock</h1>
+    <p>The Human Services Network&rsquo;s governance, administered without being absorbed.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info">14-seat BOT</span></div>
+  </div>
+  <div style="margin:0 0 var(--s4);padding:10px 14px;border:1px solid var(--gold);border-left:4px solid var(--gold);border-radius:10px;background:color-mix(in srgb,var(--gold) 8%,transparent);font-size:13px"><b>ARFHSN &mdash; a separate 501(c)(3).</b> No membership of its own; a 14-seat Board of Trustees elected by the AFRP Board; by-laws amendable by 60% of the AFRP Board. Everything on this screen belongs to that entity &mdash; the platform administers it without merging it into AFRP. Figures are demo.</div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>Board of Trustees</h3><span class="c-pill c-pill--ok">14 of 14 seated</span></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>Seat 1 &middot; term 2025&ndash;28</b><span>elected by AFRP Board motion M-2025-09 &mdash; linked to the board workspace</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">seated</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Seats 2&ndash;14</b><span>terms staggered; each seat&rsquo;s electing motion on its row (names are demo)</span></div><div class="qrow__end"><span class="mono">13 rows</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Amendments</b><span>ARFHSN by-laws amendable by <b>60% of the AFRP Board</b> &mdash; the threshold sits beside any amendment motion</span></div><div class="qrow__end"><span class="c-pill c-pill--info">60%</span></div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel__head"><h3>Interlock &amp; boundaries</h3></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>ARFECF 4-member interlock cap</b><span>cited in the old analysis, absent from the 2013 text &mdash; carried INACTIVE: shown, dated, never enforced silently</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">inactive</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Trustee election materials</b><span>HSN-confidential documents stay in HSN scope &mdash; the electing motion carries a reference, not the papers</span></div><div class="qrow__end"><span class="c-pill c-pill--info">scoped</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Money</b><span>MED &amp; W2W restricted classes post gross, reverse via receivables, report per-entity</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">S3 &middot; R25</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ NEW · program-lens screens ═══════════════ -->
+
+<section class="screen" data-route="program/endowment" data-lens="program" aria-label="Endowment management">
+  <div class="page-head">
+    <div><h1>Endowment fund management</h1>
+    <p>The corpus, the draw, and the one capacity number the scholarship budget consumes.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--warn">pending policy</span></div>
+  </div>
+  <div style="margin:0 0 var(--s4);padding:10px 14px;border:1px solid var(--gold);border-left:4px solid var(--gold);border-radius:10px;background:color-mix(in srgb,var(--gold) 8%,transparent);font-size:13px"><b>Pending two Board decisions:</b> the Endowment Fund Policy Statement, and the fund&rsquo;s legal home (ARFECF proposed). This screen exists so the Board can decide by looking at it. Every figure is demo.</div>
+  <div class="panel" style="margin-bottom:var(--s4)">
+    <div class="statbox">
+      <div class="stat"><span class="stat__k">Corpus (demo)</span><span class="stat__v">$2.41M</span><span class="stat__d">gifts join the corpus and are never spent</span></div>
+      <div class="stat"><span class="stat__k">Trailing 12-quarter average</span><span class="stat__v">$2.28M</span><span class="stat__d">the base the draw is computed on</span></div>
+      <div class="stat"><span class="stat__k">Policy draw @ 4.5%</span><span class="stat__v">$102,600</span><span class="stat__d">policy version shown with its arithmetic</span></div>
+      <div class="stat"><span class="stat__k">Distributable 2027</span><span class="stat__v">$102,600</span><span class="stat__d">THE capacity number &mdash; same figure, same date, on the scholarship budget screen</span></div>
+    </div>
+  </div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>Named funds</h3></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>General scholarship corpus</b><span>unrestricted within scholarships</span></div><div class="qrow__end"><span class="mono">$1.9M</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>The Khalil fund &mdash; engineering (demo)</b><span>named award, matched most-constrained-first</span></div><div class="qrow__end"><span class="mono">$310k</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>The Mansour fund (demo)</b><span>market value below gift value &mdash; <b>underwater</b>: draw suppressed per policy, never silently drawn</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">underwater</span></div></div>
+      </div>
+      <div class="panel__foot"><span class="why">Donor designation travels on the gift (R25); the Board&rsquo;s allocations are allocations &mdash; S6&rsquo;s wording rule applies here too.</span></div>
+    </div>
+    <div class="panel">
+      <div class="panel__head"><h3>Donor annual report</h3></div>
+      <div class="panel__body"><p class="why" style="margin:0">Corpus, draw, and what the draw funded &mdash;
+      aggregate only, under the S7 floor. Marwan&rsquo;s $10,000 is visible to Marwan; the report never lets
+      arithmetic find any other donor, or any recipient.</p></div>
+      <div class="panel__foot"><span class="why">A mid-year market drop after the scholarship committee encumbers? The capacity number is frozen at budget adoption (R43); the shortfall surfaces as next year&rsquo;s input, never a mid-cycle clawback.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" data-route="program/medops" data-lens="program" aria-label="Medical Mission operations">
+  <div class="page-head">
+    <div><h1>Medical Mission &mdash; operations</h1>
+    <p>Volunteers, logistics, and money &mdash; with a hard line where patients begin.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info">Mission 2027 &middot; planning</span></div>
+  </div>
+  <div style="margin:0 0 var(--s4);padding:10px 14px;border:1px solid var(--gold);border-left:4px solid var(--gold);border-radius:10px;background:color-mix(in srgb,var(--gold) 8%,transparent);font-size:13px"><b>ARFHSN &mdash; a separate 501(c)(3).</b> No membership of its own; a 14-seat Board of Trustees elected by the AFRP Board; by-laws amendable by 60% of the AFRP Board. Everything on this screen belongs to that entity &mdash; the platform administers it without merging it into AFRP. Figures are demo.</div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>Mission roster &amp; logistics</h3></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>Volunteers &mdash; 23 enrolled (demo)</b><span>AFRP members via program enrollment; the camp-grade safeguarding rails (R40): licensure &amp; credential verification GATES the manifest; incidents close with a notification</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">roster</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Shipment manifest &mdash; container 2 of 3</b><span>supplies, customs docs, in-country partner handoff signed at each transfer</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">in transit</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Partner handoffs</b><span>the in-country partner signs; the chain of custody is the audit</span></div><div class="qrow__end"><span class="c-pill c-pill--info">logged</span></div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel__head"><h3>Where the platform stops</h3></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>Patients are not platform records</b><span>clinical data stays in the in-country partner&rsquo;s systems; no patient name ever crosses the entity boundary</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">hard line</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Aggregate counts only</b><span>patients seen, procedures, villages &mdash; under the S7 complementary floor, so small places stay unidentifiable</span></div><div class="qrow__end"><span class="c-pill c-pill--info">S7</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Conduit money</b><span>MED restricted class &middot; gross fees &middot; chargebacks become program receivables &mdash; the class never goes negative</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">S3</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" data-route="program/intake" data-lens="program" aria-label="Human services intake">
+  <div class="page-head">
+    <div><h1>Human services intake</h1>
+    <p>The strictest screen in the platform. Clients are <b>confidential non-member records in a separate
+    store</b> &mdash; even when a client happens to be a member, the two facts are never joined.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--danger">exact grants only</span></div>
+  </div>
+  <div style="margin:0 0 var(--s4);padding:10px 14px;border:1px solid var(--gold);border-left:4px solid var(--gold);border-radius:10px;background:color-mix(in srgb,var(--gold) 8%,transparent);font-size:13px"><b>ARFHSN &mdash; a separate 501(c)(3).</b> No membership of its own; a 14-seat Board of Trustees elected by the AFRP Board; by-laws amendable by 60% of the AFRP Board. Everything on this screen belongs to that entity &mdash; the platform administers it without merging it into AFRP. Figures are demo.</div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>Intake &mdash; minimum fields, each with its why</h3></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>Name &amp; contact</b><span>collected to deliver the service &mdash; and for nothing else</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">required</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Need assessment</b><span>the service&rsquo;s own fields; every added field names why it is collected</span></div><div class="qrow__end"><span class="c-pill c-pill--info">scoped</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Membership status</b><span>NOT ASKED. No tree links, no directory presence, no lookup against member records &mdash; the client store sits OUTSIDE identity resolution, a stated carve-out from the one-person-one-record rule</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">never</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>The client&rsquo;s own access</b><span>no credentials, so access, correction and expungement run through the support desk &mdash; evidence-based, case-scoped, against a named retention policy</span></div><div class="qrow__end"><span class="c-pill c-pill--info">via desk</span></div></div>
+      </div>
+      <div class="panel__foot"><span class="why">Case notes are append-only (S5); corrections are new entries.</span></div>
+    </div>
+    <div class="panel">
+      <div class="panel__head"><h3>Access &amp; reporting</h3></div>
+      <div class="panel__body panel__body--flush">
+        <div class="qrow"><div class="qrow__main"><b>Access log</b><span>every read logged; the log is visible to the HSN director</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">audited</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Exact grants</b><span>the five-sensitive-permissions model at its strictest &mdash; federation scope does NOT read into this store</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">R39+</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Reporting</b><span>aggregate only; cells AND complements &ge; 5 &mdash; the S7 floor was born for rooms like this</span></div><div class="qrow__end"><span class="c-pill c-pill--info">S7</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="screen" data-route="sitemap" data-lens="fed" aria-label="Sitemap">
   <div class="page-head">
     <div><h1>Every screen</h1>
@@ -4194,9 +4712,15 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   </div>
   <div class="grid grid--2">
     <div class="panel">
+      <div class="panel__head"><h3>Front door &mdash; signed out</h3></div>
+      <div class="panel__body pillrow" style="gap:var(--s2)">
+        <a class="btn-xs" href="#/door/landing">Welcome</a><a class="btn-xs" href="#/door/join">Join</a><a class="btn-xs" href="#/door/login">Sign in</a><a class="btn-xs" href="#/door/recovery">Recover access</a><a class="btn-xs" href="#/door/refresh">18th-birthday refresh</a>
+      </div>
+    </div>
+    <div class="panel">
       <div class="panel__head"><h3>Member lens &mdash; participation</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/member/home">Home</a><a class="btn-xs" href="#/member/scenarios">Guided scenarios</a><a class="btn-xs" href="#/member/voting">Voting</a><a class="btn-xs" href="#/member/membership">Membership &amp; dues</a><a class="btn-xs" href="#/member/household">My household</a><a class="btn-xs" href="#/member/payments">Payments &amp; giving</a><a class="btn-xs" href="#/member/events">Events</a><a class="btn-xs" href="#/member/convention">Convention</a><a class="btn-xs" href="#/member/convlive">Convention live</a><a class="btn-xs" href="#/member/convstore">Convention store</a><a class="btn-xs" href="#/member/convhelp">Help desk</a><a class="btn-xs" href="#/member/dirinclusion">Directory inclusion</a><a class="btn-xs" href="#/member/lifeevent">Report a life event</a><a class="btn-xs" href="#/member/ads">Advertise</a><a class="btn-xs" href="#/member/programs">My programmes</a><a class="btn-xs" href="#/member/club">My club</a><a class="btn-xs" href="#/member/family">Family tree</a><a class="btn-xs" href="#/member/directory">Directory</a><a class="btn-xs" href="#/member/rbpn">Professional network</a><a class="btn-xs" href="#/member/magazine">Magazine</a><a class="btn-xs" href="#/member/bookstore">Bookstore</a>
+        <a class="btn-xs" href="#/member/home">Home</a><a class="btn-xs" href="#/member/inbox">Inbox</a><a class="btn-xs" href="#/member/scenarios">Guided scenarios</a><a class="btn-xs" href="#/member/voting">Voting</a><a class="btn-xs" href="#/member/membership">Membership &amp; dues</a><a class="btn-xs" href="#/member/household">My household</a><a class="btn-xs" href="#/member/payments">Payments &amp; giving</a><a class="btn-xs" href="#/member/events">Events</a><a class="btn-xs" href="#/member/convention">Convention</a><a class="btn-xs" href="#/member/convlive">Convention live</a><a class="btn-xs" href="#/member/convstore">Convention store</a><a class="btn-xs" href="#/member/convhelp">Help desk</a><a class="btn-xs" href="#/member/dirinclusion">Directory inclusion</a><a class="btn-xs" href="#/member/lifeevent">Report a life event</a><a class="btn-xs" href="#/member/ads">Advertise</a><a class="btn-xs" href="#/member/programs">My programmes</a><a class="btn-xs" href="#/member/club">My club</a><a class="btn-xs" href="#/member/family">Family tree</a><a class="btn-xs" href="#/member/directory">Directory</a><a class="btn-xs" href="#/member/rbpn">Professional network</a><a class="btn-xs" href="#/member/magazine">Magazine</a><a class="btn-xs" href="#/member/bookstore">Bookstore</a>
       </div>
     </div>
     <div class="panel">
@@ -4208,13 +4732,13 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <div class="panel">
       <div class="panel__head"><h3>Program lens &mdash; running the programmes</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/program/overview">All programmes</a><a class="btn-xs" href="#/program/lifecycle">Lifecycle &amp; pipeline</a><a class="btn-xs" href="#/program/registry">Programme registry</a><a class="btn-xs" href="#/program/prog/camp">Camp Ramallah</a><a class="btn-xs btn-xs--retired" href="#/program/prog/award">HS Senior Award (retired)</a><a class="btn-xs" href="#/program/prog/hope">Project Hope</a><a class="btn-xs" href="#/program/prog/medical">Medical Mission</a><a class="btn-xs" href="#/program/prog/leadership">Leadership Ramallah</a><a class="btn-xs" href="#/program/prog/exchange">Exchange Mission</a><a class="btn-xs" href="#/program/prog/congress">Congressional Outreach</a><a class="btn-xs" href="#/program/prog/action">Day of Action</a><a class="btn-xs" href="#/program/prog/arabic">Arabic Course</a><a class="btn-xs" href="#/program/prog/women">Women to Women</a><a class="btn-xs" href="#/program/prog/preservation">Preservation Project</a><a class="btn-xs" href="#/program/senior">Senior Living campaign</a><a class="btn-xs" href="#/program/applications">Scholarship applications</a><a class="btn-xs" href="#/program/conflicts">Conflict of interest</a><a class="btn-xs" href="#/program/budget">Budget &amp; endowment</a><a class="btn-xs" href="#/program/disbursement">Disbursement</a><a class="btn-xs" href="#/program/alumni">Alumni &amp; recruiting</a><a class="btn-xs" href="#/program/magazine">Magazine ops</a><a class="btn-xs" href="#/program/bookstore">Bookstore ops</a><a class="btn-xs" href="#/program/rbpn">RBPN &amp; sponsorship</a>
+        <a class="btn-xs" href="#/program/overview">All programmes</a><a class="btn-xs" href="#/program/lifecycle">Lifecycle &amp; pipeline</a><a class="btn-xs" href="#/program/registry">Programme registry</a><a class="btn-xs" href="#/program/prog/camp">Camp Ramallah</a><a class="btn-xs btn-xs--retired" href="#/program/prog/award">HS Senior Award (retired)</a><a class="btn-xs" href="#/program/prog/hope">Project Hope</a><a class="btn-xs" href="#/program/prog/medical">Medical Mission</a><a class="btn-xs" href="#/program/prog/leadership">Leadership Ramallah</a><a class="btn-xs" href="#/program/prog/exchange">Exchange Mission</a><a class="btn-xs" href="#/program/prog/congress">Congressional Outreach</a><a class="btn-xs" href="#/program/prog/action">Day of Action</a><a class="btn-xs" href="#/program/prog/arabic">Arabic Course</a><a class="btn-xs" href="#/program/prog/women">Women to Women</a><a class="btn-xs" href="#/program/prog/preservation">Preservation Project</a><a class="btn-xs" href="#/program/senior">Senior Living campaign</a><a class="btn-xs" href="#/program/applications">Scholarship applications</a><a class="btn-xs" href="#/program/conflicts">Conflict of interest</a><a class="btn-xs" href="#/program/budget">Budget &amp; endowment</a><a class="btn-xs" href="#/program/endowment">Endowment management</a><a class="btn-xs" href="#/program/medops">Mission operations</a><a class="btn-xs" href="#/program/intake">Human services intake</a><a class="btn-xs" href="#/program/disbursement">Disbursement</a><a class="btn-xs" href="#/program/alumni">Alumni &amp; recruiting</a><a class="btn-xs" href="#/program/magazine">Magazine ops</a><a class="btn-xs" href="#/program/bookstore">Bookstore ops</a><a class="btn-xs" href="#/program/rbpn">RBPN &amp; sponsorship</a>
       </div>
     </div>
     <div class="panel">
       <div class="panel__head"><h3>Federation lens &mdash; running the Federation</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/fed/dashboard">Dashboard</a><a class="btn-xs" href="#/fed/crm">The CRM today</a><a class="btn-xs" href="#/fed/member360">Member 360</a><a class="btn-xs" href="#/fed/clubs">Club registry &amp; setup</a><a class="btn-xs" href="#/fed/clubhealth">Club health &amp; integration</a><a class="btn-xs" href="#/fed/identity">Identity &amp; merge queue</a><a class="btn-xs" href="#/fed/tree">Family tree console</a><a class="btn-xs" href="#/fed/directory">Directory &amp; consent</a><a class="btn-xs" href="#/fed/roles">Roles &amp; permissions</a><a class="btn-xs" href="#/fed/board">Board &amp; officers</a><a class="btn-xs" href="#/fed/committees">Committees</a><a class="btn-xs" href="#/fed/calendar">Election calendar</a><a class="btn-xs" href="#/fed/credentialing">Credentialing &amp; quorum</a><a class="btn-xs" href="#/fed/floor">Live voting floor</a><a class="btn-xs" href="#/fed/results">Results &amp; certification</a><a class="btn-xs" href="#/fed/finance">Daily close</a><a class="btn-xs" href="#/fed/qbo">QuickBooks integration</a><a class="btn-xs" href="#/fed/ledger">Multi-entity ledger</a><a class="btn-xs" href="#/fed/controls">Financial controls</a><a class="btn-xs" href="#/fed/events">Event management</a><a class="btn-xs" href="#/fed/comms">Communications centre</a><a class="btn-xs" href="#/fed/convention">Convention &mdash; contract</a><a class="btn-xs" href="#/fed/convcmd">Convention command</a><a class="btn-xs" href="#/fed/convdesk">Convention desk</a><a class="btn-xs" href="#/fed/lifeevents">Life events queue</a><a class="btn-xs" href="#/fed/convops">Convention &mdash; operations</a><a class="btn-xs" href="#/fed/workbench">Ruleset workbench</a>
+        <a class="btn-xs" href="#/fed/dashboard">Dashboard</a><a class="btn-xs" href="#/fed/crm">The CRM today</a><a class="btn-xs" href="#/fed/member360">Member 360</a><a class="btn-xs" href="#/fed/clubs">Club registry &amp; setup</a><a class="btn-xs" href="#/fed/clubhealth">Club health &amp; integration</a><a class="btn-xs" href="#/fed/migration">Onboarding &amp; migration</a><a class="btn-xs" href="#/fed/boardroom">Board workspace</a><a class="btn-xs" href="#/fed/mailedballot">Mailed ballot (CPA)</a><a class="btn-xs" href="#/fed/supportdesk">Support desk</a><a class="btn-xs" href="#/fed/hsn">ARFHSN trustees</a><a class="btn-xs" href="#/fed/identity">Identity &amp; merge queue</a><a class="btn-xs" href="#/fed/tree">Family tree console</a><a class="btn-xs" href="#/fed/directory">Directory &amp; consent</a><a class="btn-xs" href="#/fed/roles">Roles &amp; permissions</a><a class="btn-xs" href="#/fed/board">Board &amp; officers</a><a class="btn-xs" href="#/fed/committees">Committees</a><a class="btn-xs" href="#/fed/calendar">Election calendar</a><a class="btn-xs" href="#/fed/credentialing">Credentialing &amp; quorum</a><a class="btn-xs" href="#/fed/floor">Live voting floor</a><a class="btn-xs" href="#/fed/results">Results &amp; certification</a><a class="btn-xs" href="#/fed/finance">Daily close</a><a class="btn-xs" href="#/fed/qbo">QuickBooks integration</a><a class="btn-xs" href="#/fed/ledger">Multi-entity ledger</a><a class="btn-xs" href="#/fed/controls">Financial controls</a><a class="btn-xs" href="#/fed/events">Event management</a><a class="btn-xs" href="#/fed/comms">Communications centre</a><a class="btn-xs" href="#/fed/convention">Convention &mdash; contract</a><a class="btn-xs" href="#/fed/convcmd">Convention command</a><a class="btn-xs" href="#/fed/convdesk">Convention desk</a><a class="btn-xs" href="#/fed/lifeevents">Life events queue</a><a class="btn-xs" href="#/fed/convops">Convention &mdash; operations</a><a class="btn-xs" href="#/fed/workbench">Ruleset workbench</a>
       </div>
     </div>
   </div>
@@ -4346,7 +4870,7 @@ function pctH(numH, denH){        /* both in hundredths -> "70.76%" (2 dp) */
    anchor navigation can be silently blocked and location.hash writes can
    throw SecurityError. So the route lives in memory (S.route); the URL hash
    is a best-effort mirror for deep links, wrapped in try/catch throughout. */
-var LENS_HOME = { member:'member/home', club:'club/dashboard',
+var LENS_HOME = { door:'door/landing', member:'member/home', club:'club/dashboard',
                   program:'program/applications', fed:'fed/dashboard' };
 
 function navKey(path){
@@ -5225,6 +5749,7 @@ document.getElementById('home-standing') && (function(){
    Kept as listed (not swapped): members are many-of-one-kind forming the
    canopy; programmes are outcomes the organisation bears. */
 var LENS_META = {
+  door:   { label:'Front door', icon:'i-person', desc:'signed out — join, sign in, recover' },
   member: { label:'Member', icon:'i-lens-member', desc:'what one person sees' },
   club:   { label:'Club',   icon:'i-lens-club',   desc:'running one club — Detroit' },
   program:{ label:'Program',icon:'i-lens-program',desc:'running the programmes' },
