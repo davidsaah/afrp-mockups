@@ -1340,7 +1340,8 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <nav data-lens-nav="member" aria-label="Member screens">
       <div class="l-nav-group l-nav-group--lens"><svg class="nav-ico" aria-hidden="true"><use href="#i-lens-member"/></svg>Today &middot; Nadia &middot; 4 Nov 2026</div>
       <a class="l-nav-item" href="#/member/home">Home</a>
-      <a class="l-nav-item" href="#/member/inbox">Inbox &mdash; notifications <span class="l-nav-item__badge">4</span></a>
+      <a class="l-nav-item" href="#/member/inbox">Inbox &mdash; notifications <span class="l-nav-item__badge" id="nav-inbox-badge">4</span></a>
+      <a class="l-nav-item" href="#/member/pathway">My pathway &mdash; the rails <span class="l-nav-item__badge l-nav-item__badge--violet">live</span></a>
       <a class="l-nav-item" href="#/member/voting">Voting <span class="l-nav-item__badge" id="nav-ballot-badge">1 open</span></a>
       <a class="l-nav-item" href="#/member/scenarios">Guided scenarios <span class="l-nav-item__badge l-nav-item__badge--violet">16</span></a>
       <div class="l-nav-group">Membership &amp; finance</div>
@@ -1497,7 +1498,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   <div class="page-head">
     <div><h1>Good morning, Nadia</h1>
     <p>Wednesday 4 November 2026 &middot; Detroit. One membership record, seen from your side of it.</p></div>
-    <div class="page-head__end"><span class="c-pill c-pill--ok">Patron &middot; national current</span><span class="c-pill c-pill--danger">Detroit Club lapsed</span></div>
+    <div class="page-head__end"><span class="c-pill c-pill--ok">Patron &middot; national current</span><span class="c-pill c-pill--danger" id="home-club-pill">Detroit Club lapsed</span></div>
   </div>
   <div class="grid grid--2">
     <div class="panel">
@@ -1556,7 +1557,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <div class="panel__head"><h3>Your memberships</h3></div>
       <div class="panel__body panel__body--flush">
         <div class="qrow"><div class="qrow__main"><b>AFRP national &mdash; Patron</b><span>Term 1 Sep 2026 &ndash; 31 Aug 2027 &middot; $1,000.00 paid 12 Feb 2026, in time for the 28 Feb voting deadline (By-Law 5.3)</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">current</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Detroit Club</b><span>Lapsed 30 Jun 2026 &middot; independent cycle, independent money &mdash; the club keeps its dues</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">lapsed</span><button class="btn-xs btn-xs--go" type="button" onclick="alert('Demo boundary: renewal checkout is not built in this prototype. The real flow reprices from the active dues schedule.')">Rejoin $40.00</button></div></div>
+        <div id="renew-row"></div>
       </div>
       <div class="panel__foot"><span class="why"><b>Membership year</b> runs 1 Sep &ndash; 31 Aug (By-Law 5.1); the fiscal year runs 1 Jun &ndash; 31 May (8.7.2). Any &ldquo;members in good standing&rdquo; number says which calendar it means.</span></div>
     </div>
@@ -1568,6 +1569,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       </div>
       <div class="panel__foot"><span class="why"><b>The 18th-birthday rule:</b> on 2 Mar 2027 Tarek is asked what he wants &mdash; stay in the household, take over his own record, or both. Age sets defaults, never rules. And a ballot is personal in every scope: acting-for never includes voting.</span></div>
     </div>
+    <div class="panel span-2" id="renewpanel" hidden></div>
     <div class="panel span-2" id="dues-panel">
       <div class="panel__head"><div><h3>Dues schedule &mdash; versioned data, not constants</h3><p>By-Law 5.1 makes dues an annual Assembly decision. A repricing is a new schedule with a later effective date; the old one stays.</p></div>
         <div class="panel__head__end">
@@ -1725,7 +1727,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   <div class="grid grid--sideright">
     <div class="stack">
       <div class="panel" id="dp-ballot-panel">
-        <div class="panel__head"><div><h3>Deputy President 2027</h3><p>Electronic secret ballot &middot; one member, one vote, every certified member &middot; replaces the mailed procedure of By-Law 9.2</p></div>
+        <div class="panel__head"><div><h3>Deputy President 2027</h3><p>Digital secret ballot &middot; one member, one vote, every certified member &middot; <b>Board-approved direction</b> &mdash; replaces the mailed procedure of By-Law 9.2 upon ratification of the amendment</p></div>
           <div class="panel__head__end"><span class="c-pill c-pill--info">secret ballot</span></div></div>
         <div class="panel__body" id="dp-eligibility"><!-- rendered by JS --></div>
         <div class="panel__foot"><span class="why">Counted by an independent agency under split custody; plurality wins irrespective of percentage or number of candidates (9.2.4). Closes 20 Nov 2026, 9:00 pm <b>Eastern</b> &mdash; electronic voting must state its time zone; &ldquo;postmarked by June 20&rdquo; used to do that work.</span></div>
@@ -3083,6 +3085,13 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
         </div>
         <div class="panel__foot"><span class="why" id="floor-note"></span></div>
       </div>
+      <div class="panel" id="m3panel">
+        <div class="panel__head"><div><h3>M-3 &middot; Adopt the digital-voting amendment</h3>
+        <p>Revision of By-Law 9.2 &middot; Board-approved direction &middot; weighted delegate vote, 2/3 (9.1.1) &mdash; <b>a live vote you can run</b></p></div>
+        <div class="panel__head__end" id="m3pill"></div></div>
+        <div class="panel__body" id="m3body"></div>
+        <div class="panel__foot"><span class="why" id="m3note"></span></div>
+      </div>
     </div>
     <div class="stack">
       <div class="panel">
@@ -3098,6 +3107,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
         <div class="panel__body panel__body--flush">
           <a class="qrow" href="#/fed/results"><div class="qrow__main"><b>M-1 &middot; Align convention accounting at 90 days</b><span>By-Law amendment &rarr; weighted delegate vote, 2/3 &middot; amends 10.1.7 to match the contract</span></div><div class="qrow__end"><span class="c-pill c-pill--info">tallied</span></div></a>
           <div class="qrow"><div class="qrow__main"><b>M-2 &middot; Adjourn to 2:00 pm</b><span>procedural &rarr; voice vote &middot; carried on the chair&rsquo;s call</span></div><div class="qrow__end"><span class="c-pill c-pill--muted">carried</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>M-3 &middot; Adopt the digital-voting amendment</b><span>By-Law amendment &rarr; weighted delegate vote, 2/3 &middot; the S4 rule enforced live below</span></div><div class="qrow__end"><span id="m3-paper-pill"><span class="c-pill c-pill--warn">before the floor</span></span></div></div>
         </div>
       </div>
     </div>
@@ -4250,6 +4260,18 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 </section>
 
 
+<!-- ═══ NEW · my pathway ═══ -->
+<section class="screen" data-route="member/pathway" data-lens="member" aria-label="My pathway">
+  <div class="page-head">
+    <div><h1>My pathway &mdash; the rails, walked by one person</h1>
+    <p>The platform&rsquo;s guiding principle, live: programs <b>hand off to each other</b> along four rails.
+    Milestones fire invitations into your <a href="#/member/inbox">inbox</a>; accepting one is an enrollment
+    record; declining is recorded nowhere a committee can see. Windows, not gates &mdash; skipping legs is normal.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--ok">4 rails</span><span class="c-pill c-pill--info">invitations, never auto-enrollment</span></div>
+  </div>
+  <div id="pathapp"></div>
+</section>
+
 <!-- ═══ NEW · guided scenarios ═══ -->
 <section class="screen" data-route="member/scenarios" data-lens="member" aria-label="Guided scenarios">
   <div class="page-head">
@@ -4337,72 +4359,22 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 <section class="screen" data-route="door/login" data-lens="door" aria-label="Sign in">
   <div class="page-head">
     <div><h1>Sign in</h1>
-    <p>Passwordless by default: a one-time code to a verified channel. There is nothing here to phish,
-    reuse, or forget &mdash; and this screen <b>never reveals whether an account exists</b>.</p></div>
-    <div class="page-head__end"><span class="c-pill c-pill--info">absence is not signal</span></div>
+    <p>A <b>working simulation</b>. Passwordless: a one-time code to a verified channel &mdash; and this screen
+    <b>never reveals whether an account exists</b>. Try a real-looking address and a nonsense one; watch the
+    screen behave identically.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info">existence-blind</span><span class="c-pill c-pill--warn">simulation</span></div>
   </div>
-  <div class="grid grid--2">
-    <div class="panel">
-      <div class="panel__head"><h3>One-time code</h3></div>
-      <div class="panel__body">
-        <div class="calc"><div class="calc__r"><span>Email or mobile<small>any verified channel on your record</small></span><span class="calc__n mono">samira@&bull;&bull;&bull;</span></div></div>
-        <p class="why" style="margin:var(--s3) 0 0">The response is always the same sentence: <b>&ldquo;If this
-        channel is on a record, a code is on its way.&rdquo;</b> Same wording, same timing, whether or not the
-        channel exists &mdash; the J15 absence rule applied to authentication.</p>
-      </div>
-      <div class="panel__foot"><span class="why">Refusals name their rule &mdash; but account existence is never the named fact.</span></div>
-    </div>
-    <div class="stack" style="display:grid;gap:var(--s5)">
-      <div class="panel">
-        <div class="panel__head"><h3>Passkeys</h3><span class="c-pill c-pill--ok">optional</span></div>
-        <div class="panel__body panel__body--flush">
-          <div class="qrow"><div class="qrow__main"><b>Enrol after first sign-in</b><span>per device, revocable &mdash; a passkey never leaves the device that made it</span></div><div class="qrow__end"><span class="c-pill c-pill--info">add</span></div></div>
-          <div class="qrow"><div class="qrow__main"><b>Samira&rsquo;s iPhone</b><span>enrolled 2 Mar 2026 &middot; last used today</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">active</span></div></div>
-        </div>
-      </div>
-      <div class="panel">
-        <div class="panel__head"><h3>Sessions</h3></div>
-        <div class="panel__body panel__body--flush">
-          <div class="qrow"><div class="qrow__main"><b>This device &mdash; Houston, TX</b><span>signed in 09:14 today</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">current</span></div></div>
-          <div class="qrow"><div class="qrow__main"><b>iPad &mdash; last seen 14 Aug</b><span>revoke ends the session within a minute</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">revoke</span></div></div>
-        </div>
-        <div class="panel__foot"><span class="why">Every credential change notifies every verified channel &mdash; with an undo window.</span></div>
-      </div>
-    </div>
-  </div>
+  <div id="loginapp"></div>
 </section>
 
 <section class="screen" data-route="door/recovery" data-lens="door" aria-label="Recover access">
   <div class="page-head">
     <div><h1>Recover access</h1>
-    <p>Two paths, chosen by what you still hold. Neither is same-day for a full takeover &mdash; that slowness is the security.</p></div>
+    <p>A <b>working simulation</b> of both paths. Neither is same-day for a full takeover &mdash; the slowness
+    is the security, and you can feel it here.</p></div>
     <div class="page-head__end"><span class="c-pill c-pill--warn">no shortcuts, by design</span></div>
   </div>
-  <div class="grid grid--2">
-    <div class="panel">
-      <div class="panel__head"><h3>Lost one channel</h3><span class="c-pill c-pill--ok">self-serve</span></div>
-      <div class="panel__body">
-        <ol class="trace">
-          <li class="is-pass"><b>Sign in with the other verified channel.</b></li>
-          <li class="is-pass"><b>Add the replacement</b> &mdash; verified by code before it can ever sign you in.</li>
-          <li><b>Notice goes to ALL channels</b> &mdash; including the one being replaced &mdash; with a <b>72-hour undo</b>. A hijacker&rsquo;s swap announces itself to the very channel they were trying to remove.</li>
-        </ol>
-      </div>
-    </div>
-    <div class="panel">
-      <div class="panel__head"><h3>Lost both channels</h3><span class="c-pill c-pill--warn">support case</span></div>
-      <div class="panel__body">
-        <ol class="trace">
-          <li><b>A support-desk case</b> with evidence of identity &mdash; the desk cannot shortcut this.</li>
-          <li><b>A 7-day delay</b>, and a mailed notice to the postal address on file, before any credential moves. No address on file? A slower path &mdash; in-person or notarized evidence and a longer delay &mdash; never a faster one.</li>
-          <li><b>New channels verified by code</b>, old sessions revoked, the whole event on the audit.</li>
-        </ol>
-        <p class="why" style="margin:var(--s3) 0 0"><b>What never happens:</b> a household adult recovering
-        for another adult (each adult owns their own record), or a delegate signing in as you &mdash; delegation
-        is scoped to acting <i>within</i> the platform and explicitly excludes credentials.</p>
-      </div>
-    </div>
-  </div>
+  <div id="recapp"></div>
 </section>
 
 <section class="screen" data-route="door/refresh" data-lens="door" aria-label="18th-birthday refresh">
@@ -4439,32 +4411,12 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 <section class="screen" data-route="member/inbox" data-lens="member" aria-label="Inbox">
   <div class="page-head">
     <div><h1>Inbox &mdash; every notice, and why you got it</h1>
-    <p>Everything the platform ever sent you, with the <b>consent class that authorized it</b>. Mute by class
-    &mdash; operational notices can&rsquo;t be muted away, marketing mutes immediately.</p></div>
-    <div class="page-head__end"><span class="c-pill c-pill--warn">4 unread</span></div>
+    <p>Everything the platform ever sent you, with the <b>consent class that authorized it</b>. This inbox is
+    live: program invitations arrive here from your <a href="#/member/pathway">pathway</a>, and accepting one
+    is a real enrollment in this simulation.</p></div>
+    <div class="page-head__end" id="inbox-pills"></div>
   </div>
-  <div class="grid grid--2">
-    <div class="panel">
-      <div class="panel__head"><h3>Recent</h3></div>
-      <div class="panel__body panel__body--flush">
-        <div class="qrow"><div class="qrow__main"><b>Your SF club renewal posted</b><span>today 09:02 &middot; email</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">operational</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Ballot open: Deputy President 2027</b><span>yesterday &middot; email + push</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">operational</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Project Hope &rsquo;27 cohort &mdash; you&rsquo;re invited</b><span>Mon &middot; email</span></div><div class="qrow__end"><span class="c-pill c-pill--info">program invitation</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Convention early-bird ends Friday</b><span>Sun &middot; email</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">marketing</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>A member asked to reach you via the directory</b><span>12 Aug &middot; relay &mdash; staff can see THAT it happened, never what it said</span></div><div class="qrow__end"><span class="c-pill c-pill--info">relay</span></div></div>
-      </div>
-      <div class="panel__foot"><span class="why">Deleting an entry clears your view. It never unsends anything and never edits the audit.</span></div>
-    </div>
-    <div class="panel">
-      <div class="panel__head"><h3>Your classes</h3></div>
-      <div class="panel__body panel__body--flush">
-        <div class="qrow"><div class="qrow__main"><b>Operational</b><span>renewals, ballots, receipts, schedule changes &mdash; always on while you are a member</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">on</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Program invitations</b><span>the Pathways class &mdash; handoffs like Hope or RBPN; recruitment is never dressed as operational</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">on</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Marketing</b><span>mute is immediate and audited</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">muted 12 Aug</span></div></div>
-      </div>
-      <div class="panel__foot"><span class="why">Bounced sends feed the address &amp; channel hygiene queues &mdash; the mailed-ballot roll reads them before it ships.</span></div>
-    </div>
-  </div>
+  <div id="inboxapp"></div>
 </section>
 
 <!-- ═══════════════ NEW · federation screens ═══════════════ -->
@@ -4472,10 +4424,11 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 <section class="screen" data-route="fed/mailedballot" data-lens="fed" aria-label="Mailed ballot">
   <div class="page-head">
     <div><h1>Mailed ballot &mdash; the CPA&rsquo;s election, the platform&rsquo;s roll</h1>
-    <p>The flow current law requires (kept by the 2024 text). The platform&rsquo;s authority ends at the frozen
-    roll and the envelope IDs: <b>ballot content never enters it</b>. The electronic flow elsewhere in this
-    prototype is a future-amendment design and says so.</p></div>
-    <div class="page-head__end"><span class="c-pill c-pill--info">Deputy President 2027</span><span class="c-pill c-pill--ok">roll frozen 15 Oct</span></div>
+    <p>The flow current law still requires. The platform&rsquo;s authority ends at the frozen roll and the
+    envelope IDs: <b>ballot content never enters it</b>. The Board has approved <b>full digital voting</b> as
+    the direction &mdash; the bylaw amendment awaits convention ratification, and until it ratifies, this
+    mailed flow remains the law and runs as the transitional channel.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--warn">transitional &middot; until ratification</span><span class="c-pill c-pill--info">Deputy President 2027</span><span class="c-pill c-pill--ok">roll frozen 15 Oct</span></div>
   </div>
   <div class="panel" style="margin-bottom:var(--s4)">
     <div class="statbox">
@@ -4767,7 +4720,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <div class="panel">
       <div class="panel__head"><h3>Member lens &mdash; participation</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/member/home">Home</a><a class="btn-xs" href="#/member/inbox">Inbox</a><a class="btn-xs" href="#/member/scenarios">Guided scenarios</a><a class="btn-xs" href="#/member/voting">Voting</a><a class="btn-xs" href="#/member/membership">Membership &amp; dues</a><a class="btn-xs" href="#/member/household">My household</a><a class="btn-xs" href="#/member/payments">Payments &amp; giving</a><a class="btn-xs" href="#/member/events">Events</a><a class="btn-xs" href="#/member/convention">Convention</a><a class="btn-xs" href="#/member/convlive">Convention live</a><a class="btn-xs" href="#/member/convstore">Convention store</a><a class="btn-xs" href="#/member/convhelp">Help desk</a><a class="btn-xs" href="#/member/dirinclusion">Directory inclusion</a><a class="btn-xs" href="#/member/lifeevent">Report a life event</a><a class="btn-xs" href="#/member/ads">Advertise</a><a class="btn-xs" href="#/member/programs">My programmes</a><a class="btn-xs" href="#/member/club">My club</a><a class="btn-xs" href="#/member/family">Family tree</a><a class="btn-xs" href="#/member/directory">Directory</a><a class="btn-xs" href="#/member/rbpn">Professional network</a><a class="btn-xs" href="#/member/magazine">Magazine</a><a class="btn-xs" href="#/member/bookstore">Bookstore</a>
+        <a class="btn-xs" href="#/member/home">Home</a><a class="btn-xs" href="#/member/inbox">Inbox</a><a class="btn-xs" href="#/member/pathway">My pathway</a><a class="btn-xs" href="#/member/scenarios">Guided scenarios</a><a class="btn-xs" href="#/member/voting">Voting</a><a class="btn-xs" href="#/member/membership">Membership &amp; dues</a><a class="btn-xs" href="#/member/household">My household</a><a class="btn-xs" href="#/member/payments">Payments &amp; giving</a><a class="btn-xs" href="#/member/events">Events</a><a class="btn-xs" href="#/member/convention">Convention</a><a class="btn-xs" href="#/member/convlive">Convention live</a><a class="btn-xs" href="#/member/convstore">Convention store</a><a class="btn-xs" href="#/member/convhelp">Help desk</a><a class="btn-xs" href="#/member/dirinclusion">Directory inclusion</a><a class="btn-xs" href="#/member/lifeevent">Report a life event</a><a class="btn-xs" href="#/member/ads">Advertise</a><a class="btn-xs" href="#/member/programs">My programmes</a><a class="btn-xs" href="#/member/club">My club</a><a class="btn-xs" href="#/member/family">Family tree</a><a class="btn-xs" href="#/member/directory">Directory</a><a class="btn-xs" href="#/member/rbpn">Professional network</a><a class="btn-xs" href="#/member/magazine">Magazine</a><a class="btn-xs" href="#/member/bookstore">Bookstore</a>
       </div>
     </div>
     <div class="panel">
@@ -6465,6 +6418,441 @@ render();
 window.addEventListener('hashchange', function(){
   if ((location.hash||'').indexOf('door/join') > -1) render();
 });
+})();
+</script>
+
+<script>
+/* ═══ Simulation layer v2 — inbox, pathway, renewal, M-3 floor vote, sign-in, recovery ═══ */
+(function(){
+function esc(s){ return String(s||'').replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function code6(){ return String(Math.floor(100000 + Math.random()*900000)); }
+function fH(n){ return fmtH(n); }
+
+window.SIM = {
+  inbox: [
+    { id:'renew',  cls:'operational', when:'today 09:02', title:'Your national renewal receipt', sub:'Patron · $1,000.00 · posted gross', unread:false },
+    { id:'ballot', cls:'operational', when:'yesterday',   title:'Ballot open: Deputy President 2027', sub:'digital secret ballot · closes 20 Nov, 9:00 pm Eastern', unread:true, href:'#/member/voting' },
+    { id:'rbpn',   cls:'invitation',  when:'Mon',         title:'RBPN — list your practice?', sub:'Your Leadership Ramallah cohort qualifies you for a professional listing. Opt-in storefront, relay-first.', unread:true, state:null, rail:'youth', node:'rbpn' },
+    { id:'mktg',   cls:'marketing',   when:'Sun',         title:'Convention early-bird ends Friday', sub:'held — your marketing class is muted', unread:false },
+    { id:'relay',  cls:'relay',       when:'12 Aug',      title:'A member asked to reach you via the directory', sub:'staff can see THAT it happened, never what it said', unread:true }
+  ],
+  muted: { marketing:true },
+  path: {
+    youth: [
+      ['camp','Camp Ramallah','camper, 1988–90','done'],
+      ['award','HS Senior Award','1991','done'],
+      ['scholarship','Scholarship','class of 1996','done'],
+      ['hope','Project Hope','didn’t exist yet — windows, not gates','skipped'],
+      ['leadership','Leadership Ramallah','cohort of 2009','done'],
+      ['rbpn','RBPN listing','invited — see your inbox','invited'],
+      ['mentor','Mentor a Hope member','opens after RBPN','future']
+    ],
+    advocacy: [
+      ['congress','Congressional Outreach','year-round','avail'],
+      ['doa','Day of Action','Nov 15–18, 2026','avail'],
+      ['afecem','AFECEM mission','by nomination','future']
+    ],
+    heritage: [
+      ['tree','Family Tree','steward since 2021','done'],
+      ['preservation','Preservation Project','volunteers wanted','avail'],
+      ['magazine','Hathihe Ramallah','subscriber since 1998','done']
+    ],
+    palestine: [
+      ['w2w','Women to Women','recurring gift · via ARFHSN','done'],
+      ['medical','Medical Mission volunteer','2027 mission forming','avail']
+    ],
+    log: []
+  },
+  renew: { st:'lapsed', step:0 },   /* lapsed | current | reversed */
+  m3: { st:'pending', frozenX:0, perH:0, votes:[null,null,null,null,null], indiv:null,
+        rest:{ forH:57000, againstH:29000, abstainH:3000 } },
+  login: { st:0, ch:'', known:false, code:null, sessions:null, passkey:false },
+  rec: { tab:'one', one:0, undone:false, both:0, day:0, rushed:false }
+};
+var RAILS = [['youth','The youth pipeline'],['advocacy','The advocacy rail'],['heritage','The heritage rail'],['palestine','Palestine-direct']];
+var CLS = { operational:['operational','c-pill--ok'], invitation:['program invitation','c-pill--info'],
+            marketing:['marketing','c-pill--warn'], relay:['relay','c-pill--info'] };
+
+/* ── inbox ── */
+function renderInbox(){
+  var el = document.getElementById('inboxapp');
+  var unread = SIM.inbox.filter(function(m){ return m.unread; }).length;
+  var badge = document.getElementById('nav-inbox-badge');
+  if (badge) badge.textContent = unread;
+  var pills = document.getElementById('inbox-pills');
+  if (pills) pills.innerHTML = '<span class="c-pill c-pill--warn">' + unread + ' unread</span>';
+  if (!el) return;
+  var rows = '';
+  SIM.inbox.forEach(function(m){
+    if (m.cls === 'marketing' && SIM.muted.marketing && m.id !== 'mktg') return;
+    var tag = CLS[m.cls];
+    var end = '<span class="c-pill ' + tag[1] + '">' + tag[0] + '</span>';
+    var extra = '';
+    if (m.cls === 'invitation'){
+      if (m.state === 'accepted') end = '<span class="c-pill c-pill--ok">accepted &middot; enrolled</span>';
+      else if (m.state === 'declined') end = '<span class="c-pill c-pill--muted">declined &middot; recorded nowhere a committee can see</span>';
+      else extra = '<div class="rowflex" style="margin-top:8px;gap:8px"><button class="btn-xs btn-xs--go" onclick="SIMS.accept(\'' + m.id + '\')">Accept</button>' +
+        '<button class="btn-xs" onclick="SIMS.decline(\'' + m.id + '\')">Decline</button></div>';
+    }
+    rows += '<div class="qrow" style="' + (m.unread ? 'border-left:3px solid var(--lens);' : '') + '"><div class="qrow__main"><b>' + m.title + '</b><span>' + m.when + ' &middot; ' + m.sub + '</span>' + extra + '</div><div class="qrow__end">' + end + '</div></div>';
+  });
+  el.innerHTML = '<div class="grid grid--2"><div class="panel"><div class="panel__head"><h3>Recent</h3></div>' +
+    '<div class="panel__body panel__body--flush">' + rows + '</div>' +
+    '<div class="panel__foot"><span class="why">Deleting an entry clears your view. It never unsends anything and never edits the audit.</span></div></div>' +
+    '<div class="panel"><div class="panel__head"><h3>Your classes</h3></div><div class="panel__body panel__body--flush">' +
+    '<div class="qrow"><div class="qrow__main"><b>Operational</b><span>renewals, ballots, receipts — always on while you are a member</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">on &middot; not a switch</span></div></div>' +
+    '<div class="qrow"><div class="qrow__main"><b>Program invitations</b><span>the pathways class — recruitment never dresses up as operational</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">on</span></div></div>' +
+    '<div class="qrow"><div class="qrow__main"><b>Marketing</b><span>mute is immediate and audited</span></div><div class="qrow__end"><button class="btn-xs" onclick="SIMS.mute()">' + (SIM.muted.marketing ? 'muted 12 Aug — unmute' : 'on — mute') + '</button></div></div>' +
+    '</div><div class="panel__foot"><span class="why">Bounced sends feed the hygiene queues the mailed-ballot roll reads.</span></div></div></div>';
+}
+
+/* ── pathway ── */
+function nodeHTML(rail, n){
+  var st = n[3], pill = '', act = '';
+  if (st === 'done') pill = '<span class="c-pill c-pill--ok">&#10003; ' + n[2] + '</span>';
+  else if (st === 'enrolled') pill = '<span class="c-pill c-pill--ok">enrolled &middot; ' + n[2] + '</span>';
+  else if (st === 'invited'){ pill = '<span class="c-pill c-pill--info">invited</span>';
+    act = '<button class="btn-xs btn-xs--go" onclick="SIMS.accept(\'rbpn\')">Accept</button> <button class="btn-xs" onclick="SIMS.decline(\'rbpn\')">Decline</button>'; }
+  else if (st === 'declined') pill = '<span class="c-pill c-pill--muted">declined &middot; still yours to take later</span>';
+  else if (st === 'avail'){ pill = '<span class="c-pill c-pill--muted">open to you</span>';
+    act = '<button class="btn-xs" onclick="SIMS.ask(\'' + rail + '\',\'' + n[0] + '\')">Ask for an invitation</button>'; }
+  else if (st === 'skipped') pill = '<span class="c-pill c-pill--muted">' + n[2] + '</span>';
+  else pill = '<span class="c-pill c-pill--muted">' + n[2] + '</span>';
+  return '<div class="qrow"><div class="qrow__main"><b>' + n[1] + '</b><span>' + (st==='done'||st==='enrolled' ? n[2] : (st==='invited' ? 'a program invitation is in your inbox — the rail never auto-enrolls' : n[2])) + '</span></div><div class="qrow__end">' + pill + (act ? ' ' + act : '') + '</div></div>';
+}
+function renderPathway(){
+  var el = document.getElementById('pathapp');
+  if (!el) return;
+  var html = '<div class="grid grid--2">';
+  RAILS.forEach(function(r){
+    html += '<div class="panel"><div class="panel__head"><h3>' + r[1] + '</h3></div><div class="panel__body panel__body--flush">' +
+      SIM.path[r[0]].map(function(n){ return nodeHTML(r[0], n); }).join('') + '</div></div>';
+  });
+  html += '<div class="panel span-2"><div class="panel__head"><h3>What the system recorded</h3><span class="c-pill c-pill--info">enrollment records &middot; aggregates only upstream</span></div><div class="panel__body panel__body--flush">' +
+    (SIM.path.log.length ? SIM.path.log.map(function(l){ return '<div class="qrow"><div class="qrow__main"><b>' + l[0] + '</b><span>' + l[1] + '</span></div><div class="qrow__end"><span class="mono">' + l[2] + '</span></div></div>'; }).join('')
+      : '<div class="qrow"><div class="qrow__main"><b>Nothing yet</b><span>accept or request an invitation and watch exactly what gets written — and what doesn&rsquo;t</span></div></div>') +
+    '</div><div class="panel__foot"><span class="why">Committees see cohort AGGREGATES under the S7 floor — never this screen. Your pathway is visible to you because it is yours.</span></div></div></div>';
+  el.innerHTML = html;
+}
+function findNode(rail, id){ return SIM.path[rail].filter(function(n){ return n[0] === id; })[0]; }
+
+/* ── shared invitation actions ── */
+window.SIMS = {
+  accept: function(id){
+    var m = SIM.inbox.filter(function(x){ return x.id === id; })[0];
+    if (!m || m.state) return;
+    m.state = 'accepted'; m.unread = false;
+    var n = findNode(m.rail, m.node);
+    if (n){ n[3] = 'enrolled'; n[2] = 'accepted today · dated record (program, role)'; }
+    SIM.path.log.push(['Enrollment: RBPN listing', 'a dated (program, role) record — the tracking substrate; your listing setup continues on the RBPN screen', 'enr-2026-0819']);
+    if (id === 'rbpn'){
+      var mentor = findNode('youth','mentor');
+      if (mentor && mentor[3] === 'future'){ mentor[3] = 'avail'; mentor[2] = 'unlocked by your RBPN enrollment'; }
+      SIM.inbox.unshift({ id:'mentor', cls:'invitation', when:'just now', title:'Mentor a Project Hope member?',
+        sub:'Your new RBPN listing qualifies you. This invitation FIRED off a milestone — an enrollment record, not surveillance.', unread:true, state:null, rail:'youth', node:'mentor' });
+    }
+    if (id === 'mentor'){ SIM.path.log.push(['Enrollment: Hope mentorship', 'matching will propose pairs from opted-in members; three-degree conflicts refuse with the rule only (S6)', 'enr-2026-0819b']); }
+    if (id === 'doa'){ SIM.path.log.push(['Enrollment: Day of Action 2026', 'Nov 15–18 · advocacy rail · travel details on operational rails now that you are enrolled', 'enr-2026-0820']); }
+    renderAll();
+  },
+  decline: function(id){
+    var m = SIM.inbox.filter(function(x){ return x.id === id; })[0];
+    if (!m || m.state) return;
+    m.state = 'declined'; m.unread = false;
+    var n = findNode(m.rail, m.node);
+    if (n){ n[3] = 'declined'; }
+    SIM.path.log.push(['— (a decline)', 'nothing was written that any committee can see; the door stays open, undated-neutral', 'no record']);
+    renderAll();
+  },
+  ask: function(rail, id){
+    var n = findNode(rail, id);
+    if (!n || n[3] !== 'avail') return;
+    n[3] = 'invited';
+    var titles = { doa:'Day of Action 2026 — join the delegation?', preservation:'Preservation Project — volunteer?',
+      medical:'Medical Mission 2027 — volunteer interest', congress:'Congressional Outreach — district contact', mentor:'Mentor a Project Hope member?' };
+    SIM.inbox.unshift({ id:id, cls:'invitation', when:'just now', title: titles[id] || (n[1] + ' — invitation'),
+      sub:'You asked; the program invited. Same class, same rules — accepting is an enrollment, declining is invisible upstream.', unread:true, state:null, rail:rail, node:id });
+    renderAll();
+    location.hash = '#/member/inbox';
+  },
+  mute: function(){ SIM.muted.marketing = !SIM.muted.marketing; renderAll(); }
+};
+
+/* ── renewal (Detroit) wired into the standing engine ── */
+function renderRenew(){
+  var row = document.getElementById('renew-row');
+  var panel = document.getElementById('renewpanel');
+  var pill = document.getElementById('home-club-pill');
+  var st = SIM.renew.st;
+  if (pill){
+    pill.className = 'c-pill ' + (st === 'current' ? 'c-pill--ok' : 'c-pill--danger');
+    pill.textContent = st === 'current' ? 'Detroit Club current' : (st === 'reversed' ? 'Detroit Club reversed' : 'Detroit Club lapsed');
+  }
+  if (!row) return;
+  if (st === 'lapsed'){
+    row.innerHTML = '<div class="qrow"><div class="qrow__main"><b>Detroit Club</b><span>Lapsed 30 Jun 2026 &middot; independent cycle, independent money &mdash; the club keeps its dues</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">lapsed</span><button class="btn-xs btn-xs--go" type="button" onclick="SIMS2.renewOpen()">Rejoin $40.00</button></div></div>';
+  } else if (st === 'current'){
+    row.innerHTML = '<div class="qrow"><div class="qrow__main"><b>Detroit Club</b><span>Current to 30 Jun 2027 &middot; renewed today &middot; dues held for Detroit until the monthly remittance</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">current</span></div></div>';
+  } else {
+    row.innerHTML = '<div class="qrow"><div class="qrow__main"><b>Detroit Club</b><span>Payment reversed (chargeback) &middot; standing reverted with an effective date &mdash; today</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">reversed</span><button class="btn-xs btn-xs--go" type="button" onclick="SIMS2.repay()">Make it right — repay</button></div></div>';
+  }
+  if (!panel) return;
+  if (SIM.renew.step === 0){ panel.hidden = true; return; }
+  panel.hidden = false;
+  if (SIM.renew.step === 1){
+    panel.innerHTML = '<div class="panel__head"><div><h3>Renew Detroit — one checkout</h3><p>Gross fees: the processing fee is the Federation&rsquo;s own expense line.</p></div></div>' +
+      '<div class="panel__body"><div class="calc" style="max-width:520px">' +
+      '<div class="calc__r"><span>Detroit Club — Individual, 1 Jul 2026 – 30 Jun 2027<small>held as a liability for Detroit until the monthly remittance (R21)</small></span><span class="calc__n">$40.00</span></div>' +
+      '<div class="calc__r"><span>Processing fee<small>booked as AFRP expense — the gift/dues line stays gross (R20)</small></span><span class="calc__n">$1.46</span></div>' +
+      '<div class="calc__r calc__r--tot"><span>Charged to Visa &hellip;4412</span><span class="calc__n">$40.00</span></div></div>' +
+      '<div class="rowflex" style="margin-top:var(--s3)"><button class="c-btn c-btn--sm" id="renew-pay" onclick="SIMS2.renewPay()">Pay $40.00 — simulation</button><span class="why">Three journal lines: clearing / fee / revenue-liability.</span></div></div>';
+  } else if (SIM.renew.step === 2){
+    var reversed = SIM.renew.st === 'reversed';
+    panel.innerHTML = '<div class="panel__head"><div><h3>' + (reversed ? 'The chargeback, handled by rule (S3)' : 'Posted — and everything downstream noticed') + '</h3></div>' +
+      '<div class="panel__head__end">' + (reversed ? '<span class="c-pill c-pill--danger">receivable created</span>' : '<span class="c-pill c-pill--ok">posted gross</span>') + '</div></div>' +
+      '<div class="panel__body panel__body--flush">' +
+      (reversed
+        ? '<div class="qrow"><div class="qrow__main"><b>Reversing journal lines — never edits</b><span>the original posting stands; the reversal is its own entry (R24)</span></div><div class="qrow__end"><span class="mono">S3</span></div></div>' +
+          '<div class="qrow"><div class="qrow__main"><b>Detroit already got the remittance</b><span>so the reversal creates a <b>receivable on Detroit&rsquo;s next statement</b> — never a negative liability</span></div><div class="qrow__end"><span class="mono">recv-118</span></div></div>' +
+          '<div class="qrow"><div class="qrow__main"><b>Standing reverted, effective-dated</b><span>your ballot eligibility recomputed the moment it happened — check <a href="#/member/voting">Voting</a></span></div><div class="qrow__end"><span class="c-pill c-pill--danger">effective today</span></div></div>' +
+          '<div class="qrow"><div class="qrow__main"><b>Any roll frozen in between</b><span>stays frozen — annotated &ldquo;payment reversed post-freeze&rdquo;, honored by credentialing, never recomputed</span></div><div class="qrow__end"><span class="mono">R43</span></div></div>'
+        : '<div class="qrow"><div class="qrow__main"><b>Journal: clearing $40.00 / fee $1.46 / Detroit liability $40.00</b><span>into tonight&rsquo;s daily close, idempotent batch key</span></div><div class="qrow__end"><span class="mono">R20 · R22</span></div></div>' +
+          '<div class="qrow"><div class="qrow__main"><b>Your standing recomputed everywhere</b><span>home, Member 360, the club roster — and <b>your Deputy President ballot reopened</b>: 4.3.1 conjunctive standing is satisfied now</span></div><div class="qrow__end"><a class="btn-xs btn-xs--go" href="#/member/voting">Voting &rarr;</a></div></div>' +
+          '<div class="qrow"><div class="qrow__main"><b>Try the hard part</b><span>what if this card charges back AFTER Detroit gets its remittance? The red team asked; S3 answers.</span></div><div class="qrow__end"><button class="btn-xs" onclick="SIMS2.chargeback()">simulate: chargeback</button></div></div>') +
+      '</div><div class="panel__foot"><span class="why">' + (reversed
+        ? 'One reversal model for dues, gifts, store and conduit money — born from the round-1 breaks in J02, J04 and J12.'
+        : 'One fact, many screens, same wording — the standing engine is shared, not copied.') + '</span></div>';
+  }
+}
+window.SIMS2 = {
+  renewOpen: function(){ SIM.renew.step = 1; renderAll();
+    var p = document.getElementById('renewpanel'); if (p) p.scrollIntoView({behavior:'smooth'}); },
+  renewPay: function(){
+    var b = document.getElementById('renew-pay');
+    if (b){ b.disabled = true; b.textContent = 'Posting gross · one moment…'; }
+    setTimeout(function(){
+      SIM.renew.st = 'current'; SIM.renew.step = 2;
+      PEOPLE.nadia.club = { ok:true, label:'Detroit Club · current to 30 Jun 2027' };
+      SIM.inbox.unshift({ id:'drenew', cls:'operational', when:'just now', title:'Detroit Club renewal receipt',
+        sub:'$40.00 · held for Detroit until remitted · your ballot standing recomputed', unread:true });
+      renderAll();
+    }, 900);
+  },
+  chargeback: function(){
+    SIM.renew.st = 'reversed'; SIM.renew.step = 2;
+    PEOPLE.nadia.club = { ok:false, label:'Detroit Club · reversed (chargeback) — effective today' };
+    renderAll();
+  },
+  repay: function(){ SIM.renew.st = 'current'; SIM.renew.step = 2;
+    PEOPLE.nadia.club = { ok:true, label:'Detroit Club · current to 30 Jun 2027' };
+    renderAll(); }
+};
+
+/* ── M-3: the live weighted floor vote (S4 enforced) ── */
+function m3Tally(){
+  var m = SIM.m3, forH = m.rest.forH, agH = m.rest.againstH, abH = m.rest.abstainH;
+  m.votes.forEach(function(v){ if (v === 'f') forH += m.perH; if (v === 'a') agH += m.perH; if (v === 'ab') abH += m.perH; });
+  if (m.indiv === 'f') forH += m.frozenX * 100;
+  if (m.indiv === 'a') agH += m.frozenX * 100;
+  if (m.indiv === 'ab') abH += m.frozenX * 100;
+  return { forH:forH, agH:agH, abH:abH };
+}
+function renderM3(){
+  var body = document.getElementById('m3body');
+  if (!body) return;
+  var m = SIM.m3, pill = document.getElementById('m3pill'), note = document.getElementById('m3note'),
+      paper = document.getElementById('m3-paper-pill');
+  if (m.st === 'pending'){
+    if (pill) pill.innerHTML = '<span class="c-pill c-pill--warn">before the floor</span>';
+    if (paper) paper.innerHTML = '<span class="c-pill c-pill--warn">before the floor</span>';
+    body.innerHTML = '<p class="why" style="margin:0 0 var(--s3)">The rest of the floor has cast: <b>570.00 for · 290.00 against · 30.00 abstain</b> — ' +
+      'just under the two-thirds bar. <b>Chicago&rsquo;s 90.00 decides it.</b> Set the extraction slider above however you like, then open the vote as the chair.</p>' +
+      '<button class="c-btn c-btn--sm" onclick="SIMS3.open()">Open voting on M-3</button>';
+    if (note) note.innerHTML = 'Until voting opens, members may still extract — the slider above is live. <b>S4: the moment the chair opens the vote, weights fix.</b>';
+    return;
+  }
+  var t = m3Tally();
+  var castAll = m.votes.every(function(v){ return v; }) && (m.frozenX === 0 || m.indiv);
+  if (m.st === 'open'){
+    if (pill) pill.innerHTML = '<span class="c-pill c-pill--info">voting open — weights fixed</span>';
+    if (paper) paper.innerHTML = '<span class="c-pill c-pill--info">open</span>';
+    var rows = '';
+    for (var d=0; d<5; d++){
+      var v = m.votes[d];
+      rows += '<div class="qrow"><div class="qrow__main"><b>Chicago delegate ' + (d+1) + '</b><span>carries ' + fH(m.perH) + ' — fixed when the vote opened</span></div><div class="qrow__end">' +
+        ['f','a','ab'].map(function(k){
+          var lbl = k === 'f' ? 'For' : (k === 'a' ? 'Against' : 'Abstain');
+          return '<button class="btn-xs' + (v === k ? ' btn-xs--go' : '') + '" onclick="SIMS3.vote(' + d + ',\'' + k + '\')">' + lbl + '</button>';
+        }).join(' ') + '</div></div>';
+    }
+    if (m.frozenX > 0){
+      rows += '<div class="qrow"><div class="qrow__main"><b>' + m.frozenX + ' Chicago members voting independently</b><span>1.00 each — extracted before the vote opened; a member walking up NOW waits for the next motion (S4)</span></div><div class="qrow__end">' +
+        ['f','a','ab'].map(function(k){
+          var lbl = k === 'f' ? 'All for' : (k === 'a' ? 'All against' : 'All abstain');
+          return '<button class="btn-xs' + (m.indiv === k ? ' btn-xs--go' : '') + '" onclick="SIMS3.indiv(\'' + k + '\')">' + lbl + '</button>';
+        }).join(' ') + '</div></div>';
+    }
+    var incl = (S.ruleset.abstain === 'included');
+    var denH = t.forH + t.agH + (incl ? t.abH : 0);
+    body.innerHTML = '<div class="panel__body--flush" style="margin:0 calc(-1*var(--s4))">' + rows + '</div>' +
+      '<div class="calc" style="margin-top:var(--s3)">' +
+      '<div class="calc__r"><span>For<small>rest of floor 570.00 + Chicago as cast</small></span><span class="calc__n">' + fH(t.forH) + '</span></div>' +
+      '<div class="calc__r"><span>Against</span><span class="calc__n">' + fH(t.agH) + '</span></div>' +
+      '<div class="calc__r"><span>Abstain<small>' + (incl ? 'INCLUDED in the denominator — the certification setting in force' : 'excluded from the denominator — the certification setting in force') + '</small></span><span class="calc__n">' + fH(t.abH) + '</span></div>' +
+      '<div class="calc__r calc__r--tot"><span>Two-thirds bar<small>needs ' + fH(Math.ceil(denH*2/3)) + ' of ' + fH(denH) + '</small></span><span class="calc__n">' + (denH ? pctH(t.forH, denH) : '—') + '</span></div></div>' +
+      '<div class="rowflex" style="margin-top:var(--s3)"><button class="c-btn c-btn--sm" ' + (castAll ? '' : 'disabled') + ' onclick="SIMS3.close()">Close the vote &amp; certify</button>' +
+      '<span class="why">' + (castAll ? 'Every fixed weight is cast — the chair may close.' : 'Waiting on Chicago — every delegate (and the independent bloc) must cast or abstain.') + '</span></div>';
+    if (note) note.innerHTML = '<b>Weights are FIXED while M-3 is open (S4 — drafted 9.1.3 amendment).</b> The extraction slider above is locked; it reopens between motions.';
+    return;
+  }
+  /* closed */
+  var incl2 = (S.ruleset.abstain === 'included');
+  var den2 = t.forH + t.agH + (incl2 ? t.abH : 0);
+  var pass = (3 * t.forH) >= (2 * den2);
+  if (pill) pill.innerHTML = pass ? '<span class="c-pill c-pill--ok">carried &middot; ' + pctH(t.forH, den2) + '</span>' : '<span class="c-pill c-pill--danger">fails &middot; ' + pctH(t.forH, den2) + '</span>';
+  if (paper) paper.innerHTML = pill.innerHTML;
+  body.innerHTML = '<div class="verdict ' + (pass ? 'verdict--allow' : 'verdict--deny') + '"><span class="verdict__ic">' + (pass ? '&#10003;' : '&times;') + '</span><div>' +
+    '<b>M-3 ' + (pass ? 'carries' : 'fails') + ' at ' + pctH(t.forH, den2) + ' — ' + fH(t.forH) + ' of ' + fH(den2) + '.</b>' +
+    '<p>' + (pass ? 'The digital-voting amendment is adopted in this simulation; upon real ratification the mailed CPA ballot retires from law to history.' :
+      'Short of two-thirds — the amendment waits for the next convention. Chicago&rsquo;s votes were exactly as weighty as 9.1.3 promised.') +
+    ' Every weight was fixed at opening; the certification shows its arithmetic.</p></div></div>' +
+    '<div class="rowflex" style="margin-top:var(--s3)"><button class="c-btn c-btn--sm" onclick="SIMS3.reset()">Run it again — extraction is live between motions</button></div>';
+  if (note) note.innerHTML = 'The vote is closed; <b>extraction re-opened</b> — between motions, a member extracting re-divides the pool. That boundary IS the S4 settlement.';
+}
+window.SIMS3 = {
+  open: function(){ var m = SIM.m3; m.st = 'open';
+    m.frozenX = S.extractedH / 100; m.perH = (CHI_CERT_H - S.extractedH) / CHI_DELEG;
+    m.votes = [null,null,null,null,null]; m.indiv = null; renderAll(); },
+  vote: function(d, k){ if (SIM.m3.st === 'open'){ SIM.m3.votes[d] = k; renderAll(); } },
+  indiv: function(k){ if (SIM.m3.st === 'open'){ SIM.m3.indiv = k; renderAll(); } },
+  close: function(){ SIM.m3.st = 'closed'; renderAll(); },
+  reset: function(){ SIM.m3.st = 'pending'; renderAll(); }
+};
+/* freeze extraction controls while M-3 is open */
+var _renderFloor = renderFloor;
+renderFloor = function(){
+  _renderFloor();
+  var open = SIM.m3.st === 'open';
+  var rng = document.getElementById('extract-range');
+  if (rng) rng.disabled = open;
+  ['extract-minus','extract-plus'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el && open) el.disabled = true;
+  });
+  if (open){
+    var n = document.getElementById('floor-note');
+    if (n) n.innerHTML = '<b>Locked — voting is open on M-3.</b> Weights fixed at ' + (SIM.m3.frozenX) + ' extracted / ' + fH(SIM.m3.perH) + ' per delegate (S4). Extraction resumes when the chair closes the vote.';
+  }
+};
+
+/* ── sign-in ── */
+function renderLogin(){
+  var el = document.getElementById('loginapp');
+  if (!el) return;
+  var L = SIM.login, h = '<div class="grid grid--2">';
+  h += '<div class="panel"><div class="panel__head"><h3>One-time code</h3></div><div class="panel__body">';
+  if (L.st === 0){
+    h += '<div class="j-field"><label>Email or mobile</label><input id="lg-ch" value="' + esc(L.ch) + '" placeholder="samira@example.com — or any nonsense address"><div class="j-hint">Demo: addresses ending <b>@example.com</b> are &ldquo;on a record&rdquo;; anything else is not. Watch the screen refuse to tell you which.</div></div>' +
+      '<button class="c-btn c-btn--sm" onclick="SIMS4.send()">Continue</button>';
+  } else {
+    h += '<div class="verdict verdict--allow" style="background:var(--bg)"><span class="verdict__ic">&#9993;</span><div><b>&ldquo;If this channel is on a record, a code is on its way.&rdquo;</b><p>The same sentence, the same timing, whether or not <span class="mono">' + esc(L.ch) + '</span> exists. Absence is not signal — applied to authentication.</p></div></div>';
+    if (L.st === 1 && L.known){
+      h += '<div class="j-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2.5" width="10" height="19" rx="2.4"/><path d="M11 18.6h2"/></svg><span><b>Your phone &middot; simulated</b><span class="j-code">' + L.code + '</span><small>Only YOUR device knows a code arrived — the sign-in screen itself has already told you everything it ever will.</small></span></div>' +
+        '<div class="j-field"><label>Enter the code</label><input inputmode="numeric" maxlength="6" style="max-width:180px;letter-spacing:.3em;font-family:var(--mono,ui-monospace)" oninput="SIMS4.tryCode(this)"></div>';
+    } else if (L.st === 1){
+      h += '<p class="why" style="margin:var(--s3) 0 0">&hellip;nothing arrives on any device. And this screen looks <i>identical</i> to the moment a real member sees — that sameness is the security. <button class="j-btn--quiet j-btn" onclick="SIMS4.back()">try another channel</button></p>';
+    } else if (L.st === 2){
+      h += '<p class="j-ok">&#10003; Signed in as <b>Samira Odeh</b> &middot; code verified</p><div class="rowflex" style="margin-top:var(--s2)"><button class="btn-xs" onclick="SIMS4.out()">Sign out</button></div>';
+    }
+  }
+  h += '</div><div class="panel__foot"><span class="why">Refusals name their rule — but account existence is never the named fact.</span></div></div>';
+  h += '<div class="stack" style="display:grid;gap:var(--s5)"><div class="panel"><div class="panel__head"><h3>Sessions</h3></div><div class="panel__body panel__body--flush">';
+  if (L.st === 2){
+    if (!L.sessions) L.sessions = [['This device — Houston, TX','signed in just now',true],['iPad — last seen 14 Aug','revoke ends it within a minute',false]];
+    L.sessions.forEach(function(s2, i){
+      h += '<div class="qrow"><div class="qrow__main"><b>' + s2[0] + '</b><span>' + s2[1] + '</span></div><div class="qrow__end">' +
+        (s2[2] ? '<span class="c-pill c-pill--ok">current</span>' : '<button class="btn-xs" onclick="SIMS4.revoke(' + i + ')">revoke</button>') + '</div></div>';
+    });
+    h += '<div class="qrow"><div class="qrow__main"><b>Passkey on this device</b><span>per device, revocable — never leaves the device that made it</span></div><div class="qrow__end"><button class="btn-xs' + (L.passkey ? ' btn-xs--go' : '') + '" onclick="SIMS4.passkey()">' + (L.passkey ? 'enrolled ✓' : 'enrol') + '</button></div></div>';
+  } else {
+    h += '<div class="qrow"><div class="qrow__main"><b>Sign in to see your sessions</b><span>every device, revocable — and every credential change notifies every verified channel</span></div></div>';
+  }
+  h += '</div></div></div></div>';
+  el.innerHTML = h;
+}
+window.SIMS4 = {
+  send: function(){ var v = (document.getElementById('lg-ch') || {}).value || '';
+    if (!v.trim()) return;
+    SIM.login.ch = v; SIM.login.known = /@example\.com\s*$/i.test(v.trim());
+    SIM.login.code = code6(); SIM.login.st = 1; renderLogin(); },
+  tryCode: function(inp){ if (inp.value.length < 6) return;
+    if (inp.value === SIM.login.code){ SIM.login.st = 2; renderLogin(); }
+    else { inp.value = ''; inp.placeholder = 'not quite'; } },
+  back: function(){ SIM.login.st = 0; renderLogin(); },
+  out: function(){ SIM.login = { st:0, ch:'', known:false, code:null, sessions:null, passkey:SIM.login.passkey }; renderLogin(); },
+  revoke: function(i){ SIM.login.sessions.splice(i,1); renderLogin(); },
+  passkey: function(){ SIM.login.passkey = !SIM.login.passkey; renderLogin(); }
+};
+
+/* ── recovery ── */
+function renderRec(){
+  var el = document.getElementById('recapp');
+  if (!el) return;
+  var R = SIM.rec, h = '<div class="seg" role="group" style="margin-bottom:var(--s4)">' +
+    '<button type="button" class="' + (R.tab === 'one' ? 'is-on' : '') + '" onclick="SIMS5.tab(\'one\')">Lost ONE channel<small>self-serve</small></button>' +
+    '<button type="button" class="' + (R.tab === 'both' ? 'is-on' : '') + '" onclick="SIMS5.tab(\'both\')">Lost BOTH<small>support case &middot; 7 days</small></button></div>';
+  if (R.tab === 'one'){
+    h += '<div class="panel"><div class="panel__head"><h3>Replace a lost channel</h3></div><div class="panel__body"><ol class="trace">' +
+      '<li class="' + (R.one >= 1 ? 'is-pass' : '') + '"><b>Sign in with the other verified channel.</b> ' + (R.one === 0 ? '<button class="btn-xs btn-xs--go" onclick="SIMS5.one(1)">simulate: code to my mobile ✓</button>' : 'Done — mobile code verified.') + '</li>' +
+      '<li class="' + (R.one >= 2 ? 'is-pass' : '') + '"><b>Add the replacement email</b> — verified by code before it can ever sign you in. ' + (R.one === 1 ? '<button class="btn-xs btn-xs--go" onclick="SIMS5.one(2)">simulate: verify samira.new@example.com ✓</button>' : (R.one >= 2 ? 'Done.' : '')) + '</li>' +
+      '<li class="' + (R.one >= 3 ? 'is-pass' : '') + '"><b>Notice to ALL channels — including the one being replaced</b> — with a 72-hour undo. ' +
+      (R.one === 2 ? '<button class="btn-xs" onclick="SIMS5.one(3)">send the notices</button>' : '') + '</li></ol>';
+    if (R.one === 3 && !R.undone){
+      h += '<div class="j-phone" style="max-width:520px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2.5" width="10" height="19" rx="2.4"/><path d="M11 18.6h2"/></svg><span><b>To your OLD email &middot; simulated</b><span style="font-size:12.5px;display:block;margin-top:3px">&ldquo;Your sign-in email was changed. If this wasn&rsquo;t you, undo within 72 hours.&rdquo;</span><small>A hijacker&rsquo;s swap announces itself to the very channel they tried to remove.</small></span></div>' +
+        '<div class="rowflex"><button class="btn-xs" onclick="SIMS5.undo()">I&rsquo;m the real owner — UNDO the change</button><button class="btn-xs btn-xs--go" onclick="SIMS5.done()">It was really me — keep it</button></div>';
+    } else if (R.undone){
+      h += '<p class="j-ok">&#10003; Undone. The replacement is revoked, sessions reset, the whole event on the audit — the 72-hour window did its job.</p><div class="rowflex" style="margin-top:var(--s2)"><button class="btn-xs" onclick="SIMS5.reset1()">run it again</button></div>';
+    } else if (R.one === 4){
+      h += '<p class="j-ok">&#10003; Change kept. Old sessions revoked; the audit remembers everything.</p><div class="rowflex" style="margin-top:var(--s2)"><button class="btn-xs" onclick="SIMS5.reset1()">run it again</button></div>';
+    }
+    h += '</div></div>';
+  } else {
+    var steps = ['Open a support-desk case with identity evidence', 'Evidence reviewed & accepted', 'The 7-day delay runs', 'Mailed notice to the postal address on file', 'Credentials move; every old session revoked'];
+    h += '<div class="panel"><div class="panel__head"><h3>Both channels lost — the deliberately slow path</h3><span class="c-pill c-pill--warn">day ' + R.day + ' of 7</span></div><div class="panel__body"><ol class="trace">';
+    for (var s5i = 0; s5i < steps.length; s5i++){
+      var done = R.both > s5i;
+      h += '<li class="' + (done ? 'is-pass' : '') + '"><b>' + steps[s5i] + '.</b>' +
+        (R.both === s5i && s5i < 2 ? ' <button class="btn-xs btn-xs--go" onclick="SIMS5.both(' + (s5i+1) + ')">simulate ✓</button>' : '') +
+        (R.both === 2 && s5i === 2 ? ' <button class="btn-xs btn-xs--go" onclick="SIMS5.day()">advance a day (' + R.day + '/7)</button> <button class="btn-xs" onclick="SIMS5.rush()">try to rush it</button>' : '') +
+        (R.both === 3 && s5i === 3 ? ' <button class="btn-xs btn-xs--go" onclick="SIMS5.both(4)">notice delivered ✓</button>' : '') +
+        (R.both === 4 && s5i === 4 ? ' <button class="btn-xs btn-xs--go" onclick="SIMS5.both(5)">complete the recovery</button>' : '') + '</li>';
+    }
+    h += '</ol>';
+    if (R.rushed) h += '<div class="j-sad"><b>Refused — and the refusal names its rule.</b> &ldquo;Identity-sensitive actions require the FRONTDOOR delay (7 days). The desk confers process, never permissions.&rdquo; Nobody — not staff, not the desk, not a very convincing phone call — can shortcut this.</div>';
+    if (R.both === 5) h += '<p class="j-ok">&#10003; Recovered — on day 7, with a paper trail. New channels verified by code; the audit holds every step.</p><div class="rowflex" style="margin-top:var(--s2)"><button class="btn-xs" onclick="SIMS5.reset2()">run it again</button></div>';
+    h += '</div><div class="panel__foot"><span class="why">A household adult never recovers for another adult; a delegate never signs in as you — delegation excludes credentials.</span></div></div>';
+  }
+  el.innerHTML = h;
+}
+window.SIMS5 = {
+  tab: function(t){ SIM.rec.tab = t; renderRec(); },
+  one: function(n){ SIM.rec.one = n; renderRec(); },
+  undo: function(){ SIM.rec.undone = true; renderRec(); },
+  done: function(){ SIM.rec.one = 4; renderRec(); },
+  reset1: function(){ SIM.rec.one = 0; SIM.rec.undone = false; renderRec(); },
+  both: function(n){ SIM.rec.both = n; SIM.rec.rushed = false; renderRec(); },
+  day: function(){ SIM.rec.day++; if (SIM.rec.day >= 7) SIM.rec.both = 3; renderRec(); },
+  rush: function(){ SIM.rec.rushed = true; renderRec(); },
+  reset2: function(){ SIM.rec.both = 0; SIM.rec.day = 0; SIM.rec.rushed = false; renderRec(); }
+};
+
+/* ── hook into the app ── */
+var _renderAll = renderAll;
+renderAll = function(){
+  _renderAll();
+  renderInbox(); renderPathway(); renderRenew(); renderM3(); renderLogin(); renderRec();
+};
+renderAll();
 })();
 </script>
 </body>
