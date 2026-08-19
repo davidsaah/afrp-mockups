@@ -1061,6 +1061,83 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 .l-nav-group--lens{color:var(--lens-deep)}
 .l-nav-group--lens .nav-ico{color:var(--lens-deep)}
 </style>
+
+<style id="joincss">
+#joinapp{max-width:880px}
+.j-stepper{display:flex;gap:4px;flex-wrap:wrap;margin:0 0 var(--s5)}
+.j-seg{flex:1;min-width:64px;text-align:center;font-size:10.5px;letter-spacing:.06em;
+  text-transform:uppercase;font-weight:750;color:var(--n-500);padding:7px 2px 8px;position:relative;cursor:default}
+.j-seg::before{content:"";display:block;height:4px;border-radius:99px;background:var(--n-200);margin:0 2px 6px}
+.j-seg.is-done{color:var(--lens-deep);cursor:pointer}
+.j-seg.is-done::before{background:var(--lens)}
+.j-seg.is-on{color:var(--ink)}
+.j-seg.is-on::before{background:linear-gradient(90deg,var(--lens) 55%,var(--n-200) 55%)}
+.j-card{background:var(--card,#fff);border:1px solid var(--n-200);border-radius:16px;
+  padding:var(--s6) var(--s6) var(--s5);box-shadow:0 1px 2px rgba(43,36,22,.05);
+  animation:jfade .35s ease both}
+@keyframes jfade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.j-card{animation:none}}
+.j-kick{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--lens-deep);margin:0 0 6px}
+.j-card h2{margin:0 0 6px;font-size:clamp(19px,2.4vw,25px);line-height:1.25}
+.j-sub{margin:0 0 var(--s4);font-size:14px;color:var(--ink-2);max-width:60ch;line-height:1.55}
+.j-opts{display:grid;gap:10px;margin:var(--s4) 0}
+@media (min-width:720px){.j-opts--3{grid-template-columns:1fr 1fr 1fr}.j-opts--2{grid-template-columns:1fr 1fr}}
+.j-opt{display:block;width:100%;text-align:left;background:var(--bg);border:1.5px solid var(--n-200);
+  border-radius:13px;padding:14px 15px;cursor:pointer;font:inherit;transition:border-color .15s,background .15s}
+.j-opt:hover{border-color:var(--lens)}
+.j-opt.is-on{border-color:var(--lens);background:color-mix(in srgb,var(--lens) 7%,transparent)}
+.j-opt b{display:block;font-size:14.5px}
+.j-opt small{display:block;margin-top:3px;font-size:12px;color:var(--ink-2);line-height:1.45}
+.j-opt .j-price{float:right;font-family:var(--mono,ui-monospace);font-size:13px;font-weight:700;color:var(--lens-deep)}
+.j-field{margin:0 0 var(--s3)}
+.j-field label{display:block;font-size:12px;font-weight:750;letter-spacing:.04em;margin:0 0 5px;color:var(--ink)}
+.j-field input{width:100%;max-width:420px;font:inherit;font-size:15px;padding:10px 12px;
+  border:1.5px solid var(--n-300);border-radius:10px;background:#fff;color:var(--ink)}
+.j-field input:focus{outline:2px solid var(--lens);outline-offset:1px;border-color:var(--lens)}
+.j-field .j-hint{font-size:11.5px;color:var(--n-500);margin-top:4px}
+.j-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.j-btn{font:inherit;font-weight:750;font-size:14px;padding:11px 22px;border-radius:11px;cursor:pointer;
+  border:1.5px solid var(--lens-deep);background:var(--lens-deep);color:#fff;transition:transform .12s}
+.j-btn:hover{transform:translateY(-1px)}
+.j-btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.j-btn--ghost{background:transparent;color:var(--lens-deep)}
+.j-btn--quiet{border-color:transparent;background:transparent;color:var(--ink-2);font-weight:650;font-size:13px;padding:8px 10px;text-decoration:underline;text-underline-offset:3px}
+.j-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:var(--s5);flex-wrap:wrap}
+.j-why{font-size:12px;color:var(--ink-2);background:var(--bg);border-left:3px solid var(--lens);
+  border-radius:0 9px 9px 0;padding:9px 12px;margin:var(--s4) 0 0;max-width:62ch;line-height:1.5}
+.j-phone{display:flex;gap:11px;align-items:flex-start;background:#211c11;color:#f2ecd9;border-radius:14px;
+  padding:13px 15px;margin:var(--s3) 0;max-width:430px;animation:jfade .4s ease both}
+.j-phone svg{width:20px;height:20px;flex:none;margin-top:2px}
+.j-phone b{font-size:13px;display:block}
+.j-phone .j-code{font-family:var(--mono,ui-monospace);font-size:20px;letter-spacing:.28em;margin-top:2px}
+.j-phone small{display:block;font-size:10.5px;color:#b7ac93;margin-top:4px}
+.j-ok{display:inline-flex;align-items:center;gap:6px;color:var(--pine-deep,#2f5a33);font-weight:750;font-size:13px}
+.j-sad{background:color-mix(in srgb,#a33 6%,transparent);border:1px solid #d3b1a9;border-radius:12px;
+  padding:13px 15px;margin:var(--s3) 0;font-size:13px;line-height:1.55;max-width:62ch;animation:jfade .35s ease both}
+.j-sad b{color:#7c2d1e}
+.j-tog{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--n-150,#eee7d7)}
+.j-tog:last-child{border-bottom:0}
+.j-tog b{font-size:13.5px}
+.j-tog small{display:block;font-size:11.5px;color:var(--ink-2);margin-top:2px;max-width:46ch}
+.j-sw{flex:none;width:44px;height:25px;border-radius:99px;border:0;cursor:pointer;position:relative;background:var(--n-300);transition:background .15s}
+.j-sw::after{content:"";position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:99px;background:#fff;transition:left .15s}
+.j-sw.is-on{background:var(--lens-deep)}
+.j-sw.is-on::after{left:22px}
+.j-sw[disabled]{cursor:not-allowed;opacity:.75}
+.j-welcome{text-align:center;padding:var(--s7) var(--s5)}
+.j-welcome .j-mark{width:86px;height:86px;margin:0 auto var(--s4);color:var(--lens-deep);animation:jgrow .7s cubic-bezier(.2,.8,.3,1.1) both}
+@keyframes jgrow{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
+.j-welcome h2{font-size:clamp(22px,3vw,30px);margin:0 0 8px}
+.j-welcome .j-ar{font-size:15px;color:var(--lens-deep);font-weight:700;letter-spacing:.02em;margin:0 0 4px}
+.j-memno{font-family:var(--mono,ui-monospace);font-size:13px;color:var(--ink-2);margin:6px 0 0}
+.j-cal{border-top:1px dashed var(--n-300);margin-top:var(--s4);padding-top:var(--s3);font-size:12.5px;color:var(--ink-2)}
+.j-club{display:flex;align-items:center;gap:11px;padding:10px 12px;border:1.5px solid var(--n-200);border-radius:11px;cursor:pointer;background:var(--bg);transition:border-color .15s}
+.j-club.is-on{border-color:var(--lens);background:color-mix(in srgb,var(--lens) 7%,transparent)}
+.j-club b{font-size:13.5px;flex:1}
+.j-club small{color:var(--ink-2);font-size:11.5px}
+.j-clubs{display:grid;gap:8px;margin:var(--s3) 0}
+@media (min-width:760px){.j-clubs{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
@@ -1248,7 +1325,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <nav data-lens-nav="door" aria-label="Front door screens" hidden>
       <div class="l-nav-group l-nav-group--lens"><svg class="nav-ico" aria-hidden="true"><use href="#i-person"/></svg>Signed out</div>
       <a class="l-nav-item" href="#/door/landing">Welcome &mdash; afrp.org/my</a>
-      <a class="l-nav-item" href="#/door/join">Join the Federation <span class="l-nav-item__badge l-nav-item__badge--violet">S1</span></a>
+      <a class="l-nav-item" href="#/door/join">Join the Federation <span class="l-nav-item__badge l-nav-item__badge--violet">works</span></a>
       <a class="l-nav-item" href="#/door/login">Sign in</a>
       <a class="l-nav-item" href="#/door/recovery">Recover access</a>
       <div class="l-nav-group">Coming of age</div>
@@ -4249,42 +4326,12 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 
 <section class="screen" data-route="door/join" data-lens="door" aria-label="Join">
   <div class="page-head">
-    <div><h1>Join &mdash; verified channel first</h1>
-    <p>The J01 wizard. Until your email and mobile are proven yours, only a <b>draft</b> exists &mdash; PII-minimal,
-    expires in 30 days, never billed, never mailed, contacted at most once (on the channel that started verifying).</p></div>
-    <div class="page-head__end"><span class="c-pill c-pill--info">step 2 of 7</span><span class="c-pill c-pill--warn">draft &middot; expires 18 Sep</span></div>
+    <div><h1>Join the Federation</h1>
+    <p>A <b>working simulation</b> of the whole join experience &mdash; every path, including the unhappy ones.
+    Everything runs in memory: nothing is stored, nothing is charged, nothing is mailed. Reload and it&rsquo;s gone.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info">S1 &middot; verified channel first</span><span class="c-pill c-pill--warn">simulation</span></div>
   </div>
-  <div class="grid grid--2">
-    <div class="panel">
-      <div class="panel__head"><h3>The seven steps &mdash; payment is last, on purpose</h3></div>
-      <div class="panel__body">
-        <ol class="trace">
-          <li class="is-pass"><b>1 &middot; Pick a tier.</b> Omar chose Individual, $90 &mdash; dues-2026.1 provisional, named on screen.</li>
-          <li><b>2 &middot; Verify your channels &mdash; you are here.</b> A code to omar.sayegh@example.com and one to (713) 555-01&bull;&bull;. Nothing else is stored until both clear. <b>S1.</b></li>
-          <li><b>3 &middot; Identity &amp; lineage (optional).</b> Tree search; a claim links PROVISIONAL pending steward review &mdash; membership never waits on lineage.</li>
-          <li><b>4 &middot; Household.</b> Create one, or request to join one &mdash; an adult of that household must accept; you see only &ldquo;request sent&rdquo;.</li>
-          <li><b>5 &middot; Clubs.</b> Add any of the 18 &mdash; each its own membership, its own dues, held for the club until remitted.</li>
-          <li><b>6 &middot; Consent defaults.</b> Marketing OFF &middot; operational ON &middot; program invitations ON (the Pathways class) &middot; directory OFF &mdash; bound to your now-verified channels.</li>
-          <li><b>7 &middot; One checkout.</b> Gross fees, two line groups (national revenue; club liability) &mdash; and the postal address that recovery and the mailed ballot both need. The first dollar moves <i>after</i> step 2 cleared. A household joining together is N wizards sharing this one checkout: each adult verifies their own channels first.</li>
-        </ol>
-      </div>
-      <div class="panel__foot"><span class="why">The typo attack dies here: omar@gmali.com never receives a code, and nothing was stored, charged, or mailed.</span></div>
-    </div>
-    <div class="stack" style="display:grid;gap:var(--s5)">
-      <div class="panel">
-        <div class="panel__head"><h3>Verify: email</h3><span class="c-pill c-pill--ok">code sent</span></div>
-        <div class="panel__body">
-          <p class="why" style="margin:0 0 var(--s3)">Enter the 6-digit code sent to <b>omar.sayegh@example.com</b>. Codes expire in 10 minutes; five wrong tries pause this draft for an hour.</p>
-          <div class="calc"><div class="calc__r"><span>Code<small>demo &mdash; screens never show real codes</small></span><span class="calc__n mono">&bull; &bull; &bull; &bull; &bull; &bull;</span></div></div>
-        </div>
-      </div>
-      <div class="panel">
-        <div class="panel__head"><h3>Verify: mobile</h3><span class="c-pill c-pill--warn">waiting</span></div>
-        <div class="panel__body"><p class="why" style="margin:0">SMS to (713) 555-01&bull;&bull;. Both channels verify independently; either alone can later sign you in, which is exactly why both are proven now.</p></div>
-        <div class="panel__foot"><span class="why">First login lands on a finish-setup checklist: household &middot; consent &middot; directory &middot; tree claim.</span></div>
-      </div>
-    </div>
-  </div>
+  <div id="joinapp"></div>
 </section>
 
 <section class="screen" data-route="door/login" data-lens="door" aria-label="Sign in">
@@ -6072,6 +6119,353 @@ try {
   });
 } catch (e) { /* no hashchange in this sandbox — fine */ }
 navigate(parseRoute(readHash()) || 'member/home');
+</script>
+
+<script>
+/* ═══ The join wizard — a working in-memory simulation. Nothing stored, charged, or mailed. ═══ */
+(function(){
+var STEPS = ['Who','Verify','Lineage','Household','Clubs','Consent','Checkout','Welcome'];
+var CLUBS18 = [
+ ['birmingham','Ramallah American Club of Birmingham','Birmingham, AL'],['phoenix','Ramallah Club of Phoenix','Phoenix, AZ'],
+ ['laoc','The Ramallah Club of LA/OC','Los Angeles, CA'],['sandiego','Ramallah American Club of San Diego','San Diego, CA'],
+ ['sf','Ramallah Club of San Francisco','San Francisco, CA'],['sanjose','Ramallah Club of San Jose','San Jose, CA'],
+ ['jax','Ramallah American Club of Jacksonville','Jacksonville, FL'],['chicago','Ramallah Club of Chicago','Chicago, IL'],
+ ['louisville','Ramallah Club of Louisville','Louisville, KY'],['lexington','Ramallah Club of Lexington','Lexington, KY'],
+ ['detroit','Ramallah Club of Detroit','Detroit, MI'],['nj','Ramallah Club of New Jersey','NJ'],
+ ['ny','Ramallah Club of New York','New York, NY'],['cleveland','Ramallah Club of Cleveland','Cleveland, OH'],
+ ['knoxville','Ramallah Club of Knoxville','Knoxville, TN'],['houston','Ramallah Club of Houston','Houston, TX'],
+ ['dc','Ramallah Club of Washington','Washington, DC'],['palmbeach','Ramallah Club of Palm Beach','Palm Beach, FL']];
+var TIERS = { individual:['Individual',90], family:['Family',150], patron:['Patron',1000], student:['Student — scholarship recipient',0] };
+var CLUB_DUES = 40;
+
+function person(label){ return { label:label||'', name:'', email:'', mobile:'',
+  emCode:null, moCode:null, emOK:false, moOK:false, emTries:0, expired:false }; }
+
+var J;
+function reset(){
+  J = { path:null, tier:null, step:0, seen:0, people:[person('You')], minors:[], newlywed:false,
+        tree:{status:null,q:''}, hh:{mode:null,name:'',status:null}, clubs:[],
+        cons:null, postal:'', typo:false, paid:false, memno:null };
+}
+reset();
+
+function esc(s){ return String(s||'').replace(/[&<>"]/g, function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function code6(){ return String(Math.floor(100000 + Math.random()*900000)); }
+function fmt$(n){ return '$' + n.toLocaleString('en-US'); }
+function expiryDate(){ var d = new Date(); d.setDate(d.getDate()+30);
+  return d.toLocaleDateString('en-US',{day:'numeric',month:'short'}); }
+function firstName(){ var n = (J.people[0].name||'').trim().split(' ')[0]; return n || 'friend'; }
+
+/* ── stepper ── */
+function stepper(){
+  var h = '<div class="j-stepper" role="list">';
+  for (var i=0;i<STEPS.length;i++){
+    var cls = i < J.step ? 'is-done' : (i === J.step ? 'is-on' : '');
+    var click = i < J.step && !J.paid ? ' onclick="JOIN.go(' + i + ')"' : '';
+    h += '<span class="j-seg ' + cls + '" role="listitem"' + click + '>' + STEPS[i] + '</span>';
+  }
+  return h + '</div>';
+}
+function foot(backable, nextLabel, nextFn, disabled){
+  var h = '<div class="j-foot"><span>';
+  if (backable) h += '<button class="j-btn j-btn--quiet" onclick="JOIN.go(' + (J.step-1) + ')">&larr; Back</button>';
+  h += '</span><span class="j-row">';
+  if (nextLabel) h += '<button class="j-btn" ' + (disabled?'disabled':'') + ' onclick="' + nextFn + '">' + nextLabel + '</button>';
+  return h + '</span></div>';
+}
+
+/* ── step 0 · who ── */
+function s0(){
+  function opt(key, title, sub, price, on){
+    return '<button class="j-opt' + (on?' is-on':'') + '" onclick="JOIN.pick(\'' + key + '\')">' +
+      '<span class="j-price">' + price + '</span><b>' + title + '</b><small>' + sub + '</small></button>';
+  }
+  var h = '<p class="j-kick">Step 1 · Who is joining?</p><h2>Welcome. Let&rsquo;s take this one question at a time.</h2>' +
+    '<p class="j-sub">Pick the path that fits. You can add clubs, family, and everything else along the way — and payment comes last, on purpose.</p>' +
+    '<div class="j-opts">' +
+    opt('individual','Just me','One national membership — voice and vote in the Federation.', fmt$(90)+'/yr', J.path==='individual') +
+    opt('family','My household','Two adults joining together — each verifies their own channels; one checkout. Newlyweds: your first Family year is complimentary.', fmt$(150)+'/yr', J.path==='family') +
+    opt('student','I’m a scholarship student','A real national membership at $0 — standard consents, no club auto-add. We match you against the scholarship roll at checkout.','$0', J.path==='student') +
+    '</div>';
+  if (J.path === 'individual')
+    h += '<div class="j-field"><label>Your name</label><input value="' + esc(J.people[0].name) + '" placeholder="Omar Sayegh" oninput="JOIN.set(0,\'name\',this.value)"><div class="j-hint">Only a 30-day draft exists until your channels verify — expires ' + expiryDate() + ', never billed, never mailed.</div></div>';
+  if (J.path === 'family')
+    h += '<div class="j-field"><label>Your name</label><input value="' + esc(J.people[0].name) + '" placeholder="Omar Sayegh" oninput="JOIN.set(0,\'name\',this.value)"></div>' +
+         '<div class="j-field"><label>Second adult&rsquo;s name</label><input value="' + esc((J.people[1]||{}).name || '') + '" placeholder="Reem Sayegh" oninput="JOIN.set(1,\'name\',this.value)"><div class="j-hint">Each adult owns their own record from day one — their channels, their consents.</div></div>' +
+         '<div class="j-tog" style="border:0;padding-left:0"><span><b>We&rsquo;re newlyweds</b><small>Congratulations counts as policy here: your first Family year is complimentary.</small></span>' +
+         '<button class="j-sw' + (J.newlywed?' is-on':'') + '" onclick="JOIN.wed()" aria-pressed="' + J.newlywed + '"></button></div>';
+  if (J.path === 'student')
+    h += '<div class="j-field"><label>Your name</label><input value="' + esc(J.people[0].name) + '" placeholder="Dina Khalaf" oninput="JOIN.set(0,\'name\',this.value)"></div>';
+  var ready = J.path && J.people[0].name.trim() && (J.path !== 'family' || (J.people[1] && J.people[1].name.trim()));
+  h += foot(false, 'Continue', 'JOIN.go(1)', !ready);
+  h += '<p class="j-why"><b>Why no payment yet?</b> Under the platform&rsquo;s first principle — verified channel first — not a dollar moves and not a letter mails until the next step proves your email and phone are really yours.</p>';
+  return h;
+}
+
+/* ── step 1 · verify ── */
+function verifyBlock(i){
+  var p = J.people[i];
+  var h = '<div style="margin:0 0 var(--s4);padding-bottom:var(--s3);border-bottom:1px dashed var(--n-200)">';
+  h += '<p style="margin:0 0 8px;font-weight:750;font-size:14px">' + esc(p.name || p.label) + '</p>';
+  if (!p.emCode && !p.emOK){
+    h += '<div class="j-field"><label>Email</label><input type="email" value="' + esc(p.email) + '" placeholder="omar.sayegh@example.com" oninput="JOIN.set(' + i + ',\'email\',this.value)">' +
+      '<div class="j-hint">Try a typo on purpose — the simulation shows you what happens.</div></div>' +
+      '<div class="j-field"><label>Mobile</label><input value="' + esc(p.mobile) + '" placeholder="(713) 555-0142" oninput="JOIN.set(' + i + ',\'mobile\',this.value)"></div>' +
+      '<button class="j-btn j-btn--ghost" ' + (p.email.indexOf('@')<1 || !p.mobile.trim() ? 'disabled' : '') + ' onclick="JOIN.send(' + i + ')">Send my codes</button>';
+  } else if (!p.emOK){
+    if (p.email.toLowerCase().indexOf('gmali') > -1 || J.typo){
+      h += '<div class="j-sad"><b>That address never got a code — and that&rsquo;s the design working.</b> ' +
+        'A mistyped email (like <span class="mono">' + esc(p.email) + '</span>) simply never verifies: nothing was stored beyond this draft, nothing was charged, nothing was mailed. Fix it and try again — the draft is patient until ' + expiryDate() + '.</div>' +
+        '<button class="j-btn j-btn--ghost" onclick="JOIN.fixEmail(' + i + ')">Fix my email</button>';
+    } else {
+      h += '<div class="j-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2.5" width="10" height="19" rx="2.4"/><path d="M11 18.6h2"/></svg>' +
+        '<span><b>Your phone &middot; simulated</b><span class="j-code">' + p.emCode + '</span>' +
+        '<small>In real life this lands in your inbox and SMS — screens never show real codes. This is your simulated notification.</small></span></div>';
+      if (p.expired) h += '<div class="j-sad" style="background:color-mix(in srgb,var(--gold) 8%,transparent);border-color:var(--gold)"><b style="color:#7a5a0a">That code expired after 10 minutes.</b> No harm done — a fresh one just arrived above.</div>';
+      h += '<div class="j-field"><label>Enter the 6-digit code</label><input inputmode="numeric" maxlength="6" style="max-width:180px;letter-spacing:.3em;font-family:var(--mono,ui-monospace)" oninput="JOIN.tryCode(' + i + ',this)"></div>' +
+        '<div class="j-row"><button class="j-btn j-btn--quiet" onclick="JOIN.expire(' + i + ')">simulate: let it expire</button>' +
+        '<button class="j-btn j-btn--quiet" onclick="JOIN.typoAttack(' + i + ')">simulate: I mistyped my email</button></div>';
+      if (p.emTries >= 3) h += '<p class="j-hint" style="color:#7c2d1e">' + p.emTries + ' wrong tries — five pauses this draft for an hour.</p>';
+    }
+  } else {
+    h += '<p class="j-ok">&#10003; ' + esc(p.email) + ' verified &nbsp;&middot;&nbsp; &#10003; ' + esc(p.mobile) + ' verified</p>';
+  }
+  return h + '</div>';
+}
+function s1(){
+  var h = '<p class="j-kick">Step 2 · Verify — before anything else</p><h2>Prove the channels are yours.</h2>' +
+    '<p class="j-sub">One code per channel. Until these clear, only a 30-day draft exists — the platform will not take your money or mail your address anywhere.</p>';
+  for (var i=0;i<J.people.length;i++) h += verifyBlock(i);
+  var all = J.people.every(function(p){ return p.emOK; });
+  h += foot(true, 'Continue', 'JOIN.go(2)', !all);
+  if (J.people.length > 1) h += '<p class="j-why"><b>Why does each adult verify separately?</b> Because each adult owns their own record. A household shares a checkout — never an identity.</p>';
+  return h;
+}
+
+/* ── step 2 · lineage ── */
+function s2(){
+  var h = '<p class="j-kick">Step 3 · Lineage — entirely optional</p><h2>Are you already on the family tree?</h2>' +
+    '<p class="j-sub">Thirty thousand people deep, back generations. If you&rsquo;re there, claim your place — a steward reviews every claim. If not, or not now, skip right past: <b>membership never waits on lineage</b>.</p>';
+  if (J.tree.status === 'claimed'){
+    h += '<div class="j-card" style="box-shadow:none;background:var(--bg);padding:var(--s4)"><p class="j-ok">&#10003; Claim linked — PROVISIONAL</p>' +
+      '<p class="j-sub" style="margin:6px 0 0">We found a 1995 child record under <b>' + esc(J.tree.q || firstName()) + '</b> in the Houston line. Your claim is attached provisionally, pending steward review — it will never block anything in this wizard.</p></div>';
+  } else {
+    h += '<div class="j-field"><label>Search the tree (demo)</label><input value="' + esc(J.tree.q) + '" placeholder="Sayegh, Houston" oninput="JOIN.treeQ(this.value)"></div>' +
+      '<div class="j-row"><button class="j-btn j-btn--ghost" ' + (J.tree.q.trim()?'':'disabled') + ' onclick="JOIN.claim()">Search &amp; claim</button></div>';
+  }
+  h += foot(true, J.tree.status === 'claimed' ? 'Continue' : 'Skip for now', 'JOIN.go(3)', false);
+  return h;
+}
+
+/* ── step 3 · household ── */
+function s3(){
+  var h = '<p class="j-kick">Step 4 · Household</p>';
+  if (J.path === 'family'){
+    var hhName = 'The ' + (J.people[0].name.trim().split(' ').slice(-1)[0] || 'Sayegh') + ' household';
+    h += '<h2>Your household, created together.</h2>' +
+      '<p class="j-sub"><b>' + esc(hhName) + '</b> — ' + esc(J.people[0].name) + ' and ' + esc(J.people[1].name) + ', each holding their own record inside it.</p>';
+    h += '<div style="margin:var(--s3) 0">';
+    for (var m=0;m<J.minors.length;m++)
+      h += '<p class="j-ok" style="margin:4px 0">&#10003; ' + esc(J.minors[m]) + ' — minor: no credentials, never in any directory; consent-holder: ' + esc(J.people[0].name) + '</p>';
+    h += '</div><div class="j-field"><label>Add a child (optional)</label><div class="j-row">' +
+      '<input id="j-minor" placeholder="Layla Sayegh, 14" style="max-width:300px">' +
+      '<button class="j-btn j-btn--ghost" onclick="JOIN.addMinor()">Add</button></div>' +
+      '<div class="j-hint">Minors get a record via the consent-holder — no login, no directory, ever. At 18 the refresh goes to a channel that is theirs.</div></div>';
+    h += foot(true, 'Continue', 'JOIN.go(4)', false);
+    return h;
+  }
+  h += '<h2>Join a household, or start your own?</h2>' +
+    '<p class="j-sub">A household registers together but is never one consent — every adult keeps their own record.</p>';
+  var on = function(mode){ return J.hh.mode === mode ? ' is-on' : ''; };
+  h += '<div class="j-opts j-opts--2">' +
+    '<button class="j-opt' + on('create') + '" onclick="JOIN.hhMode(\'create\')"><b>Start my own</b><small>A household of one is a fine household.</small></button>' +
+    '<button class="j-opt' + on('join') + '" onclick="JOIN.hhMode(\'join\')"><b>Join an existing one</b><small>An adult of that household must accept — you&rsquo;ll see only &ldquo;request sent&rdquo;.</small></button></div>';
+  if (J.hh.mode === 'join'){
+    if (!J.hh.status){
+      h += '<div class="j-field"><label>Whose household?</label><div class="j-row"><input value="' + esc(J.hh.name) + '" placeholder="The Khoury household, Houston" oninput="JOIN.hhName(this.value)" style="max-width:320px">' +
+        '<button class="j-btn j-btn--ghost" ' + (J.hh.name.trim()?'':'disabled') + ' onclick="JOIN.hhSend()">Send request</button></div></div>';
+    } else if (J.hh.status === 'sent'){
+      h += '<p class="j-ok" style="color:var(--gold-deep,#7a5a0a)">&#9203; Request sent. That&rsquo;s all you can see — the household&rsquo;s contents stay theirs.</p>' +
+        '<div class="j-row"><button class="j-btn j-btn--quiet" onclick="JOIN.hhResolve(true)">simulate: they accept</button>' +
+        '<button class="j-btn j-btn--quiet" onclick="JOIN.hhResolve(false)">simulate: they decline</button></div>';
+    } else if (J.hh.status === 'accepted'){
+      h += '<p class="j-ok">&#10003; An adult of ' + esc(J.hh.name) + ' accepted. Welcome to the household.</p>';
+    } else {
+      h += '<div class="j-sad"><b>They passed — and nothing about you leaked.</b> They saw your name and your request; you never saw their household. Start your own below — you can always be invited later.</div>' +
+        '<div class="j-row"><button class="j-btn j-btn--ghost" onclick="JOIN.hhMode(\'create\')">Start my own instead</button></div>';
+    }
+  }
+  var ok = J.hh.mode === 'create' || J.hh.status === 'accepted';
+  h += foot(true, 'Continue', 'JOIN.go(4)', !ok);
+  return h;
+}
+
+/* ── step 4 · clubs ── */
+function s4(){
+  var h = '<p class="j-kick">Step 5 · Clubs</p><h2>The real eighteen. Join as many as will have you.</h2>' +
+    '<p class="j-sub">Each club membership is its own record with its own dues and its own renewal — ' + fmt$(CLUB_DUES) + '/yr here (demo). Dues you pay today are held for the club until remitted.</p><div class="j-clubs">';
+  for (var i=0;i<CLUBS18.length;i++){
+    var c = CLUBS18[i], on = J.clubs.indexOf(c[0]) > -1;
+    h += '<div class="j-club' + (on?' is-on':'') + '" onclick="JOIN.club(\'' + c[0] + '\')" role="checkbox" aria-checked="' + on + '" tabindex="0">' +
+      '<span style="width:18px;height:18px;border-radius:5px;border:1.5px solid ' + (on?'var(--lens-deep)':'var(--n-300)') + ';background:' + (on?'var(--lens-deep)':'transparent') + ';color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex:none">' + (on?'&#10003;':'') + '</span>' +
+      '<b>' + c[1] + '</b><small>' + c[2] + '</small></div>';
+  }
+  h += '</div>';
+  if (J.clubs.length > 1) h += '<p class="j-why"><b>Two clubs? Three?</b> Fine — like Samira, who belongs to San Jose <i>and</i> San Francisco. You&rsquo;ll vote in each club where you&rsquo;re current, and count exactly once federally through a club of record you choose.</p>';
+  h += foot(true, J.clubs.length ? 'Continue' : 'Continue without a club', 'JOIN.go(5)', false);
+  return h;
+}
+
+/* ── step 5 · consent ── */
+function s5(){
+  if (!J.cons){ J.cons = J.people.map(function(){ return { marketing:false, invites:true, directory:false }; }); }
+  var h = '<p class="j-kick">Step 6 · Consent — the defaults protect you</p><h2>What may we send, and what may others see?</h2>' +
+    '<p class="j-sub">Bound to the channels you just verified. Everything here is per person and changeable any time.</p>';
+  for (var i=0;i<J.people.length;i++){
+    var c = J.cons[i];
+    if (J.people.length > 1) h += '<p style="font-weight:750;font-size:14px;margin:var(--s4) 0 2px">' + esc(J.people[i].name) + '</p>';
+    h += '<div class="j-tog"><span><b>Operational notices</b><small>Renewals, ballots, receipts — always on while you&rsquo;re a member. This is the one switch that isn&rsquo;t one.</small></span><button class="j-sw is-on" disabled aria-pressed="true"></button></div>' +
+      '<div class="j-tog"><span><b>Program invitations</b><small>The pathways class — camp, Project Hope, RBPN handoffs. Recruitment never dresses up as operational.</small></span><button class="j-sw' + (c.invites?' is-on':'') + '" onclick="JOIN.tog(' + i + ',\'invites\')" aria-pressed="' + c.invites + '"></button></div>' +
+      '<div class="j-tog"><span><b>Marketing</b><small>Off until you say otherwise.</small></span><button class="j-sw' + (c.marketing?' is-on':'') + '" onclick="JOIN.tog(' + i + ',\'marketing\')" aria-pressed="' + c.marketing + '"></button></div>' +
+      '<div class="j-tog"><span><b>Directory inclusion</b><small>Off by default — blank means blank on purpose. Turn it on later, field by field, from your household screen.</small></span><button class="j-sw' + (c.directory?' is-on':'') + '" onclick="JOIN.tog(' + i + ',\'directory\')" aria-pressed="' + c.directory + '"></button></div>';
+  }
+  h += '<div class="j-field" style="margin-top:var(--s4)"><label>Postal address</label><input value="' + esc(J.postal) + '" placeholder="1400 Hermann Dr, Houston, TX 77004" oninput="JOIN.postal(this.value)">' +
+    '<div class="j-hint">Two things need this and only this: account recovery&rsquo;s mailed notice, and the CPA&rsquo;s election ballot.</div></div>';
+  h += foot(true, 'Continue to checkout', 'JOIN.go(6)', !J.postal.trim());
+  return h;
+}
+
+/* ── step 6 · checkout ── */
+function s6(){
+  var rows = [], natTotal = 0, clubTotal = 0;
+  var tierKey = J.path === 'family' ? 'family' : (J.path === 'student' ? 'student' : 'individual');
+  var t = TIERS[tierKey];
+  var natLine = t[1];
+  if (J.path === 'family' && J.newlywed) natLine = 0;
+  natTotal += natLine;
+  rows.push(['National — ' + t[0] + (J.path==='family' ? ' (' + J.people.length + ' adults' + (J.minors.length ? ', ' + J.minors.length + ' minor' + (J.minors.length>1?'s':'') : '') + ')' : ''),
+    J.path==='family' && J.newlywed ? '<s style="color:var(--n-400)">' + fmt$(t[1]) + '</s> $0 — complimentary first year. Congratulations.' : fmt$(natLine),
+    'national revenue']);
+  for (var i=0;i<J.clubs.length;i++){
+    var c = CLUBS18.filter(function(x){ return x[0] === J.clubs[i]; })[0];
+    rows.push([c[1], fmt$(CLUB_DUES), 'held for the club until remitted']);
+    clubTotal += CLUB_DUES;
+  }
+  var total = natTotal + clubTotal;
+  var h = '<p class="j-kick">Step 7 · One checkout — at last</p><h2>' + (total ? 'The money, plainly.' : 'Nothing to pay — and the flow is identical.') + '</h2>' +
+    '<p class="j-sub">Fees post gross: the processing fee is the Federation&rsquo;s own expense line, never quietly subtracted from anyone&rsquo;s dues or gift.</p>';
+  h += '<div class="calc" style="max-width:560px">';
+  for (var r=0;r<rows.length;r++)
+    h += '<div class="calc__r"><span>' + rows[r][0] + '<small>' + rows[r][2] + '</small></span><span class="calc__n">' + rows[r][1] + '</span></div>';
+  h += '<div class="calc__r calc__r--tot"><span>Total today</span><span class="calc__n">' + fmt$(total) + '</span></div></div>';
+  if (J.path === 'student') h += '<p class="j-ok" style="margin-top:var(--s3)">&#10003; Matched against the scholarship roll (demo) — full membership, standard consents, no club auto-add.</p>';
+  h += '<div class="j-foot"><span><button class="j-btn j-btn--quiet" onclick="JOIN.go(5)">&larr; Back</button></span>' +
+    '<button class="j-btn" id="j-pay" onclick="JOIN.pay()">' + (total ? 'Pay ' + fmt$(total) + ' — simulation' : 'Complete — no charge') + '</button></div>';
+  h += '<p class="j-why"><b>Why was this the last step?</b> Because everything above it — verified channels, your own household, your own consents — is what makes charging this card safe. Payment last is the design, not a nicety.</p>';
+  return h;
+}
+
+/* ── step 7 · welcome ── */
+function s7(){
+  var mark = document.querySelector('.brandmark svg, .l-brand svg');
+  var markHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" class="j-mark"><circle cx="12" cy="9" r="5.4"/><path d="M12 14.5V21M8.5 21h7M12 3.6v-2M7.5 5l-1.4-1.4M16.5 5l1.4-1.4"/></svg>';
+  var use = document.querySelector('#i-cypress') ? '<svg class="j-mark"><use href="#i-cypress"/></svg>' : markHTML;
+  var names = J.people.map(function(p){ return p.name.trim().split(' ')[0]; }).join(' & ');
+  var h = '<div class="j-welcome">' + use +
+    '<p class="j-ar">أهلاً وسهلاً</p>' +
+    '<h2>Welcome to the Federation, ' + esc(names) + '.</h2>' +
+    '<p class="j-sub" style="margin:0 auto var(--s2);max-width:52ch">Seventy-four years of Ramallah families in America, and now yours' + (J.clubs.length ? ' — with ' + J.clubs.length + ' club' + (J.clubs.length>1?'s':'') + ' waiting to meet you' : '') + '.</p>' +
+    '<p class="j-memno">Member no. ' + J.memno + ' &middot; ' + (J.path==='family' ? 'Family' : (J.path==='student' ? 'Student ($0)' : 'Individual')) + ' &middot; renews annually</p>' +
+    '<div class="j-cal" style="max-width:460px;margin-left:auto;margin-right:auto;text-align:left">' +
+    '<b style="font-size:13px">Finish setting up — four small things, whenever you like:</b>' +
+    '<div style="display:grid;gap:6px;margin-top:8px">' +
+    '<a class="btn-xs" href="#/member/household">1 &middot; Your household &amp; who may act for whom</a>' +
+    '<a class="btn-xs" href="#/member/dirinclusion">2 &middot; Directory — appear on your own terms, or not at all</a>' +
+    '<a class="btn-xs" href="#/member/family">3 &middot; Your provisional tree claim (steward reviewing)</a>' +
+    '<a class="btn-xs" href="#/member/programs">4 &middot; The programs — camp to career, when you&rsquo;re ready</a>' +
+    '</div></div>' +
+    '<p class="j-hint" style="margin-top:var(--s4)">This was a working simulation. Nothing was stored, charged, or mailed — reload and it&rsquo;s gone.</p>' +
+    '<div class="j-row" style="justify-content:center;margin-top:var(--s3)"><button class="j-btn j-btn--ghost" onclick="JOIN.restart()">Run it again — try another path</button></div>' +
+    '</div>';
+  return h;
+}
+
+/* ── engine ── */
+function render(){
+  var el = document.getElementById('joinapp');
+  if (!el) return;
+  var steps = [s0,s1,s2,s3,s4,s5,s6,s7];
+  el.innerHTML = stepper() + '<div class="j-card" key="' + J.step + '">' + steps[J.step]() + '</div>';
+}
+window.JOIN = {
+  go: function(n){ J.step = n; J.typo = false; render(); window.scrollTo(0,0); },
+  pick: function(p){
+    J.path = p; J.tier = p;
+    if (p === 'family'){ if (J.people.length < 2) J.people.push(person('Second adult')); }
+    else J.people = J.people.slice(0,1);
+    render();
+  },
+  set: function(i, k, v){ J.people[i][k] = v;
+    /* no re-render on each keystroke for inputs — only button states matter */
+    var btns = document.querySelectorAll('#joinapp .j-btn:not(.j-btn--quiet)');
+    if (J.step === 0){
+      var ready = J.path && J.people[0].name.trim() && (J.path !== 'family' || (J.people[1] && J.people[1].name.trim()));
+      btns.forEach(function(b){ if (b.textContent.trim() === 'Continue') b.disabled = !ready; });
+    }
+    if (J.step === 1){
+      var p = J.people[i], ok = p.email.indexOf('@') > 0 && p.mobile.trim();
+      btns.forEach(function(b){ if (b.textContent.indexOf('Send my codes') > -1) b.disabled = !ok; });
+    }
+  },
+  wed: function(){ J.newlywed = !J.newlywed; render(); },
+  send: function(i){ var p = J.people[i]; p.emCode = code6(); p.expired = false; render(); },
+  tryCode: function(i, input){
+    var p = J.people[i];
+    if (input.value.length < 6) return;
+    if (input.value === p.emCode){ p.emOK = true; p.moOK = true; render(); }
+    else { p.emTries++; input.value = ''; input.placeholder = 'not quite — try again';
+      if (p.emTries >= 3) render(); }
+  },
+  expire: function(i){ var p = J.people[i]; p.emCode = code6(); p.expired = true; render(); },
+  typoAttack: function(i){ J.typo = true; render(); },
+  fixEmail: function(i){ var p = J.people[i]; p.emCode = null; p.expired = false; J.typo = false;
+    if (p.email.toLowerCase().indexOf('gmali') > -1) p.email = p.email.replace(/gmali/ig,'gmail');
+    render(); },
+  treeQ: function(v){ J.tree.q = v;
+    document.querySelectorAll('#joinapp .j-btn--ghost').forEach(function(b){
+      if (b.textContent.indexOf('Search') > -1) b.disabled = !v.trim(); }); },
+  claim: function(){ J.tree.status = 'claimed'; render(); },
+  hhMode: function(m){ J.hh.mode = m; if (m === 'create') J.hh.status = null; render(); },
+  hhName: function(v){ J.hh.name = v;
+    document.querySelectorAll('#joinapp .j-btn--ghost').forEach(function(b){
+      if (b.textContent.indexOf('Send request') > -1) b.disabled = !v.trim(); }); },
+  hhSend: function(){ J.hh.status = 'sent'; render(); },
+  hhResolve: function(yes){ J.hh.status = yes ? 'accepted' : 'declined'; render(); },
+  addMinor: function(){ var el = document.getElementById('j-minor');
+    if (el && el.value.trim()){ J.minors.push(el.value.trim()); render(); } },
+  club: function(id){ var k = J.clubs.indexOf(id);
+    if (k > -1) J.clubs.splice(k,1); else J.clubs.push(id); render(); },
+  tog: function(i, k){ J.cons[i][k] = !J.cons[i][k]; render(); },
+  postal: function(v){ J.postal = v;
+    document.querySelectorAll('#joinapp .j-btn').forEach(function(b){
+      if (b.textContent.indexOf('checkout') > -1) b.disabled = !v.trim(); }); },
+  pay: function(){
+    var b = document.getElementById('j-pay');
+    if (b){ b.disabled = true; b.textContent = 'Verifying · posting gross · one moment…'; }
+    setTimeout(function(){
+      J.paid = true; J.memno = 'AFRP-2026-' + code6().slice(0,4);
+      J.step = 7; render(); window.scrollTo(0,0);
+    }, 1100);
+  },
+  restart: function(){ reset(); render(); window.scrollTo(0,0); }
+};
+render();
+/* re-render when navigating back to the screen (state persists in memory) */
+window.addEventListener('hashchange', function(){
+  if ((location.hash||'').indexOf('door/join') > -1) render();
+});
+})();
 </script>
 </body>
 </html>
