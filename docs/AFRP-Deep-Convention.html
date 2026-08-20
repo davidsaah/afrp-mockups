@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AFRP · The Convention, in full — a deep dive in four dimensions</title>
+<meta name="description" content="The AFRP convention treated whole: the year-long timeline from bid to handoff, every role walked separately, the four days hour by hour, and the money and contract lifecycle where three different treatments meet.">
+<style>
+/* ═════════════════════════════════════════════════════════════════════════
+   AFRP UNIFIED PLATFORM — consolidated document chrome (px- namespace)
+   Heritage layer v3.1 values. Everything inside .sc-m / .sc-o keeps its own
+   scoped stylesheet; this layer only draws the consolidated shell around it.
+   ═════════════════════════════════════════════════════════════════════════ */
+:root{
+  --px-ink:#2b2416; --px-ink-2:#57503f; --px-ink-3:#7a7260;
+  --px-bg:#f5f0e1; --px-surface:#fffdf6; --px-surface-2:#f7f1e2;
+  --px-line:#e2d9c2; --px-dark:#211c11; --px-dark-2:#2c261741;
+  --px-cream:#f2ecd9; --px-cream-2:#d8d0b8;
+  --px-green:#4c6414; --px-green-deep:#33430b; --px-green-50:#eef0da;
+  --px-olive:#6d7a19; --px-olive-50:#f2f4dd;
+  --px-gold:#9a720d;  --px-gold-50:#faf2dc; --px-gold-200:#e7d191;
+  --px-pine:#3f6b41;  --px-pine-50:#e6f0e2;
+  --px-red:#8c2f21;   --px-red-50:#f7e4df;
+  --px-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --px-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+svg.sprite{display:none}
+body{margin:0;background:var(--px-bg);color:var(--px-ink);font:16px/1.6 var(--px-font)}
+.px-doc{scroll-behavior:smooth}
+
+/* ── masthead ─────────────────────────────────────────────────────────── */
+.px-mast{background:var(--px-dark);color:var(--px-cream);padding:44px 0 30px;
+  border-bottom:4px solid var(--px-green)}
+.px-mast .px-in{max-width:1560px;margin:0 auto;padding:0 24px}
+.px-lockup{display:flex;align-items:center;gap:12px;color:#d9b45a;margin-bottom:26px}
+.px-lockup svg{width:38px;height:38px}
+.px-lockup b{font-size:20px;letter-spacing:.06em;color:var(--px-cream)}
+.px-lockup small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:#c9b877;font-weight:600}
+.px-kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#b5c24a;
+  font-weight:700;margin:0 0 10px}
+.px-mast h1{font-size:clamp(30px,3vw + 18px,44px);line-height:1.12;margin:0 0 18px;
+  font-weight:800;letter-spacing:-.01em;color:#fffdf6}
+.px-mast .px-lede{max-width:74ch;font-size:16.5px;line-height:1.65;color:#e8e1cb;margin:0 0 14px}
+.px-mast .px-lede b{color:#fffdf6}
+.px-mast .px-lede code{font-family:var(--px-mono);font-size:.86em;background:#ffffff14;
+  padding:1px 6px;border-radius:6px;color:#e7d191}
+.px-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.px-chip{font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px;
+  background:#ffffff12;color:#e8e1cb;border:1px solid #ffffff24}
+.px-chip--green{background:#4c6414;color:#f2f4dd;border-color:#5d7a1a}
+.px-chip--red{background:#8c2f21;color:#f7e4df;border-color:#a1402f}
+.px-chip--gold{background:#9a720d33;color:#e7d191;border-color:#9a720d66}
+
+/* institution nav strip in mast */
+.px-instnav{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.px-instnav a{display:flex;align-items:center;gap:9px;text-decoration:none;
+  background:#ffffff0d;border:1px solid #ffffff22;border-radius:12px;padding:10px 16px;
+  color:#f2ecd9;font-size:14px;font-weight:600;transition:background .15s}
+.px-instnav a:hover{background:#ffffff1c}
+.px-instnav .px-rn{font-family:var(--px-mono);font-size:12px;color:#d9b45a;font-weight:700}
+
+/* ── legend ───────────────────────────────────────────────────────────── */
+.px-legendwrap{background:var(--px-surface);border-bottom:1px solid var(--px-line)}
+.px-legend{max-width:1560px;margin:0 auto;padding:22px 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px 28px}
+.px-legend h4{margin:0 0 5px;font-size:13.5px;display:flex;align-items:center;gap:8px}
+.px-legend p{margin:0;font-size:13px;line-height:1.5;color:var(--px-ink-2)}
+
+/* ── badges ───────────────────────────────────────────────────────────── */
+.px-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.1em;padding:3px 10px;border-radius:999px;text-transform:uppercase;
+  vertical-align:2px}
+.px-badge i{width:7px;height:7px;border-radius:99px;display:inline-block}
+.px-badge--built{background:var(--px-pine-50);color:var(--px-pine);border:1px solid #aecfa6}
+.px-badge--built i{background:var(--px-pine)}
+.px-badge--designed{background:var(--px-gold-50);color:var(--px-gold);border:1px solid var(--px-gold-200)}
+.px-badge--designed i{background:var(--px-gold)}
+.px-badge--proposed{background:#eee9f5;color:#5b4a80;border:1px solid #cfc2e4}
+.px-badge--proposed i{background:#5b4a80}
+.px-badge--partial{background:var(--px-olive-50);color:#525d12;border:1px solid #cdd48f}
+.px-badge--partial i{background:var(--px-olive)}
+
+/* ── TOC ──────────────────────────────────────────────────────────────── */
+.px-toc{max-width:1560px;margin:34px auto 0;padding:0 24px}
+.px-toc h2{font-size:22px;margin:0 0 6px}
+.px-toc > p{margin:0 0 20px;color:var(--px-ink-2);font-size:14.5px;max-width:88ch}
+.px-toccols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.px-toccol{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:18px 20px}
+.px-toccol h3{margin:0 0 2px;font-size:16px;display:flex;gap:9px;align-items:baseline}
+.px-toccol h3 .px-rn{font-family:var(--px-mono);font-size:12px;color:var(--px-gold)}
+.px-toccol .px-bylaw{font-size:12px;color:var(--px-ink-3);margin:0 0 12px}
+.px-toccol a{display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+  padding:7px 2px;text-decoration:none;color:var(--px-ink);font-size:14px;
+  border-top:1px solid var(--px-line)}
+.px-toccol a:hover{color:var(--px-green-deep)}
+.px-toccol a .px-fc{font-size:11.5px;color:var(--px-ink-3);font-family:var(--px-mono);white-space:nowrap}
+.px-toccol a.px-star{font-weight:700}
+
+/* ── institution part header ──────────────────────────────────────────── */
+.px-inst{margin:72px 0 0;background:var(--px-dark);color:var(--px-cream);
+  border-top:4px solid var(--px-gold);padding:34px 0 30px}
+.px-inst .px-in{max-width:1560px;margin:0 auto;padding:0 24px}
+.px-inst .px-rn{font-family:var(--px-mono);font-size:13px;color:#d9b45a;font-weight:700;
+  letter-spacing:.12em}
+.px-inst h2{font-size:clamp(24px,2vw + 15px,32px);margin:6px 0 10px;color:#fffdf6}
+.px-inst p{max-width:80ch;margin:0;font-size:15px;line-height:1.6;color:#e8e1cb}
+.px-inst .px-src{margin-top:12px;font-size:12.5px;color:#c9b877;font-family:var(--px-mono)}
+
+/* ── module head ──────────────────────────────────────────────────────── */
+.px-mod{max-width:1560px;margin:56px auto 0;padding:0 24px}
+.px-mod--star{border-left:4px solid var(--px-gold);padding-left:20px;margin-left:max(24px,calc((100% - 1560px)/2));
+  max-width:1516px;padding-right:24px}
+@media (max-width:1608px){.px-mod--star{margin-left:24px;margin-right:0}}
+.px-mod .px-modkick{font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--px-ink-3);font-weight:700;margin:0 0 4px}
+.px-mod h3{font-size:clamp(20px,1.4vw + 14px,26px);margin:0 0 10px;display:flex;
+  flex-wrap:wrap;align-items:center;gap:12px}
+.px-mod .px-desc{max-width:86ch;margin:0 0 12px;font-size:15px;line-height:1.62;color:var(--px-ink-2)}
+.px-mod .px-desc b{color:var(--px-ink)}
+.px-api{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.px-api span{font-family:var(--px-mono);font-size:11.5px;background:var(--px-surface);
+  border:1px solid var(--px-line);border-radius:7px;padding:3px 8px;color:#57503f}
+.px-api span.px-api--live{border-color:#aecfa6;background:var(--px-pine-50);color:var(--px-pine)}
+.px-api span.px-api--draft{border-style:dashed;color:#5b4a80;border-color:#cfc2e4;background:#f4f1f9}
+.px-subhead{max-width:1560px;margin:34px auto 0;padding:0 24px;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--px-ink-3);font-weight:700;
+  display:flex;align-items:center;gap:10px}
+.px-subhead:after{content:"";flex:1;height:1px;background:var(--px-line)}
+
+/* roadmap cards (ARFHSN / endowment) */
+.px-road{max-width:1560px;margin:22px auto 0;padding:0 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.px-roadcard{background:var(--px-surface);border:1px dashed var(--px-cream-2);
+  border-radius:14px;padding:20px 22px}
+.px-roadcard h4{margin:0 0 8px;font-size:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.px-roadcard p{margin:0 0 8px;font-size:13.5px;line-height:1.55;color:var(--px-ink-2)}
+.px-roadcard .px-blocked{font-size:12.5px;color:var(--px-red);background:var(--px-red-50);
+  border-radius:8px;padding:7px 11px;margin-top:10px}
+
+/* footer */
+.px-foot{margin-top:88px;background:var(--px-dark);color:#c9c0a5;padding:34px 0 46px;
+  border-top:4px solid var(--px-green)}
+.px-foot .px-in{max-width:1560px;margin:0 auto;padding:0 24px;font-size:13px;line-height:1.7}
+.px-foot b{color:#f2ecd9}
+.px-foot a{color:#d9b45a}
+.px-sep{height:26px}
+@media print{.px-mast,.px-inst{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+/* ── v3: sticky top nav, version chip, element matrix ─────────────────── */
+.px-topnav{position:sticky;top:0;z-index:50;background:#211c11f2;backdrop-filter:blur(6px);
+  border-bottom:1px solid #ffffff1c;color:#f2ecd9}
+.px-topnav .px-in{max-width:1560px;margin:0 auto;padding:9px 24px;display:flex;
+  align-items:center;gap:14px;flex-wrap:wrap}
+.px-topnav .px-tbrand{display:flex;align-items:center;gap:9px;font-weight:800;
+  letter-spacing:.05em;color:#fffdf6;text-decoration:none;font-size:15px}
+.px-topnav .px-tver{font-family:var(--px-mono);font-size:10.5px;font-weight:700;
+  background:#4c6414;color:#f2f4dd;border-radius:999px;padding:2px 9px;letter-spacing:.06em}
+.px-topnav .px-tlinks{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.px-topnav .px-tlinks a{color:#e8e1cb;text-decoration:none;font-size:13px;font-weight:600;
+  padding:6px 11px;border-radius:8px}
+.px-topnav .px-tlinks a:hover{background:#ffffff14}
+.px-topnav .px-tlinks a.px-tcta{background:#4c6414;color:#f2f4dd}
+.px-vermeta{font-family:var(--px-mono);font-size:12px;color:#c9b877;margin:0 0 14px}
+
+.px-matrix{max-width:1560px;margin:26px auto 0;padding:0 24px}
+.px-matrix h3{font-size:19px;margin:34px 0 4px}
+.px-matrix .px-mnote{font-size:13.5px;color:var(--px-ink-2);margin:0 0 12px;max-width:88ch}
+.px-tablewrap{overflow-x:auto;background:var(--px-surface);border:1px solid var(--px-line);
+  border-radius:12px}
+table.px-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.px-table th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--px-ink-3);padding:10px 14px;border-bottom:1px solid var(--px-line);
+  background:var(--px-surface-2)}
+.px-table td{padding:9px 14px;border-bottom:1px solid #eee7d4;vertical-align:top}
+.px-table tr:last-child td{border-bottom:0}
+.px-table a{color:var(--px-green-deep);text-decoration:none;font-weight:600}
+.px-table a:hover{text-decoration:underline}
+.px-st{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.08em;padding:2px 9px;border-radius:999px;text-transform:uppercase;white-space:nowrap}
+.px-st i{width:7px;height:7px;border-radius:99px}
+.px-st--p{background:var(--px-pine-50);color:var(--px-pine)}.px-st--p i{background:var(--px-pine)}
+.px-st--part{background:var(--px-olive-50);color:#525d12}.px-st--part i{background:var(--px-olive)}
+.px-st--m{background:var(--px-red-50);color:var(--px-red)}.px-st--m i{background:var(--px-red)}
+.px-st--prop{background:#eee9f5;color:#5b4a80}.px-st--prop i{background:#5b4a80}
+
+.px-cardgrid{max-width:1560px;margin:20px auto 0;padding:0 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px}
+.px-mcard{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:18px 20px}
+.px-mcard h4{margin:0 0 6px;font-size:15.5px;display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.px-mcard p{margin:0 0 10px;font-size:13px;line-height:1.55;color:var(--px-ink-2)}
+.px-mcard .px-mlinks{display:flex;flex-wrap:wrap;gap:6px}
+.px-mcard .px-mlinks a{font-size:12px;font-weight:700;color:var(--px-green-deep);
+  text-decoration:none;background:var(--px-green-50);border:1px solid #c4cd97;
+  border-radius:999px;padding:3px 11px}
+.px-mcard .px-mlinks a:hover{background:#dde2bf}
+.px-mcard .px-mlinks a.px-ml--ext{background:var(--px-gold-50);border-color:var(--px-gold-200);
+  color:var(--px-gold)}
+
+/* ── programs doc: pipelines, duo layout, facts ────────────────────────── */
+.px-pipes{max-width:1560px;margin:30px auto 0;padding:0 24px}
+.px-pipe{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:16px 20px;margin-bottom:14px}
+.px-pipe h4{margin:0 0 2px;font-size:15.5px}
+.px-pipe > p{margin:0 0 12px;font-size:13px;color:var(--px-ink-2)}
+.px-pipe .px-rail{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.px-pipe .px-rail a{display:flex;flex-direction:column;text-decoration:none;background:var(--px-green-50);
+  border:1px solid #c4cd97;border-radius:10px;padding:7px 13px;color:var(--px-green-deep);min-width:0}
+.px-pipe .px-rail a b{font-size:13px}
+.px-pipe .px-rail a small{font-size:10.5px;color:#525d12;font-family:var(--px-mono)}
+.px-pipe .px-rail a:hover{background:#dde2bf}
+.px-pipe .px-rail .px-arr{color:var(--px-ink-3);font-weight:700}
+.px-hostchip{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:3px 11px;
+  color:#fff;vertical-align:2px}
+.px-progflag{max-width:1560px;margin:10px auto 0;padding:0 24px}
+.px-progflag > div{border-left:3px solid var(--px-gold);background:var(--px-gold-50);color:#584106;
+  padding:10px 14px;border-radius:0 10px 10px 0;font-size:13px;max-width:100ch}
+.px-duo{max-width:1560px;margin:18px auto 0;padding:0 24px;display:grid;gap:22px;
+  grid-template-columns:minmax(0,1fr)}
+@media(min-width:1150px){.px-duo{grid-template-columns:minmax(0,7fr) minmax(0,3fr);align-items:start}}
+.px-duo .px-duolabel{font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--px-ink-3);font-weight:700;margin:0 0 8px}
+.px-srcline{max-width:1560px;margin:8px auto 0;padding:0 24px;font-size:12px;color:var(--px-ink-3)}
+.px-srcline a{color:var(--px-green-deep)}
+@media(max-width:1149px){
+  .px-duo > div:first-child{order:2}
+  .px-duo > div:last-child{order:1}
+}
+
+/* ── v2 programs: charter grid ─────────────────────────────────────────── */
+.px-charter{max-width:1560px;margin:14px auto 0;padding:0 24px;display:grid;gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.px-chcard{background:var(--px-surface);border:1px solid var(--px-line);border-radius:12px;
+  padding:13px 16px;min-width:0}
+.px-chcard h5{margin:0 0 7px;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--px-ink-3);display:flex;align-items:center;gap:7px}
+.px-chcard h5 i{width:8px;height:8px;border-radius:3px;display:inline-block;background:var(--px-green)}
+.px-chcard--mission h5 i{background:var(--px-green)}
+.px-chcard--committee h5 i{background:var(--px-gold)}
+.px-chcard--budget h5 i{background:var(--px-pine)}
+.px-chcard--activities h5 i{background:var(--px-olive)}
+.px-chcard--metrics h5 i{background:#5b4a80}
+.px-chcard p{margin:0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)}
+.px-chcard p b{color:var(--px-ink)}
+.px-chcard ul{margin:0;padding-left:16px;font-size:12.5px;line-height:1.55;color:var(--px-ink-2)}
+.px-chcard ul li{margin-bottom:3px}
+.px-chcard .px-chsub{font-size:11.5px;color:var(--px-ink-3);margin-top:6px}
+.px-chcard .px-demo{font-size:10px;font-weight:800;letter-spacing:.08em;background:var(--px-red-50);
+  color:var(--px-red);border-radius:99px;padding:1px 7px;vertical-align:1px}
+.px-chcard .px-real{font-size:10px;font-weight:800;letter-spacing:.08em;background:var(--px-pine-50);
+  color:var(--px-pine);border-radius:99px;padding:1px 7px;vertical-align:1px}
+
+/* ── experience doc: journey blocks, breaks register ───────────────────── */
+.px-journey{max-width:1560px;margin:44px auto 0;padding:0 24px}
+.px-jsteps{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:6px 0;margin-top:14px}
+.px-jstep{display:flex;gap:14px;padding:11px 18px;border-bottom:1px solid #eee7d4;font-size:13.5px}
+.px-jstep:last-child{border-bottom:0}
+.px-jstep .px-jn{flex:none;width:26px;height:26px;border-radius:99px;background:var(--px-green-50);
+  border:1px solid #c4cd97;color:var(--px-green-deep);font-weight:800;font-size:12px;
+  display:grid;place-items:center}
+.px-jstep .px-jbody{min-width:0}
+.px-jstep .px-jbody b{color:var(--px-ink)}
+.px-jstep .px-jbody .px-jrule{display:inline-block;margin-left:6px;font-family:var(--px-mono);
+  font-size:10.5px;background:var(--px-surface-2);border:1px solid var(--px-line);
+  border-radius:6px;padding:1px 7px;color:var(--px-ink-3)}
+.px-jstep .px-jbody .px-jscreen{display:inline-block;margin-left:6px;font-size:11px;font-weight:700}
+.px-jstep .px-jbody .px-jscreen a{color:var(--px-green-deep);text-decoration:none}
+.px-jstep--fix{background:var(--px-gold-50)}
+.px-jstep--fix .px-jn{background:var(--px-gold-50);border-color:var(--px-gold-200);color:var(--px-gold)}
+.px-break{border-left:3px solid var(--px-red);background:var(--px-red-50);border-radius:0 10px 10px 0;
+  padding:11px 15px;margin-top:10px;font-size:13px;color:#5c2418}
+.px-break b{color:var(--px-red)}
+.px-break .px-fix{display:block;margin-top:6px;color:#3d5220}
+.px-break .px-fix b{color:var(--px-green-deep)}
+.px-sev{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.09em;border-radius:99px;
+  padding:1px 8px;text-transform:uppercase;vertical-align:1px;margin-right:6px}
+.px-sev--critical{background:var(--px-red);color:#fff}
+.px-sev--major{background:var(--px-gold);color:#fff}
+.px-sev--minor{background:var(--px-cream-2);color:var(--px-ink-2)}
+
+
+/* ── deep-dive: the paired operator/participant spine ───────────────────── */
+.dd-wrap{max-width:1560px;margin:0 auto;padding:0 24px}
+.dd-pair{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  margin:14px 0;overflow:hidden}
+.dd-head{display:flex;gap:11px;align-items:baseline;padding:13px 16px 11px;
+  border-bottom:1px solid var(--px-line);background:var(--px-green-50);flex-wrap:wrap}
+.dd-n{flex:none;width:23px;height:23px;border-radius:99px;background:var(--px-green-deep);color:#fff;
+  font-size:11.5px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
+.dd-head b{font-size:15px;flex:1;min-width:200px}
+.dd-rules{font-family:var(--px-mono);font-size:10.5px;letter-spacing:.05em;color:#525d12;
+  background:#fff;border:1px solid var(--px-line);border-radius:99px;padding:2px 9px}
+.dd-cols{display:grid;grid-template-columns:1fr 1fr}
+@media (max-width:860px){.dd-cols{grid-template-columns:1fr}}
+.dd-col{padding:14px 16px 16px}
+.dd-col+.dd-col{border-left:1px solid var(--px-line)}
+@media (max-width:860px){.dd-col+.dd-col{border-left:0;border-top:1px solid var(--px-line)}}
+.dd-col h5{margin:0 0 7px;font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:800}
+.dd-op h5{color:var(--px-pine)}
+.dd-pt h5{color:var(--px-gold)}
+.dd-col p{margin:0;font-size:13.2px;line-height:1.58;color:var(--px-ink-2)}
+.dd-col p b{color:var(--px-ink)}
+.dd-col p+p{margin-top:7px}
+.dd-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.dd-links a{font-size:11.5px;font-weight:700;color:var(--px-green-deep);background:var(--px-green-50);
+  border:1px solid var(--px-line);border-radius:99px;padding:3px 9px;text-decoration:none}
+.dd-links a:hover{background:#dde2bf}
+.dd-gap{margin:0;padding:10px 16px;background:var(--px-gold-50);border-top:1px solid var(--px-gold-200);
+  font-size:12.5px;line-height:1.55;color:#5c4708}
+.dd-gap b{color:#7a5a0a}
+.dd-note{max-width:1560px;margin:16px auto 0;padding:12px 16px;border-left:3px solid var(--px-green);
+  background:var(--px-surface);border-radius:0 12px 12px 0;font-size:13px;line-height:1.6;color:var(--px-ink-2)}
+.dd-note b{color:var(--px-ink)}
+.dd-wrap>.dd-note{margin-left:0;margin-right:0}
+
+</style>
+</head>
+<body class="px-doc">
+<nav class="px-topnav"><div class="px-in">
+  <a class="px-tbrand" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="AFRP olive-tree mark" style="color:#f2ecd9;width:26px;height:26px;flex:none">
+  
+
+  
+  <g>
+    <rect x="13" y="66" width="94" height="22" fill="#e7d191"/>
+    <g fill="#d9b45a">
+      <rect x="13" y="67" width="15" height="9" rx="3"/><rect x="31" y="67" width="19" height="9" rx="3"/>
+      <rect x="53" y="67" width="13" height="9" rx="3"/><rect x="69" y="67" width="18" height="9" rx="3"/>
+      <rect x="90" y="67" width="17" height="9" rx="3"/>
+    </g>
+    <g fill="#c9a34a">
+      <rect x="13" y="78" width="10" height="9" rx="3"/><rect x="26" y="78" width="17" height="9" rx="3"/>
+      <rect x="46" y="78" width="14" height="9" rx="3"/><rect x="63" y="78" width="11" height="9" rx="3"/>
+      <rect x="77" y="78" width="18" height="9" rx="3"/><rect x="98" y="78" width="9" height="9" rx="3"/>
+    </g>
+  </g>
+
+  
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M59 97c0-12 0-24-3-33" stroke-width="7.5"/>
+    <path d="M56 64c-3-8-8-13-14-16" stroke-width="6"/>
+    <path d="M56.5 66c2-8 7-14 14-18" stroke-width="6"/>
+    <path d="M47 53c-3-3-5-7-5-12" stroke-width="4.5"/>
+    <path d="M66 53c4-2 7-5 9-9" stroke-width="4.5"/>
+    <path d="M59 97c-5 3-10 4-15 4M59 97c5 3 10 4 15 4M59 97v7" stroke-width="5"/>
+  </g>
+
+  
+  <g fill="#4c6414">
+    <ellipse cx="33" cy="34" rx="6.5" ry="3.1" transform="rotate(-38 33 34)"/>
+    <ellipse cx="45" cy="23" rx="6.5" ry="3.1" transform="rotate(-16 45 23)"/>
+    <ellipse cx="61" cy="18" rx="6.5" ry="3.1" transform="rotate(2 61 18)"/>
+    <ellipse cx="77" cy="22" rx="6.5" ry="3.1" transform="rotate(20 77 22)"/>
+    <ellipse cx="88" cy="33" rx="6.5" ry="3.1" transform="rotate(48 88 33)"/>
+    <ellipse cx="27" cy="47" rx="6.5" ry="3.1" transform="rotate(-66 27 47)"/>
+    <ellipse cx="93" cy="46" rx="6.5" ry="3.1" transform="rotate(66 93 46)"/>
+  </g>
+  <g fill="#6d7a19">
+    <ellipse cx="40" cy="34" rx="6" ry="2.9" transform="rotate(-28 40 34)"/>
+    <ellipse cx="53" cy="27" rx="6" ry="2.9" transform="rotate(-8 53 27)"/>
+    <ellipse cx="68" cy="26" rx="6" ry="2.9" transform="rotate(12 68 26)"/>
+    <ellipse cx="81" cy="32" rx="6" ry="2.9" transform="rotate(36 81 32)"/>
+    <ellipse cx="33" cy="55" rx="6" ry="2.9" transform="rotate(-56 33 55)"/>
+    <ellipse cx="87" cy="55" rx="6" ry="2.9" transform="rotate(56 87 55)"/>
+    <ellipse cx="60" cy="30" rx="6" ry="2.9" transform="rotate(0 60 30)"/>
+  </g>
+  <g fill="#7e9440">
+    <ellipse cx="47" cy="37" rx="5.5" ry="2.7" transform="rotate(-18 47 37)"/>
+    <ellipse cx="60" cy="38" rx="5.5" ry="2.7" transform="rotate(4 60 38)"/>
+    <ellipse cx="73" cy="37" rx="5.5" ry="2.7" transform="rotate(24 73 37)"/>
+    <ellipse cx="39" cy="46" rx="5.5" ry="2.7" transform="rotate(-42 39 46)"/>
+    <ellipse cx="82" cy="45" rx="5.5" ry="2.7" transform="rotate(42 82 45)"/>
+    <ellipse cx="53" cy="46" rx="5.5" ry="2.7" transform="rotate(-8 53 46)"/>
+    <ellipse cx="68" cy="46" rx="5.5" ry="2.7" transform="rotate(14 68 46)"/>
+  </g>
+
+  
+  <g fill="#38430b">
+    <circle cx="43" cy="28" r="2.3"/><circle cx="66" cy="21" r="2.3"/><circle cx="85" cy="28" r="2.3"/>
+    <circle cx="34" cy="41" r="2.3"/><circle cx="64" cy="33" r="2.3"/><circle cx="88" cy="41" r="2.3"/>
+    <circle cx="46" cy="42" r="2.3"/>
+  </g>
+  <g fill="#9a720d">
+    <circle cx="53" cy="22" r="2.1"/><circle cx="74" cy="30" r="2.1"/><circle cx="56" cy="33" r="2.1"/>
+    <circle cx="30" cy="51" r="2.1"/><circle cx="90" cy="51" r="2.1"/>
+  </g>
+
+  
+  <g fill="none" stroke="#4c6414" stroke-width="2" stroke-linecap="round">
+    <path d="M36 60c-2 5-2 10-1 14"/><path d="M83 59c2 5 2 10 1 15"/>
+  </g>
+  <g fill="#38430b">
+    <circle cx="34.6" cy="69" r="2"/><circle cx="35.6" cy="74.5" r="2"/>
+    <circle cx="84.6" cy="68" r="2"/><circle cx="84.2" cy="74" r="2"/>
+  </g>
+
+  
+  <path d="M11 88V60a49 49 0 0 1 98 0v28" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
+  <path d="M4 89.5h17M99 89.5h17" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+</svg>
+<span>AFRP</span></a>
+  <span style="color:#7a7260">/</span><span style="font-weight:700;font-size:14px">Deep dive · The Convention</span>
+  <span class="px-tver">v1.0</span>
+  <div class="px-tlinks"><a href="#timeline">Timeline</a><a href="#roles">Roles</a><a href="#onsite">On-site</a><a href="#money">Money</a><a href="prototype.html#/fed/convcmd">Prototype</a><a href="index.html" class="px-tcta">All docs</a></div>
+</div></nav>
+<header class="px-mast"><div class="px-in">
+  <p class="px-kicker">AFRP design delivery · deep dive, 1 of 5</p>
+  <h1>The Convention, in full</h1>
+  <p class="px-vermeta">v1.0 · 20 Aug 2026 · four dimensions · every moment paired: running it / living it</p>
+  <p class="px-lede">Sixty-eight of these since 1959, and it is still the hardest thing the federation does: a four-day meeting that is simultaneously a family reunion, a legislative session, a trade show, a youth camp and a small hotel business — run by volunteers who change every year. This deep dive takes it in four dimensions: <b>the year-long timeline</b> from bid to handoff, <b>role by role</b>, <b>hour by hour on-site</b>, and <b>the money</b> — where three different legal treatments of a dollar meet in one ballroom and the platform has to name which one applies, every time.</p>
+  <div class="px-chips"><span class="px-chip px-chip--gold">4 dimensions · 1 convention</span><span class="px-chip px-chip--green">every moment paired</span><span class="px-chip px-chip--red">three money treatments in one room</span><span class="px-chip ">Houston 2026 · San Francisco 2027</span></div>
+</div></header>
+<div class="px-chips" style="max-width:1560px;margin:24px auto 0;padding:0 24px"><a href="#timeline" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">The timeline — bid to handoff</a><a href="#roles" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">Role by role</a><a href="#onsite" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">Hour by hour on-site</a><a href="#money" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">Money and the contract lifecycle</a></div>
+
+<section class="px-mod" id="timeline">
+  <p class="px-modkick">Dimension 1 · the year that produces four days</p>
+  <h3>The timeline — bid to handoff</h3>
+  <p class="px-desc">A convention is not planned in the months before it; it is planned in the <b>two years</b> before it. The site is chosen by the membership two years ahead, rotating through three regions — which means at any moment three conventions are alive at once: the one being run, the one being planned, and the one being bid for. The platform has to hold all three without letting them contaminate each other.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>The bid</b><span class="dd-rules">R43 · 10.1</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Running it — a club that wants the convention</h5><p>San Jose’s officers assemble a bid: candidate hotels, room-block pricing, air access, the local committee who would actually do the work, and a draft budget built on the federation’s own template so bids can be compared like with like.</p><p>The bid is a <b>club action</b> filed with the federation — it does not commit the club’s money until a contract is signed, and the platform says so on the form.</p></div>
+    <div class="dd-col dd-pt"><h5>Living it — a member who will vote on it</h5><p>She sees the competing bids side by side in the convention section: cities, dates, indicative prices, and what each committee is promising. Not a glossy pitch — the same fields for everyone.</p><p>The vote is hers because the site is chosen <b>by the general membership two years ahead</b>, not by the Board. The ballot is the ordinary ballot machinery.</p><div class="dd-links"><a href="AFRP-Convention.html">Convention doc</a><a href="prototype.html#/member/voting">Voting</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>Site selection and the contract</b><span class="dd-rules">Convention Contract · R43</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Running it — federation staff and the incoming host</h5><p>The membership’s choice becomes a <b>year record</b>: “Convention 2028 · 70th · San Jose”, an object of its own with its own committee, budget line and contract dates. Nothing from a prior year carries into it without an explicit review-and-adopt — not prices, not store items, not comms lists.</p><p>The Convention Contract is signed between the federation and the host. It is the document that makes the money question answerable, so the platform stores it <i>as the source</i>, not as an attachment nobody reads.</p></div>
+    <div class="dd-col dd-pt"><h5>Living it — the winning club</h5><p>San Jose learns what it has actually taken on: named deadlines, a required accounting timeline, and the fact that convention money is never its own.</p><p>The platform states the split at signing rather than at settlement: <b>anything paid through My AFRP is Federation money from the first dollar</b> — the host is class attribution, not a bank. Only what the host takes <i>off</i> the platform — cash at a door, a local cheque — is held <b>as an agent</b>, and that money posts as a receivable owed to the federation by the contract’s settlement date.</p><div class="dd-links"><a href="prototype.html#/fed/convention">Contract & finance</a></div></div>
+  </div><p class="dd-gap"><b>Open:</b> the contract’s own renewal cycle. The 2009 Convention Contractual Agreement is the text in force; whether it is re-executed per convention or standing with per-year schedules is a Board question the platform currently flags rather than assumes.</p>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>Committee formation</b><span class="dd-rules">R38 · R39</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Running it — the convention chair</h5><p>The committee forms on the <b>standard committee rails</b>: the roster IS the grant, scoped <span class="mono">program:convention</span>. Registration, program, banquet, youth, hospitality, sponsorship, and the desk each get a lead with a scope — not a shared login.</p><p>Grants are end-dated to the convention. The chair does not have to remember to remove anyone.</p></div>
+    <div class="dd-col dd-pt"><h5>Living it — a member who volunteers</h5><p>He submits the Committee Interest Form, is accepted onto the banquet subcommittee, and immediately can see exactly what that gives him: the banquet capacity and seating tool, the run-of-show, the vendor contacts — and not the registration list, not anyone’s giving, not the roster.</p><p>When the convention closes, his access ends on the date it said it would.</p><div class="dd-links"><a href="prototype.html#/fed/committees">Committees</a><a href="AFRP-Platform-Experience.html#j10">Journey J10</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">4</span><b>The budget, and the first hard number</b><span class="dd-rules">R38 · R23</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Running it — the convention treasurer</h5><p>The budget is adopted as the convention’s own line: room-block guarantees, food-and-beverage minimums, AV, the youth program, the banquet, printing. The two numbers that decide everything are the <b>attrition clause</b> (rooms the federation must fill or pay for) and the <b>F&amp;B minimum</b>.</p><p>Registration pricing is then derived from those, not guessed — the platform shows the derivation.</p></div>
+    <div class="dd-col dd-pt"><h5>Living it — the Board</h5><p>The Board sees the same derivation and can ask the only question worth asking: at what registration count does this convention break even, and what happens at 80% of it?</p><p>A budget adopted by the Board is an <b>allocation</b>. Only a donor’s designation creates a restriction — the screen says which is which, because that confusion has cost nonprofits real money.</p><div class="dd-links"><a href="prototype.html#/fed/boardroom">Board workspace</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">5</span><b>Registration opens</b><span class="dd-rules">R19 · R26 · S1</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Running it — the registration lead</h5><p>Registration is built on the <b>one event builder</b> under the convention policy pack: membership is mandatory for all attendees, so a “non-member” rate bundles the membership it requires and creates it through the front door at checkout. Guest tickets are refused, naming the rule.</p><p>Banquet seats are <b>capacity inventory</b>, not a donation line. There is no oversell path to find.</p></div>
+    <div class="dd-col dd-pt"><h5>Living it — a member registering a family</h5><p>She registers herself, her husband, and their fourteen-year-old — the household model decides who she may register, not a shared password. The youth program has its own consent-holder step.</p><p>Her Detroit club membership is lapsed, so one rate reads differently than she expected, and the screen tells her exactly why and what would change it.</p><div class="dd-links"><a href="prototype.html#/member/convention">Convention (member)</a><a href="AFRP-Platform-Experience.html#j05">Journey J05</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">5.5</span><b>The governance calendar running underneath</b><span class="dd-rules">R12 · 8.11 · 9.2</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Federation staff and the committees</h5><p>Parallel to the logistics, a second calendar with hard dates: the <b>amendment and resolution filing deadline</b>, the <b>nominations window</b> for national office, the <b>delegate certification cutoff</b>, the record date that freezes the electorate, and the credentials report to the Assembly.</p><p>These are the dates that decide whether the convention can lawfully do business, so they belong on the same timeline as the hotel deadlines rather than in a separate memo.</p></div>
+    <div class="dd-col dd-pt"><h5>A member with something to file</h5><p>She wants to put a by-law amendment before the Assembly. The platform tells her the filing deadline and what it must contain — before it passes, not after.</p><div class="dd-links"><a href="prototype.html#/fed/calendar">Election calendar</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">5.7</span><b>Housing and the room block</b><span class="dd-rules">budget · contract</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The chair, watching the attrition clause</h5><p>Room-block pickup is tracked against the guarantee, because unfilled rooms are a bill the federation pays. The chair sees pickup against the clause with time to act.</p></div>
+    <div class="dd-col dd-pt"><h5>A member booking</h5><p>He books through the block link by the cutoff. Booking outside it is his right and costs the federation money, so the screen says so plainly rather than nagging.</p><p>Rooming money is the hotel’s, never the federation’s — it appears nowhere in the accounting except as the attrition exposure.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">5.9</span><b>The registration lifecycle after purchase</b><span class="dd-rules">R26 · R31 · S3</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The registration lead</h5><p>A published <b>refund deadline schedule</b>; substitution rules (a registration may be transferred to another member by the payer, once, before the deadline — a ticket is possession, so the transfer is recorded rather than assumed); the walk-up path on site; and accessibility and dietary fields that only the people who must act on them can read.</p></div>
+    <div class="dd-col dd-pt"><h5>Plans that change</h5><p>She can cancel by a date she was told, hand her place to her sister before the deadline, or arrive and register at the desk. During the summer registration pause the screen says what is happening: payments queue as pending-capture, waitlist positions hold.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">6</span><b>Close-out and settlement</b><span class="dd-rules">R43 · S3 · 10.1.7</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Running it — treasurer and staff together</h5><p>Within the accounting deadline the host renders a full accounting: every dollar collected, every dollar spent, the surplus or deficit, and the settlement transfer. Snapshots — the roll, sales, attendance — archive read-only.</p><p>Unclaimed store pickups are held, then refunded through the reversal model. Nothing is quietly absorbed.</p></div>
+    <div class="dd-col dd-pt"><h5>Living it — the host club</h5><p>The host club finds out whether it is owed money or owes it — and, crucially, that the answer was computable all along, because the treatment of each dollar was named when it was collected rather than reconstructed afterwards.</p><div class="dd-links"><a href="prototype.html#/fed/results">Results</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">7</span><b>Handoff</b><span class="dd-rules">R43 · R37</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Running it — outgoing chair to incoming chair</h5><p>The next year’s record opens <b>empty by default</b>. What carries is deliberate and reviewed: the lessons file, the vendor performance notes, and — the one standing exception — <b>program-book ad placements that missed this year’s book roll forward</b> through the ads desk rather than vanishing.</p></div>
+    <div class="dd-col dd-pt"><h5>Living it — next year’s committee</h5><p>They inherit a checklist and a set of decisions with reasons attached, instead of a folder of last year’s files and a phone number for someone who is tired.</p><div class="dd-links"><a href="AFRP-Platform-Experience.html#j13">Journey J13</a></div></div>
+  </div><p class="dd-gap"><b>Worth deciding:</b> sponsor relationships are the other thing hosts want carried forward. The design currently treats each year’s sponsorships as that year’s — a multi-year sponsor agreement would be an inter-entity-style agreement record, not a copied list. Flagged, not assumed.</p>
+</div><div class="dd-note"><b>The through-line.</b> Every rail of the federation surfaces here once a year — camp reunion, scholarship awards on stage, the RBPN meetup, the heritage exhibit, the mission report to the floor. That is why the convention is its own element rather than a big event: it is the annual convening layer of the <a href="AFRP-Platform-Experience.html#pathways">program rails</a>.</div></div>
+<div class="px-matrix" style="margin-top:26px"><h3 style="font-size:16px">Three conventions are always alive at once</h3>
+  <div class="px-tablewrap"><table class="px-table"><thead><tr><th>Which</th><th>State</th><th>What the platform must keep separate</th></tr></thead><tbody><tr><td><b>The 68th — Houston, 2026</b></td><td>running / closing</td><td>Live registration, on-site ops, then close-out. Its snapshots freeze here and are never recomputed.</td></tr><tr><td><b>The 69th — 2027</b></td><td>planning</td><td>Contract signed, committee forming, budget in draft. Cannot read or reuse the 68th’s config without explicit adopt.</td></tr><tr><td><b>The 70th — 2028</b></td><td>bidding</td><td>Bids under comparison; a membership vote pending. No money, no committee grants, no store.</td></tr></tbody></table></div><p class="px-mnote" style="margin-top:10px">The commonest planning failure in volunteer organisations is last year’s spreadsheet becoming this year’s plan by accident. Empty-by-default is the design’s answer, and review-and-adopt is the escape hatch.</p></div>
+<section class="px-mod" id="roles">
+  <p class="px-modkick">Dimension 2 · seven people, seven surfaces</p>
+  <h3>Role by role</h3>
+  <p class="px-desc">The same four days look completely different depending on who you are. Each role below gets a different surface and a different scope — and the scope is the point: a badge-reprint agent does not need your giving history, and a delegate does not need the banquet seating chart.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>The convention chair</b><span class="dd-rules">R39</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>What they hold</h5><p>The <b>command centre</b>: registration counts against capacity, room-block pickup against the attrition clause, banquet sales against the F&amp;B minimum, desk queue length, and the exception list — what is overdue or blocked right now.</p></div>
+    <div class="dd-col dd-pt"><h5>What they deliberately cannot see</h5><p>Not the sealed ballots. Not individual giving. Not the credentialing determinations, which belong to the credentials chair by rule.</p><p>A chair who can see everything is a chair who can be lobbied about everything.</p><div class="dd-links"><a href="prototype.html#/fed/convcmd">Command centre</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>The convention treasurer</b><span class="dd-rules">R20 · R23 · S3</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>What they hold</h5><p>Every dollar with its <b>treatment named at the moment of collection</b>: registration and Relief Fund as Federation property held by an agent, sponsorships by class, the store, the banquet. Daily close, gross fees, reversals as receivables.</p></div>
+    <div class="dd-col dd-pt"><h5>What the design forces them to do</h5><p>They cannot post an unclassified dollar. There is no “miscellaneous” bucket to sweep the difficult ones into — which is inconvenient for four days and decisive for the ninety after.</p><div class="dd-links"><a href="prototype.html#/fed/finance">Daily close</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>The credentials chair</b><span class="dd-rules">R12 · R17 · S4 · S6</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>What they hold</h5><p>The frozen roll at the record date, delegate certifications verified against the <b>remittance ledger</b> rather than self-attestation, and the exception queue where a club feed and the ledger disagree.</p></div>
+    <div class="dd-col dd-pt"><h5>What a refused delegate sees</h5><p>“Detroit’s fourth delegate cannot be seated: the club’s August remittance is unposted — By-Law 8.11.” The rule, the date, and the fix. Never a shrug, never a list of who else was refused.</p><div class="dd-links"><a href="prototype.html#/fed/credentialing">Credentialing</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">4</span><b>A delegate</b><span class="dd-rules">S4 · R14</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>What the floor gives them</h5><p>The current weight of their delegation shown live, the motion before the house, and a vote that <b>freezes weights the moment voting opens</b> — so a member extracting mid-vote cannot change the value of ballots already cast.</p></div>
+    <div class="dd-col dd-pt"><h5>What they carry</h5><p>They carry other people’s votes. The arithmetic is visible to the room in exact hundredths, because a certified result that fails to reconcile by a fraction of a vote is a result somebody litigates.</p><div class="dd-links"><a href="prototype.html#/fed/floor">Live floor</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">5</span><b>An ordinary attendee</b><span class="dd-rules">R19 · R30 · R31</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>What the platform does for them</h5><p>A rotating QR badge, a schedule that updates, stamped operational announcements, and one two-way door — the help desk — that is owned and clocked rather than being “ask whoever is at the table”.</p></div>
+    <div class="dd-col dd-pt"><h5>Their four days</h5><p>They came to see people. The measure of the platform is how little of it they have to touch: badge at the door, schedule in a pocket, and nothing that requires learning software during a reunion.</p><div class="dd-links"><a href="prototype.html#/member/convlive">Convention live</a><a href="prototype.html#/member/convhelp">Help desk</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">6</span><b>A youth participant (and their consent-holder)</b><span class="dd-rules">R7 · R40 · S1</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>What the youth lead holds</h5><p>The youth roster with health forms gating arrival, medication logs double-signed, incident closure requiring a parent notification, and pickup authority read from the household model — the camp rules, generalized to four days in a hotel.</p></div>
+    <div class="dd-col dd-pt"><h5>What the parent controls</h5><p>The parent set photo consent and pickup authority once, in the household, and it is honoured here without being re-asked. Their fourteen-year-old appears on no attendee-visible list at all.</p><div class="dd-links"><a href="AFRP-Platform-Experience.html#j07">Journey J07</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">7</span><b>A vendor or sponsor</b><span class="dd-rules">R19 · R39</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>What sponsorship holds</h5><p>Sponsorship is a money class with deliverables attached (book ad, signage, table). The ads desk carries the program-book deadline; the sponsor sees their own placements and nothing else.</p></div>
+    <div class="dd-col dd-pt"><h5>The awkward case, handled</h5><p>An exhibitor credential is <b>not attendance</b> and therefore does not touch R19: hall access only — no sessions, no banquet, no floor, no vote, and no line on any roll. A vendor’s representative who wants to attend the program registers normally, as a member, like everyone else.</p><p>That distinction keeps the rule absolute instead of carving an exception into it. Press and observer credentials work the same way.</p><div class="dd-links"><a href="prototype.html#/fed/convdesk">Desk & store</a><a href="prototype.html#/member/ads">Advertise</a></div></div>
+  </div><p class="dd-gap"><b>Why it matters:</b> a “vendor exception to membership” would put non-members on a credentialed list that the electorate is derived from. A non-attendee credential cannot inflate a roll, because it never creates a membership in the first place.</p>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">8</span><b>The host club’s own officers — the role the money depends on</b><span class="dd-rules">Convention Contract · R23</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Who actually holds the account</h5><p>The host club president and treasurer are distinct from the convention chair and convention treasurer, and the platform records which individuals hold which. Where the host treasurer <i>is</i> the convention treasurer, that is a recorded fact, not an assumption.</p></div>
+    <div class="dd-col dd-pt"><h5>The duty, named</h5><p>Because the agency duty attaches to a named person and a named account. “The host holds it as an agent” means nothing until the record says who.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">9</span><b>Tellers, parliamentarian, press and observers</b><span class="dd-rules">9.2 · R39</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Election committee and chair</h5><p>Tellers are a scoped role for the counting hours only; the parliamentarian advises and records nothing. Press and observer credentials are non-attendee credentials with named access.</p></div>
+    <div class="dd-col dd-pt"><h5>Who may be in the room</h5><p>Business sessions have a defined observer status, so “can I sit at the back?” has an answer before someone has to improvise one at the door.</p></div>
+  </div>
+</div></div>
+
+<section class="px-mod" id="onsite">
+  <p class="px-modkick">Dimension 3 · the four days themselves</p>
+  <h3>Hour by hour on-site</h3>
+  <p class="px-desc">On-site is where a design either survives or gets replaced by a clipboard. The test is not the happy path — it is 6:40pm at the banquet door with a queue, a scanner that will not scan, and a family who swear they paid.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>Wednesday, 2:00pm — the desk opens</b><span class="dd-rules">R19 · R31</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The desk agent</h5><p>Search by name, confirm the registration, print badges. The door list shows <b>name and ticket type only</b> — not giving, not consents, not household — because a desk screen is visible to everyone in the queue behind it.</p></div>
+    <div class="dd-col dd-pt"><h5>The arriving family</h5><p>Ninety seconds, four badges, and the youth wristband handled at the same table instead of a second queue somewhere else.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>Wednesday, 2:20pm — the wifi dies</b><span class="dd-rules">R22 · R43</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The desk agent</h5><p>The desk keeps working from the <b>pre-loaded arrival snapshot</b>: check-ins queue locally and reconcile when the connection returns, idempotently — the same queue-and-replay pattern the club ledgers use when a QuickBooks token dies.</p><p>Payments do not run offline. Money waits for the network; attendance does not.</p></div>
+    <div class="dd-col dd-pt"><h5>The queue</h5><p>Nobody in the queue notices. That is the entire specification.</p><div class="dd-links"><a href="prototype.html#/fed/qbo">QBO queue pattern</a></div></div>
+  </div><p class="dd-gap"><b>Design note:</b> offline check-in means two devices can admit the same badge before they reconcile. The settled answer is that duplicate admission is detected at reconcile and reported, never silently merged — a badge scanned twice is a fact worth knowing, not an error worth hiding.</p>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>Thursday, 9:00am — the floor</b><span class="dd-rules">R12 · S4</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The chair and credentials</h5><p>Quorum tested against the frozen roll; the mode for each motion assigned by the by-laws, not chosen by the chair; weights fixed when voting opens on each question.</p></div>
+    <div class="dd-col dd-pt"><h5>The room</h5><p>The room sees the arithmetic on the screen as it happens — Chicago’s 90.00 dividing across five delegates, re-dividing as members extract between motions, and totalling to exactly 90.00 every time.</p><div class="dd-links"><a href="prototype.html#/fed/floor">Live floor</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3.5</span><b>Thursday, 10:30am — the election</b><span class="dd-rules">R13 · R14 · 9.2</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Tellers and the election committee</h5><p>Ballots issue against the frozen roll; the tellers’ station is a scoped surface for the counting hours only. The <b>mailed CPA ballots reconcile with the floor</b> into one count — never “the electronic result plus the paper ones”.</p><p>Results are announced with the arithmetic shown, and a challenge window opens with a stated closing time.</p></div>
+    <div class="dd-col dd-pt"><h5>A voter</h5><p>She votes once, in whichever channel she was issued. Her receipt proves her ballot is in the box and proves nothing about its contents — which is what makes it safe to hold.</p><div class="dd-links"><a href="prototype.html#/fed/mailedballot">Mailed ballot</a><a href="prototype.html#/fed/results">Results</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3.7</span><b>Friday, 8:00am — the memorial service</b><span class="dd-rules">S2 · R30</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The committee</h5><p>The convention remembers members who died since the last one. The list compiles from <b>family-approved</b> life events only — never from the deceased-pending state, and never as a surprise to a family who has not yet approved publication.</p></div>
+    <div class="dd-col dd-pt"><h5>Families</h5><p>Names read aloud that the families expected to hear. No attendance is recorded.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">4</span><b>Thursday, 6:40pm — the banquet door</b><span class="dd-rules">R26 · R31</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The banquet lead</h5><p>Seats are inventory: the count at the door is the count that was sold, and there is no oversell path to have created the problem. A scan failure falls back to name lookup on the same snapshot.</p></div>
+    <div class="dd-col dd-pt"><h5>The family who swear they paid</h5><p>They did pay — for three, not four. The desk can see the purchase, the tier, and the date, and can sell the fourth seat if one exists. If it does not, the refusal is capacity, stated plainly, not a judgement about them.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">5</span><b>Friday, 11:00am — the awards</b><span class="dd-rules">S7 · R27</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The scholarship committee</h5><p>Winners are named on stage <b>with per-instance consent</b>. That consent screen now says what it must: this naming plus the published funnel report could, together, identify who applied and did not receive.</p></div>
+    <div class="dd-col dd-pt"><h5>A recipient, and a non-recipient</h5><p>The recipient chose to be named. The applicant who was not selected is protected by complementary suppression in the report — the red team found that exact subtraction attack and it is why the rule exists.</p><div class="dd-links"><a href="AFRP-Platform-Experience.html#j16">Journey J16</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">5.5</span><b>Any hour — a medical emergency in the lobby</b><span class="dd-rules">R40-pattern · R27</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The committee</h5><p>An incident involving an adult is logged and closed by the committee; an incident involving a <b>minor closes only with a consent-holder notification</b>, exactly as at camp. The desk can reach a youth participant’s consent-holder because the youth roster carries it — the ordinary door list does not, and does not need to.</p></div>
+    <div class="dd-col dd-pt"><h5>An adult attendee, and a youth</h5><p>Emergency contact is a field the attendee gave for this purpose, readable by the people who must act and nobody else.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">6</span><b>Saturday, 11:00pm — hospitality</b><span class="dd-rules">R30</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Hospitality leads</h5><p>Suite schedules are operational notices to registrants. Nothing about hospitality rides marketing, and no attendance is recorded — there is no legitimate use for a list of who was in which suite at midnight.</p></div>
+    <div class="dd-col dd-pt"><h5>Everyone else</h5><p>The part of the convention that matters most to the most people is the part the platform touches least. That is deliberate.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">7</span><b>Sunday, 10:00am — teardown</b><span class="dd-rules">R43</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The committee</h5><p>Attendance, sales and roll snapshots freeze. Unclaimed store items go to a 30-day hold. The lessons file is written now, while it is still true, rather than in the exhausted week afterwards.</p></div>
+    <div class="dd-col dd-pt"><h5>The record</h5><p>Everything anyone will argue about in November was captured in the moment it happened, stamped with the ruleset that governed it.</p></div>
+  </div>
+</div></div>
+
+<section class="px-mod" id="money">
+  <p class="px-modkick">Dimension 4 · the hard one</p>
+  <h3>Money and the contract lifecycle</h3>
+  <p class="px-desc">In one ballroom, on one evening, three different legal treatments of a dollar are in play at once. Getting this wrong is how volunteer organisations end up in disputes that outlast everyone involved. The platform’s job is to <b>name the treatment at the moment of collection</b> — not to reconstruct it at settlement.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>Registration and the Relief Fund — federation money from the first dollar</b><span class="dd-rules">R19 · R22 · R23</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The convention treasurer</h5><p>Every convention payment runs through <b>My AFRP</b>, so it is <b>federation money at the moment of capture</b> and posts at the federation’s daily close. The host city is a <b>class code</b> on it — attribution, not ownership, and never a bank account the close cannot reach.</p><p>One registration can carry three things at once: a membership (liability until remitted), a Relief Fund gift (donor-restricted), a banquet seat (inventory). They are three lines, not one deposit.</p></div>
+    <div class="dd-col dd-pt"><h5>What that means in practice</h5><p>Which removes the classic failure: convention money sitting in a club account, spent on a club expense, and reconciled optimistically in November.</p><p>The label travels with the dollar from the first checkout, and the accounting is a report of what the ledger already knows rather than a reconstruction.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>The exception: what the host takes off-platform</b><span class="dd-rules">Convention Contract · S3</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The host treasurer</h5><p>Cash at a door, a local cheque, a table sold at the hall — receipts that never touch My AFRP. <b>This</b> is where the Convention Contract’s agency treatment applies: the host holds federation money as an agent.</p></div>
+    <div class="dd-col dd-pt"><h5>The agent duty, precisely scoped</h5><p>It posts as a <b>receivable owed by the host to the federation</b>, with the contract’s settlement date as its due date. Not the club’s revenue for a while; not a mystery until spring. A receivable with a name and a deadline.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>The host club’s own hafli, during convention week</b><span class="dd-rules">R21</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The host club</h5><p>A club event during convention week is <b>club money</b> — the club’s own revenue, collected nationally and held as a liability until remitted. A completely different treatment, five feet away, on the same night.</p></div>
+    <div class="dd-col dd-pt"><h5>Why this is the dangerous one</h5><p>This is where the seams tear. Two cash boxes, two treatments, one volunteer holding both. The design answer is that <b>the event object carries the host field</b>, and money routes by that field — never by which table it was taken at.</p><div class="dd-links"><a href="prototype.html#/club/newevent">Event builder</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>A club project fund passing through HQ</b><span class="dd-rules">11.1.5 · R25</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The federation</h5><p>Club project funds route through headquarters as a <b>conduit</b>: the money is neither federation revenue nor host revenue — it passes through with its restriction intact.</p></div>
+    <div class="dd-col dd-pt"><h5>The third treatment</h5><p>Three treatments, one weekend: <b>owned by the federation, held by an agent</b>; <b>the club’s own</b>; <b>passing through</b>. Every screen that shows a dollar says which one it is.</p><div class="dd-links"><a href="prototype.html#/fed/ledger">Multi-entity ledger</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">4</span><b>Sponsorships and the program book</b><span class="dd-rules">R37 · R23</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The sponsorship lead</h5><p>Sponsorship is <b>federation revenue with deliverables attached</b> — an exchange, not a gift, so the receipt says so and the deductible portion is stated. Where a package includes seats or a table, those seats are drawn from <b>capacity inventory</b> like any other, not conjured.</p><p>The ads desk carries the program book’s real deadline and a missed placement <b>rolls forward</b> rather than vanishing.</p></div>
+    <div class="dd-col dd-pt"><h5>The sponsor</h5><p>The sponsor sees what they bought, when it is due, and what was delivered — the most common reason a sponsor does not renew is not price, it is never finding out whether their ad ran.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">5</span><b>A refund after settlement</b><span class="dd-rules">S3</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Both treasurers</h5><p>A chargeback lands in October, after the 90-day accounting closed and the settlement transferred. Nothing is edited: reversing lines post, and because the money already crossed a boundary, the reversal creates a <b>receivable</b> — not a negative balance in a closed period.</p></div>
+    <div class="dd-col dd-pt"><h5>The reversal model doing its job</h5><p>The frozen accounting stays frozen, annotated “payment reversed post-settlement”. Anyone reading it later sees both facts: what was true at close, and what happened after.</p><div class="dd-links"><a href="AFRP-Platform-Experience.html#j02">Journey J02</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">6</span><b>A deficit</b><span class="dd-rules">10.1.7</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The Board</h5><p>The convention loses money — attrition was missed, attendance was soft. The budget line shows it against the adopted budget, and the accounting deadline forces the conversation while the facts are fresh.</p></div>
+    <div class="dd-col dd-pt"><h5>The host club</h5><p>Who bears it is a governance question, not a software one — but the platform ensures it is asked with a full and timely accounting in hand rather than a year later with fragments.</p></div>
+  </div><p class="dd-gap"><b>Board decision:</b> deficit responsibility between the federation and a host city is defined by the Convention Contract; the platform reads it rather than assuming. Where the contract is silent, the screen says so instead of guessing.</p>
+</div><div class="dd-note"><b>Why this dimension got its own section.</b> Every other part of the convention can be recovered from if it goes wrong — a bad schedule is annoying, a slow desk is forgivable. Money handled under the wrong treatment produces disputes between a club and the federation that can last decades, and the people involved are neighbours and cousins. The platform’s contribution is narrow and specific: name the treatment when the dollar arrives, and never let a screen show a dollar without it.</div><div class="dd-note"><b>Red-teamed before publication.</b> Eighteen attacks across the five deep dives — offline oversell, vendor badges inflating the electorate, the treasurer voting his own audit, a post-settlement chargeback with no owner — <b>all refuted</b>. Sixteen consistency findings were folded in, and the largest changed this document: convention money paid through My AFRP is <b>federation money at the first dollar</b>, with the Convention Contract’s agency treatment scoped precisely to off-platform receipts. An earlier draft had the host holding all of it as an agent, which contradicted the rule that every convention payment runs through the platform.</div></div>
+<div class="px-matrix" style="margin-top:26px"><h3 style="font-size:16px">The three treatments, side by side — the single most useful table in this document</h3>
+  <div class="px-tablewrap"><table class="px-table"><thead><tr><th>The dollar</th><th>Whose money is it?</th><th>Where it sits</th><th>What must never happen</th></tr></thead><tbody><tr><td><b>Convention registration &amp; Relief Fund <i>(via My AFRP)</i></b></td><td><b>Federation’s</b>, at the moment of capture</td><td>Federation books, host city as a class code</td><td>Routed to a host account; netted against host costs before rendering</td></tr><tr><td><b>Off-platform convention receipts <i>(door cash, local cheques)</i></b></td><td><b>Federation’s</b> — held by the host <b>as an agent</b></td><td>A receivable owed to the federation, due at the contract’s settlement date</td><td>Treated as host revenue while it is held; carried past the settlement date without an owner</td></tr><tr><td><b>Host club’s own hafli, raffle, merchandise</b></td><td><b>The club’s</b></td><td>Collected nationally, held as a liability until remitted</td><td>Mixed with convention collections in one undifferentiated deposit</td></tr><tr><td><b>Club project funds routed via HQ</b></td><td><b>Neither</b> — a conduit</td><td>Passes through with its restriction intact</td><td>Treated as federation revenue because it briefly touched a federation account</td></tr><tr><td><b>Sponsorship &amp; program-book ads</b></td><td><b>Federation’s</b> revenue, with deliverables</td><td>Federation books, class CONV</td><td>Deliverable promised and never tracked to delivery</td></tr><tr><td><b>Banquet seats &amp; store items</b></td><td><b>Federation’s</b> — but inventory, not gifts</td><td>Capacity-controlled sales</td><td>Booked as contribution revenue; oversold</td></tr></tbody></table></div><p class="px-mnote" style="margin-top:10px">If a volunteer can answer “whose money is this?” for every dollar they touch during those four days, the convention will settle cleanly. That sentence is the whole design brief for this dimension.</p></div>
+<div class="px-sep"></div>
+<footer class="px-foot"><div class="px-in">
+  <p><b>How to read this.</b> Every moment is shown twice &mdash; the person running it on the left, the
+  person living it on the right &mdash; because the gap between those two views is where this design has
+  failed under attack before. Amber notes mark a gap or an open decision rather than a settled answer.
+  People and money figures are fictional; programs, clubs, committees and by-law citations are real and
+  sourced (afrp.org and the governing texts). Part of the AFRP design delivery &mdash;
+  <a href="index.html">all documents</a> &middot; <a href="AFRP-Complete-Platform.html">the complete platform</a>.
+  Build remains on hold.</p>
+</div></footer>
+</body>
+</html>

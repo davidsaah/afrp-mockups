@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AFRP · Running a club — a deep dive into club management</title>
+<meta name="description" content="The work of running an AFRP club: the officer year, the treasurer’s month, the membership secretary’s queue, elections, migration onto the platform, and the states nobody designs for — a club with no officers, a club going dormant.">
+<style>
+/* ═════════════════════════════════════════════════════════════════════════
+   AFRP UNIFIED PLATFORM — consolidated document chrome (px- namespace)
+   Heritage layer v3.1 values. Everything inside .sc-m / .sc-o keeps its own
+   scoped stylesheet; this layer only draws the consolidated shell around it.
+   ═════════════════════════════════════════════════════════════════════════ */
+:root{
+  --px-ink:#2b2416; --px-ink-2:#57503f; --px-ink-3:#7a7260;
+  --px-bg:#f5f0e1; --px-surface:#fffdf6; --px-surface-2:#f7f1e2;
+  --px-line:#e2d9c2; --px-dark:#211c11; --px-dark-2:#2c261741;
+  --px-cream:#f2ecd9; --px-cream-2:#d8d0b8;
+  --px-green:#4c6414; --px-green-deep:#33430b; --px-green-50:#eef0da;
+  --px-olive:#6d7a19; --px-olive-50:#f2f4dd;
+  --px-gold:#9a720d;  --px-gold-50:#faf2dc; --px-gold-200:#e7d191;
+  --px-pine:#3f6b41;  --px-pine-50:#e6f0e2;
+  --px-red:#8c2f21;   --px-red-50:#f7e4df;
+  --px-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --px-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+svg.sprite{display:none}
+body{margin:0;background:var(--px-bg);color:var(--px-ink);font:16px/1.6 var(--px-font)}
+.px-doc{scroll-behavior:smooth}
+
+/* ── masthead ─────────────────────────────────────────────────────────── */
+.px-mast{background:var(--px-dark);color:var(--px-cream);padding:44px 0 30px;
+  border-bottom:4px solid var(--px-green)}
+.px-mast .px-in{max-width:1560px;margin:0 auto;padding:0 24px}
+.px-lockup{display:flex;align-items:center;gap:12px;color:#d9b45a;margin-bottom:26px}
+.px-lockup svg{width:38px;height:38px}
+.px-lockup b{font-size:20px;letter-spacing:.06em;color:var(--px-cream)}
+.px-lockup small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:#c9b877;font-weight:600}
+.px-kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#b5c24a;
+  font-weight:700;margin:0 0 10px}
+.px-mast h1{font-size:clamp(30px,3vw + 18px,44px);line-height:1.12;margin:0 0 18px;
+  font-weight:800;letter-spacing:-.01em;color:#fffdf6}
+.px-mast .px-lede{max-width:74ch;font-size:16.5px;line-height:1.65;color:#e8e1cb;margin:0 0 14px}
+.px-mast .px-lede b{color:#fffdf6}
+.px-mast .px-lede code{font-family:var(--px-mono);font-size:.86em;background:#ffffff14;
+  padding:1px 6px;border-radius:6px;color:#e7d191}
+.px-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.px-chip{font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px;
+  background:#ffffff12;color:#e8e1cb;border:1px solid #ffffff24}
+.px-chip--green{background:#4c6414;color:#f2f4dd;border-color:#5d7a1a}
+.px-chip--red{background:#8c2f21;color:#f7e4df;border-color:#a1402f}
+.px-chip--gold{background:#9a720d33;color:#e7d191;border-color:#9a720d66}
+
+/* institution nav strip in mast */
+.px-instnav{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.px-instnav a{display:flex;align-items:center;gap:9px;text-decoration:none;
+  background:#ffffff0d;border:1px solid #ffffff22;border-radius:12px;padding:10px 16px;
+  color:#f2ecd9;font-size:14px;font-weight:600;transition:background .15s}
+.px-instnav a:hover{background:#ffffff1c}
+.px-instnav .px-rn{font-family:var(--px-mono);font-size:12px;color:#d9b45a;font-weight:700}
+
+/* ── legend ───────────────────────────────────────────────────────────── */
+.px-legendwrap{background:var(--px-surface);border-bottom:1px solid var(--px-line)}
+.px-legend{max-width:1560px;margin:0 auto;padding:22px 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px 28px}
+.px-legend h4{margin:0 0 5px;font-size:13.5px;display:flex;align-items:center;gap:8px}
+.px-legend p{margin:0;font-size:13px;line-height:1.5;color:var(--px-ink-2)}
+
+/* ── badges ───────────────────────────────────────────────────────────── */
+.px-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.1em;padding:3px 10px;border-radius:999px;text-transform:uppercase;
+  vertical-align:2px}
+.px-badge i{width:7px;height:7px;border-radius:99px;display:inline-block}
+.px-badge--built{background:var(--px-pine-50);color:var(--px-pine);border:1px solid #aecfa6}
+.px-badge--built i{background:var(--px-pine)}
+.px-badge--designed{background:var(--px-gold-50);color:var(--px-gold);border:1px solid var(--px-gold-200)}
+.px-badge--designed i{background:var(--px-gold)}
+.px-badge--proposed{background:#eee9f5;color:#5b4a80;border:1px solid #cfc2e4}
+.px-badge--proposed i{background:#5b4a80}
+.px-badge--partial{background:var(--px-olive-50);color:#525d12;border:1px solid #cdd48f}
+.px-badge--partial i{background:var(--px-olive)}
+
+/* ── TOC ──────────────────────────────────────────────────────────────── */
+.px-toc{max-width:1560px;margin:34px auto 0;padding:0 24px}
+.px-toc h2{font-size:22px;margin:0 0 6px}
+.px-toc > p{margin:0 0 20px;color:var(--px-ink-2);font-size:14.5px;max-width:88ch}
+.px-toccols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.px-toccol{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:18px 20px}
+.px-toccol h3{margin:0 0 2px;font-size:16px;display:flex;gap:9px;align-items:baseline}
+.px-toccol h3 .px-rn{font-family:var(--px-mono);font-size:12px;color:var(--px-gold)}
+.px-toccol .px-bylaw{font-size:12px;color:var(--px-ink-3);margin:0 0 12px}
+.px-toccol a{display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+  padding:7px 2px;text-decoration:none;color:var(--px-ink);font-size:14px;
+  border-top:1px solid var(--px-line)}
+.px-toccol a:hover{color:var(--px-green-deep)}
+.px-toccol a .px-fc{font-size:11.5px;color:var(--px-ink-3);font-family:var(--px-mono);white-space:nowrap}
+.px-toccol a.px-star{font-weight:700}
+
+/* ── institution part header ──────────────────────────────────────────── */
+.px-inst{margin:72px 0 0;background:var(--px-dark);color:var(--px-cream);
+  border-top:4px solid var(--px-gold);padding:34px 0 30px}
+.px-inst .px-in{max-width:1560px;margin:0 auto;padding:0 24px}
+.px-inst .px-rn{font-family:var(--px-mono);font-size:13px;color:#d9b45a;font-weight:700;
+  letter-spacing:.12em}
+.px-inst h2{font-size:clamp(24px,2vw + 15px,32px);margin:6px 0 10px;color:#fffdf6}
+.px-inst p{max-width:80ch;margin:0;font-size:15px;line-height:1.6;color:#e8e1cb}
+.px-inst .px-src{margin-top:12px;font-size:12.5px;color:#c9b877;font-family:var(--px-mono)}
+
+/* ── module head ──────────────────────────────────────────────────────── */
+.px-mod{max-width:1560px;margin:56px auto 0;padding:0 24px}
+.px-mod--star{border-left:4px solid var(--px-gold);padding-left:20px;margin-left:max(24px,calc((100% - 1560px)/2));
+  max-width:1516px;padding-right:24px}
+@media (max-width:1608px){.px-mod--star{margin-left:24px;margin-right:0}}
+.px-mod .px-modkick{font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--px-ink-3);font-weight:700;margin:0 0 4px}
+.px-mod h3{font-size:clamp(20px,1.4vw + 14px,26px);margin:0 0 10px;display:flex;
+  flex-wrap:wrap;align-items:center;gap:12px}
+.px-mod .px-desc{max-width:86ch;margin:0 0 12px;font-size:15px;line-height:1.62;color:var(--px-ink-2)}
+.px-mod .px-desc b{color:var(--px-ink)}
+.px-api{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.px-api span{font-family:var(--px-mono);font-size:11.5px;background:var(--px-surface);
+  border:1px solid var(--px-line);border-radius:7px;padding:3px 8px;color:#57503f}
+.px-api span.px-api--live{border-color:#aecfa6;background:var(--px-pine-50);color:var(--px-pine)}
+.px-api span.px-api--draft{border-style:dashed;color:#5b4a80;border-color:#cfc2e4;background:#f4f1f9}
+.px-subhead{max-width:1560px;margin:34px auto 0;padding:0 24px;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--px-ink-3);font-weight:700;
+  display:flex;align-items:center;gap:10px}
+.px-subhead:after{content:"";flex:1;height:1px;background:var(--px-line)}
+
+/* roadmap cards (ARFHSN / endowment) */
+.px-road{max-width:1560px;margin:22px auto 0;padding:0 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.px-roadcard{background:var(--px-surface);border:1px dashed var(--px-cream-2);
+  border-radius:14px;padding:20px 22px}
+.px-roadcard h4{margin:0 0 8px;font-size:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.px-roadcard p{margin:0 0 8px;font-size:13.5px;line-height:1.55;color:var(--px-ink-2)}
+.px-roadcard .px-blocked{font-size:12.5px;color:var(--px-red);background:var(--px-red-50);
+  border-radius:8px;padding:7px 11px;margin-top:10px}
+
+/* footer */
+.px-foot{margin-top:88px;background:var(--px-dark);color:#c9c0a5;padding:34px 0 46px;
+  border-top:4px solid var(--px-green)}
+.px-foot .px-in{max-width:1560px;margin:0 auto;padding:0 24px;font-size:13px;line-height:1.7}
+.px-foot b{color:#f2ecd9}
+.px-foot a{color:#d9b45a}
+.px-sep{height:26px}
+@media print{.px-mast,.px-inst{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+/* ── v3: sticky top nav, version chip, element matrix ─────────────────── */
+.px-topnav{position:sticky;top:0;z-index:50;background:#211c11f2;backdrop-filter:blur(6px);
+  border-bottom:1px solid #ffffff1c;color:#f2ecd9}
+.px-topnav .px-in{max-width:1560px;margin:0 auto;padding:9px 24px;display:flex;
+  align-items:center;gap:14px;flex-wrap:wrap}
+.px-topnav .px-tbrand{display:flex;align-items:center;gap:9px;font-weight:800;
+  letter-spacing:.05em;color:#fffdf6;text-decoration:none;font-size:15px}
+.px-topnav .px-tver{font-family:var(--px-mono);font-size:10.5px;font-weight:700;
+  background:#4c6414;color:#f2f4dd;border-radius:999px;padding:2px 9px;letter-spacing:.06em}
+.px-topnav .px-tlinks{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.px-topnav .px-tlinks a{color:#e8e1cb;text-decoration:none;font-size:13px;font-weight:600;
+  padding:6px 11px;border-radius:8px}
+.px-topnav .px-tlinks a:hover{background:#ffffff14}
+.px-topnav .px-tlinks a.px-tcta{background:#4c6414;color:#f2f4dd}
+.px-vermeta{font-family:var(--px-mono);font-size:12px;color:#c9b877;margin:0 0 14px}
+
+.px-matrix{max-width:1560px;margin:26px auto 0;padding:0 24px}
+.px-matrix h3{font-size:19px;margin:34px 0 4px}
+.px-matrix .px-mnote{font-size:13.5px;color:var(--px-ink-2);margin:0 0 12px;max-width:88ch}
+.px-tablewrap{overflow-x:auto;background:var(--px-surface);border:1px solid var(--px-line);
+  border-radius:12px}
+table.px-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.px-table th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--px-ink-3);padding:10px 14px;border-bottom:1px solid var(--px-line);
+  background:var(--px-surface-2)}
+.px-table td{padding:9px 14px;border-bottom:1px solid #eee7d4;vertical-align:top}
+.px-table tr:last-child td{border-bottom:0}
+.px-table a{color:var(--px-green-deep);text-decoration:none;font-weight:600}
+.px-table a:hover{text-decoration:underline}
+.px-st{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.08em;padding:2px 9px;border-radius:999px;text-transform:uppercase;white-space:nowrap}
+.px-st i{width:7px;height:7px;border-radius:99px}
+.px-st--p{background:var(--px-pine-50);color:var(--px-pine)}.px-st--p i{background:var(--px-pine)}
+.px-st--part{background:var(--px-olive-50);color:#525d12}.px-st--part i{background:var(--px-olive)}
+.px-st--m{background:var(--px-red-50);color:var(--px-red)}.px-st--m i{background:var(--px-red)}
+.px-st--prop{background:#eee9f5;color:#5b4a80}.px-st--prop i{background:#5b4a80}
+
+.px-cardgrid{max-width:1560px;margin:20px auto 0;padding:0 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px}
+.px-mcard{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:18px 20px}
+.px-mcard h4{margin:0 0 6px;font-size:15.5px;display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.px-mcard p{margin:0 0 10px;font-size:13px;line-height:1.55;color:var(--px-ink-2)}
+.px-mcard .px-mlinks{display:flex;flex-wrap:wrap;gap:6px}
+.px-mcard .px-mlinks a{font-size:12px;font-weight:700;color:var(--px-green-deep);
+  text-decoration:none;background:var(--px-green-50);border:1px solid #c4cd97;
+  border-radius:999px;padding:3px 11px}
+.px-mcard .px-mlinks a:hover{background:#dde2bf}
+.px-mcard .px-mlinks a.px-ml--ext{background:var(--px-gold-50);border-color:var(--px-gold-200);
+  color:var(--px-gold)}
+
+/* ── programs doc: pipelines, duo layout, facts ────────────────────────── */
+.px-pipes{max-width:1560px;margin:30px auto 0;padding:0 24px}
+.px-pipe{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:16px 20px;margin-bottom:14px}
+.px-pipe h4{margin:0 0 2px;font-size:15.5px}
+.px-pipe > p{margin:0 0 12px;font-size:13px;color:var(--px-ink-2)}
+.px-pipe .px-rail{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.px-pipe .px-rail a{display:flex;flex-direction:column;text-decoration:none;background:var(--px-green-50);
+  border:1px solid #c4cd97;border-radius:10px;padding:7px 13px;color:var(--px-green-deep);min-width:0}
+.px-pipe .px-rail a b{font-size:13px}
+.px-pipe .px-rail a small{font-size:10.5px;color:#525d12;font-family:var(--px-mono)}
+.px-pipe .px-rail a:hover{background:#dde2bf}
+.px-pipe .px-rail .px-arr{color:var(--px-ink-3);font-weight:700}
+.px-hostchip{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:3px 11px;
+  color:#fff;vertical-align:2px}
+.px-progflag{max-width:1560px;margin:10px auto 0;padding:0 24px}
+.px-progflag > div{border-left:3px solid var(--px-gold);background:var(--px-gold-50);color:#584106;
+  padding:10px 14px;border-radius:0 10px 10px 0;font-size:13px;max-width:100ch}
+.px-duo{max-width:1560px;margin:18px auto 0;padding:0 24px;display:grid;gap:22px;
+  grid-template-columns:minmax(0,1fr)}
+@media(min-width:1150px){.px-duo{grid-template-columns:minmax(0,7fr) minmax(0,3fr);align-items:start}}
+.px-duo .px-duolabel{font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--px-ink-3);font-weight:700;margin:0 0 8px}
+.px-srcline{max-width:1560px;margin:8px auto 0;padding:0 24px;font-size:12px;color:var(--px-ink-3)}
+.px-srcline a{color:var(--px-green-deep)}
+@media(max-width:1149px){
+  .px-duo > div:first-child{order:2}
+  .px-duo > div:last-child{order:1}
+}
+
+/* ── v2 programs: charter grid ─────────────────────────────────────────── */
+.px-charter{max-width:1560px;margin:14px auto 0;padding:0 24px;display:grid;gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.px-chcard{background:var(--px-surface);border:1px solid var(--px-line);border-radius:12px;
+  padding:13px 16px;min-width:0}
+.px-chcard h5{margin:0 0 7px;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--px-ink-3);display:flex;align-items:center;gap:7px}
+.px-chcard h5 i{width:8px;height:8px;border-radius:3px;display:inline-block;background:var(--px-green)}
+.px-chcard--mission h5 i{background:var(--px-green)}
+.px-chcard--committee h5 i{background:var(--px-gold)}
+.px-chcard--budget h5 i{background:var(--px-pine)}
+.px-chcard--activities h5 i{background:var(--px-olive)}
+.px-chcard--metrics h5 i{background:#5b4a80}
+.px-chcard p{margin:0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)}
+.px-chcard p b{color:var(--px-ink)}
+.px-chcard ul{margin:0;padding-left:16px;font-size:12.5px;line-height:1.55;color:var(--px-ink-2)}
+.px-chcard ul li{margin-bottom:3px}
+.px-chcard .px-chsub{font-size:11.5px;color:var(--px-ink-3);margin-top:6px}
+.px-chcard .px-demo{font-size:10px;font-weight:800;letter-spacing:.08em;background:var(--px-red-50);
+  color:var(--px-red);border-radius:99px;padding:1px 7px;vertical-align:1px}
+.px-chcard .px-real{font-size:10px;font-weight:800;letter-spacing:.08em;background:var(--px-pine-50);
+  color:var(--px-pine);border-radius:99px;padding:1px 7px;vertical-align:1px}
+
+/* ── experience doc: journey blocks, breaks register ───────────────────── */
+.px-journey{max-width:1560px;margin:44px auto 0;padding:0 24px}
+.px-jsteps{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:6px 0;margin-top:14px}
+.px-jstep{display:flex;gap:14px;padding:11px 18px;border-bottom:1px solid #eee7d4;font-size:13.5px}
+.px-jstep:last-child{border-bottom:0}
+.px-jstep .px-jn{flex:none;width:26px;height:26px;border-radius:99px;background:var(--px-green-50);
+  border:1px solid #c4cd97;color:var(--px-green-deep);font-weight:800;font-size:12px;
+  display:grid;place-items:center}
+.px-jstep .px-jbody{min-width:0}
+.px-jstep .px-jbody b{color:var(--px-ink)}
+.px-jstep .px-jbody .px-jrule{display:inline-block;margin-left:6px;font-family:var(--px-mono);
+  font-size:10.5px;background:var(--px-surface-2);border:1px solid var(--px-line);
+  border-radius:6px;padding:1px 7px;color:var(--px-ink-3)}
+.px-jstep .px-jbody .px-jscreen{display:inline-block;margin-left:6px;font-size:11px;font-weight:700}
+.px-jstep .px-jbody .px-jscreen a{color:var(--px-green-deep);text-decoration:none}
+.px-jstep--fix{background:var(--px-gold-50)}
+.px-jstep--fix .px-jn{background:var(--px-gold-50);border-color:var(--px-gold-200);color:var(--px-gold)}
+.px-break{border-left:3px solid var(--px-red);background:var(--px-red-50);border-radius:0 10px 10px 0;
+  padding:11px 15px;margin-top:10px;font-size:13px;color:#5c2418}
+.px-break b{color:var(--px-red)}
+.px-break .px-fix{display:block;margin-top:6px;color:#3d5220}
+.px-break .px-fix b{color:var(--px-green-deep)}
+.px-sev{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.09em;border-radius:99px;
+  padding:1px 8px;text-transform:uppercase;vertical-align:1px;margin-right:6px}
+.px-sev--critical{background:var(--px-red);color:#fff}
+.px-sev--major{background:var(--px-gold);color:#fff}
+.px-sev--minor{background:var(--px-cream-2);color:var(--px-ink-2)}
+
+
+/* ── deep-dive: the paired operator/participant spine ───────────────────── */
+.dd-wrap{max-width:1560px;margin:0 auto;padding:0 24px}
+.dd-pair{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  margin:14px 0;overflow:hidden}
+.dd-head{display:flex;gap:11px;align-items:baseline;padding:13px 16px 11px;
+  border-bottom:1px solid var(--px-line);background:var(--px-green-50);flex-wrap:wrap}
+.dd-n{flex:none;width:23px;height:23px;border-radius:99px;background:var(--px-green-deep);color:#fff;
+  font-size:11.5px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
+.dd-head b{font-size:15px;flex:1;min-width:200px}
+.dd-rules{font-family:var(--px-mono);font-size:10.5px;letter-spacing:.05em;color:#525d12;
+  background:#fff;border:1px solid var(--px-line);border-radius:99px;padding:2px 9px}
+.dd-cols{display:grid;grid-template-columns:1fr 1fr}
+@media (max-width:860px){.dd-cols{grid-template-columns:1fr}}
+.dd-col{padding:14px 16px 16px}
+.dd-col+.dd-col{border-left:1px solid var(--px-line)}
+@media (max-width:860px){.dd-col+.dd-col{border-left:0;border-top:1px solid var(--px-line)}}
+.dd-col h5{margin:0 0 7px;font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:800}
+.dd-op h5{color:var(--px-pine)}
+.dd-pt h5{color:var(--px-gold)}
+.dd-col p{margin:0;font-size:13.2px;line-height:1.58;color:var(--px-ink-2)}
+.dd-col p b{color:var(--px-ink)}
+.dd-col p+p{margin-top:7px}
+.dd-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.dd-links a{font-size:11.5px;font-weight:700;color:var(--px-green-deep);background:var(--px-green-50);
+  border:1px solid var(--px-line);border-radius:99px;padding:3px 9px;text-decoration:none}
+.dd-links a:hover{background:#dde2bf}
+.dd-gap{margin:0;padding:10px 16px;background:var(--px-gold-50);border-top:1px solid var(--px-gold-200);
+  font-size:12.5px;line-height:1.55;color:#5c4708}
+.dd-gap b{color:#7a5a0a}
+.dd-note{max-width:1560px;margin:16px auto 0;padding:12px 16px;border-left:3px solid var(--px-green);
+  background:var(--px-surface);border-radius:0 12px 12px 0;font-size:13px;line-height:1.6;color:var(--px-ink-2)}
+.dd-note b{color:var(--px-ink)}
+.dd-wrap>.dd-note{margin-left:0;margin-right:0}
+
+</style>
+</head>
+<body class="px-doc">
+<nav class="px-topnav"><div class="px-in">
+  <a class="px-tbrand" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="AFRP olive-tree mark" style="color:#f2ecd9;width:26px;height:26px;flex:none">
+  
+
+  
+  <g>
+    <rect x="13" y="66" width="94" height="22" fill="#e7d191"/>
+    <g fill="#d9b45a">
+      <rect x="13" y="67" width="15" height="9" rx="3"/><rect x="31" y="67" width="19" height="9" rx="3"/>
+      <rect x="53" y="67" width="13" height="9" rx="3"/><rect x="69" y="67" width="18" height="9" rx="3"/>
+      <rect x="90" y="67" width="17" height="9" rx="3"/>
+    </g>
+    <g fill="#c9a34a">
+      <rect x="13" y="78" width="10" height="9" rx="3"/><rect x="26" y="78" width="17" height="9" rx="3"/>
+      <rect x="46" y="78" width="14" height="9" rx="3"/><rect x="63" y="78" width="11" height="9" rx="3"/>
+      <rect x="77" y="78" width="18" height="9" rx="3"/><rect x="98" y="78" width="9" height="9" rx="3"/>
+    </g>
+  </g>
+
+  
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M59 97c0-12 0-24-3-33" stroke-width="7.5"/>
+    <path d="M56 64c-3-8-8-13-14-16" stroke-width="6"/>
+    <path d="M56.5 66c2-8 7-14 14-18" stroke-width="6"/>
+    <path d="M47 53c-3-3-5-7-5-12" stroke-width="4.5"/>
+    <path d="M66 53c4-2 7-5 9-9" stroke-width="4.5"/>
+    <path d="M59 97c-5 3-10 4-15 4M59 97c5 3 10 4 15 4M59 97v7" stroke-width="5"/>
+  </g>
+
+  
+  <g fill="#4c6414">
+    <ellipse cx="33" cy="34" rx="6.5" ry="3.1" transform="rotate(-38 33 34)"/>
+    <ellipse cx="45" cy="23" rx="6.5" ry="3.1" transform="rotate(-16 45 23)"/>
+    <ellipse cx="61" cy="18" rx="6.5" ry="3.1" transform="rotate(2 61 18)"/>
+    <ellipse cx="77" cy="22" rx="6.5" ry="3.1" transform="rotate(20 77 22)"/>
+    <ellipse cx="88" cy="33" rx="6.5" ry="3.1" transform="rotate(48 88 33)"/>
+    <ellipse cx="27" cy="47" rx="6.5" ry="3.1" transform="rotate(-66 27 47)"/>
+    <ellipse cx="93" cy="46" rx="6.5" ry="3.1" transform="rotate(66 93 46)"/>
+  </g>
+  <g fill="#6d7a19">
+    <ellipse cx="40" cy="34" rx="6" ry="2.9" transform="rotate(-28 40 34)"/>
+    <ellipse cx="53" cy="27" rx="6" ry="2.9" transform="rotate(-8 53 27)"/>
+    <ellipse cx="68" cy="26" rx="6" ry="2.9" transform="rotate(12 68 26)"/>
+    <ellipse cx="81" cy="32" rx="6" ry="2.9" transform="rotate(36 81 32)"/>
+    <ellipse cx="33" cy="55" rx="6" ry="2.9" transform="rotate(-56 33 55)"/>
+    <ellipse cx="87" cy="55" rx="6" ry="2.9" transform="rotate(56 87 55)"/>
+    <ellipse cx="60" cy="30" rx="6" ry="2.9" transform="rotate(0 60 30)"/>
+  </g>
+  <g fill="#7e9440">
+    <ellipse cx="47" cy="37" rx="5.5" ry="2.7" transform="rotate(-18 47 37)"/>
+    <ellipse cx="60" cy="38" rx="5.5" ry="2.7" transform="rotate(4 60 38)"/>
+    <ellipse cx="73" cy="37" rx="5.5" ry="2.7" transform="rotate(24 73 37)"/>
+    <ellipse cx="39" cy="46" rx="5.5" ry="2.7" transform="rotate(-42 39 46)"/>
+    <ellipse cx="82" cy="45" rx="5.5" ry="2.7" transform="rotate(42 82 45)"/>
+    <ellipse cx="53" cy="46" rx="5.5" ry="2.7" transform="rotate(-8 53 46)"/>
+    <ellipse cx="68" cy="46" rx="5.5" ry="2.7" transform="rotate(14 68 46)"/>
+  </g>
+
+  
+  <g fill="#38430b">
+    <circle cx="43" cy="28" r="2.3"/><circle cx="66" cy="21" r="2.3"/><circle cx="85" cy="28" r="2.3"/>
+    <circle cx="34" cy="41" r="2.3"/><circle cx="64" cy="33" r="2.3"/><circle cx="88" cy="41" r="2.3"/>
+    <circle cx="46" cy="42" r="2.3"/>
+  </g>
+  <g fill="#9a720d">
+    <circle cx="53" cy="22" r="2.1"/><circle cx="74" cy="30" r="2.1"/><circle cx="56" cy="33" r="2.1"/>
+    <circle cx="30" cy="51" r="2.1"/><circle cx="90" cy="51" r="2.1"/>
+  </g>
+
+  
+  <g fill="none" stroke="#4c6414" stroke-width="2" stroke-linecap="round">
+    <path d="M36 60c-2 5-2 10-1 14"/><path d="M83 59c2 5 2 10 1 15"/>
+  </g>
+  <g fill="#38430b">
+    <circle cx="34.6" cy="69" r="2"/><circle cx="35.6" cy="74.5" r="2"/>
+    <circle cx="84.6" cy="68" r="2"/><circle cx="84.2" cy="74" r="2"/>
+  </g>
+
+  
+  <path d="M11 88V60a49 49 0 0 1 98 0v28" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
+  <path d="M4 89.5h17M99 89.5h17" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+</svg>
+<span>AFRP</span></a>
+  <span style="color:#7a7260">/</span><span style="font-weight:700;font-size:14px">Deep dive · Club management</span>
+  <span class="px-tver">v1.0</span>
+  <div class="px-tlinks"><a href="#officers">The officer year</a><a href="#money">Money</a><a href="#members">Members</a><a href="#migration">Migration</a><a href="#hard">Hard states</a><a href="prototype.html#/club/dashboard">Prototype</a><a href="index.html" class="px-tcta">All docs</a></div>
+</div></nav>
+<header class="px-mast"><div class="px-in">
+  <p class="px-kicker">AFRP design delivery · deep dive, 4 of 5</p>
+  <h1>Running a club</h1>
+  <p class="px-vermeta">v1.0 · 20 Aug 2026 · the officer’s year · every moment paired</p>
+  <p class="px-lede">Eighteen clubs, run entirely by volunteers who have day jobs and change every year or two. Club management is where the federation’s design meets its hardest constraint: <b>whoever does this work does it in the evening, and will hand it to someone else sooner than you think</b>. Every mechanism below is judged on how well it survives a handover — including the handovers that go badly.</p>
+  <div class="px-chips"><span class="px-chip px-chip--gold">the officer year</span><span class="px-chip px-chip--green">officer / member, paired</span><span class="px-chip px-chip--red">the states nobody designs for</span><span class="px-chip ">18 real clubs</span></div>
+</div></header>
+<div class="px-chips" style="max-width:1560px;margin:24px auto 0;padding:0 24px"><a href="#officers" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">The officer year — election, grants, handover</a><a href="#money" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">The treasurer’s month</a><a href="#members" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">The membership secretary’s queue</a><a href="#migration" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">Coming onto the platform</a><a href="#hard" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">No officers, going dormant, coming back</a></div>
+
+<section class="px-mod" id="officers">
+  <p class="px-modkick">The cycle that repeats forever</p>
+  <h3>The officer year — election, grants, handover</h3>
+  <p class="px-desc">Everything about club management is downstream of one fact: the people doing it are temporary. The design’s answer is that authority is <b>granted, scoped and dated</b> — never assumed, never inherited by knowing a password.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>The club elects its officers</b><span class="dd-rules">club rules · R42</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The club</h5><p>Under the club’s <b>own</b> governing rules — separately incorporated, own bylaws. The federation does not run club elections and the platform does not pretend to.</p></div>
+    <div class="dd-col dd-pt"><h5>The federation</h5><p>What the federation needs is the <b>affiliation form</b>: who holds which office, from when. That filing is what turns an election result into access.</p><div class="dd-links"><a href="prototype.html#/club/officers">Officers & affiliation</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>Grants are issued</b><span class="dd-rules">R39</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Federation staff</h5><p>Each office becomes a <b>(person, role, scope)</b> grant, scoped to this club only and <b>end-dated to the term</b>. Five sensitive permissions always require exact grants — no role inherits them.</p></div>
+    <div class="dd-col dd-pt"><h5>The new treasurer</h5><p>She can see Detroit’s dues, Detroit’s roster, Detroit’s remittance — and nothing of any other club, and nothing of the federation. Her scope is visible to her, so she knows what she is trusted with.</p><div class="dd-links"><a href="prototype.html#/fed/roles">Roles & permissions</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>The handover</b><span class="dd-rules">R39 · S5</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Outgoing officer</h5><p>The treasury reconciles and <b>both officers sign</b> the reconciliation. The outgoing officer’s grants end on a date — not when someone remembers, and not when trust runs out.</p></div>
+    <div class="dd-col dd-pt"><h5>Incoming officer</h5><p>He inherits a signed statement of what he is taking on, rather than a shoebox and a verbal assurance.</p></div>
+  </div><p class="dd-gap"><b>The bad handover:</b> if the outgoing officer will not sign — or has died — the reconciliation is filed <b>unilaterally with a stated discrepancy</b> and escalates to the federation. The grants still end on their date. An unsigned handover is a fact to record, never a reason to leave access open indefinitely.</p>
+</div></div>
+
+<section class="px-mod" id="money">
+  <p class="px-modkick">Twelve times a year</p>
+  <h3>The treasurer’s month</h3>
+  <p class="px-desc">The single most consequential volunteer job in the federation, and the one most likely to go quiet.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>The remittance statement arrives</b><span class="dd-rules">R21</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>What the federation sends</h5><p>Dues collected nationally on the club’s behalf are a <b>liability</b> until remitted. The statement shows mode, gross, due, and carried — the four numbers that let a treasurer reconcile in ten minutes instead of an evening.</p></div>
+    <div class="dd-col dd-pt"><h5>What the treasurer does</h5><p>She checks it against her own book, accepts it, and the money moves. Where it disagrees, the disagreement is a queue item with a named owner, not an email thread.</p><div class="dd-links"><a href="prototype.html#/club/remit">Remittance</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>A member renews mid-month</b><span class="dd-rules">S3</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The ledger</h5><p>Gross posting, three journal lines. If the payment reverses <b>after</b> the remittance has gone out, the reversal creates a <b>receivable on the club’s next statement</b> — never a negative liability and never a quiet adjustment to a closed month.</p></div>
+    <div class="dd-col dd-pt"><h5>The member</h5><p>His standing reverts with an effective date, and any roll frozen in between stays frozen with an annotation. Nothing is recomputed behind him.</p><div class="dd-links"><a href="AFRP-Platform-Experience.html#j02">Journey J02</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>The QuickBooks connection dies in August</b><span class="dd-rules">R22</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The federation’s close</h5><p>Postings <b>queue with full detail</b>; the national daily close never waits on one club’s dead token. September’s re-auth replays the queue idempotently — same date+fund+kind keys, no duplicates.</p></div>
+    <div class="dd-col dd-pt"><h5>The club</h5><p>The club sees “August queued, replayed 4 Sep”. What it must not see is a silent gap that surfaces in November as a missing month.</p><div class="dd-links"><a href="prototype.html#/fed/qbo">QuickBooks</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">4</span><b>The interlock nobody expects</b><span class="dd-rules">R17</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Finance on Tuesday</h5><p>An unposted remittance is a finance fact.</p></div>
+    <div class="dd-col dd-pt"><h5>Credentialing on Friday</h5><p>It is also, on Friday, the reason the club’s fourth delegate cannot be seated — <b>same fact, same wording, two screens</b>. One truth, surfaced wherever it bites.</p><div class="dd-links"><a href="AFRP-Platform-Experience.html#j08">Journey J08</a></div></div>
+  </div>
+</div></div>
+
+<section class="px-mod" id="members">
+  <p class="px-modkick">Continuously</p>
+  <h3>The membership secretary’s queue</h3>
+  <p class="px-desc">The unglamorous work that everything else depends on.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>New members and transfers</b><span class="dd-rules">R1 · R2 · R34</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The secretary</h5><p>National and club memberships are <b>separate peer records</b> that never merge. A transfer is not an administrative move: relocation <b>prompts</b> the member, and the member acts.</p></div>
+    <div class="dd-col dd-pt"><h5>A member moving cities</h5><p>She moves from Cleveland to Houston and chooses what happens to each membership. Nobody bulk-moves her, and her Cleveland membership runs to its own expiry if she wants it to.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>Multi-club members</b><span class="dd-rules">R2 · R16</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The registry view</h5><p>Overlap is <b>shown, never merged</b>. For federal apportionment a member counts once, through the <b>club of record</b> pointer, and attested counts are deduplicated against it before any weight is computed.</p></div>
+    <div class="dd-col dd-pt"><h5>Samira, who belongs to two</h5><p>She votes in each club’s own elections where she is current, and counts exactly once federally. Three memberships, three lapse clocks, one person.</p><div class="dd-links"><a href="prototype.html#/fed/clubs">Club registry</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>Roster freshness on the manual door</b><span class="dd-rules">R42</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>A manual-roster club</h5><p>Clubs choose their integration door: live feed, dated manual roster, or platform-native after cutover. All three are first-class and <b>labelled at every point of use</b>.</p></div>
+    <div class="dd-col dd-pt"><h5>What it costs to be late</h5><p>A manual roster older than the record-date window is <b>stale</b> — visible on the health screen well before it becomes a credentialing refusal.</p><div class="dd-links"><a href="prototype.html#/fed/clubhealth">Club health</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">4</span><b>Lapses approaching</b><span class="dd-rules">R18 · S1</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The queue</h5><p>Renewals are operational notices — never marketing — and the queue shows who is approaching lapse while something can still be done about it.</p></div>
+    <div class="dd-col dd-pt"><h5>The member</h5><p>He is told before he loses standing, not after he is refused a ballot.</p></div>
+  </div>
+</div></div>
+
+<section class="px-mod" id="migration">
+  <p class="px-modkick">Once, if the club chooses</p>
+  <h3>Coming onto the platform</h3>
+  <p class="px-desc">Eighteen clubs, eighteen different starting points — Breeze, a spreadsheet, a shoebox, nothing at all. The migration wizard exists because “which club goes first” had no screen, and the answer must always be <b>the club decides</b>.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>Stages 1–3</b><span class="dd-rules">R3 · R42</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Federation and club together</h5><p>Full import with identity resolution — candidate duplicates to the <b>merge queue</b>, never auto-merged, nothing written back to the club’s system. Reconciliation to the cent with the treasurer. Then a one-way nightly delta sync the club can pause on <b>indefinitely</b>.</p></div>
+    <div class="dd-col dd-pt"><h5>The club’s members</h5><p>Nothing about their membership changes during any of this. The club’s system stays the club’s system until the club votes otherwise.</p><div class="dd-links"><a href="prototype.html#/fed/migration">Migration</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>Before cutover — the verification outreach</b><span class="dd-rules">S1</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>What the red team forced</h5><p>Imported emails and phones are <b>unverified channels</b>, and S1 forbids money, PII or consent across them. So before the cutover vote, each member verifies a channel front-door style; the unverified land on a hygiene queue with a postal fallback.</p></div>
+    <div class="dd-col dd-pt"><h5>The member</h5><p>He confirms his own email once, and from then on the platform can actually be trusted to reach him — which matters most at ballot time.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>Cutover</b><span class="dd-rules">R42 · R43</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The club’s vote</h5><p>The club votes under its own rules. Only then does the platform become its system of record, effective-dated, with the registry gaining its third door value: <b>platform-native</b>.</p></div>
+    <div class="dd-col dd-pt"><h5>What changes</h5><p>An electorate frozen mid-migration reads the door of record <i>as of the record date</i> — migration state is part of the snapshot’s label, so nothing shifts under a frozen roll.</p></div>
+  </div>
+</div></div>
+
+<section class="px-mod" id="hard">
+  <p class="px-modkick">The states nobody designs for</p>
+  <h3>No officers, going dormant, coming back</h3>
+  <p class="px-desc">Real federations have clubs that go quiet. A design that only handles healthy clubs fails exactly when it is needed, so these states are specified rather than discovered.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>A club with no officers</b><span class="dd-rules">R17 · R42</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>What the federation can see</h5><p>The club is still visible in the registry. What it <b>cannot</b> do is certify delegates — surfaced plainly on the health screen, not hidden until convention.</p></div>
+    <div class="dd-col dd-pt"><h5>What members keep</h5><p>Members keep their club memberships and everything that comes with them. A leadership gap is not a membership penalty.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>Dormancy</b><span class="dd-rules">S4 · R43 · S3</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>An effective-dated status</h5><p>Dormancy is effective-dated: memberships run to their own expiry — <b>no mid-term cancellation</b> — and prepaid dues stay a liability, remitted on reactivation or refunded through the reversal model. Never silently absorbed.</p></div>
+    <div class="dd-col dd-pt"><h5>A multi-club member</h5><p>If her club of record goes dormant she is prompted to redesignate a current club. Only a member with <i>no</i> other current club falls to the at-large roll at the next record date.</p><div class="dd-links"><a href="prototype.html#/fed/clubhealth">Club health</a><a href="AFRP-Platform-Experience.html#j14">Journey J14</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>Coming back</b><span class="dd-rules">R43</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Reactivation</h5><p>Reactivation is another effective-dated status change with a Board action behind chartering decisions.</p></div>
+    <div class="dd-col dd-pt"><h5>What does not move</h5><p>Frozen rolls are never recomputed. A club going dormant on 20 October changes future record dates only — history stays exactly as it was.</p></div>
+  </div>
+</div><div class="dd-note"><b>What federation staff may never do.</b> Staff configure a club: charter, officers, money, integration door, electorate. Staff never edit a member’s club membership record directly — corrections happen at source, so the club stays the authority on its own roster and every downstream reader sees the same fact with the same label.</div><div class="dd-note"><b>Red-teamed before publication.</b> Eighteen attacks on the five deep dives were all refuted; the sweep’s findings for this surface were folded into the club-activities document, which now draws the money line by <b>collection channel rather than occasion</b> — the distinction a treasurer needs in order to reconcile a hafli without double-counting it.</div></div>
+
+<div class="px-sep"></div>
+<footer class="px-foot"><div class="px-in">
+  <p><b>How to read this.</b> Every moment is shown twice &mdash; the person running it on the left, the
+  person living it on the right &mdash; because the gap between those two views is where this design has
+  failed under attack before. Amber notes mark a gap or an open decision rather than a settled answer.
+  People and money figures are fictional; programs, clubs, committees and by-law citations are real and
+  sourced (afrp.org and the governing texts). Part of the AFRP design delivery &mdash;
+  <a href="index.html">all documents</a> &middot; <a href="AFRP-Complete-Platform.html">the complete platform</a>.
+  Build remains on hold.</p>
+</div></footer>
+</body>
+</html>
