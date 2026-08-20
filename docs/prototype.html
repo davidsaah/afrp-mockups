@@ -4374,6 +4374,8 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <div class="page-head__end"><span class="c-pill c-pill--info">existence-blind</span><span class="c-pill c-pill--warn">simulation</span></div>
   </div>
   <div id="loginapp"></div>
+  <div class="soc-rule"><span>Google &middot; Facebook &middot; LinkedIn &mdash; a convenience a member adds to an account they already have</span></div>
+  <div id="socapp"></div>
 </section>
 
 <section class="screen" data-route="door/recovery" data-lens="door" aria-label="Recover access">
@@ -7573,6 +7575,201 @@ window.INSTW = {
 var _renderAll3 = renderAll;
 renderAll = function(){ _renderAll3(); renderReg(); renderDetail(); renderWiz(); };
 renderAll();
+})();
+</script>
+<style>
+/* ═══ social sign-in ═══ */
+.soc-rule{display:flex;align-items:center;gap:var(--s3);margin:var(--s6) 0 var(--s5);color:var(--muted,#6b6350);font-size:13px}
+.soc-rule:before,.soc-rule:after{content:"";flex:1;height:1px;background:rgba(43,36,22,.14)}
+.soc-btns{display:grid;gap:10px}
+.soc-btn{display:flex;align-items:center;gap:12px;width:100%;padding:11px 14px;border:1px solid rgba(43,36,22,.22);border-radius:9px;background:#fff;cursor:pointer;font:inherit;font-size:14.5px;font-weight:600;color:var(--ink,#2b2416);text-align:left;transition:border-color .13s,box-shadow .13s}
+.soc-btn:hover{border-color:var(--green,#4c6414);box-shadow:0 1px 0 rgba(76,100,20,.16)}
+.soc-btn__m{flex:0 0 22px;height:22px;display:grid;place-items:center;border-radius:5px;font-weight:800;font-size:12.5px;color:#fff;letter-spacing:-.02em}
+.soc-btn__m--g{background:#4285f4}.soc-btn__m--f{background:#1877f2}.soc-btn__m--l{background:#0a66c2}
+.soc-btn__t{flex:1}
+.soc-btn__n{display:block;font-size:11.5px;font-weight:500;color:var(--muted,#6b6350);margin-top:1px}
+.soc-step{display:flex;align-items:center;gap:8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted,#6b6350);margin:0 0 var(--s3)}
+.soc-step b{display:grid;place-items:center;width:19px;height:19px;border-radius:50%;background:var(--green,#4c6414);color:#fff;font-size:11px}
+.soc-scope{border:1px dashed rgba(43,36,22,.3);border-radius:9px;padding:var(--s3) var(--s4);background:rgba(255,255,255,.6);margin:var(--s3) 0}
+.soc-scope h5{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted,#6b6350)}
+.soc-scope ul{margin:0;padding-left:1.1em;font-size:13.5px}
+.soc-scope li{margin:2px 0}
+.soc-scope .no{color:var(--muted,#6b6350)}
+.soc-chk{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px solid rgba(43,36,22,.1)}
+.soc-chk input{margin-top:3px}
+.soc-chk b{display:block;font-size:13.5px}
+.soc-chk span{display:block;font-size:12.5px;color:var(--muted,#6b6350)}
+</style>
+<script>
+/* ═══ Social sign-in — Google / Facebook / LinkedIn ═══════════════════════
+   David, 20 Aug 2026 (revised): social is a method a MEMBER LINKS to an account
+   that already exists. It never creates one. Two-step simulation:
+     1 · link it from inside the account (you are already authenticated)
+     2 · sign out, sign back in with it — an UNLINKED provider dead-ends existence-blind
+   Binding is to the provider's stable account ID, not its email address.            */
+(function(){
+function esc(s){ return String(s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function c6(){ return String(Math.floor(100000+Math.random()*900000)); }
+
+var PROV = {
+  google:   { n:'Google',   m:'G',  c:'g', sub:'108-441-902-77', em:'samira.odeh@gmail.com' },
+  facebook: { n:'Facebook', m:'f',  c:'f', sub:'fb-6620331487',  em:null },
+  linkedin: { n:'LinkedIn', m:'in', c:'l', sub:'li-AC-99g2kQ',   em:'s.odeh@work-example.com' }
+};
+var ORDER = ['google','facebook','linkedin'];
+
+function S0(){ return { linked:[], sess:null, st:'idle', prov:null, notice:null,
+  step:{ open:false, code:null, done:false },
+  rbpn:{ employer:false, title:false, industry:false, done:false } }; }
+var SC = S0();
+
+function mk(p){ return '<span class="soc-btn__m soc-btn__m--'+PROV[p].c+'">'+PROV[p].m+'</span>'; }
+
+function renderSoc(){
+  var el = document.getElementById('socapp'); if(!el) return;
+  var h = '<div class="grid grid--2">';
+
+  /* ═══ LEFT — step 2: sign in with it ═══ */
+  h += '<div class="panel"><div class="panel__head"><div><h3>Sign in with a provider</h3>'+
+       '<p>Only a provider you have <b>already linked</b> can sign you in. Try one you have not linked yet and watch what the screen refuses to tell you.</p></div></div><div class="panel__body">';
+  h += '<div class="soc-step"><b>2</b> after linking, on any device</div>';
+
+  if (SC.sess){
+    var A = PROV[SC.sess] ? PROV[SC.sess].n : 'a one-time code';
+    h += '<p class="j-ok">&#10003; Signed in as <b>Samira Odeh</b> &middot; via '+esc(A)+'</p>'+
+         '<div class="verdict verdict--allow"><span class="verdict__ic">&#10003;</span><div><b>Member &middot; Houston Club &middot; in good standing</b>'+
+         '<p>The same member record, reached by a different door. The provider proved who you are; the <b>roster</b> — By-Law 4.3.1 standing, Selection Committee certification, the franchise — is what says you are a member, and no provider touches it.</p></div></div>'+
+         '<div class="rowflex" style="margin-top:var(--s3)"><button class="btn-xs" onclick="SOC.out()">Sign out</button></div>';
+  }
+  else if (SC.st === 'idle'){
+    h += '<div class="soc-btns">';
+    ORDER.forEach(function(p){
+      var on = SC.linked.indexOf(p) >= 0;
+      h += '<button class="soc-btn" onclick="SOC.go(\''+p+'\')">'+mk(p)+
+           '<span class="soc-btn__t">Continue with '+PROV[p].n+
+           '<span class="soc-btn__n">'+(on ? 'linked to your account' : 'not linked — see what happens')+'</span></span></button>';
+    });
+    h += '</div>';
+    h += '<p class="why" style="margin-top:var(--s4)">A provider tells us <i>who you are</i>. It can never tell us whether you are a <b>member</b> — and it can never make you one.</p>';
+  }
+  else if (SC.st === 'consent'){
+    var Q = PROV[SC.prov];
+    h += '<div class="verdict verdict--hold"><span class="verdict__ic">'+Q.m+'</span><div><b>'+Q.n+' asks you to confirm</b>'+
+         '<p>The provider\'s own screen, simulated. Note how little is requested.</p></div></div>'+
+         '<div class="soc-scope"><h5>AFRP is asking '+Q.n+' for</h5><ul>'+
+         '<li>confirmation that this is your account</li><li>your name</li>'+
+         '<li class="no">and nothing else — no contacts, no friends, no connections, no posting, no email harvesting</li></ul></div>'+
+         '<button class="c-btn c-btn--sm" onclick="SOC.ret()">Continue</button> '+
+         '<button class="j-btn j-btn--quiet" onclick="SOC.reset()">cancel</button>';
+  }
+  else if (SC.st === 'blind'){
+    h += '<div class="verdict verdict--allow" style="background:var(--bg)"><span class="verdict__ic">&#9993;</span><div>'+
+         '<b>&ldquo;If this provider is linked to a record, you&rsquo;ll be signed in.&rdquo;</b>'+
+         '<p>The same sentence, the same timing, whether or not <b>'+PROV[SC.prov].n+'</b> is linked to anything here. '+
+         '&hellip;and nothing happens. This screen looks <i>identical</i> to a member who simply mistyped — that sameness is the security. '+
+         'It will not tell you that no account exists, that the account exists but is unlinked, or that you should try a different provider.</p></div></div>';
+    h += '<div class="rowflex" style="margin-top:var(--s3)"><button class="j-btn j-btn--quiet" onclick="SOC.reset()">try another way</button> '+
+         '<button class="btn-xs" onclick="location.hash=\'#/door/join\'">Apply for membership</button></div>';
+    h += '<p class="why" style="margin-top:var(--s3)">The <b>Apply</b> button sits here on every outcome, linked or not — if it appeared only when there was no account, its presence would be the leak.</p>';
+  }
+
+  h += '</div><div class="panel__foot"><span class="why">A provider is an <b>identity assertion</b>. The roster is the <b>authority</b>. The design never confuses the two.</span></div></div>';
+
+  /* ═══ RIGHT column ═══ */
+  h += '<div style="display:grid;gap:var(--s5);align-content:start">';
+
+  /* step 1 — link from inside the account */
+  h += '<div class="panel"><div class="panel__head"><div><h3>Your account &middot; linked methods</h3>'+
+       '<p>Samira Odeh &middot; member since 2019 &middot; Houston Club</p></div>'+
+       '<div class="panel__head__end"><span class="c-pill c-pill--ok">signed in</span></div></div><div class="panel__body">';
+  h += '<div class="soc-step"><b>1</b> do this first, from inside the account</div>';
+  h += '<div class="qrow"><div class="qrow__main"><b>One-time code to your verified channel</b><span>s&bull;&bull;&bull;&bull;@example.com &middot; this <i>is</i> the account — it can never be unlinked</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">primary</span></div></div>';
+  ORDER.forEach(function(p){
+    var on = SC.linked.indexOf(p) >= 0;
+    h += '<div class="qrow"><div class="qrow__main"><b>'+PROV[p].n+'</b><span>'+
+         (on ? 'linked &middot; bound to account id <span class="mono">'+PROV[p].sub+'</span>' : 'convenience only — adds a door, never replaces the channel')+
+         '</span></div><div class="qrow__end">'+
+         (on ? '<button class="btn-xs" onclick="SOC.unlink(\''+p+'\')">unlink</button>'
+             : '<button class="btn-xs btn-xs--go" onclick="SOC.link(\''+p+'\')">link</button>')+
+         '</div></div>';
+  });
+  if (SC.notice){
+    h += '<div class="verdict verdict--hold" style="margin-top:var(--s3)"><span class="verdict__ic">&#9993;</span><div><b>'+esc(SC.notice)+'</b>'+
+         '<p>Every link and unlink is announced to <b>every</b> verified channel, with the same <b>72-hour undo</b> as a channel change. A silently added sign-in method is how a takeover survives a password reset.</p></div></div>';
+  }
+  h += '<p class="why" style="margin-top:var(--s3)">Linking from <i>inside</i> the account is why this is safe: you are already authenticated, so there is no email to match and nothing to guess. The binding is to the provider\'s <b>stable account id</b> — not to its email address, which can be changed, recycled, or never verified at all.</p>';
+  h += '</div></div>';
+
+  /* step-up */
+  if (SC.sess){
+    h += '<div class="panel"><div class="panel__head"><div><h3>Step-up</h3><p>Ballots &middot; money &middot; board-confidential</p></div>'+
+         '<div class="panel__head__end">'+(SC.step.done?'<span class="c-pill c-pill--ok">verified</span>':'<span class="c-pill c-pill--warn">required</span>')+'</div></div><div class="panel__body">';
+    if (SC.step.done){
+      h += '<div class="verdict verdict--allow"><span class="verdict__ic">&#10003;</span><div><b>Ballot unlocked for this action.</b>'+
+           '<p>Step-up is <b>per action</b>, not per session — the next ballot asks again. The receipt records that the channel was re-proved, which is what a canvass needs to be able to say afterwards.</p></div></div>';
+    } else if (SC.step.open){
+      h += '<div class="j-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2.5" width="10" height="19" rx="2.4"/><path d="M11 18.6h2"/></svg><span><b>Verified channel &middot; simulated</b><span class="j-code">'+SC.step.code+'</span><small>Not your provider inbox — the channel the roster knows.</small></span></div>'+
+           '<div class="j-field"><label>Enter the code</label><input inputmode="numeric" maxlength="6" style="max-width:180px;letter-spacing:.3em;font-family:var(--mono,ui-monospace)" oninput="SOC.tryStep(this)"></div>';
+    } else {
+      h += '<div class="verdict verdict--deny"><span class="verdict__ic">&times;</span><div><b>A provider session is not enough to vote.</b>'+
+           '<p>Linking trades a little security for convenience, and this is where we buy it back. The ballot\'s integrity rests on the <b>certified roll</b>, not on a third party — a compromised Google account must not be able to cast a vote in an AFRP election.<br><span class="mono">rule: step-up required &middot; ballot &middot; verified channel</span></p></div></div>'+
+           '<button class="c-btn c-btn--sm" onclick="SOC.step()">Send code to my verified channel</button>';
+    }
+    h += '</div></div>';
+  }
+
+  /* RBPN — only once LinkedIn is actually linked */
+  if (SC.linked.indexOf('linkedin') >= 0){
+    h += '<div class="panel"><div class="panel__head"><div><h3>RBPN &middot; import from LinkedIn?</h3><p>Ramallah Business &amp; Professional Network</p></div>'+
+         '<div class="panel__head__end"><span class="c-pill c-pill--info">asked once</span></div></div><div class="panel__body">';
+    if (SC.rbpn.done){
+      var got = ['employer','title','industry'].filter(function(k){ return SC.rbpn[k]; });
+      h += '<div class="verdict verdict--allow"><span class="verdict__ic">&#10003;</span><div><b>'+(got.length? 'Imported '+got.length+' of 3 fields.' : 'Nothing imported.')+'</b>'+
+           '<p>'+(got.length? 'Only <b>'+got.join(', ')+'</b> moved across. Each field carries its own attribution consent and can be withdrawn later — the same per-field model the professional network already uses everywhere else.' : 'Your LinkedIn profile stays where it is. RBPN remains entirely member-entered.')+'</p>'+
+           '<p><button class="j-btn j-btn--quiet" onclick="SOC.rbAgain()">change what I shared</button></p></div></div>';
+    } else {
+      h += '<p style="margin:0 0 var(--s2);font-size:14px">You linked LinkedIn, so we <i>could</i> fill your professional profile. We will not do it silently. Field by field:</p>'+
+           '<div class="soc-chk"><input type="checkbox" id="rb-e" '+(SC.rbpn.employer?'checked':'')+' onchange="SOC.rb(\'employer\',this.checked)"><label for="rb-e"><b>Employer</b><span>Qadri &amp; Associates</span></label></div>'+
+           '<div class="soc-chk"><input type="checkbox" id="rb-t" '+(SC.rbpn.title?'checked':'')+' onchange="SOC.rb(\'title\',this.checked)"><label for="rb-t"><b>Job title</b><span>Structural Engineer</span></label></div>'+
+           '<div class="soc-chk"><input type="checkbox" id="rb-i" '+(SC.rbpn.industry?'checked':'')+' onchange="SOC.rb(\'industry\',this.checked)"><label for="rb-i"><b>Industry</b><span>Civil engineering</span></label></div>'+
+           '<div class="rowflex" style="margin-top:var(--s3)"><button class="c-btn c-btn--sm" onclick="SOC.rbDone()">Import the ticked fields</button> <button class="j-btn j-btn--quiet" onclick="SOC.rbSkip()">no thanks</button></div>'+
+           '<p class="why" style="margin-top:var(--s3)">Your <b>connections are never read</b>. RBPN is a network of people who chose to be in it — harvesting a contact graph would put people in a directory they never joined.</p>';
+    }
+    h += '</div></div>';
+  }
+
+  h += '</div></div>';
+  el.innerHTML = h;
+}
+
+window.SOC = {
+  link: function(p){ if (SC.linked.indexOf(p) < 0) SC.linked.push(p);
+    SC.notice = PROV[p].n + ' linked — we told every verified channel'; renderSoc(); },
+  unlink: function(p){ SC.linked = SC.linked.filter(function(x){ return x !== p; });
+    if (SC.sess === p) SC.sess = null;
+    SC.notice = PROV[p].n + ' unlinked — we told every verified channel'; renderSoc(); },
+  go: function(p){ SC.prov = p; SC.st = 'consent'; renderSoc(); },
+  ret: function(){
+    if (SC.linked.indexOf(SC.prov) >= 0){ SC.sess = SC.prov; SC.st = 'idle';
+      SC.step = { open:false, code:null, done:false }; }
+    else { SC.st = 'blind'; }
+    renderSoc(); },
+  out: function(){ SC.sess = null; SC.st = 'idle'; SC.step = { open:false, code:null, done:false }; renderSoc(); },
+  reset: function(){ SC.st = 'idle'; SC.prov = null; renderSoc(); },
+  step: function(){ SC.step.open = true; SC.step.code = c6(); renderSoc(); },
+  tryStep: function(i){ if (i.value.length < 6) return;
+    if (i.value === SC.step.code){ SC.step.done = true; SC.step.open = false; renderSoc(); }
+    else { i.value=''; i.placeholder='not quite'; } },
+  rb: function(k,v){ SC.rbpn[k] = v; },
+  rbDone: function(){ SC.rbpn.done = true; renderSoc(); },
+  rbSkip: function(){ SC.rbpn.employer=SC.rbpn.title=SC.rbpn.industry=false; SC.rbpn.done=true; renderSoc(); },
+  rbAgain: function(){ SC.rbpn.done = false; renderSoc(); }
+};
+
+var prev = window.renderAll;
+window.renderAll = function(){ if (prev) prev.apply(this, arguments); try { renderSoc(); } catch(e){} };
+if (document.readyState !== 'loading') renderSoc();
+else document.addEventListener('DOMContentLoaded', renderSoc);
 })();
 </script>
 </body>

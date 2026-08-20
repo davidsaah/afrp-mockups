@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AFRP · The six flagship programs, rung by rung</title>
+<meta name="description" content="Camp Ramallah, Leadership Ramallah, the Scholarship, the Medical Mission, RBPN and the Convention — each walked across the five rungs of engagement, the person running it beside the person living it.">
+<style>
+/* ═════════════════════════════════════════════════════════════════════════
+   AFRP UNIFIED PLATFORM — consolidated document chrome (px- namespace)
+   Heritage layer v3.1 values. Everything inside .sc-m / .sc-o keeps its own
+   scoped stylesheet; this layer only draws the consolidated shell around it.
+   ═════════════════════════════════════════════════════════════════════════ */
+:root{
+  --px-ink:#2b2416; --px-ink-2:#57503f; --px-ink-3:#7a7260;
+  --px-bg:#f5f0e1; --px-surface:#fffdf6; --px-surface-2:#f7f1e2;
+  --px-line:#e2d9c2; --px-dark:#211c11; --px-dark-2:#2c261741;
+  --px-cream:#f2ecd9; --px-cream-2:#d8d0b8;
+  --px-green:#4c6414; --px-green-deep:#33430b; --px-green-50:#eef0da;
+  --px-olive:#6d7a19; --px-olive-50:#f2f4dd;
+  --px-gold:#9a720d;  --px-gold-50:#faf2dc; --px-gold-200:#e7d191;
+  --px-pine:#3f6b41;  --px-pine-50:#e6f0e2;
+  --px-red:#8c2f21;   --px-red-50:#f7e4df;
+  --px-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --px-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+svg.sprite{display:none}
+body{margin:0;background:var(--px-bg);color:var(--px-ink);font:16px/1.6 var(--px-font)}
+.px-doc{scroll-behavior:smooth}
+
+/* ── masthead ─────────────────────────────────────────────────────────── */
+.px-mast{background:var(--px-dark);color:var(--px-cream);padding:44px 0 30px;
+  border-bottom:4px solid var(--px-green)}
+.px-mast .px-in{max-width:1560px;margin:0 auto;padding:0 24px}
+.px-lockup{display:flex;align-items:center;gap:12px;color:#d9b45a;margin-bottom:26px}
+.px-lockup svg{width:38px;height:38px}
+.px-lockup b{font-size:20px;letter-spacing:.06em;color:var(--px-cream)}
+.px-lockup small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:#c9b877;font-weight:600}
+.px-kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#b5c24a;
+  font-weight:700;margin:0 0 10px}
+.px-mast h1{font-size:clamp(30px,3vw + 18px,44px);line-height:1.12;margin:0 0 18px;
+  font-weight:800;letter-spacing:-.01em;color:#fffdf6}
+.px-mast .px-lede{max-width:74ch;font-size:16.5px;line-height:1.65;color:#e8e1cb;margin:0 0 14px}
+.px-mast .px-lede b{color:#fffdf6}
+.px-mast .px-lede code{font-family:var(--px-mono);font-size:.86em;background:#ffffff14;
+  padding:1px 6px;border-radius:6px;color:#e7d191}
+.px-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.px-chip{font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px;
+  background:#ffffff12;color:#e8e1cb;border:1px solid #ffffff24}
+.px-chip--green{background:#4c6414;color:#f2f4dd;border-color:#5d7a1a}
+.px-chip--red{background:#8c2f21;color:#f7e4df;border-color:#a1402f}
+.px-chip--gold{background:#9a720d33;color:#e7d191;border-color:#9a720d66}
+
+/* institution nav strip in mast */
+.px-instnav{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.px-instnav a{display:flex;align-items:center;gap:9px;text-decoration:none;
+  background:#ffffff0d;border:1px solid #ffffff22;border-radius:12px;padding:10px 16px;
+  color:#f2ecd9;font-size:14px;font-weight:600;transition:background .15s}
+.px-instnav a:hover{background:#ffffff1c}
+.px-instnav .px-rn{font-family:var(--px-mono);font-size:12px;color:#d9b45a;font-weight:700}
+
+/* ── legend ───────────────────────────────────────────────────────────── */
+.px-legendwrap{background:var(--px-surface);border-bottom:1px solid var(--px-line)}
+.px-legend{max-width:1560px;margin:0 auto;padding:22px 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px 28px}
+.px-legend h4{margin:0 0 5px;font-size:13.5px;display:flex;align-items:center;gap:8px}
+.px-legend p{margin:0;font-size:13px;line-height:1.5;color:var(--px-ink-2)}
+
+/* ── badges ───────────────────────────────────────────────────────────── */
+.px-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.1em;padding:3px 10px;border-radius:999px;text-transform:uppercase;
+  vertical-align:2px}
+.px-badge i{width:7px;height:7px;border-radius:99px;display:inline-block}
+.px-badge--built{background:var(--px-pine-50);color:var(--px-pine);border:1px solid #aecfa6}
+.px-badge--built i{background:var(--px-pine)}
+.px-badge--designed{background:var(--px-gold-50);color:var(--px-gold);border:1px solid var(--px-gold-200)}
+.px-badge--designed i{background:var(--px-gold)}
+.px-badge--proposed{background:#eee9f5;color:#5b4a80;border:1px solid #cfc2e4}
+.px-badge--proposed i{background:#5b4a80}
+.px-badge--partial{background:var(--px-olive-50);color:#525d12;border:1px solid #cdd48f}
+.px-badge--partial i{background:var(--px-olive)}
+
+/* ── TOC ──────────────────────────────────────────────────────────────── */
+.px-toc{max-width:1560px;margin:34px auto 0;padding:0 24px}
+.px-toc h2{font-size:22px;margin:0 0 6px}
+.px-toc > p{margin:0 0 20px;color:var(--px-ink-2);font-size:14.5px;max-width:88ch}
+.px-toccols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.px-toccol{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:18px 20px}
+.px-toccol h3{margin:0 0 2px;font-size:16px;display:flex;gap:9px;align-items:baseline}
+.px-toccol h3 .px-rn{font-family:var(--px-mono);font-size:12px;color:var(--px-gold)}
+.px-toccol .px-bylaw{font-size:12px;color:var(--px-ink-3);margin:0 0 12px}
+.px-toccol a{display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+  padding:7px 2px;text-decoration:none;color:var(--px-ink);font-size:14px;
+  border-top:1px solid var(--px-line)}
+.px-toccol a:hover{color:var(--px-green-deep)}
+.px-toccol a .px-fc{font-size:11.5px;color:var(--px-ink-3);font-family:var(--px-mono);white-space:nowrap}
+.px-toccol a.px-star{font-weight:700}
+
+/* ── institution part header ──────────────────────────────────────────── */
+.px-inst{margin:72px 0 0;background:var(--px-dark);color:var(--px-cream);
+  border-top:4px solid var(--px-gold);padding:34px 0 30px}
+.px-inst .px-in{max-width:1560px;margin:0 auto;padding:0 24px}
+.px-inst .px-rn{font-family:var(--px-mono);font-size:13px;color:#d9b45a;font-weight:700;
+  letter-spacing:.12em}
+.px-inst h2{font-size:clamp(24px,2vw + 15px,32px);margin:6px 0 10px;color:#fffdf6}
+.px-inst p{max-width:80ch;margin:0;font-size:15px;line-height:1.6;color:#e8e1cb}
+.px-inst .px-src{margin-top:12px;font-size:12.5px;color:#c9b877;font-family:var(--px-mono)}
+
+/* ── module head ──────────────────────────────────────────────────────── */
+.px-mod{max-width:1560px;margin:56px auto 0;padding:0 24px}
+.px-mod--star{border-left:4px solid var(--px-gold);padding-left:20px;margin-left:max(24px,calc((100% - 1560px)/2));
+  max-width:1516px;padding-right:24px}
+@media (max-width:1608px){.px-mod--star{margin-left:24px;margin-right:0}}
+.px-mod .px-modkick{font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--px-ink-3);font-weight:700;margin:0 0 4px}
+.px-mod h3{font-size:clamp(20px,1.4vw + 14px,26px);margin:0 0 10px;display:flex;
+  flex-wrap:wrap;align-items:center;gap:12px}
+.px-mod .px-desc{max-width:86ch;margin:0 0 12px;font-size:15px;line-height:1.62;color:var(--px-ink-2)}
+.px-mod .px-desc b{color:var(--px-ink)}
+.px-api{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.px-api span{font-family:var(--px-mono);font-size:11.5px;background:var(--px-surface);
+  border:1px solid var(--px-line);border-radius:7px;padding:3px 8px;color:#57503f}
+.px-api span.px-api--live{border-color:#aecfa6;background:var(--px-pine-50);color:var(--px-pine)}
+.px-api span.px-api--draft{border-style:dashed;color:#5b4a80;border-color:#cfc2e4;background:#f4f1f9}
+.px-subhead{max-width:1560px;margin:34px auto 0;padding:0 24px;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--px-ink-3);font-weight:700;
+  display:flex;align-items:center;gap:10px}
+.px-subhead:after{content:"";flex:1;height:1px;background:var(--px-line)}
+
+/* roadmap cards (ARFHSN / endowment) */
+.px-road{max-width:1560px;margin:22px auto 0;padding:0 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.px-roadcard{background:var(--px-surface);border:1px dashed var(--px-cream-2);
+  border-radius:14px;padding:20px 22px}
+.px-roadcard h4{margin:0 0 8px;font-size:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.px-roadcard p{margin:0 0 8px;font-size:13.5px;line-height:1.55;color:var(--px-ink-2)}
+.px-roadcard .px-blocked{font-size:12.5px;color:var(--px-red);background:var(--px-red-50);
+  border-radius:8px;padding:7px 11px;margin-top:10px}
+
+/* footer */
+.px-foot{margin-top:88px;background:var(--px-dark);color:#c9c0a5;padding:34px 0 46px;
+  border-top:4px solid var(--px-green)}
+.px-foot .px-in{max-width:1560px;margin:0 auto;padding:0 24px;font-size:13px;line-height:1.7}
+.px-foot b{color:#f2ecd9}
+.px-foot a{color:#d9b45a}
+.px-sep{height:26px}
+@media print{.px-mast,.px-inst{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+/* ── v3: sticky top nav, version chip, element matrix ─────────────────── */
+.px-topnav{position:sticky;top:0;z-index:50;background:#211c11f2;backdrop-filter:blur(6px);
+  border-bottom:1px solid #ffffff1c;color:#f2ecd9}
+.px-topnav .px-in{max-width:1560px;margin:0 auto;padding:9px 24px;display:flex;
+  align-items:center;gap:14px;flex-wrap:wrap}
+.px-topnav .px-tbrand{display:flex;align-items:center;gap:9px;font-weight:800;
+  letter-spacing:.05em;color:#fffdf6;text-decoration:none;font-size:15px}
+.px-topnav .px-tver{font-family:var(--px-mono);font-size:10.5px;font-weight:700;
+  background:#4c6414;color:#f2f4dd;border-radius:999px;padding:2px 9px;letter-spacing:.06em}
+.px-topnav .px-tlinks{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.px-topnav .px-tlinks a{color:#e8e1cb;text-decoration:none;font-size:13px;font-weight:600;
+  padding:6px 11px;border-radius:8px}
+.px-topnav .px-tlinks a:hover{background:#ffffff14}
+.px-topnav .px-tlinks a.px-tcta{background:#4c6414;color:#f2f4dd}
+.px-vermeta{font-family:var(--px-mono);font-size:12px;color:#c9b877;margin:0 0 14px}
+
+.px-matrix{max-width:1560px;margin:26px auto 0;padding:0 24px}
+.px-matrix h3{font-size:19px;margin:34px 0 4px}
+.px-matrix .px-mnote{font-size:13.5px;color:var(--px-ink-2);margin:0 0 12px;max-width:88ch}
+.px-tablewrap{overflow-x:auto;background:var(--px-surface);border:1px solid var(--px-line);
+  border-radius:12px}
+table.px-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.px-table th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--px-ink-3);padding:10px 14px;border-bottom:1px solid var(--px-line);
+  background:var(--px-surface-2)}
+.px-table td{padding:9px 14px;border-bottom:1px solid #eee7d4;vertical-align:top}
+.px-table tr:last-child td{border-bottom:0}
+.px-table a{color:var(--px-green-deep);text-decoration:none;font-weight:600}
+.px-table a:hover{text-decoration:underline}
+.px-st{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.08em;padding:2px 9px;border-radius:999px;text-transform:uppercase;white-space:nowrap}
+.px-st i{width:7px;height:7px;border-radius:99px}
+.px-st--p{background:var(--px-pine-50);color:var(--px-pine)}.px-st--p i{background:var(--px-pine)}
+.px-st--part{background:var(--px-olive-50);color:#525d12}.px-st--part i{background:var(--px-olive)}
+.px-st--m{background:var(--px-red-50);color:var(--px-red)}.px-st--m i{background:var(--px-red)}
+.px-st--prop{background:#eee9f5;color:#5b4a80}.px-st--prop i{background:#5b4a80}
+
+.px-cardgrid{max-width:1560px;margin:20px auto 0;padding:0 24px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px}
+.px-mcard{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:18px 20px}
+.px-mcard h4{margin:0 0 6px;font-size:15.5px;display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.px-mcard p{margin:0 0 10px;font-size:13px;line-height:1.55;color:var(--px-ink-2)}
+.px-mcard .px-mlinks{display:flex;flex-wrap:wrap;gap:6px}
+.px-mcard .px-mlinks a{font-size:12px;font-weight:700;color:var(--px-green-deep);
+  text-decoration:none;background:var(--px-green-50);border:1px solid #c4cd97;
+  border-radius:999px;padding:3px 11px}
+.px-mcard .px-mlinks a:hover{background:#dde2bf}
+.px-mcard .px-mlinks a.px-ml--ext{background:var(--px-gold-50);border-color:var(--px-gold-200);
+  color:var(--px-gold)}
+
+/* ── programs doc: pipelines, duo layout, facts ────────────────────────── */
+.px-pipes{max-width:1560px;margin:30px auto 0;padding:0 24px}
+.px-pipe{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:16px 20px;margin-bottom:14px}
+.px-pipe h4{margin:0 0 2px;font-size:15.5px}
+.px-pipe > p{margin:0 0 12px;font-size:13px;color:var(--px-ink-2)}
+.px-pipe .px-rail{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.px-pipe .px-rail a{display:flex;flex-direction:column;text-decoration:none;background:var(--px-green-50);
+  border:1px solid #c4cd97;border-radius:10px;padding:7px 13px;color:var(--px-green-deep);min-width:0}
+.px-pipe .px-rail a b{font-size:13px}
+.px-pipe .px-rail a small{font-size:10.5px;color:#525d12;font-family:var(--px-mono)}
+.px-pipe .px-rail a:hover{background:#dde2bf}
+.px-pipe .px-rail .px-arr{color:var(--px-ink-3);font-weight:700}
+.px-hostchip{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:3px 11px;
+  color:#fff;vertical-align:2px}
+.px-progflag{max-width:1560px;margin:10px auto 0;padding:0 24px}
+.px-progflag > div{border-left:3px solid var(--px-gold);background:var(--px-gold-50);color:#584106;
+  padding:10px 14px;border-radius:0 10px 10px 0;font-size:13px;max-width:100ch}
+.px-duo{max-width:1560px;margin:18px auto 0;padding:0 24px;display:grid;gap:22px;
+  grid-template-columns:minmax(0,1fr)}
+@media(min-width:1150px){.px-duo{grid-template-columns:minmax(0,7fr) minmax(0,3fr);align-items:start}}
+.px-duo .px-duolabel{font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--px-ink-3);font-weight:700;margin:0 0 8px}
+.px-srcline{max-width:1560px;margin:8px auto 0;padding:0 24px;font-size:12px;color:var(--px-ink-3)}
+.px-srcline a{color:var(--px-green-deep)}
+@media(max-width:1149px){
+  .px-duo > div:first-child{order:2}
+  .px-duo > div:last-child{order:1}
+}
+
+/* ── v2 programs: charter grid ─────────────────────────────────────────── */
+.px-charter{max-width:1560px;margin:14px auto 0;padding:0 24px;display:grid;gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.px-chcard{background:var(--px-surface);border:1px solid var(--px-line);border-radius:12px;
+  padding:13px 16px;min-width:0}
+.px-chcard h5{margin:0 0 7px;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--px-ink-3);display:flex;align-items:center;gap:7px}
+.px-chcard h5 i{width:8px;height:8px;border-radius:3px;display:inline-block;background:var(--px-green)}
+.px-chcard--mission h5 i{background:var(--px-green)}
+.px-chcard--committee h5 i{background:var(--px-gold)}
+.px-chcard--budget h5 i{background:var(--px-pine)}
+.px-chcard--activities h5 i{background:var(--px-olive)}
+.px-chcard--metrics h5 i{background:#5b4a80}
+.px-chcard p{margin:0;font-size:12.5px;line-height:1.5;color:var(--px-ink-2)}
+.px-chcard p b{color:var(--px-ink)}
+.px-chcard ul{margin:0;padding-left:16px;font-size:12.5px;line-height:1.55;color:var(--px-ink-2)}
+.px-chcard ul li{margin-bottom:3px}
+.px-chcard .px-chsub{font-size:11.5px;color:var(--px-ink-3);margin-top:6px}
+.px-chcard .px-demo{font-size:10px;font-weight:800;letter-spacing:.08em;background:var(--px-red-50);
+  color:var(--px-red);border-radius:99px;padding:1px 7px;vertical-align:1px}
+.px-chcard .px-real{font-size:10px;font-weight:800;letter-spacing:.08em;background:var(--px-pine-50);
+  color:var(--px-pine);border-radius:99px;padding:1px 7px;vertical-align:1px}
+
+/* ── experience doc: journey blocks, breaks register ───────────────────── */
+.px-journey{max-width:1560px;margin:44px auto 0;padding:0 24px}
+.px-jsteps{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  padding:6px 0;margin-top:14px}
+.px-jstep{display:flex;gap:14px;padding:11px 18px;border-bottom:1px solid #eee7d4;font-size:13.5px}
+.px-jstep:last-child{border-bottom:0}
+.px-jstep .px-jn{flex:none;width:26px;height:26px;border-radius:99px;background:var(--px-green-50);
+  border:1px solid #c4cd97;color:var(--px-green-deep);font-weight:800;font-size:12px;
+  display:grid;place-items:center}
+.px-jstep .px-jbody{min-width:0}
+.px-jstep .px-jbody b{color:var(--px-ink)}
+.px-jstep .px-jbody .px-jrule{display:inline-block;margin-left:6px;font-family:var(--px-mono);
+  font-size:10.5px;background:var(--px-surface-2);border:1px solid var(--px-line);
+  border-radius:6px;padding:1px 7px;color:var(--px-ink-3)}
+.px-jstep .px-jbody .px-jscreen{display:inline-block;margin-left:6px;font-size:11px;font-weight:700}
+.px-jstep .px-jbody .px-jscreen a{color:var(--px-green-deep);text-decoration:none}
+.px-jstep--fix{background:var(--px-gold-50)}
+.px-jstep--fix .px-jn{background:var(--px-gold-50);border-color:var(--px-gold-200);color:var(--px-gold)}
+.px-break{border-left:3px solid var(--px-red);background:var(--px-red-50);border-radius:0 10px 10px 0;
+  padding:11px 15px;margin-top:10px;font-size:13px;color:#5c2418}
+.px-break b{color:var(--px-red)}
+.px-break .px-fix{display:block;margin-top:6px;color:#3d5220}
+.px-break .px-fix b{color:var(--px-green-deep)}
+.px-sev{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.09em;border-radius:99px;
+  padding:1px 8px;text-transform:uppercase;vertical-align:1px;margin-right:6px}
+.px-sev--critical{background:var(--px-red);color:#fff}
+.px-sev--major{background:var(--px-gold);color:#fff}
+.px-sev--minor{background:var(--px-cream-2);color:var(--px-ink-2)}
+
+
+/* ── deep-dive: the paired operator/participant spine ───────────────────── */
+.dd-wrap{max-width:1560px;margin:0 auto;padding:0 24px}
+.dd-pair{background:var(--px-surface);border:1px solid var(--px-line);border-radius:14px;
+  margin:14px 0;overflow:hidden}
+.dd-head{display:flex;gap:11px;align-items:baseline;padding:13px 16px 11px;
+  border-bottom:1px solid var(--px-line);background:var(--px-green-50);flex-wrap:wrap}
+.dd-n{flex:none;width:23px;height:23px;border-radius:99px;background:var(--px-green-deep);color:#fff;
+  font-size:11.5px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
+.dd-head b{font-size:15px;flex:1;min-width:200px}
+.dd-rules{font-family:var(--px-mono);font-size:10.5px;letter-spacing:.05em;color:#525d12;
+  background:#fff;border:1px solid var(--px-line);border-radius:99px;padding:2px 9px}
+.dd-cols{display:grid;grid-template-columns:1fr 1fr}
+@media (max-width:860px){.dd-cols{grid-template-columns:1fr}}
+.dd-col{padding:14px 16px 16px}
+.dd-col+.dd-col{border-left:1px solid var(--px-line)}
+@media (max-width:860px){.dd-col+.dd-col{border-left:0;border-top:1px solid var(--px-line)}}
+.dd-col h5{margin:0 0 7px;font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:800}
+.dd-op h5{color:var(--px-pine)}
+.dd-pt h5{color:var(--px-gold)}
+.dd-col p{margin:0;font-size:13.2px;line-height:1.58;color:var(--px-ink-2)}
+.dd-col p b{color:var(--px-ink)}
+.dd-col p+p{margin-top:7px}
+.dd-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.dd-links a{font-size:11.5px;font-weight:700;color:var(--px-green-deep);background:var(--px-green-50);
+  border:1px solid var(--px-line);border-radius:99px;padding:3px 9px;text-decoration:none}
+.dd-links a:hover{background:#dde2bf}
+.dd-gap{margin:0;padding:10px 16px;background:var(--px-gold-50);border-top:1px solid var(--px-gold-200);
+  font-size:12.5px;line-height:1.55;color:#5c4708}
+.dd-gap b{color:#7a5a0a}
+.dd-note{max-width:1560px;margin:16px auto 0;padding:12px 16px;border-left:3px solid var(--px-green);
+  background:var(--px-surface);border-radius:0 12px 12px 0;font-size:13px;line-height:1.6;color:var(--px-ink-2)}
+.dd-note b{color:var(--px-ink)}
+.dd-wrap>.dd-note{margin-left:0;margin-right:0}
+
+</style>
+</head>
+<body class="px-doc">
+<nav class="px-topnav"><div class="px-in">
+  <a class="px-tbrand" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="AFRP olive-tree mark" style="color:#f2ecd9;width:26px;height:26px;flex:none">
+  
+
+  
+  <g>
+    <rect x="13" y="66" width="94" height="22" fill="#e7d191"/>
+    <g fill="#d9b45a">
+      <rect x="13" y="67" width="15" height="9" rx="3"/><rect x="31" y="67" width="19" height="9" rx="3"/>
+      <rect x="53" y="67" width="13" height="9" rx="3"/><rect x="69" y="67" width="18" height="9" rx="3"/>
+      <rect x="90" y="67" width="17" height="9" rx="3"/>
+    </g>
+    <g fill="#c9a34a">
+      <rect x="13" y="78" width="10" height="9" rx="3"/><rect x="26" y="78" width="17" height="9" rx="3"/>
+      <rect x="46" y="78" width="14" height="9" rx="3"/><rect x="63" y="78" width="11" height="9" rx="3"/>
+      <rect x="77" y="78" width="18" height="9" rx="3"/><rect x="98" y="78" width="9" height="9" rx="3"/>
+    </g>
+  </g>
+
+  
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M59 97c0-12 0-24-3-33" stroke-width="7.5"/>
+    <path d="M56 64c-3-8-8-13-14-16" stroke-width="6"/>
+    <path d="M56.5 66c2-8 7-14 14-18" stroke-width="6"/>
+    <path d="M47 53c-3-3-5-7-5-12" stroke-width="4.5"/>
+    <path d="M66 53c4-2 7-5 9-9" stroke-width="4.5"/>
+    <path d="M59 97c-5 3-10 4-15 4M59 97c5 3 10 4 15 4M59 97v7" stroke-width="5"/>
+  </g>
+
+  
+  <g fill="#4c6414">
+    <ellipse cx="33" cy="34" rx="6.5" ry="3.1" transform="rotate(-38 33 34)"/>
+    <ellipse cx="45" cy="23" rx="6.5" ry="3.1" transform="rotate(-16 45 23)"/>
+    <ellipse cx="61" cy="18" rx="6.5" ry="3.1" transform="rotate(2 61 18)"/>
+    <ellipse cx="77" cy="22" rx="6.5" ry="3.1" transform="rotate(20 77 22)"/>
+    <ellipse cx="88" cy="33" rx="6.5" ry="3.1" transform="rotate(48 88 33)"/>
+    <ellipse cx="27" cy="47" rx="6.5" ry="3.1" transform="rotate(-66 27 47)"/>
+    <ellipse cx="93" cy="46" rx="6.5" ry="3.1" transform="rotate(66 93 46)"/>
+  </g>
+  <g fill="#6d7a19">
+    <ellipse cx="40" cy="34" rx="6" ry="2.9" transform="rotate(-28 40 34)"/>
+    <ellipse cx="53" cy="27" rx="6" ry="2.9" transform="rotate(-8 53 27)"/>
+    <ellipse cx="68" cy="26" rx="6" ry="2.9" transform="rotate(12 68 26)"/>
+    <ellipse cx="81" cy="32" rx="6" ry="2.9" transform="rotate(36 81 32)"/>
+    <ellipse cx="33" cy="55" rx="6" ry="2.9" transform="rotate(-56 33 55)"/>
+    <ellipse cx="87" cy="55" rx="6" ry="2.9" transform="rotate(56 87 55)"/>
+    <ellipse cx="60" cy="30" rx="6" ry="2.9" transform="rotate(0 60 30)"/>
+  </g>
+  <g fill="#7e9440">
+    <ellipse cx="47" cy="37" rx="5.5" ry="2.7" transform="rotate(-18 47 37)"/>
+    <ellipse cx="60" cy="38" rx="5.5" ry="2.7" transform="rotate(4 60 38)"/>
+    <ellipse cx="73" cy="37" rx="5.5" ry="2.7" transform="rotate(24 73 37)"/>
+    <ellipse cx="39" cy="46" rx="5.5" ry="2.7" transform="rotate(-42 39 46)"/>
+    <ellipse cx="82" cy="45" rx="5.5" ry="2.7" transform="rotate(42 82 45)"/>
+    <ellipse cx="53" cy="46" rx="5.5" ry="2.7" transform="rotate(-8 53 46)"/>
+    <ellipse cx="68" cy="46" rx="5.5" ry="2.7" transform="rotate(14 68 46)"/>
+  </g>
+
+  
+  <g fill="#38430b">
+    <circle cx="43" cy="28" r="2.3"/><circle cx="66" cy="21" r="2.3"/><circle cx="85" cy="28" r="2.3"/>
+    <circle cx="34" cy="41" r="2.3"/><circle cx="64" cy="33" r="2.3"/><circle cx="88" cy="41" r="2.3"/>
+    <circle cx="46" cy="42" r="2.3"/>
+  </g>
+  <g fill="#9a720d">
+    <circle cx="53" cy="22" r="2.1"/><circle cx="74" cy="30" r="2.1"/><circle cx="56" cy="33" r="2.1"/>
+    <circle cx="30" cy="51" r="2.1"/><circle cx="90" cy="51" r="2.1"/>
+  </g>
+
+  
+  <g fill="none" stroke="#4c6414" stroke-width="2" stroke-linecap="round">
+    <path d="M36 60c-2 5-2 10-1 14"/><path d="M83 59c2 5 2 10 1 15"/>
+  </g>
+  <g fill="#38430b">
+    <circle cx="34.6" cy="69" r="2"/><circle cx="35.6" cy="74.5" r="2"/>
+    <circle cx="84.6" cy="68" r="2"/><circle cx="84.2" cy="74" r="2"/>
+  </g>
+
+  
+  <path d="M11 88V60a49 49 0 0 1 98 0v28" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
+  <path d="M4 89.5h17M99 89.5h17" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+</svg>
+<span>AFRP</span></a>
+  <span style="color:#7a7260">/</span><span style="font-weight:700;font-size:14px">Flagship programs</span>
+  <span class="px-tver">v1.0</span>
+  <div class="px-tlinks"><a href="AFRP-Programs.html">All programs</a><a href="AFRP-Platform-Experience.html">The rails</a><a href="AFRP-Deep-Convention.html">Convention</a><a href="prototype.html">Prototype</a><a href="index.html" class="px-tcta">All docs</a></div>
+</div></nav>
+<header class="px-mast"><div class="px-in">
+  <p class="px-kicker">Deep dive · programs</p>
+  <h1>Six programs, rung by rung</h1>
+  <p class="px-vermeta">20 August 2026 · design and planning only · build on hold</p>
+  <p class="px-lede">One ladder, six programs, thirty moments. Every program is walked across the same five rungs — hear, show up, take part, give or serve, lead — so that “thin” becomes something you can see and point at rather than something you feel. Facts are from afrp.org and the governing texts; people and money figures are fictional.</p>
+  <div class="px-chips"><span class="px-chip px-chip--ok">5 rungs × 6 programs</span><span class="px-chip px-chip--info">paired: organizer · participant</span><span class="px-chip px-chip--warn">no rung without evidence</span><span class="px-chip px-chip--info">sourced from afrp.org</span></div>
+</div></header>
+<div class="px-chips" style="max-width:1560px;margin:24px auto 0;padding:0 24px"><a href="#ladder" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">The five rungs</a><a href="#camp" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">Camp Ramallah</a><a href="#leadership" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">Leadership Ramallah</a><a href="#scholarship" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">The Scholarship</a><a href="#medical" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">The Medical Mission</a><a href="#rbpn" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">Ramallah Business & Professional Network</a><a href="#convention" class="px-chip" style="text-decoration:none;color:var(--px-ink);background:var(--px-surface);border-color:var(--px-line)">The Convention</a></div>
+
+<section class="px-mod" id="ladder">
+  <p class="px-modkick">Read this first</p>
+  <h3>The five rungs</h3>
+  <p class="px-desc">Every program below uses the same ladder. A rung is only real when four things exist: what it feels like to the participant, what the organizer sees, <b>the evidence the platform can actually observe</b>, and what happens when someone stalls there. Where one of the four is missing, the program says so instead of inventing it.</p>
+</section>
+<div class="dd-wrap"><div class="dd-note"><b>Stall signals bend around grief.</b> Someone who drops from rung 3 to rung 1 may have buried a parent. Where a bereavement or life event is on record the stall signal is <b>suppressed rather than queued</b> — and the suppression is invisible to the organizer, because a visible suppression leaks the life event just as loudly as the nudge would have.</div><div class="dd-note"><b>Small programs cannot publish rung counts.</b> Leadership Ramallah had fifteen participants in 2026. A rung distribution over fifteen people identifies them. Every published figure here is subject to the same complementary suppression as the rest of the platform (S7) — composed across tabs and across time, not just per view. <b>This binds every program in this document, including the large ones:</b> a per-club eligible-minor count of nine is the same disclosure as a cohort of fifteen.</div><div class="dd-note"><b>Consent is per audience, not per field alone.</b> “Visible to program committees” and “visible in the member directory” are <b>separate grants</b>, and a member may give one without the other. Narrow-query suppression governs open directory search; a committee-visible consent is an explicit grant to exactly that audience and is not a search result. Both rules appear below — in RBPN and in the Medical Mission — and they are not in conflict because they govern different audiences.</div><div class="dd-note"><b>Where the stall leg is deliberately empty.</b> Four things make a rung real, and one of them is what happens when someone stalls. For most rungs in this document the honest answer is <b>nothing happens, on purpose</b> — see the stall table at the end of each program. A rung with no stall signal is a rung where the organisation has decided not to chase, which is a design decision and is recorded as one.</div></div>
+<div class="px-matrix" style="margin-top:26px"><h3 style="font-size:16px">The ladder, and the rules it obeys</h3>
+  <div class="px-tablewrap"><table class="px-table"><thead><tr><th>Rung</th><th>What it means</th><th>The rule that protects it</th></tr></thead><tbody><tr><td><b>1 · Hear</b></td><td>They know it exists — a cousin went, it was in the Magazine, the club mentioned it.</td><td>Derived from records the family already gave. Never a purchased or scraped list.</td></tr><tr><td><b>2 · Show up</b></td><td><b>One instance.</b> Applied once, attended a single year, came to one mixer, sat in one briefing.</td><td>One time is a complete and honourable outcome, not a failed rung 3. An application is rung 2 — trying is showing up.</td></tr><tr><td><b>3 · Take part</b></td><td><b>Sustained or repeated.</b> A returning camper, a continuing recipient, an enrolled member, a season.</td><td>Requires an enrollment, award or repeat-attendance record. No rung 3 inferred from interest — a search is not participation.</td></tr><tr><td><b>4 · Give or serve</b></td><td>Contributes to the program’s capacity for other people — donates, volunteers, mentors, chaperones, hosts, teaches.</td><td>Service and money are the <b>same</b> rung; neither ranks above the other. Entering the ladder here, without ever holding 2 or 3, is normal.</td></tr><tr><td><b>5 · Lead</b></td><td>Holds responsibility for the program — committee, chair, coordinator, trustee, board seat.</td><td>A seat is the evidence. <b>Standing for a seat is rung 4 in motion, not rung 5</b>; influence without a seat is not a rung.</td></tr></tbody></table></div><p class="px-mnote" style="margin-top:10px"><b>Rungs are defined by the relationship, not the activity.</b> The same act can sit at different rungs in different programs only if the program says why — otherwise a rung distribution across programs is not comparable and should not be built. <b>The member never sees a number.</b> A participant is shown “here is what’s next, if you’d like it” — never “you are a 2”. Downward movement is never flagged. Declines are recorded nowhere a committee can see, and a rung that fails to advance must not become a back door to inferring one.</p></div><div class="px-matrix" style="margin-top:26px"><h3 style="font-size:16px">Stall handling — the fourth leg, declared for all thirty moments</h3>
+  <div class="px-tablewrap"><table class="px-table"><thead><tr><th>Program</th><th>Rung 1</th><th>Rung 2</th><th>Rung 3</th><th>Rung 4</th><th>Rung 5</th></tr></thead><tbody><tr><td><b>Camp Ramallah</b></td><td>Notice is the act — no chase</td><td>None. One summer is complete</td><td>None. A return is observed, never solicited</td><td><b>Deadline</b>: counselor applications close</td><td>Vacancy is recruitment, not a stall</td></tr><tr><td><b>Leadership Ramallah</b></td><td>Handoff fires once, never repeats</td><td>None</td><td>None — the cohort simply ends</td><td>None</td><td>None</td></tr><tr><td><b>The Scholarship</b></td><td>None</td><td><b>Deadline</b>: incomplete application before May 31, then stops</td><td><b>Obligation</b>: renewal surfaces before it lapses — <i>suppressed on bereavement</i></td><td>None. A former recipient is never solicited</td><td>Vacancy is a seating motion</td></tr><tr><td><b>Medical Mission</b></td><td>None</td><td>None. An hour of attention is not a lead</td><td><b>Obligation</b>: credential expiry, 90 days out</td><td>None</td><td>BOT vacancy filled by the AFRP Board</td></tr><tr><td><b>RBPN</b></td><td>None</td><td>None</td><td>None. Course gaps are not chased</td><td>Pairing end notified to <i>both</i> sides</td><td>Seat vacancy, seated by motion</td></tr><tr><td><b>The Convention</b></td><td><b>Statutory</b>: 60-day notice (10.1.4)</td><td><b>Deadline</b>: April 30 franchise cliff, surfaced in March</td><td>None</td><td>Host committee recruitment is the host’s</td><td><b>Deadline</b>: bids close at Mid-Year</td></tr></tbody></table></div><p class="px-mnote" style="margin-top:10px"><b>Read the pattern, not the cells.</b> Almost every entry is “none”, and the ones that are not are <b>obligations and deadlines</b> — dated, legal or contractual things a person would be harmed by missing — never nudges about engagement. The platform reminds you that a document is due. It does not ask why you stopped coming.</p></div>
+<section class="px-mod" id="camp">
+  <p class="px-modkick">Program 1 · youth pipeline</p>
+  <h3>Camp Ramallah</h3>
+  <p class="px-desc">Ages 13–17, a week each June or July. Thirty-seven campers in 2018 in the Smoky Mountains, fifty in Asheville the year after, and — in AFRP’s own words — a place for young members “to experience Ramallah Heritage, Palestine History, and Ramallah Culture all in one place, all while enjoying adventurous outdoor experiences, and engaging with their extended Ramallah family.” It is the first rung of the entire federation for most people who have one.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>Rung 1 · Hear — the eligible-age list writes itself</b><span class="dd-rules">household · minor consent</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The camp committee</h5><p>The organizer does <b>not</b> build a recruitment list. The platform derives one: households with a member aged 12 to 17, by club. Nothing is bought, scraped or inferred from behaviour — it comes from the household record the family already filled in when they joined.</p><p>What the coordinator sees is a <b>banded</b> count per club, not a roster of children and not an exact small cell: Detroit 10–19, Jacksonville <10, plus an <b>at-large bucket</b> for households whose club is dormant or who hold national membership only. Nine eligible children in one club, cross-referenced against a club roster, identifies them as surely as a cohort of fifteen does — so the same suppression applies. The named list exists only for the club’s own membership secretary, who already holds those records.</p></div>
+    <div class="dd-col dd-pt"><h5>A twelve-year-old in Detroit</h5><p>Nobody emails her. The notice goes to <b>her parents</b>, in the household inbox, because she is a minor attached to a household record and that is the only channel that exists for her.</p><p>What she actually hears is her cousin, at a hafli, saying it was the best week of last summer. That is rung 1 and the platform will never be able to see it — which is why rung 1 is measured by <i>who was told</i>, never by <i>who is interested</i>.</p><div class="dd-links"><a href="prototype.html#/member/household">The household record</a></div></div>
+  </div><p class="dd-gap"><b>Open — must a camper be a member?</b> afrp.org states the membership requirement for <b>counselors</b> and is silent for campers. <b>No by-law addresses minor membership at all:</b> By-Law 4.3.1 defines good standing as AFRP and Local Club dues paid and is silent on minors and on households. So the platform treats camper eligibility as household-derived, flags the question, and does not enforce an unwritten rule.</p>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>Rung 2 · Show up — one summer, and that is allowed to be all</b><span class="dd-rules">Jan–Mar window · My AFRP</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Applications open</h5><p>Applications open between January and March, through My AFRP. The organizer sees the funnel as it fills: eligible → started → submitted → offered → confirmed → attended. Six states, and the drop between any two is the only thing worth a phone call.</p><p><b>The waitlist is the real work.</b> Camp grew 37 → 50 and “increases in size every year”; capacity is the binding constraint, so the organizer needs to see the waitlist by club, not by application date, or one large club takes the whole cohort.</p></div>
+    <div class="dd-col dd-pt"><h5>Her first year</h5><p>She goes once. She has a fine time, makes two friends in Houston, and does not come back the following summer because she made the varsity team.</p><p><b>Nothing chases her.</b> She sits at rung 2 and the platform is content to leave her there. The organizer’s view shows her as “attended 2027” — not as a lapsed rung 3, not as a lost lead, not in a re-engagement queue.</p></div>
+  </div><p class="dd-gap"><b>Not published</b> Camp cost is not stated anywhere on afrp.org. The fee, what it covers, and whether club scholarships exist are all needed before the checkout screen can be honest — and “ask the coordinator” is a barrier that falls hardest on the families the camp most wants.</p>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>Rung 3 · Take part — the returning camper</b><span class="dd-rules">attendance record</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The pattern that predicts everything</h5><p>A second year is the single strongest signal in the youth pipeline: returning campers are who become counselors, and counselors are who become Leadership Ramallah. The organizer sees returns as a cohort — “of the 50 in 2019, how many came back” — because the cohort number, not the headcount, is what says whether the week worked.</p></div>
+    <div class="dd-col dd-pt"><h5>Her brother, third summer</h5><p>By his third year he knows the songs, knows which cabin floods, and is the one explaining the Nakba timeline session to the new thirteen-year-olds because he has sat through it twice.</p><p>He is doing a counselor’s job two years before he can hold the title. The organizer can see that — and the only useful thing to do with it is to <b>ask him in eighteen months</b>, not to invent a junior rank for him now.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">4</span><b>Rung 4 · Serve — turning eighteen is where the platform gets hard</b><span class="dd-rules">4.3.1 · consent refresh · counselor 19+</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>A counselor must be a member in their own right</h5><p>Counselors must be <b>19, or have completed a year of college</b>, and must be Federation members. That second requirement is the sharp one: a camper has always been inside a household record. A counselor cannot be. At eighteen they age out of the household and must join, consent and be reachable <b>as themselves</b>.</p><p>So the counselor application has a prerequisite the applicant has never had to think about: their own membership, their own verified channel, their own standing under 4.3.1 — which is conjunctive, national <i>and</i> club.</p></div>
+    <div class="dd-col dd-pt"><h5>Him, at nineteen, one year of college done</h5><p>He clicks “apply to be a counselor” and the platform tells him something nobody warned him about: he is not a member. He turned eighteen last year and nothing happened, because nothing was designed to happen. He has been at this camp for four summers and he has never had a record of his own.</p><p>The screen does not scold him. It says what is missing, in order, and does the parts it can: his household already proves his lineage, so what remains is his own channel, his own consent, and his club’s dues. <b>Three steps, named, not a wall.</b></p><div class="dd-links"><a href="prototype.html#/door/refresh">Turning eighteen</a><a href="prototype.html#/door/join">Join</a></div></div>
+  </div><p class="dd-gap"><b>This is the pipeline’s narrowest point</b> Every youth program leaks here — at the moment a child becomes a person the federation has no record of. The consent refresh at eighteen is designed; what is <i>not</i> yet decided is whether a club may pay a first-year counselor’s dues on their behalf, which By-Law 8.12.4’s own-funds rule appears to forbid for voting purposes.</p>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">5</span><b>Rung 5 · Lead — the committee, and the curriculum</b><span class="dd-rules">8.1.3 · President-appointed</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Who actually runs it</h5><p>Camp is coordinated by a program coordinator (currently Dillon Odeh) with a committee <b>appointed</b> under By-Law 8.1.3 — President-appointed, one-year terms, after consultation with the Committee on Appointments — whose members must satisfy the separate <b>eligibility</b> test at 8.1.2: standing in the prior year, and standing maintained throughout the term. Two different by-laws, routinely conflated. The committee owns the curriculum: how much heritage, how much history, how much canoe.</p><p>The organizer surface has to hold <b>two years at once</b> — this summer’s operations and next summer’s site selection — because the site is booked before the current camp ends.</p></div>
+    <div class="dd-col dd-pt"><h5>Her, eight years later</h5><p>She came once, at thirteen, and never returned. At twenty-six she is asked to run a heritage session because she teaches middle-school history — that is <b>rung 4</b>, entered without ever holding rung 3. The following spring the committee asks her to join it, and <i>that</i> seat is rung 5.</p><p>The ladder is not a staircase. A person can arrive at rung 4 or 5 from outside the program entirely, and a design that requires the lower rungs first is a design that shrinks the committee to whoever happened to go to camp.</p></div>
+  </div>
+</div><div class="dd-note"><b>What is missing.</b> Cost, capacity, and the camper membership question are all unpublished. Counselor vetting — background checks for adults supervising minors — is not described anywhere in AFRP’s material and is not something the platform should quietly invent; it needs a policy before it needs a screen.</div></div>
+<div class="px-matrix" style="margin-top:26px"><h3 style="font-size:16px">Camp Ramallah · the operating year</h3>
+  <div class="px-tablewrap"><table class="px-table"><thead><tr><th>When</th><th>What happens</th><th>Who</th><th>Platform surface</th></tr></thead><tbody><tr><td><b>Aug–Oct</b></td><td>Site selection and booking for next summer</td><td>Committee</td><td>events · money</td></tr><tr><td><b>Jan–Mar</b></td><td>Camper and counselor applications open</td><td>Coordinator</td><td>program/camp-ramallah</td></tr><tr><td><b>Mar–Apr</b></td><td>Offers, waitlist by club, counselor vetting</td><td>Committee</td><td>program roster</td></tr><tr><td><b>May</b></td><td>Health forms, minor consents, travel</td><td>Coordinator + households</td><td>household</td></tr><tr><td><b>Jun/Jul</b></td><td>Camp runs</td><td>Counselors</td><td>attendance</td></tr><tr><td><b>Aug</b></td><td>Cohort report; who returns; who turns 18 this year</td><td>Coordinator</td><td>the ladder</td></tr></tbody></table></div><p class="px-mnote" style="margin-top:10px">The August row is the one that does not exist today, and it is the one that feeds Leadership Ramallah three years later.</p></div>
+<section class="px-mod" id="leadership">
+  <p class="px-modkick">Program 2 · youth pipeline → advocacy</p>
+  <h3>Leadership Ramallah</h3>
+  <p class="px-desc">Ages 21 and over, active members, a two-day summit that runs <b>alongside the Mid-Year Meeting</b> — fifteen participants in Lexington in 2026. Workshops on leadership, advocacy and cultural preservation, led by subject-matter experts. Its most important design fact is not in the curriculum: it puts young adults in the same building as the Board, in the week when Member-At-Large candidacies are filed.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>Rung 1 · Hear — the handoff fires, three years late</b><span class="dd-rules">rails · handoff</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Where the cohort comes from</h5><p>The natural feeder is Camp Ramallah — but a camper ages out at 17 and cannot enter here until 21. <b>There is a four-year hole in the pipeline</b>, and it is the single largest structural gap in the youth rail.</p><p>What the organizer can see: former <b>counselors</b> reaching 21 this year, by club — people who held rung 4 at Camp and served. Former one-summer campers are <b>not</b> on this list, because Camp promised rung 2 would not become a re-engagement queue and a handoff must not launder that promise. A counselor opted into service; a thirteen-year-old who came once did not.</p></div>
+    <div class="dd-col dd-pt"><h5>A former counselor, now 21</h5><p>Nothing happened to him between 18 and 21 except the counselor summers, and if he stopped those at 19 then nothing happened at all. Three years is long enough to leave.</p><p>What reaches him is an invitation naming the thing he already did — “you counselled at Camp Ramallah in 2024” — rather than a generic call for young leaders. <b>The handoff carries its evidence with it</b>, which is what makes it feel like being remembered rather than being marketed to.</p></div>
+  </div><p class="dd-gap"><b>The teen gap, 18 to 21</b> No AFRP program exists for this age band. It is carried as a “proposed” row in the program registry and is the clearest programmatic recommendation this design produces.</p>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>Rung 2 · Show up — two days, and standing is checked at the door</b><span class="dd-rules">4.3.1 conjunctive</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Eligibility is stricter than it looks</h5><p>“Active members with current membership status” means By-Law 4.3.1 in full: national dues <b>and</b> club dues, both current. A young adult who paid AFRP but whose Detroit Club membership lapsed is not eligible, and will not know why.</p><p>The organizer needs the refusal to name <i>which</i> of the two lapsed and what it costs to fix — not “not eligible”.</p></div>
+    <div class="dd-col dd-pt"><h5>Standing at the registration desk</h5><p>The screen says: <b>your AFRP dues are current; your Detroit Club dues lapsed on 30 June.</b> Rejoin $40. It does not say “ineligible”, it does not list who else is eligible, and it does not tell the workshop leader why he was late.</p><p>He pays on his phone and the standing engine reopens everything downstream — the ballot, the directory, this summit — because standing is one fact read in many places, not a flag copied into each.</p><div class="dd-links"><a href="prototype.html#/member/membership">Renewal, live</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>Rung 3 · Take part — fifteen people in a room, which is a privacy problem</b><span class="dd-rules">S7 · suppression</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The cohort is too small to report on</h5><p>Fifteen participants. Any breakdown — by club, by city, by age, by gender — identifies individuals immediately, and a second breakdown on a different tab identifies the rest by subtraction.</p><p>So the organizer’s own view is full detail (they were in the room), but <b>everything published</b> — to the Board, in the Magazine, in a grant report — is suppressed on composition, not just on a per-view threshold.</p></div>
+    <div class="dd-col dd-pt"><h5>In the workshop</h5><p>Two days of sessions on advocacy and cultural preservation, run by people who do this professionally. He meets fourteen others who grew up the way he did in cities he has never visited.</p><p>The value is the fourteen. Which is why the <b>cohort list</b> — who else was here — is the one piece of data participants actually want, and it is released to them by mutual consent rather than published by default.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">4</span><b>Rung 4 · Serve — the alum who comes back to facilitate</b><span class="dd-rules">8.1.2 standing maintained</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The second cohort is cheaper than the first</h5><p>An alum facilitating a session costs nothing and teaches better than an outside expert, because they were in the chair two years ago. The organizer’s view tracks alumni by year and by what they ran — which is also the recruitment pool for every other committee in the federation.</p></div>
+    <div class="dd-col dd-pt"><h5>Back, at 24</h5><p>He runs the session on talking to a congressional staffer, because he has now done it twice at Day of Action.</p><p>This is where two rails cross: Leadership Ramallah rung 4 is fed by <b>Day of Action</b> rung 3. The platform records the crossing so that the advocacy rail is visibly a rail and not a series of unrelated invitations.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">5</span><b>Rung 5 · Lead — the room next door</b><span class="dd-rules">6.5.2 MAL · 10.1.1 bids</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Proximity is the program’s real asset</h5><p>The summit coincides with the Mid-Year Meeting — where <b>Member-At-Large candidacies are filed</b> (6.5.2), convention bids are submitted in writing (10.1.1), and candidates address the Board. Fifteen young adults are in that building for two days.</p><p>Today that adjacency is accidental. The design makes it deliberate: the Mid-Year agenda and the summit agenda are one calendar, so a participant can see what is being decided fifty feet away and walk in.</p></div>
+    <div class="dd-col dd-pt"><h5>Seated at 26</h5><p>He files for Member At Large at the Mid-Year Meeting he first attended as a summit participant at 21 — <b>filing is rung 4 in motion, not rung 5</b> — and in July the Assembly elects him by secret ballot to a two-year term. The seat is the rung.</p><p>Five rungs, five years, two programs, one ladder. <b>This is the whole thesis of the rails in a single person</b> — and until now the platform could not see any of it, because each program kept its own list.</p><div class="dd-links"><a href="AFRP-Platform-Experience.html">The rails</a><a href="prototype.html#/fed/board">Board & committees</a></div></div>
+  </div>
+</div><div class="dd-note"><b>The adjacency should be designed, not tolerated.</b> Running a youth leadership summit inside a governance meeting is either a scheduling convenience or the point of the program. Treating it as the point — shared calendar, open gallery, an explicit “here is what the Board is deciding today” briefing — costs nothing and is the difference between a workshop and a pipeline.</div></div>
+
+<section class="px-mod" id="scholarship">
+  <p class="px-modkick">Program 3 · educational · ARFECF</p>
+  <h3>The Scholarship</h3>
+  <p class="px-desc">Over $5,000,000 awarded since inception; $135,000 approved in 2023; four years of undergraduate support, extended through graduation for medical students. A 3.0 GPA floor, documented financial need, official transcripts, and a <b>May 31 deadline</b>. Following the decisions of 20 August 2026 it lives in <b>ARFECF</b>, alongside the Endowed Fund. Today it runs on a Google Form.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>Rung 1 · Hear — lineage is the eligibility, and lineage is a different program</b><span class="dd-rules">4.1.1 · Family Tree</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Two doors, one of them undocumented</h5><p>Eligibility is direct lineage to the original Ramallah families — <i>or</i> sponsorship and approval by the Scholarship Committee and the Board. The first door is a genealogical question the <b>Ramallah Family Tree</b> program exists to answer. The second is a discretionary escape hatch with no written criteria.</p><p>The organizer needs both doors visible, because a family that cannot document lineage will be told to prove something rather than told there is a second route.</p></div>
+    <div class="dd-col dd-pt"><h5>A high-school senior in San Jose</h5><p>She is told the same way everyone is told: the Magazine, a club announcement, and a cousin. The observable rung 1 is <b>the notice her household was sent</b> — households with a member in their final two years of school, derived from the household record and banded, never an exact small cell. Her grandmother’s family is from Ramallah and she has no idea how to prove it. Her mother thinks there is a book.</p><p>There is: Aziz Shaheen’s <i>Ramallah</i> is the by-law’s own reference for who qualifies (4.1.1). The platform can carry that lookup, and can carry the Family Tree’s verified lines — so that <b>lineage is checked once and reused</b>, rather than re-argued at every program that asks for it.</p><div class="dd-links"><a href="prototype.html#/member/family">Family tree</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>Rung 2 · Show up — the Google Form problem</b><span class="dd-rules">as-is</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>There is no applicant record</h5><p>Applications go through a Google Form. That means: no draft state, no way for an applicant to see what they submitted, no way for the committee to see who started and stopped, no document versioning, and a transcript sitting in a Drive folder alongside a financial-need statement.</p><p><b>The first thing the platform gives the organizer is not a better form — it is a funnel.</b> Started, incomplete, submitted, missing-document, complete. Today those states do not exist.</p></div>
+    <div class="dd-col dd-pt"><h5>Applying in April</h5><p>She fills it in over three sittings on her phone, uploading a transcript photo she is not sure is legible, and never sees it again. She does not know whether it arrived, whether it is complete, or whether the photo was readable.</p><p>What she needs is unglamorous: <b>a page that says what has been received and what is still missing.</b> That single screen is most of the value of moving off the form.</p></div>
+  </div><p class="dd-gap"><b>Sensitive documents, no classification</b> Financial-need documentation is the most sensitive material in the federation after health data. It needs a consent class, a retention period, and a rule about who on a nine-person committee may open it. None of the three exists today.</p>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>Rung 3 · Take part — the award is a subscription, not a prize</b><span class="dd-rules">renewal · reports</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Four years of obligations, annually renewed</h5><p>“Application and reports must be submitted on time.” A four-year undergraduate award is four renewal cycles, each with transcripts and continued need — and medical students run longer still. The committee’s real workload is <b>renewals, not new applications</b>, and it is invisible in a form-based process.</p><p>The organizer view is a cohort grid: recipients down, years across, each cell green, amber or lapsed.</p></div>
+    <div class="dd-col dd-pt"><h5>Sophomore year, October</h5><p>She has forgotten that the renewal exists. Nobody has told her yet, because the reminder is a person remembering to send it.</p><p>A dated obligation surfaces before it lapses, in her inbox, naming the document and the date — the same machinery as a filing deadline or an attestation cycle, <b>one obligations engine, not a reminder written per program</b>.</p><p>And the case that matters most: a recipient who misses the renewal because her father died. Where a bereavement is on record the chase is <b>suppressed rather than queued</b>, the award is not lapsed by silence, and a human is told to call — while the organizer sees no marker explaining why, because a visible suppression leaks the death as loudly as the reminder would have.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">4</span><b>Rung 4 · Give — the alum, and the $25,000 name</b><span class="dd-rules">named funds · ARFECF</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Two very different rung-4s</h5><p>A named scholarship is a minimum $25,000 contribution payable over three years — a pledge with a schedule, a naming right, and a restriction that must survive forever. That is a restricted-fund object, not a donation.</p><p>The other rung 4 is the alum who gives $200 because someone did it for her. Same rung, three orders of magnitude apart, and the organizer view must not sort by amount or it becomes a wealth screen.</p></div>
+    <div class="dd-col dd-pt"><h5>Twelve years later</h5><p>She gives $200 a year and mentions the scholarship whenever a cousin is applying to college. The second thing is worth more than the first and the platform can only see the first.</p><p>Her receipt says <b>ARFECF</b>, with its own EIN — not AFRP. Her gift arrives on a My AFRP surface for a program belonging to a different entity, which is the same entity crossing the Medical Mission describes, and it needs the same recorded agreement. Same rule, second instance, no exception.</p><p>Rung 4 credits <b>service and money identically</b> and does not rank them — because the organisation that ranks them stops being a family.</p></div>
+  </div><p class="dd-gap"><b>4% floor or 5% cap — this decides the award size</b> ARFECF 6.3.3 and 6.4.3 read as a <b>cap</b>: expenditure “limited… only to five (5%) percent.” The 2015 Policy Statement is understood to make 4% plus 1% <b>mandatory</b>. A cap and a floor are different instruments. Until the Policy Statement is produced, the platform enforces the by-law cap and shows the other figures as unsourced.</p>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">5</span><b>Rung 5 · Lead — the committee nobody constituted</b><span class="dd-rules">5.3 · 8.12.5 · Decision 3</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>A cross-entity election with no enabling by-law</h5><p>AFRP members are certified to vote for “members of the Scholarship Committee” (5.3, 8.12.5) — yet <b>no AFRP by-law constitutes a Scholarship Committee</b>. With ARFECF confirmed as the scholarship’s home, this is definitively AFRP’s franchise electing an ARFECF body. That works, and it must be written down.</p><p>Worse: there is <b>no conflict-of-interest rule anywhere in the 2024 text</b>. A committee member reading a cousin’s application is unaddressed by every governing document AFRP has.</p></div>
+    <div class="dd-col dd-pt"><h5>Reading applications in June</h5><p>She is on the committee now. The fourth file she opens is her nephew’s.</p><p>The platform declares the conflict before she opens it, seals that file from her, and records the recusal — <b>naming the rule, not the relative</b>. It cannot invent the rule; it can refuse to pretend the situation is normal, and it can make the absence visible to the people who could write one.</p><div class="dd-links"><a href="prototype.html#/program/conflicts">Conflicts</a></div></div>
+  </div>
+</div><div class="dd-note"><b>Where the money actually sits.</b> Decisions 2 and 3 of 20 August 2026 put both the Endowed Fund and the scholarship in ARFECF, which means endowment income funds awards <b>inside one entity</b> — no inter-entity agreement, no per-distribution terms. The cost of that convenience is that the unresolved 4%/5% question now governs both funds instead of one.</div></div>
+<div class="px-matrix" style="margin-top:26px"><h3 style="font-size:16px">The scholarship year</h3>
+  <div class="px-tablewrap"><table class="px-table"><thead><tr><th>When</th><th>What happens</th><th>Whose rule</th></tr></thead><tbody><tr><td><b>Jan–May</b></td><td>Applications open; lineage and need documented</td><td>ARFECF 6.4 · AFRP 4.1.1</td></tr><tr><td><b>May 31</b></td><td>Deadline — applications and reports</td><td>afrp.org, published</td></tr><tr><td><b>Jun–Jul</b></td><td>Committee review; conflicts declared; ranking</td><td>no CoI rule exists</td></tr><tr><td><b>Jul</b></td><td>Awards approved within the spend rule</td><td>ARFECF 6.4.3 — cap or floor, unresolved</td></tr><tr><td><b>Aug</b></td><td>Disbursement to institutions; receipts</td><td>ARFECF books</td></tr><tr><td><b>Oct + annually</b></td><td>Renewal reports for continuing recipients</td><td>“submitted on time”</td></tr></tbody></table></div></div>
+<section class="px-mod" id="medical">
+  <p class="px-modkick">Program 4 · Palestine-direct · ARFHSN</p>
+  <h3>The Medical Mission</h3>
+  <p class="px-desc">Developed in 2000 and run inside the <b>Human Services Network</b> — a separate 501(c)(3) whose fourteen trustees are elected by the AFRP Board. Volunteer physicians and specialists from the US and Palestine; prosthetics, eye screening, cancer screening, workforce development, hospital infrastructure. In AFRP’s own framing it builds “long-term health system capacity”, not short-term interventions. It is the program where the platform must be most careful about what it does <b>not</b> hold.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>Rung 1 · Hear — a profession, not an age</b><span class="dd-rules">RBPN · directory consent</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The recruitable population is knowable, and mostly not recorded</h5><p>Rung 1 here is “is a health professional”. The federation half-knows this — through RBPN self-listings, through people the committee happens to know — and has no reliable list. The organizer cannot recruit a surgeon they cannot find.</p><p>The fix is the professional directory with <b>per-field, per-audience consent</b>. “Visible to program committees” is a <i>different switch</i> from “visible in the member directory”: a member who ticks the first has made an explicit grant to exactly this audience, and the committee sees a name. A member who ticks only the second is subject to open-search suppression and will never surface from a query this narrow. Two rules, two audiences, no conflict — and the organizer sees a suppressed count wherever no grant exists.</p></div>
+    <div class="dd-col dd-pt"><h5>A radiologist in Chicago</h5><p>She has been a member for twenty years and nobody has ever asked what she does for a living, because there has never been a field for it that she trusted.</p><p>She ticks one box — <b>occupation, visible to program committees</b> — and leaves the public directory switch off, because being findable by a committee that runs a medical mission is not the same as being findable by anyone. That single consented field, aimed at one audience, is the whole of rung 1, and it took eight seconds.</p><div class="dd-links"><a href="prototype.html#/member/rbpn">RBPN</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>Rung 2 · Show up — the annual report session, once</b><span class="dd-rules">attendance</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>One hour, once a year, and it is the only broad door</h5><p>The mission reports at convention: what was screened, what was fitted, which hospitals, what it cost. That session is the program’s <b>only</b> low-commitment entry point — everything else asks for a licence, a fortnight, or money.</p><p>So the organizer’s rung-2 measure is attendance at that one session, and the useful number is not how many came but <b>how many came who are not already donors or clinicians</b>. That figure is the program’s actual reach into the membership.</p></div>
+    <div class="dd-col dd-pt"><h5>Sitting in on Friday morning</h5><p>He is a schoolteacher. He has no clinical skill to offer and had not planned to give anything; he came because the session was on the schedule and his aunt was going.</p><p>He leaves having watched a video of a man walking on a prosthetic leg. Nothing is asked of him in the room and <b>no follow-up is queued</b> — attending once is a complete outcome, and a program that treats an hour of attention as a lead has spent the goodwill it just earned.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>Rung 3 · Take part — credentials are the rung</b><span class="dd-rules">licence · liability · MoH</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>No rung 3 without verified credentials</h5><p>Travelling on a mission requires a current licence, malpractice or liability cover, and Ministry of Health authorisation on the Palestinian side. These are <b>dated obligations with expiry</b>, exactly like a charitable-solicitation registration — and a lapsed licence must block the roster, naming the rule.</p><p>The organizer’s roster is therefore not a list of willing people. It is a list of <i>currently credentialed</i> people, and the difference between those two numbers is the thing that ruins missions.</p></div>
+    <div class="dd-col dd-pt"><h5>Eleven weeks out</h5><p>Her state licence renews in March; the mission travels in April. The platform tells her in January, not in April.</p><p>And it tells her <b>what it needs and when</b> — not that she is “not approved”. A refusal that names the missing document is help; a refusal that names her status is an insult to someone volunteering three weeks of annual leave.</p></div>
+  </div><p class="dd-gap"><b>Credential requirements are not published</b> afrp.org states no credential requirements for volunteers. What is verified, by whom, and to what standard needs a written policy before it can be a screen — and it is a liability question as much as a design one.</p>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">4</span><b>Rung 4 · Give or serve — and most people enter the ladder right here</b><span class="dd-rules">ARFHSN 501(c)(3) · workforce development</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Money and service are one rung, and the money crosses an entity line</h5><p>Two ways to contribute capacity, ranked equally. <b>Serving:</b> Health Workforce Development brings Palestinian clinicians <i>to the US</i> for rotations, plus online occupational-therapy and emergency-medicine training — so hosting a rotation, supervising remotely or teaching a module all count, none of which involve travel. That roughly triples the recruitable population.</p><p><b>Giving:</b> donations are taken through My AFRP — an <b>AFRP</b> surface — for a program belonging to <b>ARFHSN</b>, a separate 501(c)(3). That crossing requires a recorded inter-entity agreement and the receipt must be issued in ARFHSN’s name, because ARFHSN’s own text describes AFRP as a 501(c)(4). Get it wrong and a donor takes a deduction against the wrong entity.</p><p>For this program rung 4 is the <b>most populated rung</b>, and the great majority of the people on it have never held rungs 2 or 3. That is not a gap in the funnel; it is what the program is.</p></div>
+    <div class="dd-col dd-pt"><h5>A $500 gift, and six weeks of supervision</h5><p>He gives at the mission’s table during convention week and the receipt reaches his phone before he is back in his seat. It says <b>American Ramallah Federation Human Services Network</b>, with its own EIN — not AFRP. He did not need to know why; the platform did.</p><p>She supervises a rotation for a trainee from Ramallah for six weeks and teaches two online sessions in the autumn. She has never been on a mission and may never go.</p><p>Same rung. The platform does not sort them, does not rank the cheque above the six weeks or the six weeks above the cheque, and shows the organizer <b>one list</b> — because a program that only counts travel undercounts its best people, and one that only counts money stops being a mission.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">5</span><b>Rung 5 · Lead — trustees, and the line the platform must not cross</b><span class="dd-rules">ARFHSN III §2, §7 · patient data</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Governed by AFRP, reported twice a year</h5><p>Leadership is the fourteen-seat Board of Trustees — elected by the AFRP Board, all AFRP members in good standing, six drawn from the AFRP Board and eight independent, seated by metro area. The BOT reports financially and operationally to the AFRP Board <b>every six months</b>, and the AFRP President may demand information between reports.</p><p><b>And here is the hard line: patient data never enters this platform.</b> Not encrypted, not restricted, not “for the trustees only”. The mission’s outputs into the federation’s systems are counts, costs and equipment — never people who were treated.</p></div>
+    <div class="dd-col dd-pt"><h5>A trustee reading the six-month report</h5><p>She sees screenings performed, prosthetics fitted, equipment installed, cost per site, and which hospital partnerships are current.</p><p>She does not see a single patient, and she should not be able to. A member CRM that can be made to hold clinical information is one subpoena or one breach away from harming the people the mission exists to help — so the capability is <b>absent by construction</b>, not merely switched off.</p><div class="dd-links"><a href="prototype.html#/fed/hsn">ARFHSN</a></div></div>
+  </div>
+</div><div class="dd-note"><b>The entity is not a technicality.</b> ARFHSN is a 501(c)(3) with no membership, whose by-laws are amended by 60% of the AFRP Board without reference to AFRP’s membership at all. Every design instinct that says “just put the mission in the programs list” has to survive that fact — separate books, separate receipts, separate governance, one Board that controls both.</div></div>
+
+<section class="px-mod" id="rbpn">
+  <p class="px-modkick">Program 5 · professional</p>
+  <h3>Ramallah Business & Professional Network</h3>
+  <p class="px-desc">Established July 2017 to bring together “talented individuals from various occupations to hone in professional development skills through training courses, group activities and networking events” — healthcare, STEM, business, law, the arts, senior and young professionals alike. It holds a seat on the AFRP Board. Its rung 2 is the easiest in the federation: a mixer included in the base convention registration.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>Rung 1 · Hear — the directory is the program</b><span class="dd-rules">per-field consent</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>RBPN is a consent surface wearing a program’s clothes</h5><p>Almost everything RBPN does — matching, mentoring, recruiting, referrals — depends on knowing what members do for a living. So the professional directory <i>is</i> the program, and every design decision is a consent decision.</p><p>The organizer sees consented fields only, and a <b>suppressed count</b> for the rest. “31 members in law” where only 12 have consented to be visible is a lie the platform must not tell.</p></div>
+    <div class="dd-col dd-pt"><h5>Deciding what to show</h5><p>Employer, title, industry, city, and “open to mentoring” are five separate switches, not one profile toggle.</p><p>He shows industry and mentoring, and hides employer — because his firm has opinions about Palestine and he has a mortgage. <b>The platform never asks him to explain that</b>, and never shows a half-empty profile as incomplete.</p><div class="dd-links"><a href="prototype.html#/member/dirinclusion">Directory consent</a></div></div>
+  </div><p class="dd-gap"><b>LinkedIn import, decided 20 Aug 2026</b> A member who links LinkedIn is offered an import of employer, title and industry — field by field, nothing pre-ticked, connections never read. Populating a professional directory from a contact graph would place people in a directory they never joined.</p>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>Rung 2 · Show up — the mixer that costs nothing extra</b><span class="dd-rules">included in base registration</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Zero-friction is a design achievement</h5><p>The RBPN Happy Hour Mixer runs during convention week and is <b>included with base convention registration</b>. No separate ticket, no separate decision, no separate payment. That is why it works, and it is the single most transferable idea in this document.</p><p>The organizer’s counterpart to that is knowing who came — which at a mixer means a check-in that takes two seconds and does not feel like a check-in.</p></div>
+    <div class="dd-col dd-pt"><h5>Thursday, 4:30pm</h5><p>He is at the convention anyway. He wanders in because it is on the schedule and it is free, and he meets a woman who hires people who do what he does.</p><p><b>He did not join anything.</b> Rung 2 asked nothing of him — and that is precisely why he is now available for rung 3.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>Rung 3 · Take part — enrolled, not merely listed</b><span class="dd-rules">enrollment record · S7 composition</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Being in the directory is not rung 3</h5><p>The trap here is obvious once named: a consented directory entry is a <b>rung 1</b> artefact — it says what you do, not that you took part. Rung 3 requires an enrollment record: joining the network as a declared member, and attending the training courses that are the program’s stated core (“training courses, group activities and networking events”).</p><p>So the organizer runs a roster and a course register, and the honest number is <b>enrolled and attended at least twice</b> — not directory headcount, which is the number everyone will want to quote.</p><p>The search surface is separate and dangerous. “Attorneys · Knoxville” returns one person; “Attorneys” returns forty, “Knoxville” thirty, and no single filter looked risky alone. <b>Suppression must survive composition</b> — across filters, across tabs, and across time, because someone who appears in a count on Monday and vanishes on Tuesday has been identified by the change.</p></div>
+    <div class="dd-col dd-pt"><h5>Two courses and a quarterly call</h5><p>She enrolls, sits two of the four training sessions, and turns up to the quarterly call because it is thirty minutes on a Tuesday evening. That is rung 3: a record exists that she took part, twice, on purpose.</p><p>What she wanted first, though, was a mentor — a Palestinian-American woman in structural engineering who has been through a licensure exam. There are perhaps three in the country, and the platform will not hand her a name from a query that narrow. It offers to <b>pass her request to them</b> instead, so the introduction can happen without the directory ever having identified anybody.</p><div class="dd-links"><a href="prototype.html#/member/directory">Directory</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">4</span><b>Rung 4 · Give or serve — mentoring, teaching, sponsoring</b><span class="dd-rules">exact grant, not a role</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Three ways to add capacity, one permission problem</h5><p>Rung 4 is mentoring a member, teaching one of the training sessions, or sponsoring the mixer. Equal weight — the lawyer who runs an hour on contracts and the firm that pays the bar tab are on the same rung, and the organizer’s list does not sort by money.</p><p>The permission problem is mentoring. <b>Being a mentor grants nothing</b>; being <i>this person’s</i> mentor grants visibility of <i>this person’s</i> profile, for as long as the pairing lasts. That is an exact grant — the same pattern as board-confidential material — and it is what stops “mentor” from quietly becoming a directory-wide read for anyone who volunteers.</p></div>
+    <div class="dd-col dd-pt"><h5>Paired for a year, then not</h5><p>She mentors a graduate two states away for a year. She can see his profile and his history; she cannot see anyone else’s, and volunteering as a mentor never opened the directory to her.</p><p>When the pairing closes she keeps the relationship and loses the access — and <b>he is told that it ended</b>, just as he was told when it began. Access that ends silently is access nobody can audit, and a mentee who cannot see who can see him is not being mentored, he is being watched.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">5</span><b>Rung 5 · Lead — the seat on the Board</b><span class="dd-rules">6.2.2 · one voting seat</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>One seat, and what it is for</h5><p>RBPN holds one voting seat on the AFRP Board (6.2.2). That makes rung 5 of this program a <b>governance</b> position — the professional network has a vote on federation business.</p><p>The organizer view therefore carries a committee and a seat, with the seating recorded as a motion like every other seat.</p></div>
+    <div class="dd-col dd-pt"><h5>Her first Board meeting</h5><p>She is the only person in the room who arrived through the professional network rather than through a club or a past presidency, and the first motion she speaks to is a budget line for training courses she used to teach.</p><p>She got here from a mixer she wandered into at a convention she was attending anyway. <b>Every rung was optional and none of them was a form she had to be talked into</b> — which is the argument for building rung 2 to cost nothing.</p></div>
+  </div>
+</div><div class="dd-note"><b>What is not published.</b> Membership cost, joining mechanism, meeting cadence beyond the convention mixer, and whether a job board exists are all absent from afrp.org. RBPN reads as a network that convenes annually and would like to convene more often — the platform’s contribution is making the other fifty-one weeks possible.</div></div>
+<div class="px-matrix" style="margin-top:26px"><h3 style="font-size:16px">RBPN · what is known, and what the ladder needs that nobody has published</h3>
+  <div class="px-tablewrap"><table class="px-table"><thead><tr><th>Rung</th><th>Evidence the platform can observe</th><th>Status</th></tr></thead><tbody><tr><td><b>1 · Hear</b></td><td>A consented professional field on the member record</td><td>Designed — consent model exists</td></tr><tr><td><b>2 · Show up</b></td><td>Check-in at the convention mixer</td><td>Observable; the mixer is confirmed and included in base registration</td></tr><tr><td><b>3 · Take part</b></td><td>Network enrollment + training-course register</td><td><b>Needs a joining mechanism</b> — none published</td></tr><tr><td><b>4 · Give or serve</b></td><td>Mentor pairing, session taught, sponsorship recorded</td><td>Pairing designed; cadence unpublished</td></tr><tr><td><b>5 · Lead</b></td><td>The RBPN seat on the AFRP Board (6.2.2), seated by motion</td><td>Confirmed in the by-laws</td></tr></tbody></table></div><p class="px-mnote" style="margin-top:10px">Two of the five rungs rest on facts AFRP has not published. That is the honest shape of this program today, and it is why RBPN is the thinnest section here — not because it matters least.</p></div>
+<section class="px-mod" id="convention">
+  <p class="px-modkick">Program 6 · the convening layer</p>
+  <h3>The Convention</h3>
+  <p class="px-desc">Not a program so much as the place all of them surface once a year. Host cities are chosen two years ahead by the membership, from three rotating regions, by cities with at least fifty paid members for five consecutive years. Twenty-five paid members constitute a quorum. It is walked in full elsewhere — <a href="AFRP-Deep-Convention.html">the convention deep dive</a>, thirty-six paired moments across four dimensions. Here it is only laddered.</p>
+</section>
+<div class="dd-wrap"><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">1</span><b>Rung 1 · Hear — where notice is a legal obligation</b><span class="dd-rules">10.1.4 · 60 days</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>The Magazine announcement is statutory</h5><p>An announcement in the Magazine at least sixty days before the Annual Meeting is <b>sufficient notice</b> under By-Law 10.1.4. Rung 1 of the convention is not a marketing decision — it is a compliance obligation with a date, and missing it is a governance defect, not a soft outcome.</p><p>So the organizer’s rung-1 view is a countdown with a legal consequence attached, and the platform records that notice was given, when, and through which channel.</p></div>
+    <div class="dd-col dd-pt"><h5>Reading it in Hathihe Ramallah</h5><p>The date and the city are in the magazine that arrives at the house, which is how a large part of the membership still finds out — and the platform must not assume otherwise.</p><p>Digital notice is <b>added to</b> the statutory channel, never substituted for it, until a by-law says otherwise.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">2</span><b>Rung 2 · Show up — attending and voting are different things</b><span class="dd-rules">5.3 · Apr 30 · 4.3.1</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Two populations, one door</h5><p>Registering is open to members; <b>voting</b> requires dues received or postmarked by April 30 and certification. A member can attend in July having missed the franchise by ten weeks, and will discover it in the hall.</p><p>The organizer needs the April 30 cliff surfaced in March — to the member, in their own inbox — because after it, nothing can be done.</p></div>
+    <div class="dd-col dd-pt"><h5>Registered in June, certified in April or not at all</h5><p>She registers in June and the screen tells her plainly: she is registered, and she is <b>not certified to vote</b> this year, because dues arrived on 6 May.</p><p>It says so in June rather than letting her find out at the ballot table, and it says what to do differently next year. The refusal names the rule and the date, never her.</p><div class="dd-links"><a href="prototype.html#/member/convention">Convention</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">3</span><b>Rung 3 · Take part — the delegation, and the weight</b><span class="dd-rules">9.1.3 · extraction</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Weighted fractional voting, live</h5><p>Each club sends delegates carrying its certified members’ votes divided among them — and any certified member present may <b>extract</b> their own vote from the delegation. Weights therefore move until voting opens, which is why the amendment fixing them at opening is on the floor.</p></div>
+    <div class="dd-col dd-pt"><h5>Extracting her vote</h5><p>She disagrees with her club on one motion and takes her single vote out of the delegation for that motion only.</p><p>The floor shows her delegation’s weight drop by exactly her share, in front of everyone. <b>The mechanic is public, which is what makes it trustworthy</b>, and she is not asked to justify it to anyone.</p><div class="dd-links"><a href="prototype.html#/fed/floor">The floor</a></div></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">4</span><b>Rung 4 · Serve — the host committee, and three kinds of money</b><span class="dd-rules">5.2 · 11.1.5 · Decision 1</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>Where the money is decides who owns it</h5><p>Three treatments run at one convention. Platform-collected registration and Relief Fund contributions are <b>federation money at the first dollar</b>. Off-platform receipts — door cash, cheques at the hafli — take the Convention Contract’s agency treatment and post as a receivable due at settlement. The host club’s own hafli is club money until remitted.</p><p>Under Decision 1 (20 Aug 2026), dues collected by anyone are AFRP’s from the first dollar — which makes By-Law 5.2’s host-remittance clause an instance of the general rule rather than a special case.</p></div>
+    <div class="dd-col dd-pt"><h5>Working the registration desk</h5><p>He takes a cheque from a cousin who did not register online, and the platform tells him what just happened: this is a receivable, it settles at the end of the week, and it does not count toward the host’s proceeds.</p><p>He is a volunteer at a folding table and he now understands the accounting, because the screen explained it in one sentence instead of assuming he had read the contract.</p></div>
+  </div>
+</div><div class="dd-pair">
+  <div class="dd-head"><span class="dd-n">5</span><b>Rung 5 · Lead — the bid, two years out</b><span class="dd-rules">10.1.1 · 10.1.7 · 120 days</span></div>
+  <div class="dd-cols">
+    <div class="dd-col dd-op"><h5>A four-year object</h5><p>A city bids at a Mid-Year Meeting for a convention two years later, needing fifty paid members for five consecutive years and a region whose turn it is. Then it hosts. Then it files a final accounting within 120 days. The convention is a <b>four-year object</b> and no current system holds it as one.</p></div>
+    <div class="dd-col dd-pt"><h5>The host club president</h5><p>She bid in 2025 for 2027, ran it in July, and is closing the books in November.</p><p>Rung 5 of the convention is the hardest volunteer job in the federation, and the platform’s contribution is not enthusiasm — it is <b>the checklist she inherited from the last host</b>, with the dates and the contract terms already filled in.</p><div class="dd-links"><a href="AFRP-Deep-Convention.html">Full convention deep dive</a></div></div>
+  </div>
+</div><div class="dd-note"><b>Confirm rather than assume.</b> Exhibitor and press credentials are modelled as non-attendee credentials so that the membership-mandatory rule stays absolute. That is current practice inferred from the by-laws rather than a written rule, and it is on the board list to confirm.</div></div>
+
+<div class="px-sep"></div>
+<footer class="px-foot"><div class="px-in">
+  <p><b>How to read this.</b> Every moment is shown twice &mdash; the person running it on the left, the
+  person living it on the right &mdash; because the gap between those two views is where this design has
+  failed under attack before. Amber notes mark a gap or an open decision rather than a settled answer.
+  People and money figures are fictional; programs, clubs, committees and by-law citations are real and
+  sourced (afrp.org and the governing texts). Part of the AFRP design delivery &mdash;
+  <a href="index.html">all documents</a> &middot; <a href="AFRP-Complete-Platform.html">the complete platform</a>.
+  Build remains on hold.</p>
+</div></footer>
+</body>
+</html>
