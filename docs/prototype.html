@@ -1361,7 +1361,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" href="#/member/club">My club &mdash; Detroit</a>
       <div class="l-nav-group">Community</div>
       <a class="l-nav-item" href="#/member/family">Family tree &amp; life events</a>
-      <a class="l-nav-item" href="#/member/lifeevent">Report a life event</a>
+      <a class="l-nav-item" href="#/member/family">Report a life event</a>
       <a class="l-nav-item" href="#/member/directory">Directory</a>
       <a class="l-nav-item" href="#/member/rbpn">Professional network</a>
       <a class="l-nav-item" href="#/member/magazine">Magazine</a>
@@ -1403,7 +1403,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" href="#/program/medops">Mission operations <span class="l-nav-item__badge l-nav-item__badge--muted">ARFHSN</span></a>
       <a class="l-nav-item" href="#/program/intake">Human services intake <span class="l-nav-item__badge l-nav-item__badge--muted">ARFHSN</span></a>
       <a class="l-nav-item" href="#/program/prog/women">Women to Women</a>
-      <a class="l-nav-item" href="#/program/senior">Senior Living campaign <span class="l-nav-item__badge l-nav-item__badge--muted">w/ Foundation</span></a>
+      <a class="l-nav-item" href="#/program/senior">Senior Living campaign <span class="l-nav-item__badge l-nav-item__badge--muted">Foundation</span></a>
       <div class="l-nav-group">Cultural</div>
       <a class="l-nav-item" href="#/program/prog/arabic">Arabic Course</a>
       <a class="l-nav-item" href="#/program/prog/exchange">Exchange Mission</a>
@@ -1418,7 +1418,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" href="#/program/rbpn">RBPN &amp; sponsorship</a>
       <div class="l-nav-group">Educational</div>
       <a class="l-nav-item" href="#/program/applications">Applications &amp; rubric</a>
-      <a class="l-nav-item" href="#/program/conflicts">Conflict of interest</a>
+      <a class="l-nav-item" href="#/program/applications">Conflict of interest</a>
       <a class="l-nav-item" href="#/program/budget">Budget &amp; endowment</a>
       <a class="l-nav-item" href="#/program/endowment">Endowment management <span class="l-nav-item__badge l-nav-item__badge--violet">pending policy</span></a>
       <a class="l-nav-item" href="#/program/disbursement">Disbursement &amp; verification</a>
@@ -1448,7 +1448,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" href="#/fed/identity">Identity &amp; merge queue <span class="l-nav-item__badge l-nav-item__badge--red">14</span></a>
       <a class="l-nav-item" href="#/fed/tree">Family tree console</a>
       <a class="l-nav-item" href="#/fed/directory">Directory &amp; consent</a>
-      <a class="l-nav-item" href="#/fed/lifeevents">Life events queue <span class="l-nav-item__badge">9</span></a>
+      <a class="l-nav-item" href="#/fed/tree">Life events queue</a>
       <a class="l-nav-item" href="#/fed/roles">Roles &amp; permissions</a>
       <div class="l-nav-group">Club management</div>
       <a class="l-nav-item" href="#/fed/clubs">Club registry &amp; setup <span class="l-nav-item__badge">18</span></a>
@@ -1871,33 +1871,16 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   </div>
 </section>
 
-<section class="screen" data-route="member/family" data-lens="member" aria-label="Family tree">
+<section class="screen" data-route="member/family" data-lens="member" aria-label="Family tree and life events">
   <div class="page-head">
-    <div><h1>Family tree &amp; life events</h1>
-    <p>Operational, not ceremonial &mdash; the same tree detects committee conflicts and finds lost alumni.</p></div>
+    <div><h1>Ramallah Family Tree</h1>
+    <p>A <b>working simulation</b> over the real project file &mdash; 28,226 people, 10,399 families,
+    nine clans, back to Rashed El-Haddadeen who settled Ramallah around 1517. Find your line, see what
+    the record actually supports, and attach it as <b>evidence</b> to a membership or scholarship application.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info">evidence, not a verdict</span><span class="c-pill c-pill--warn">living people are stand-ins</span></div>
   </div>
-  <div class="grid grid--2">
-    <div class="panel">
-      <div class="panel__head"><h3>Your branch</h3><p>Living individuals restricted; provisional records say so.</p></div>
-      <div class="panel__body stack stack--sm">
-        <div class="c-tnode"><span class="c-avatar c-avatar--sm">FK</span><div><div class="c-tnode__name">Fouad Khoury</div><div class="c-tnode__meta">father &middot; 1941&ndash;2016 &middot; Ramallah, per Shaheen registry</div></div></div>
-        <div class="c-tnode c-tnode--me"><span class="c-avatar c-avatar--sm">NK</span><div><div class="c-tnode__name">Nadia Khoury</div><div class="c-tnode__meta">you &middot; b. 1974</div></div></div>
-        <div class="c-tnode"><span class="c-avatar c-avatar--sm">TK</span><div><div class="c-tnode__name">Tarek Khoury</div><div class="c-tnode__meta">son &middot; b. 2009</div></div></div>
-        <div class="c-tnode c-tnode--provisional"><span class="c-avatar c-avatar--sm">SH</span><div><div class="c-tnode__name">Salwa Hishmeh</div><div class="c-tnode__meta">aunt &middot; provisional &mdash; unverified, submitted by a cousin, awaiting two confirmations</div></div></div>
-      </div>
-      <div class="panel__foot"><span class="why">Eligibility for Regular Membership is Ramallah ancestry as defined in Aziz Shaheen&rsquo;s <i>Ramallah</i>, or marriage to it (Const. VII) &mdash; the tree is how that is evidenced rather than asserted.</span></div>
-    </div>
-    <div class="panel">
-      <div class="panel__head"><h3>Life events</h3><p>Consent gates before anything is published.</p></div>
-      <div class="panel__body">
-        <div class="c-timeline">
-          <div class="c-tl-item"><div class="c-tl-item__when">Jun 2027 &middot; expected</div><b style="font-size:var(--fs-sm)">Tarek&rsquo;s graduation &mdash; Dearborn High</b><div class="why">Queued for the magazine&rsquo;s auto section, pending your proof-and-confirm. There is no manual entry path into an auto section.</div></div>
-          <div class="c-tl-item"><div class="c-tl-item__when">Sep 2026 &middot; cousin&rsquo;s wedding</div><b style="font-size:var(--fs-sm)">Complimentary Family year offered to the newlyweds</b><div class="why"><b>Flagged:</b> a comped membership pays no dues from the couple&rsquo;s own funds, so under By-Law 8.15.4 it may not confer a vote. The benefit stands; the franchise question is on the revision&rsquo;s list.</div></div>
-          <div class="c-tl-item c-tl-item--muted"><div class="c-tl-item__when">2016</div><b style="font-size:var(--fs-sm)">Fouad Khoury &mdash; memorial notice</b><div class="why">Published with the family&rsquo;s consent, held two weeks until it was given.</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div id="treeapp"></div>
+  <div id="treemore"></div>
 </section>
 
 <section class="screen" data-route="member/directory" data-lens="member" aria-label="Directory">
@@ -2406,7 +2389,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <thead><tr><th class="num">#</th><th>Applicant</th><th>Club</th><th>Field &middot; GPA</th><th class="num">R1</th><th class="num">R2</th><th class="num">R3</th><th class="num">Median</th><th>Panel</th><th>Flags</th></tr></thead>
       <tbody>
         <tr><td class="num">1</td><td><b>Hanan Dabbagh</b></td><td>San Francisco</td><td class="why">Engineering &middot; 3.9</td><td class="num">91</td><td class="num">85</td><td class="num">88</td><td class="num"><b>88.0</b></td><td class="why">3 of 3</td><td><span class="c-pill c-pill--muted">&mdash;</span></td></tr>
-        <tr data-href="#/program/conflicts" tabindex="0" role="link" aria-label="Open Layla Khoury conflict detail" class="is-good"><td class="num">2</td><td><b>Layla Khoury</b></td><td>Detroit</td><td class="why">Medicine &middot; 3.8</td><td class="num">86</td><td class="num">88</td><td class="num" style="color:var(--red-700)">rec.</td><td class="num"><b>87.0</b></td><td class="why">2 of 3 &middot; <b>1 recused</b></td><td><span class="c-pill c-pill--danger">conflict, 3&deg;</span></td></tr>
+        <tr data-href="#/program/applications" tabindex="0" role="link" aria-label="Open Layla Khoury conflict detail" class="is-good"><td class="num">2</td><td><b>Layla Khoury</b></td><td>Detroit</td><td class="why">Medicine &middot; 3.8</td><td class="num">86</td><td class="num">88</td><td class="num" style="color:var(--red-700)">rec.</td><td class="num"><b>87.0</b></td><td class="why">2 of 3 &middot; <b>1 recused</b></td><td><span class="c-pill c-pill--danger">conflict, 3&deg;</span></td></tr>
         <tr><td class="num">3</td><td><b>Fadi Totah</b></td><td>Houston</td><td class="why">Computer science &middot; 3.7</td><td class="num">84</td><td class="num">86</td><td class="num">80</td><td class="num"><b>84.0</b></td><td class="why">3 of 3</td><td><span class="c-pill c-pill--muted">&mdash;</span></td></tr>
         <tr class="is-flag"><td class="num">4</td><td><b>Wadie Ajluni</b></td><td>Chicago</td><td class="why">Law &middot; 3.6</td><td class="num">82</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num"><b>82.0</b></td><td class="why"><b>1 of 3 &mdash; panel of one by neglect</b></td><td><span class="c-pill c-pill--warn">under-reviewed</span></td></tr>
         <tr><td class="num">5</td><td><b>Reem Salah</b></td><td>Jacksonville</td><td class="why">Nursing &middot; 3.5</td><td class="num">78</td><td class="num">81</td><td class="num">77</td><td class="num"><b>78.0</b></td><td class="why">3 of 3</td><td><span class="c-pill c-pill--muted">&mdash;</span></td></tr>
@@ -2414,36 +2397,18 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     </table></div>
     <div class="panel__foot"><span class="why"><b>Recused and not-scored are different facts in different columns.</b> Layla Khoury has a panel of two by design; Wadie Ajluni has a panel of one by neglect. Collapsing them would make her award look weaker than his. Click Layla&rsquo;s row for the conflict detail. The SFC must also follow up that recipients maintain the required academic credentials (2015 policy) &mdash; the credentials themselves are stated nowhere, which is on the revision&rsquo;s question list.</span></div>
   </div>
+  <div class="px-sep" style="margin:var(--s6) 0"></div>
+  <div class="page-head">
+    <div><h2 style="font-size:20px;margin:0 0 4px">Conflict of interest &mdash; a relatedness reading</h2>
+    <p>Not a screen of its own. The review row above expands into this: a <b>query against the family
+    tree</b>, run on the real 28,226-person file. AFRP&rsquo;s 2024 text contains <b>no conflict-of-interest
+    rule at all</b> &mdash; the graph can still see the cousin.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--warn">no governing rule &mdash; yet</span></div>
+  </div>
+  <div id="kinapp"></div>
 </section>
 
-<section class="screen" data-route="program/conflicts" data-lens="program" aria-label="Conflict of interest">
-  <div class="page-head">
-    <div><h1>Conflict of interest</h1>
-    <p>Detected from the family tree, not from self-declaration &mdash; a declaration form cannot catch what people do not think to declare.</p></div>
-  </div>
-  <div class="grid grid--2">
-    <div class="panel">
-      <div class="panel__head"><div><h3>Ghassan T. Haddad &rarr; Layla Khoury</h3><p>Shortest path through canonical tree records.</p></div><div class="panel__head__end"><span class="c-pill c-pill--danger">3 degrees</span></div></div>
-      <div class="panel__body">
-        <div class="stack stack--sm">
-          <div class="c-tnode"><span class="c-avatar c-avatar--sm">GH</span><div><div class="c-tnode__name">Ghassan T. Haddad</div><div class="c-tnode__meta">reviewer &middot; SFC panel &middot; b. 1958</div></div></div>
-          <div class="c-tnode"><span class="c-avatar c-avatar--sm">MH</span><div><div class="c-tnode__name">Miriam Haddad, n&eacute;e Khoury</div><div class="c-tnode__meta">his mother &middot; degree 1 &middot; sister of Samir Khoury</div></div></div>
-          <div class="c-tnode"><span class="c-avatar c-avatar--sm">RK</span><div><div class="c-tnode__name">Rima N. Khoury</div><div class="c-tnode__meta">Samir&rsquo;s daughter &middot; degree 2</div></div></div>
-          <div class="c-tnode c-tnode--me"><span class="c-avatar c-avatar--sm">LK</span><div><div class="c-tnode__name">Layla Khoury</div><div class="c-tnode__meta">applicant &middot; Rima&rsquo;s daughter &middot; degree 3</div></div></div>
-        </div>
-        <div class="verdict verdict--deny" style="margin-top:var(--s4)"><span class="verdict__ic">&times;</span><div><b>Recused &mdash; within three degrees of kinship.</b>
-        <p>Reviewer barred from scoring this application; the panel proceeds at two of three, recorded as a recusal, not a missing score.<br><span class="mono">SFC conflict rule (platform policy) &middot; tree path verified 11 Aug 2026.</span></p></div></div>
-      </div>
-    </div>
-    <div class="panel panel--flag">
-      <div class="panel__head"><h3>This rule has no governing authority &mdash; yet</h3></div>
-      <div class="panel__body">
-        <p class="why" style="margin:0"><b>Policy choice, stated plainly:</b> none of the four governing documents &mdash; Constitution &amp; By-Laws, ARFECF By-Laws, the Scholarship Fund Policy Statement, the Convention Contract &mdash; says a word about conflict of interest. The three-degree bar (block within three degrees, disclose beyond) is a build decision with no authority behind it. In a federation descended from one ancestral community it <i>will</i> be challenged the first time someone doesn&rsquo;t get an award. <b>It needs to be adopted by the SFC or written into the revision.</b></p>
-        <p class="why" style="margin:var(--s3) 0 0">What the documents do specify: paid employees of ARFECF or AFRP may not vote on the committee; two consecutive three-year terms, then a full calendar year off; the chair limited to two consecutive one-year terms.</p>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <section class="screen" data-route="program/budget" data-lens="program" aria-label="Budget and endowment">
   <div class="page-head">
@@ -3751,39 +3716,16 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   </div>
 </section>
 
-<section class="screen" data-route="fed/tree" data-lens="fed" aria-label="Family tree console">
+<section class="screen" data-route="fed/tree" data-lens="fed" aria-label="Family tree repository">
   <div class="page-head">
-    <div><h1>Family tree console</h1>
-    <p>Operational, not ceremonial: moderation, privacy, committee conflicts and alumni tracing, all off one curated tree.</p></div>
+    <div><h1>Family Tree &mdash; repository of record</h1>
+    <p>One graph, many questions. Households, life events, kinship, conflicts of interest and
+    By-Law 4.1.1 eligibility are all <b>queries against this graph</b> rather than separate stores.
+    <b>Working simulation</b> &mdash; the committee, the single queue, import/export, and the
+    impact register.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info" id="tr2-ver">v2026.08.13</span><span class="c-pill c-pill--warn">mirror &middot; not yet the record</span></div>
   </div>
-  <div class="panel" style="margin-bottom:var(--s4)">
-    <div class="statbox">
-      <div class="stat"><span class="stat__k">Individuals</span><span class="stat__v">8,412</span><span class="stat__d">migrated from Google Groups/Sites &middot; hand-curated since 1998</span></div>
-      <div class="stat"><span class="stat__k">Living, restricted</span><span class="stat__v">1,204</span><span class="stat__d">members-only visibility + per-person consent</span></div>
-      <div class="stat"><span class="stat__k">Provisional pending</span><span class="stat__v">12</span><span class="stat__d">dashed amber until verified &mdash; never silently promoted</span></div>
-      <div class="stat"><span class="stat__k">COI queries this cycle</span><span class="stat__v">41</span><span class="stat__d">one per scholarship application, automatic</span></div>
-    </div>
-  </div>
-  <div class="grid grid--2">
-    <div class="panel">
-      <div class="panel__head"><h3>Moderation queue</h3><p>Provisional records: submitted by relatives, verified by two confirmations or a document.</p></div>
-      <div class="panel__body panel__body--flush">
-        <div class="qrow"><div class="qrow__main"><b>Salwa Hishmeh &mdash; aunt of Nadia Khoury</b><span>submitted by a cousin &middot; 1 of 2 confirmations &middot; visible to the family as provisional meanwhile</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">1 of 2</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Yacoub branch &mdash; 3 records from the alumni import</b><span>1985 addresses &middot; awaiting a living relative&rsquo;s confirmation</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">pending</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Merge: two Fouad Khourys, b. 1941</b><span>same person via marriage record &mdash; merge with provenance kept on both sources</span></div><div class="qrow__end"><span class="c-pill c-pill--info">verify</span></div></div>
-      </div>
-      <div class="panel__foot"><span class="why">Living individuals never appear to non-members, and never in the magazine&rsquo;s tree highlight without consent &mdash; the privacy rule is on the person, not the page.</span></div>
-    </div>
-    <div class="panel">
-      <div class="panel__head"><h3>What the tree answers</h3></div>
-      <div class="panel__body panel__body--flush">
-        <a class="qrow" href="#/program/conflicts"><div class="qrow__main"><b>Committee conflicts of interest</b><span>latest: Haddad &rarr; Khoury, 3 degrees &mdash; recused before anyone declared anything</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">COI</span></div></a>
-        <a class="qrow" href="#/program/alumni"><div class="qrow__main"><b>Lost alumni tracing</b><span>61 of 240 historic alumni reached through living relatives</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">tracing</span></div></a>
-        <a class="qrow" href="#/member/family"><div class="qrow__main"><b>The member&rsquo;s own lineage</b><span>participation scale &mdash; my branch, my life events, the wedding-benefit flow</span></div><div class="qrow__end"><span class="c-pill c-pill--muted">member lens</span></div></a>
-      </div>
-      <div class="panel__foot"><span class="why">Eligibility for Regular Membership is ancestry per Aziz Shaheen&rsquo;s <i>Ramallah</i> or marriage to it (Const. VII) &mdash; the tree is the evidence store for the Federation&rsquo;s own membership rule.</span></div>
-    </div>
-  </div>
+  <div id="tree2app"></div>
 </section>
 
 <section class="screen" data-route="fed/convops" data-lens="fed" aria-label="Convention operations detail">
@@ -3876,43 +3818,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 
 
 <!-- ═══ NEW · report a life event (L1) ═══ -->
-<section class="screen" data-route="member/lifeevent" data-lens="member" aria-label="Report a life event">
-  <div class="page-head">
-    <div><h1>Report a life event</h1>
-    <p>A submission is a <b>claim, not an announcement</b> &mdash; it goes to the membership desk, and each kind
-    of news has its own gates, shown before you submit.</p></div>
-    <div class="page-head__end"><span class="c-pill c-pill--info">marriage selected</span></div>
-  </div>
-  <div class="grid grid--2">
-    <div class="panel">
-      <div class="panel__head"><h3>What happened</h3></div>
-      <div class="panel__body">
-        <div class="pillrow" style="display:flex;flex-wrap:wrap;gap:var(--s2);margin-bottom:var(--s3)">
-          <a class="btn-xs" href="#/member/lifeevent">Birth</a>
-          <a class="btn-xs" href="#/member/lifeevent" style="background:var(--lens);color:#fff;border-color:var(--lens)">Marriage</a>
-          <a class="btn-xs" href="#/member/lifeevent">Death</a>
-          <a class="btn-xs" href="#/member/lifeevent">Graduation</a>
-          <a class="btn-xs" href="#/member/lifeevent">Relocation</a>
-        </div>
-        <div class="calc">
-          <div class="calc__r"><span>Who it concerns<small>Tarek Khoury &mdash; your household</small></span><span class="calc__n mono">tree &#10003;</span></div>
-          <div class="calc__r"><span>Date</span><span class="calc__n">26 Sep 2026</span></div>
-          <div class="calc__r calc__r--tot"><span>Submit to the membership desk</span><span class="calc__n">&rarr;</span></div>
-        </div>
-        <p class="why" style="margin:var(--s3) 0 0">Both names must resolve on the family tree before anything posts &mdash; a marriage names two people, so it needs two yeses.</p>
-      </div>
-    </div>
-    <div class="panel">
-      <div class="panel__head"><h3>What happens next &mdash; marriage</h3></div>
-      <div class="panel__body panel__body--flush">
-        <div class="qrow"><div class="qrow__main"><b>1 &middot; Membership desk reviews the claim</b><span>identity check against the tree</span></div><div class="qrow__end"><span class="mono">L2</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>2 &middot; Both members approve the announcement</b><span>it names two people</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">2 needed</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>3 &middot; Then it can appear</b><span>club news, the tree, and the magazine &mdash; each with its own switch</span></div><div class="qrow__end"><a class="btn-xs" href="#/member/magazine">Magazine</a></div></div>
-      </div>
-      <div class="panel__foot"><span class="why">A <b>death</b> is different: held for family approval before it appears anywhere &mdash; magazine included. The hold is the rule, not a courtesy.</span></div>
-    </div>
-  </div>
-</section>
+
 
 
 <!-- ═══ NEW · convention week live (C1) ═══ -->
@@ -4053,36 +3959,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 
 
 <!-- ═══ NEW · fed life events queue (L2) ═══ -->
-<section class="screen" data-route="fed/lifeevents" data-lens="fed" aria-label="Life events approval queue">
-  <div class="page-head">
-    <div><h1>Life events &mdash; submission &amp; approval queue</h1>
-    <p>Nine pending. Every row is a member&rsquo;s claim from <a href="#/member/lifeevent">the report form</a>;
-    approval releases it to surfaces whose own gates then apply &mdash; <b>approve is not publish</b>.</p></div>
-    <div class="page-head__end"><span class="c-pill c-pill--warn">1 death held</span></div>
-  </div>
-  <div class="grid grid--2">
-    <div class="panel">
-      <div class="panel__head"><h3>Pending &mdash; 9</h3></div>
-      <div class="panel__body panel__body--flush">
-        <div class="qrow"><div class="qrow__main"><b>Marriage &middot; Tarek Khoury &amp; Maha Salameh</b><span>1 of 2 approvals &middot; Maha pending</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">Waiting</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Death &middot; Ibrahim N. Salameh, 1934&ndash;2026</b><span>family approval pending &middot; magazine hold on &middot; the approve button is not offered</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">Held</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Birth &middot; Noor Jaghab, b. 20 Oct</b><span>resolved onto tree &middot; ready</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">Approve</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Graduation &middot; Basim Yacoub, MSU &rsquo;26</b><span>identity verified &middot; ready</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">Approve</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Relocation &middot; Mona Zarou, LA &rarr; Houston</b><span>club transfer offered &middot; never automatic</span></div><div class="qrow__end"><span class="c-pill c-pill--info">Open</span></div></div>
-      </div>
-      <div class="panel__foot"><span class="why">Refusals always name the rule. The queue holds claims; a row approves only when its type&rsquo;s checks are green.</span></div>
-    </div>
-    <div class="panel">
-      <div class="panel__head"><h3>What one approval releases</h3></div>
-      <div class="panel__body panel__body--flush">
-        <div class="qrow"><div class="qrow__main"><b>Family tree</b><span>record updated &mdash; lineage untouched, privacy blanks preserved</span></div><div class="qrow__end"><a class="btn-xs" href="#/fed/tree">Tree</a></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Club news</b><span>announcement drafted for the member&rsquo;s club, consent-filtered</span></div><div class="qrow__end"><a class="btn-xs" href="#/club/comms">Club</a></div></div>
-        <div class="qrow"><div class="qrow__main"><b><i>Hathihe Ramallah</i></b><span>queued for the next issue &mdash; the copy-freeze hold is the same hold</span></div><div class="qrow__end"><a class="btn-xs" href="#/program/magazine">Magazine</a></div></div>
-      </div>
-      <div class="panel__foot"><span class="why">One approval, three surfaces, each keeping its own gate &mdash; which is why approving here is safe: it releases claims into pipelines, not onto pages.</span></div>
-    </div>
-  </div>
-</section>
+
 
 
 <!-- ═══ NEW · fed convention command (C4) ═══ -->
@@ -4308,7 +4185,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <div class="panel">
       <div class="panel__head"><h3>Operations &amp; governance journeys</h3></div>
       <div class="panel__body panel__body--flush">
-<div class="qrow"><div class="qrow__main"><b>J04 · A death in the family</b><span>Operational effects immediately; publications only after family approval</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j04">Journey</a><a class="btn-xs" href="#/fed/lifeevents" style="margin-left:6px">Start</a></div></div>
+<div class="qrow"><div class="qrow__main"><b>J04 · A death in the family</b><span>Operational effects immediately; publications only after family approval</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j04">Journey</a><a class="btn-xs" href="#/fed/tree" style="margin-left:6px">Start</a></div></div>
 <div class="qrow"><div class="qrow__main"><b>J05 · Convention end-to-end</b><span>Registration, refused credentials with the rule named, the frozen floor</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j05">Journey</a><a class="btn-xs" href="#/fed/credentialing" style="margin-left:6px">Start</a></div></div>
 <div class="qrow"><div class="qrow__main"><b>J06 · Scholarship cycle</b><span>Three degrees, median ranking, capacity-gated budget — tested sound</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j06">Journey</a><a class="btn-xs" href="#/program/applications" style="margin-left:6px">Start</a></div></div>
 <div class="qrow"><div class="qrow__main"><b>J08 · Treasurer’s year</b><span>Dead QuickBooks token, queued postings, the remittance-credential interlock — tested sound</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j08">Journey</a><a class="btn-xs" href="#/club/remit" style="margin-left:6px">Start</a></div></div>
@@ -4808,7 +4685,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <div class="panel">
       <div class="panel__head"><h3>Member lens &mdash; participation</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/member/home">Home</a><a class="btn-xs" href="#/member/inbox">Inbox</a><a class="btn-xs" href="#/member/pathway">My pathway</a><a class="btn-xs" href="#/member/scenarios">Guided scenarios</a><a class="btn-xs" href="#/member/voting">Voting</a><a class="btn-xs" href="#/member/membership">Membership &amp; dues</a><a class="btn-xs" href="#/member/household">My household</a><a class="btn-xs" href="#/member/payments">Payments &amp; giving</a><a class="btn-xs" href="#/member/events">Events</a><a class="btn-xs" href="#/member/convention">Convention</a><a class="btn-xs" href="#/member/convlive">Convention live</a><a class="btn-xs" href="#/member/convstore">Convention store</a><a class="btn-xs" href="#/member/convhelp">Help desk</a><a class="btn-xs" href="#/member/dirinclusion">Directory inclusion</a><a class="btn-xs" href="#/member/lifeevent">Report a life event</a><a class="btn-xs" href="#/member/ads">Advertise</a><a class="btn-xs" href="#/member/programs">My programmes</a><a class="btn-xs" href="#/member/club">My club</a><a class="btn-xs" href="#/member/family">Family tree</a><a class="btn-xs" href="#/member/directory">Directory</a><a class="btn-xs" href="#/member/rbpn">Professional network</a><a class="btn-xs" href="#/member/magazine">Magazine</a><a class="btn-xs" href="#/member/bookstore">Bookstore</a>
+        <a class="btn-xs" href="#/member/home">Home</a><a class="btn-xs" href="#/member/inbox">Inbox</a><a class="btn-xs" href="#/member/pathway">My pathway</a><a class="btn-xs" href="#/member/scenarios">Guided scenarios</a><a class="btn-xs" href="#/member/voting">Voting</a><a class="btn-xs" href="#/member/membership">Membership &amp; dues</a><a class="btn-xs" href="#/member/household">My household</a><a class="btn-xs" href="#/member/payments">Payments &amp; giving</a><a class="btn-xs" href="#/member/events">Events</a><a class="btn-xs" href="#/member/convention">Convention</a><a class="btn-xs" href="#/member/convlive">Convention live</a><a class="btn-xs" href="#/member/convstore">Convention store</a><a class="btn-xs" href="#/member/convhelp">Help desk</a><a class="btn-xs" href="#/member/dirinclusion">Directory inclusion</a><a class="btn-xs" href="#/member/family">Report a life event</a><a class="btn-xs" href="#/member/ads">Advertise</a><a class="btn-xs" href="#/member/programs">My programmes</a><a class="btn-xs" href="#/member/club">My club</a><a class="btn-xs" href="#/member/family">Family tree</a><a class="btn-xs" href="#/member/directory">Directory</a><a class="btn-xs" href="#/member/rbpn">Professional network</a><a class="btn-xs" href="#/member/magazine">Magazine</a><a class="btn-xs" href="#/member/bookstore">Bookstore</a>
       </div>
     </div>
     <div class="panel">
@@ -4820,13 +4697,13 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <div class="panel">
       <div class="panel__head"><h3>Program lens &mdash; running the programmes</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/program/overview">All programmes</a><a class="btn-xs" href="#/program/lifecycle">Lifecycle &amp; pipeline</a><a class="btn-xs" href="#/program/registry">Programme registry</a><a class="btn-xs" href="#/program/newevent">Create an event</a><a class="btn-xs" href="#/program/prog/camp">Camp Ramallah</a><a class="btn-xs btn-xs--retired" href="#/program/prog/award">HS Senior Award (retired)</a><a class="btn-xs" href="#/program/prog/hope">Project Hope</a><a class="btn-xs" href="#/program/prog/medical">Medical Mission</a><a class="btn-xs" href="#/program/prog/leadership">Leadership Ramallah</a><a class="btn-xs" href="#/program/prog/exchange">Exchange Mission</a><a class="btn-xs" href="#/program/prog/congress">Congressional Outreach</a><a class="btn-xs" href="#/program/prog/action">Day of Action</a><a class="btn-xs" href="#/program/prog/arabic">Arabic Course</a><a class="btn-xs" href="#/program/prog/women">Women to Women</a><a class="btn-xs" href="#/program/prog/preservation">Preservation Project</a><a class="btn-xs" href="#/program/senior">Senior Living campaign</a><a class="btn-xs" href="#/program/applications">Scholarship applications</a><a class="btn-xs" href="#/program/conflicts">Conflict of interest</a><a class="btn-xs" href="#/program/budget">Budget &amp; endowment</a><a class="btn-xs" href="#/program/endowment">Endowment management</a><a class="btn-xs" href="#/program/medops">Mission operations</a><a class="btn-xs" href="#/program/intake">Human services intake</a><a class="btn-xs" href="#/program/disbursement">Disbursement</a><a class="btn-xs" href="#/program/alumni">Alumni &amp; recruiting</a><a class="btn-xs" href="#/program/magazine">Magazine ops</a><a class="btn-xs" href="#/program/bookstore">Bookstore ops</a><a class="btn-xs" href="#/program/rbpn">RBPN &amp; sponsorship</a>
+        <a class="btn-xs" href="#/program/overview">All programmes</a><a class="btn-xs" href="#/program/lifecycle">Lifecycle &amp; pipeline</a><a class="btn-xs" href="#/program/registry">Programme registry</a><a class="btn-xs" href="#/program/newevent">Create an event</a><a class="btn-xs" href="#/program/prog/camp">Camp Ramallah</a><a class="btn-xs btn-xs--retired" href="#/program/prog/award">HS Senior Award (retired)</a><a class="btn-xs" href="#/program/prog/hope">Project Hope</a><a class="btn-xs" href="#/program/prog/medical">Medical Mission</a><a class="btn-xs" href="#/program/prog/leadership">Leadership Ramallah</a><a class="btn-xs" href="#/program/prog/exchange">Exchange Mission</a><a class="btn-xs" href="#/program/prog/congress">Congressional Outreach</a><a class="btn-xs" href="#/program/prog/action">Day of Action</a><a class="btn-xs" href="#/program/prog/arabic">Arabic Course</a><a class="btn-xs" href="#/program/prog/women">Women to Women</a><a class="btn-xs" href="#/program/prog/preservation">Preservation Project</a><a class="btn-xs" href="#/program/senior">Senior Living campaign</a><a class="btn-xs" href="#/program/applications">Scholarship applications</a><a class="btn-xs" href="#/program/applications">Conflict of interest</a><a class="btn-xs" href="#/program/budget">Budget &amp; endowment</a><a class="btn-xs" href="#/program/endowment">Endowment management</a><a class="btn-xs" href="#/program/medops">Mission operations</a><a class="btn-xs" href="#/program/intake">Human services intake</a><a class="btn-xs" href="#/program/disbursement">Disbursement</a><a class="btn-xs" href="#/program/alumni">Alumni &amp; recruiting</a><a class="btn-xs" href="#/program/magazine">Magazine ops</a><a class="btn-xs" href="#/program/bookstore">Bookstore ops</a><a class="btn-xs" href="#/program/rbpn">RBPN &amp; sponsorship</a>
       </div>
     </div>
     <div class="panel">
       <div class="panel__head"><h3>Federation lens &mdash; running the Federation</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/fed/dashboard">Dashboard</a><a class="btn-xs" href="#/fed/crm">The CRM today</a><a class="btn-xs" href="#/fed/member360">Member 360</a><a class="btn-xs" href="#/fed/clubs">Club registry &amp; setup</a><a class="btn-xs" href="#/fed/clubhealth">Club health &amp; integration</a><a class="btn-xs" href="#/fed/migration">Onboarding &amp; migration</a><a class="btn-xs" href="#/fed/boardroom">Board workspace</a><a class="btn-xs" href="#/fed/mailedballot">Mailed ballot (CPA)</a><a class="btn-xs" href="#/fed/supportdesk">Support desk</a><a class="btn-xs" href="#/fed/institutions">Institution registry</a><a class="btn-xs" href="#/fed/inst">Institution detail</a><a class="btn-xs" href="#/fed/newinst">Add an institution</a><a class="btn-xs" href="#/fed/hsn">ARFHSN trustees</a><a class="btn-xs" href="#/fed/identity">Identity &amp; merge queue</a><a class="btn-xs" href="#/fed/tree">Family tree console</a><a class="btn-xs" href="#/fed/directory">Directory &amp; consent</a><a class="btn-xs" href="#/fed/roles">Roles &amp; permissions</a><a class="btn-xs" href="#/fed/board">Board &amp; officers</a><a class="btn-xs" href="#/fed/committees">Committees</a><a class="btn-xs" href="#/fed/calendar">Election calendar</a><a class="btn-xs" href="#/fed/credentialing">Credentialing &amp; quorum</a><a class="btn-xs" href="#/fed/floor">Live voting floor</a><a class="btn-xs" href="#/fed/results">Results &amp; certification</a><a class="btn-xs" href="#/fed/finance">Daily close</a><a class="btn-xs" href="#/fed/qbo">QuickBooks integration</a><a class="btn-xs" href="#/fed/ledger">Multi-entity ledger</a><a class="btn-xs" href="#/fed/controls">Financial controls</a><a class="btn-xs" href="#/fed/events">Event management</a><a class="btn-xs" href="#/fed/comms">Communications centre</a><a class="btn-xs" href="#/fed/convention">Convention &mdash; contract</a><a class="btn-xs" href="#/fed/convcmd">Convention command</a><a class="btn-xs" href="#/fed/convdesk">Convention desk</a><a class="btn-xs" href="#/fed/lifeevents">Life events queue</a><a class="btn-xs" href="#/fed/convops">Convention &mdash; operations</a><a class="btn-xs" href="#/fed/workbench">Ruleset workbench</a>
+        <a class="btn-xs" href="#/fed/dashboard">Dashboard</a><a class="btn-xs" href="#/fed/crm">The CRM today</a><a class="btn-xs" href="#/fed/member360">Member 360</a><a class="btn-xs" href="#/fed/clubs">Club registry &amp; setup</a><a class="btn-xs" href="#/fed/clubhealth">Club health &amp; integration</a><a class="btn-xs" href="#/fed/migration">Onboarding &amp; migration</a><a class="btn-xs" href="#/fed/boardroom">Board workspace</a><a class="btn-xs" href="#/fed/mailedballot">Mailed ballot (CPA)</a><a class="btn-xs" href="#/fed/supportdesk">Support desk</a><a class="btn-xs" href="#/fed/institutions">Institution registry</a><a class="btn-xs" href="#/fed/inst">Institution detail</a><a class="btn-xs" href="#/fed/newinst">Add an institution</a><a class="btn-xs" href="#/fed/hsn">ARFHSN trustees</a><a class="btn-xs" href="#/fed/identity">Identity &amp; merge queue</a><a class="btn-xs" href="#/fed/tree">Family tree console</a><a class="btn-xs" href="#/fed/directory">Directory &amp; consent</a><a class="btn-xs" href="#/fed/roles">Roles &amp; permissions</a><a class="btn-xs" href="#/fed/board">Board &amp; officers</a><a class="btn-xs" href="#/fed/committees">Committees</a><a class="btn-xs" href="#/fed/calendar">Election calendar</a><a class="btn-xs" href="#/fed/credentialing">Credentialing &amp; quorum</a><a class="btn-xs" href="#/fed/floor">Live voting floor</a><a class="btn-xs" href="#/fed/results">Results &amp; certification</a><a class="btn-xs" href="#/fed/finance">Daily close</a><a class="btn-xs" href="#/fed/qbo">QuickBooks integration</a><a class="btn-xs" href="#/fed/ledger">Multi-entity ledger</a><a class="btn-xs" href="#/fed/controls">Financial controls</a><a class="btn-xs" href="#/fed/events">Event management</a><a class="btn-xs" href="#/fed/comms">Communications centre</a><a class="btn-xs" href="#/fed/convention">Convention &mdash; contract</a><a class="btn-xs" href="#/fed/convcmd">Convention command</a><a class="btn-xs" href="#/fed/convdesk">Convention desk</a><a class="btn-xs" href="#/fed/tree">Life events queue</a><a class="btn-xs" href="#/fed/convops">Convention &mdash; operations</a><a class="btn-xs" href="#/fed/workbench">Ruleset workbench</a>
       </div>
     </div>
   </div>
@@ -5335,7 +5212,7 @@ var M360_LINKS = {
           ['#/member/voting','Her ballot, live under the active ruleset','demo 2']],
   rima:  [['#/club/roster','Detroit roster row','club lapsed · national current · Patron'],
           ['#/fed/finance','Her $1,000.00 gift in the 15 Aug daily close','three lines, fees gross'],
-          ['#/program/conflicts','The kinship path that recused a reviewer of her daughter','degree 3']],
+          ['#/program/applications','The kinship path that recused a reviewer of her daughter','degree 3']],
   layla: [['#/program/applications','Application row — median 87.0','2 of 3, 1 recused'],
           ['#/program/disbursement','Her $6,000.00 award and its §117 split','2 of 4 gates'],
           ['#/club/roster','Detroit roster row — complimentary student','the 8.15.4 franchise question']],
@@ -7772,5 +7649,597 @@ if (document.readyState !== 'loading') renderSoc();
 else document.addEventListener('DOMContentLoaded', renderSoc);
 })();
 </script>
+<style>
+/* ═══ nav item fix ═══ */
+/* The label is an anonymous text node in a flex row and the badge had neither
+   flex nor white-space, so BOTH wrapped — "Senior Living campaign" over three
+   lines beside "w/ Foundation" over two. Give the badge a spine, give the label
+   room, and let the row grow in height instead of shredding the text. */
+:root{--sidebar-w:272px}
+.l-nav-item{
+  align-items:center;
+  min-height:42px;
+  padding-top:7px;padding-bottom:7px;
+  line-height:1.32;
+  text-wrap:pretty;
+  overflow-wrap:break-word;
+}
+.l-nav-item__badge{
+  flex:0 0 auto;
+  white-space:nowrap;
+  align-self:center;
+  font-size:10.5px;
+  padding:2px 6px;
+  letter-spacing:.005em;
+  max-width:46%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+/* icons hold the first line on multi-line items rather than floating mid-block */
+.l-nav-item .nav-ico{align-self:center}
+/* group headers keep their own rhythm when items grow */
+.navgrp .l-nav-item+.l-nav-item{margin-top:1px}
+@media (max-width:900px){
+  .l-nav-item{min-height:40px}
+  .l-nav-item__badge{max-width:52%}
+}
+</style>
+<style>
+/* ═══ family tree ═══ */
+.tr-src{border:1px dashed rgba(43,36,22,.3);border-radius:9px;padding:10px 13px;background:rgba(255,255,255,.55);margin:var(--s3) 0;font-size:12.5px;line-height:1.5}
+.tr-line{display:grid;gap:0;margin:var(--s3) 0}
+.tr-g{display:grid;grid-template-columns:44px 1fr auto;gap:11px;align-items:start;padding:9px 0;border-top:1px solid rgba(43,36,22,.1);position:relative}
+.tr-g:first-child{border-top:0}
+.tr-g__n{font-family:var(--mono,ui-monospace);font-size:10.5px;font-weight:800;color:#7a7260;padding-top:3px;letter-spacing:.02em}
+.tr-g__b{font-size:13.6px;font-weight:700;line-height:1.35}
+.tr-g__m{display:block;font-size:11.5px;font-weight:500;color:#6b6350;margin-top:2px}
+.tr-g__c{flex:none;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:99px;white-space:nowrap;align-self:center}
+.tr-c--doc{background:#e6ecd2;color:#3f5410}
+.tr-c--bk{background:#fdf0d0;color:#7a5a0a}
+.tr-c--tr{background:#f0e6e2;color:#8a3b2b}
+.tr-c--syn{background:#ece7f5;color:#5b4a86}
+.tr-hit{display:flex;gap:11px;align-items:center;width:100%;text-align:left;padding:9px 11px;border:1px solid rgba(43,36,22,.2);border-radius:9px;background:#fff;cursor:pointer;font:inherit;margin-bottom:7px}
+.tr-hit:hover{border-color:var(--green,#4c6414)}
+.tr-hit b{font-size:13.5px;display:block}
+.tr-hit span{font-size:11.5px;color:#6b6350}
+.tr-clan{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:7px;margin:var(--s3) 0}
+.tr-clan div{background:rgba(255,255,255,.6);border:1px solid rgba(43,36,22,.14);border-radius:8px;padding:7px 9px;font-size:11.5px}
+.tr-clan b{display:block;font-size:14px;font-weight:800}
+.tr-clan.is-mine div.mine{background:#e6ecd2;border-color:#4c6414}
+</style>
+<style>
+/* ═══ tree console ═══ */
+.t2-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:var(--s4);border-bottom:1px solid rgba(43,36,22,.14);padding-bottom:8px}
+.t2-tab{padding:6px 12px;border-radius:99px;border:1px solid transparent;background:none;cursor:pointer;font:inherit;font-size:13px;font-weight:700;color:#6b6350}
+.t2-tab:hover{background:rgba(43,36,22,.05)}
+.t2-tab.is-on{background:var(--green,#4c6414);color:#fff}
+.t2-q{display:grid;grid-template-columns:32px 1fr auto;gap:11px;align-items:start;padding:11px 0;border-top:1px solid rgba(43,36,22,.1)}
+.t2-q:first-child{border-top:0}
+.t2-cls{flex:none;width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:800;font-size:12.5px;color:#fff}
+.t2-A{background:#4c6414}.t2-B{background:#6b7f2e}.t2-C{background:#9a6b1f}.t2-D{background:#8a3b2b}.t2-E{background:#5b4a86}
+.t2-q b{font-size:13.5px;display:block;line-height:1.35}
+.t2-q span.m{display:block;font-size:11.8px;color:#6b6350;margin-top:2px;line-height:1.45}
+.t2-blast{font-family:var(--mono,ui-monospace);font-size:10.5px;font-weight:700;background:#f0e6e2;color:#8a3b2b;border-radius:99px;padding:2px 8px;white-space:nowrap}
+.t2-blast--sm{background:#e6ecd2;color:#3f5410}
+.t2-book{font-family:var(--mono,ui-monospace);font-size:12.2px;line-height:1.62;background:#fffdf6;border:1px solid rgba(43,36,22,.16);border-radius:10px;padding:14px 16px;overflow-x:auto}
+.t2-book .ref{color:#4c6414;font-weight:800}
+.t2-book .ent{margin:0 0 11px;padding-left:76px;text-indent:-76px}
+.t2-book .kid{padding-left:76px;color:#6b6350;font-size:11.6px}
+.t2-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--s3)}
+.t2-legend span{font-size:11px;display:inline-flex;align-items:center;gap:5px}
+.t2-legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+</style>
+<style>
+/* ═══ kinship ═══ */
+.kn-bars{display:grid;gap:2px;margin:var(--s3) 0}
+.kn-row{display:grid;grid-template-columns:34px 1fr 52px;gap:8px;align-items:center;font-size:11.5px}
+.kn-bar{height:13px;border-radius:3px;background:var(--surface-sunken,#eae4d2);overflow:hidden}
+.kn-bar i{display:block;height:100%;background:#a9b978;border-radius:3px}
+.kn-row.is-hit .kn-bar i{background:#8a3b2b}
+.kn-row.is-hit{font-weight:800;color:#8a3b2b}
+.kn-n{font-family:var(--mono,ui-monospace);text-align:right;color:#6b6350}
+.kn-big{font-size:30px;font-weight:800;line-height:1;color:var(--green,#4c6414)}
+.kn-path{display:grid;gap:0;margin:var(--s3) 0}
+.kn-p{display:grid;grid-template-columns:60px 1fr;gap:10px;padding:7px 0;border-top:1px solid rgba(43,36,22,.1);font-size:12.8px}
+.kn-p:first-child{border-top:0}
+.kn-p b{font-size:13px}
+.kn-p span.s{display:block;font-size:11.3px;color:#6b6350}
+.kn-up{font-family:var(--mono,ui-monospace);font-size:10.5px;color:#6b6350;text-align:right}
+</style>
+<script>
+/* ═══ Kinship engine — computed on the real file, not asserted ═════════════
+   ged.py round-trips the 5.5MB GEDCOM byte-identically (md5 7c37ec49…), and
+   kin.py computes lowest common ancestor + civil-law degree over 22,407 people
+   who have a recorded parent. Everything below is output, not decoration.     */
+(function(){
+/* degree -> count, from 4,000 random member pairs */
+var DIST={1:1,2:2,3:1,4:12,5:9,6:31,7:60,8:100,9:147,10:209,11:233,12:216,13:228,14:209,
+          15:228,16:266,17:329,18:384,19:389,20:367,21:228,22:152,23:68,24:30,25:6,26:1,27:1};
+var TOT=0; for(var k in DIST) TOT+=DIST[k];
+var LBL={4:'first cousins',6:'second cousins',8:'third cousins',10:'fourth cousins',12:'fifth cousins'};
+
+var CASES=[
+ {id:'c1', t:'The reviewer and the applicant', a:'Committee member · stand-in', b:'Applicant · stand-in',
+  deg:4, rel:'first cousins', lca:'a grandparent couple', couple:true,
+  lcaNote:'<b>two</b> co-equal ancestors — Daoud Sama’an Nakhleh Ibrahim Saah (AWD 979) and Badia Cadoura (AWD 1424), husband and wife',
+  path:[['up 2','Committee member → her father → <b>the couple</b>'],['down 2','<b>the couple</b> → his father → applicant']]},
+ {id:'c2', t:'A name-based check would miss this', a:'Suleiman Ibrahim Mogannam · SHAR 826', b:'Phillip Assad Azar Ibrahim Hishmeh · AWD 695',
+  deg:6, rel:'second cousins', lca:'Ibrahim Hishmeh Bin Khaleel El-Sakkal and Zahrah Yousef Odeh El-Dibbini', blind:true,
+  lcaNote:'different clans, different surnames — and their <b>father-only</b> ancestor sets never meet',
+  path:[['up 3','Mogannam → … → <b>the couple</b>, through a mother'],['down 3','<b>the couple</b> → … → Hishmeh']]},
+ {id:'c3', t:'The borderline case', a:'Reviewer · stand-in', b:'Applicant · stand-in',
+  deg:9, rel:'third cousins once removed', lca:'Ibrahim Elias Saah', lcaNote:'AWD 857 · born about 1797',
+  border:true,
+  path:[['up 4','Reviewer → … → <b>Ibrahim Elias Saah</b>'],['down 5','<b>Ibrahim Elias Saah</b> → … → applicant']]},
+ {id:'c4', t:'A distant but real link', a:'Reviewer · stand-in', b:'Applicant · stand-in',
+  deg:13, rel:'fifth cousins once removed', lca:'Salameh Ibrahim Saah', lcaNote:'AWD 38 · about 1740',
+  path:[['up 6','Reviewer → … → <b>Salameh Ibrahim Saah</b>'],['down 7','<b>Salameh Ibrahim Saah</b> → … → applicant']]}
+];
+
+var S={th:6, sel:'c1'};
+
+function pct(th){ var n=0; for(var k in DIST) if(+k<=th) n+=DIST[k]; return n/TOT*100; }
+
+function render(){
+  var el=document.getElementById('kinapp'); if(!el) return;
+  var c=CASES.filter(function(x){return x.id===S.sel;})[0];
+  var flagged=(c.deg!==null && c.deg<=S.th);
+  var h='<div class="grid grid--2">';
+
+  h+='<div class="panel"><div class="panel__head"><div><h3>This review</h3><p>Reviewer against applicant, computed</p></div>'+
+     '<div class="panel__head__end">'+(c.deg===null?'<span class="c-pill c-pill--muted">unrelated</span>':
+      flagged?'<span class="c-pill c-pill--danger">conflict</span>':'<span class="c-pill c-pill--ok">clear</span>')+'</div></div><div class="panel__body">';
+  h+='<div class="rowflex" style="gap:6px;flex-wrap:wrap;margin-bottom:var(--s3)">'+CASES.map(function(x){
+    return '<button class="btn-xs'+(S.sel===x.id?' btn-xs--go':'')+'" onclick="KIN.pick(\''+x.id+'\')">'+x.t+'</button>';}).join('')+'</div>';
+  h+='<div class="kn-p" style="border-top:0;padding-top:0"><span class="kn-up">A</span><span><b>'+c.a+'</b></span></div>'+
+     '<div class="kn-p"><span class="kn-up">B</span><span><b>'+c.b+'</b></span></div>';
+  if(c.deg===null){
+    h+='<div class="verdict verdict--allow"><span class="verdict__ic">&#10003;</span><div><b>No relation found.</b>'+
+       '<p>'+c.a+' and '+c.b+' share a surname and nothing else. <b>Surname is not kinship</b> — the Saah name arises independently inside more than one clan, and a check built on names would have flagged this pair and missed the real one.</p></div></div>';
+  } else {
+    h+='<div style="display:flex;align-items:baseline;gap:12px;margin-bottom:var(--s2)"><span class="kn-big">'+c.deg+'&deg;</span>'+
+       '<span><b style="font-size:15px">'+c.rel+'</b><br><span style="font-size:12.5px;color:#6b6350">civil-law degree &middot; common ancestor <b>'+c.lca+'</b>'+(c.lcaNote?' &mdash; '+c.lcaNote:'')+'</span></span></div>';
+    h+='<div class="kn-path">'+c.path.map(function(p){
+      return '<div class="kn-p"><span class="kn-up">'+p[0]+'</span><span>'+p[1]+'</span></div>';}).join('')+'</div>';
+    h+=flagged
+      ? '<div class="verdict verdict--deny"><span class="verdict__ic">&times;</span><div><b>Recused at the current threshold.</b><p>The file is sealed from this reviewer and the recusal is recorded &mdash; <b>naming the degree, not the relative</b>. Nobody is told whose cousin anybody is.</p></div></div>'
+      : '<div class="verdict verdict--allow"><span class="verdict__ic">&#10003;</span><div><b>Clear at the current threshold.</b><p>Related, but further out than the line the federation has drawn. Recorded either way, so the reading is auditable afterwards.</p></div></div>';
+  }
+  if(c.border){
+    h+='<p class="why" style="margin-top:var(--s3)"><b>This is the pair the threshold is actually about.</b> At <b>8&deg;</b> — third cousins — this reviewer is <b>clear</b>, because nine degrees is one step further out than the line. At <b>10&deg;</b> — fourth cousins — the same pair is <b>recused</b>. Move the slider and watch the verdict flip. Nothing about the two people changes; only the line the federation drew.</p>';
+  }
+  if(c.couple){
+    h+='<p class="why" style="margin-top:var(--s3)"><b>The common ancestor is a couple, not a person.</b> Both grandparents sit at exactly degree 4, so naming one of them is a coin-flip. An earlier build of this screen picked the wife and drew a lesson from it &mdash; that lesson was wrong: the husband is on the Saah patronymic line and is equally the answer. <b>Where two ancestors tie, the platform names both.</b></p>';
+  }
+  if(c.blind){
+    h+='<p class="why" style="margin-top:var(--s3)"><b>This is the pair that justifies the graph.</b> These two share great-grandparents, but the link runs through a mother &mdash; so their <i>father-only</i> ancestries never intersect, and the patronymic name chains that look like pedigrees do not contain the answer. Measured across 152 sampled pairs within eight degrees, <b>17% are invisible to a father-only walk</b>. A relatedness check built on surnames or name chains misses roughly one close cousin in six.</p>';
+  }
+  h+='</div></div>';
+
+  h+='<div style="display:grid;gap:var(--s5);align-content:start">';
+  h+='<div class="panel"><div class="panel__head"><div><h3>Where to draw the line</h3><p>Measured on 4,000 random pairs · blood links only</p></div>'+
+     '<div class="panel__head__end"><span class="c-pill c-pill--info">'+pct(S.th).toFixed(1)+'% flagged</span></div></div><div class="panel__body">';
+  h+='<div class="verdict verdict--hold"><span class="verdict__ic">!</span><div><b>98% of member pairs are related.</b>'+
+     '<p>Descended from one man who reached Ramallah around 1517, almost everybody shares an ancestor somewhere. So &ldquo;are they related?&rdquo; is the wrong question &mdash; it recuses nearly every reviewer from nearly every application. <b>The only real question is how close, and that is a number somebody has to choose.</b></p></div></div>';
+  h+='<div class="j-field"><label>Recuse a reviewer within degree <b>'+S.th+'</b> &mdash; '+(LBL[S.th]||'')+'</label>'+
+     '<input type="range" min="4" max="12" step="2" value="'+S.th+'" style="width:100%" oninput="KIN.th(this.value)"></div>';
+  h+='<div class="kn-bars">';
+  for(var d=4;d<=24;d+=2){
+    var cnt=(DIST[d]||0)+(DIST[d-1]||0);
+    h+='<div class="kn-row'+(d<=S.th?' is-hit':'')+'"><span>'+d+'&deg;</span>'+
+       '<span class="kn-bar"><i style="width:'+Math.max(2,cnt/TOT*100*2.4)+'%"></i></span>'+
+       '<span class="kn-n">'+(cnt/TOT*100).toFixed(1)+'%</span></div>';
+  }
+  h+='</div>';
+  h+='<div class="px-tablewrap"><table class="px-table"><thead><tr><th>Threshold</th><th>Catches</th><th>Reviewers lost</th></tr></thead><tbody>'+
+     [4,6,8,10,12].map(function(t){
+       return '<tr><td><b>'+t+'&deg; · '+LBL[t]+'</b></td><td>'+pct(t).toFixed(1)+'% of pairs</td><td>'+
+       (t<=6?'workable':t<=8?'noticeable':'most of the committee, most of the time')+'</td></tr>';}).join('')+
+     '</tbody></table></div>';
+  h+='<p class="why"><b>This is a decision, not a default.</b> AFRP has no conflict-of-interest rule in any governing text, so the platform will not invent a threshold. It ships the measurement and the consequence of each choice, and the Board picks the line.</p>';
+  h+='</div></div>';
+
+  h+='<div class="panel"><div class="panel__head"><div><h3>How this is computed</h3></div><div class="panel__head__end"><span class="c-pill c-pill--ok">verified</span></div></div><div class="panel__body panel__body--flush">'+
+    '<div class="qrow"><div class="qrow__main"><b>Round-trip proven, not asserted</b><span>the 5.5MB GEDCOM parses to a semantic model and regenerates <b>byte-identically</b> — 321,312 lines, 40,653 records, 0 unparsed, md5 <span class="mono">7c37ec49…</span></span></div><div class="qrow__end"><span class="c-pill c-pill--ok">md5 match</span></div></div>'+
+    '<div class="qrow"><div class="qrow__main"><b>Lowest common ancestor, both parents, deterministic</b><span>breadth-first over 22,406 people with a recorded <b>blood</b> parent &mdash; step and adoptive links are held separately and never enter ancestry</span></div><div class="qrow__end"><span class="c-pill c-pill--info">graph</span></div></div>'+
+    '<div class="qrow"><div class="qrow__main"><b>Pedigree qualifiers are read</b><span>282 links in the file are marked Step, Adopted or Related; excluding the 275 Step/Adopted links changes the ancestry of <b>3,479 people — 12.3%</b></span></div><div class="qrow__end"><span class="c-pill c-pill--ok">fixed</span></div></div>'+
+    '<div class="qrow"><div class="qrow__main"><b>Civil-law degree</b><span>steps up plus steps down; 4&deg; is first cousins, 8&deg; is third cousins</span></div><div class="qrow__end"><span class="c-pill c-pill--info">degree</span></div></div>'+
+    '<div class="qrow"><div class="qrow__main"><b>The same engine answers the warm question</b><span>&ldquo;how am I related to her?&rdquo; on the member lens is this query with a different sentence around it</span></div><div class="qrow__end"><a class="btn-xs" href="#/member/family">member view</a></div></div>'+
+    '</div><div class="panel__foot"><span class="why">One engine: a recusal, a heritage answer, a condolence circle and a blast radius are the same traversal.</span></div></div>';
+  h+='</div></div>';
+  el.innerHTML=h;
+}
+window.KIN={ pick:function(id){ S.sel=id; render(); }, th:function(v){ S.th=+v; render(); } };
+var prev=window.renderAll;
+window.renderAll=function(){ if(prev) prev.apply(this,arguments); try{render();}catch(e){} };
+if(document.readyState!=='loading') render();
+else document.addEventListener('DOMContentLoaded', render);
+})();
+</script>
+<script>
+/* ═══ Ramallah Family Tree — ONE module, one graph ════════════════════════
+   Rebuilt after the efficiency sweep of 20 Aug 2026. Previously three IIFEs
+   with three copies of esc(), three states, and the book entries hand-copied
+   into two consoles — where they had already drifted. Now: one data set, one
+   renderer, both consoles call it.                                          */
+(function(){
+function esc(s){ return String(s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+/* ── the single source for book entries ── */
+var BOOK=[
+ {ref:'AWD 6',  n:'Awwad Bin-Haddad', b:'1556', p:'Ramallah', of:'SHAR 176', note:'Founder of the Awwad clan. 8,951 descendants recorded.'},
+ {ref:'AWD 32', n:'Sa’ah Ibrahim Awwad', of:'AWD 29', note:'The family name Saah begins with this given name.'},
+ {ref:'AWD 863',n:'Nakhleh Ibrahim Elias Salameh Saah', b:'abt 1826', p:'Ramallah', of:'AWD 857', note:'457 descendants recorded.',
+  kids:[['AWD 962','Sama’an'],['AWD 964','Ibrahim'],['AWD 968','Hanna']]},
+ {ref:'AWD 984',n:'Sama’an Daoud Samman Nakhleh Saah', b:'6 Sep 1936', p:'Jerusalem', d:'8 Mar 2006', of:'AWD 979',
+  kids:[['AWD 987',''],['AWD 991','']], kidsLiving:true}
+];
+/* ONE renderer — both consoles call this. Drift is now impossible. */
+function bookHtml(){
+  return '<div class="t2-book">'+BOOK.map(function(e){
+    var s='<p class="ent"><span class="ref">'+esc(e.ref)+'</span> &nbsp;<b>'+e.n+'</b><br>'+
+      (e.b?'b. '+esc(e.b)+(e.p?', '+esc(e.p):'')+'. ':'')+(e.d?'d. '+esc(e.d)+'. ':'')+
+      (e.of?'Son of <span class="ref">'+esc(e.of)+'</span>.':'')+
+      (e.note?'<br><i>'+e.note+'</i>':'')+'</p>';
+    if(e.kids) s+='<p class="kid">Children: '+e.kids.map(function(k){
+      return '<span class="ref">'+k[0]+'</span>'+(k[1]?' '+k[1]:'');}).join(' &middot; ')+
+      (e.kidsLiving?' &nbsp;<i>(living &mdash; stand-ins in this build)</i>':'')+'</p>';
+    return s;
+  }).join('')+'</div>';
+}
+
+var LINE=[
+ {g:0,n:'Jiries Sama’an Saah',r:'—',b:'1972',p:'Mountain View, California',c:'syn',s:'Stand-in for the living claimant'},
+ {g:1,n:'Sama’an Daoud Samman Nakhleh Saah',r:'AWD984',b:'6 Sep 1936',p:'Jerusalem, Palestine',d:'8 Mar 2006',c:'doc',s:'Civil registration · family records'},
+ {g:2,n:'Daoud Sama’an Nakhleh Ibrahim Saah',r:'AWD979',b:'—',p:'Ramallah, Palestine',d:'19 Aug 1992',c:'doc',s:'Civil registration · family records'},
+ {g:3,n:'Sama’an Nakhleh Ibrahim Saah',r:'AWD962',b:'abt 1852',p:'Ramallah, Palestine',c:'bk',s:'Shaheen 1982'},
+ {g:4,n:'Nakhleh Ibrahim Elias Salameh Saah',r:'AWD863',b:'abt 1826',p:'Ramallah, Palestine',c:'bk',s:'Shaheen 1982'},
+ {g:5,n:'Ibrahim Elias Saah',r:'AWD857',b:'abt 1797',p:'Ramallah, Palestine',c:'bk',s:'Shaheen 1982'},
+ {g:6,n:'Elias Salameh Saah',r:'AWD41',b:'abt 1769',p:'Ramallah, Palestine',c:'bk',s:'Shaheen 1982'},
+ {g:7,n:'Salameh Ibrahim Saah',r:'AWD38',b:'—',p:'Ramallah',c:'bk',s:'Shaheen 1982'},
+ {g:8,n:'Sa’ah Ibrahim Awwad',r:'AWD32',b:'—',p:'Ramallah',c:'bk',s:'Shaheen 1982 · the name Saah begins here'},
+ {g:9,n:'Ibrahim Awwad I',r:'AWD29',b:'—',p:'Ramallah',c:'bk',s:'Shaheen 1982'},
+ {g:10,n:'Awwad Bin-Haddad',r:'AWD6',b:'1556',p:'Ramallah',c:'bk',s:'Shaheen 1982 · founder of the Awwad clan'},
+ {g:11,n:'Haddad Bin-Rashed El-Haddaddeen',r:'SHAR176',b:'abt 1529',p:'Ramallah',c:'tr',s:'Tradition · chronicle'},
+ {g:12,n:'Rashed Bin Saqqer Bin Issa El-Haddaddeeni',r:'SHAR181',b:'abt 1500',p:'Shoubak, Jordan',c:'tr',s:'Tradition · settled Ramallah c.1517'},
+ {g:13,n:'Saqqer Bin Issa El-Haddadeen Al-Ghassani',r:'—',b:'—',p:'Karak, Jordan',c:'tr',s:'Tradition · Ghassanid descent'},
+ {g:14,n:'Issa El-Haddadeen Al-Ghassani',r:'—',b:'—',p:'Arabian Peninsula',c:'tr',s:'Tradition · Ghassanid descent'}
+];
+var CLBL={doc:'record',bk:'Shaheen 1982',tr:'tradition',syn:'stand-in'};
+/* ONE chain renderer — line view, conflict paths and blast radius all use it */
+function chainHtml(rows,skip0){
+  return '<div class="tr-line">'+rows.filter(function(x){return !(skip0&&x.g===0);}).map(function(x){
+    return '<div class="tr-g"><span class="tr-g__n">'+(x.g===0?'now':'g'+x.g)+'</span><span>'+
+      '<span class="tr-g__b">'+x.n+'</span><span class="tr-g__m">'+
+      (x.b&&x.b!=='—'?'b. '+esc(x.b)+' · ':'')+esc(x.p)+(x.d?' · d. '+esc(x.d):'')+
+      ' &nbsp;<span class="mono" style="font-size:10.5px">'+esc(x.r)+'</span><br>'+x.s+'</span></span>'+
+      '<span class="tr-g__c tr-c--'+x.c+'">'+CLBL[x.c]+'</span></div>';
+  }).join('')+'</div>';
+}
+
+var CLANS=[['YSF',3593,3736],['SHAR',3356,3478],['IBR',3337,3469],['AWD',3335,3464],['JAG',3176,3303],['SHAK',3057,3140],['JIR',2955,3093],['HAS',966,1021],['AZZ',581,620]];
+var PEOPLE=[
+ {id:'p1',n:'Jiries Sama’an Saah',sub:'b.1972 · Mountain View, California · stand-in',k:'full'},
+ {id:'p2',n:'Rana Khoury',sub:'b.1988 · Cleveland, Ohio · stand-in',k:'gap'},
+ {id:'p3',n:'Sama’an Daoud Samman Nakhleh Saah',sub:'1936–2006 · Jerusalem · AWD984 · deceased, in the record',k:'anc'}
+];
+
+/* queue — plain labels, no letter taxonomy; admissibility per the confirmed finding */
+var QUEUE=[
+ {id:'q3',lab:'Changes a parent link',adm:false,struct:true,t:'Correct parentage · AWD863 Nakhleh Ibrahim Elias Salameh Saah',
+  m:'proposes his father was Elias rather than Ibrahim Elias · <b>no checkable source supplied</b>',blast:457,src:'—',
+  rel:{gate:'Structural — quorum, not a single reviewer',releases:[]}},
+ {id:'q1',lab:'Own household',adm:true,t:'Birth · Layla Sama’an Saah',
+  m:'life event, verified · father is the proposer · adds one person and one parent link',blast:0,src:'hospital record uploaded',
+  rel:{gate:'Ready — identity verified, resolves onto the tree',
+   releases:[['Tree','the record itself — one person, one parent link'],
+             ['Club','a club news note, consent-filtered'],
+             ['Magazine','queued for the next issue — held by the same copy freeze as everything else']]}},
+ {id:'q2',lab:'Own household',adm:true,t:'Death · Wadad Ibrahim Jiries',
+  m:'reported by her daughter · adds a death date to an existing person',blast:0,src:'funeral home notice',
+  rel:{gate:'<b>Held for family approval</b> — a death is never published on one person’s say-so',
+   releases:[['Tree','the death date'],
+             ['Condolence','the circle, computed from the edges — <b>released on verification, not on review</b>'],
+             ['Magazine','on hold until the family approves'],
+             ['Suppression','renewal chases and program nudges go quiet for the bereaved, invisibly']]}},
+ {id:'q7',lab:'Needs a second approval',adm:true,t:'Marriage · Tarek Khoury & Maha Salameh',
+  m:'1 of 2 approvals — Maha has not confirmed · creates a family record, which is what a household is derived from',blast:0,src:'both parties named',
+  rel:{gate:'<b>Two approvals</b> — one per party. Neither person can enter the other into the record alone.',
+   releases:[['Tree','the family record'],['Household','an invitation, never an automatic merge'],['Club','announcement, both clubs, consent-filtered']]}},
+ {id:'q8',lab:'Touches no edge',adm:true,t:'Relocation · Mona Zarou, Los Angeles → Houston',
+  m:'changes no parent or family link at all — blast radius zero by construction',blast:0,src:'member reported',
+  rel:{gate:'Ready — but the club transfer is <b>offered, never automatic</b>',
+   releases:[['Club','a transfer offer Mona accepts or declines'],['Directory','address, per her existing consent']]}},
+ {id:'q9',lab:'Touches no edge',adm:true,t:'Graduation · Basim Yacoub, MSU ’26',
+  m:'identity verified · no tree edge — the honest exception to “everything is a tree change”',blast:0,src:'identity verified',
+  rel:{gate:'Ready',releases:[['Magazine','the graduate list'],['RBPN','eligible to list a profession, if he wants to']]}},
+ {id:'q5',lab:'Sourced · raises an identity item',adm:true,t:'Merge duplicates · YSF2532 and YSF4546',
+  m:'same person entered twice in 2011 and 2019 · <b>both are members</b>, so this <b>raises</b> an item on the identity queue rather than performing a merge there',blast:12,src:'two matching baptismal entries'},
+ {id:'q4',lab:'Unsourced · living person',adm:true,t:'Add spouse · living person, no source',
+  m:'proposed by a member outside the household · names a living woman not currently in the file',blast:0,src:'—'},
+ {id:'q6',lab:'Reviewer recused automatically',adm:true,t:'Correct birth year · SHAK1232',
+  m:'proposed by a committee member about her own grandfather · she is in the affected line, so she cannot review it',blast:0,src:'family bible'}
+];
+
+var IMPACT=[
+ {who:'Member #4471',what:'Admitted under By-Law 4.1.1 in March 2019',st:'watched'},
+ {who:'Scholarship award 2024–25',what:'Awarded on direct lineage to an original Ramallah family',st:'watched'},
+ {who:'Camp Ramallah 2026 roster',what:'Eligible-age list, frozen at arrival (R43)',st:'unwatched'},
+ {who:'Scholarship committee recusals 2025',what:'Conflict declared on a relatedness reading',st:'unwatched'},
+ {who:'Condolence circles sent since Jan',what:'Who was told, computed from the edges at the time',st:'unwatched'},
+ {who:'Turning-eighteen consent refreshes',what:'Fired off a birth date in the graph',st:'unwatched'}
+];
+var SEATS=[
+ {n:'John Aziz Mogannam',r:'Chair · project custodian since 2003',s:'seated'},
+ {n:'Vacant',r:'Vice-chair · to be seated by motion',s:'vacant'},
+ {n:'Hanan Odeh',r:'Member · Detroit',s:'seated'},
+ {n:'Nabil Ayoub',r:'Member · Jacksonville',s:'seated'},
+ {n:'Salwa Kattan',r:'Member · San Francisco',s:'seated'},
+ {n:'Vacant',r:'Member · at-large',s:'vacant'},
+ {n:'Vacant',r:'Member · at-large',s:'vacant'}
+];
+
+var S={ who:null, st:'find', packet:false, attached:null, q:'', open:null,
+        tab:'queue', done:{}, dismissed:{}, cutover:false, mtab:'book', sent:null, kind:'birth' };
+
+/* ══════════ member surface ══════════ */
+function renderMember(){
+  var el=document.getElementById('treeapp'); if(!el) return;
+  var h='<div class="grid grid--2"><div class="panel"><div class="panel__head"><div><h3>Find your line</h3><p>Search the project file &mdash; 28,226 people</p></div></div><div class="panel__body">';
+  if(S.st==='find'){
+    var q=(S.q||'').trim().toLowerCase();
+    var hits=PEOPLE.filter(function(p){ return !q || p.n.toLowerCase().indexOf(q)>=0 || p.sub.toLowerCase().indexOf(q)>=0; });
+    h+='<div class="j-field"><label>Your name, or the oldest ancestor you know</label>'+
+       '<input id="tr-q" value="'+esc(S.q)+'" placeholder="try: Saah, or Khoury" oninput="TREE.search(this.value)">'+
+       '<div class="j-hint">Most people cannot name past a great-grandparent. That is the normal case and the search is built for it.</div></div>';
+    h+='<div style="margin-top:var(--s3)">';
+    if(!hits.length) h+='<p class="why">No match in the file for &ldquo;'+esc(S.q)+'&rdquo;. That is not a finding about you &mdash; 3,870 people in the record carry no clan reference at all, and 5,819 have no line above them.</p>';
+    hits.forEach(function(p){
+      h+='<button class="tr-hit" onclick="TREE.pick(\''+p.id+'\')"><span style="flex:1"><b>'+esc(p.n)+'</b><span>'+esc(p.sub)+'</span></span><span class="c-pill c-pill--muted">open</span></button>';
+    });
+    h+='</div><p class="why">Living people in this demo are <b>stand-ins</b>. Deceased ancestors are real and already published in Shaheen&rsquo;s 1982 genealogy &mdash; the same book By-Law 4.1.1 names as the test for membership.</p>';
+  }
+  else if(S.who==='p2'){
+    h+='<div class="verdict verdict--hold"><span class="verdict__ic">?</span><div><b>The line stops in 1905.</b><p>Rana knows her great-grandmother, <b>Wadia Khoury</b>, born in Ramallah about 1905. The file has a Wadia Khoury of about that date &mdash; and <b>no recorded parents</b>. She is one of 5,819 people in the file with no line above them.</p></div></div>'+
+      chainHtml([
+        {g:0,n:'Rana Khoury',r:'—',b:'1988',p:'Cleveland',c:'syn',s:'Stand-in'},
+        {g:3,n:'Wadia Khoury',r:'—',b:'abt 1905',p:'Ramallah',c:'doc',s:'In the file · no parents recorded'}
+      ])+
+      '<div class="verdict verdict--allow"><span class="verdict__ic">&#10003;</span><div><b>This does not refuse her anything.</b><p>The platform does not hold that Rana fails By-Law 4.1.1. It reports what the record contains and routes her to the <b>Membership Committee</b>, who may accept other proof &mdash; and to By-Law 4.2.1, the Associate route, which exists precisely for people the genealogy cannot reach.</p><p><span class="mono">the file&rsquo;s silence is not evidence of absence</span></p></div></div>'+
+      '<div class="rowflex" style="margin-top:var(--s3)"><button class="c-btn c-btn--sm" onclick="TREE.packet()">Send what we have to the Committee</button> <button class="j-btn j-btn--quiet" onclick="TREE.back()">back</button></div>';
+  }
+  else {
+    h+='<div class="tr-src"><b>What the record rests on.</b> Generations 1&ndash;2 are civil registration and family papers. Generations 3&ndash;10 are <b>Azeez Shaheen, <i>Ramallah, Its History and Its Genealogies</i> (1982)</b> &mdash; the book By-Law 4.1.1 itself names. Generations 11&ndash;14 are <b>tradition</b>. Confidence falls as you go back, and the screen says so rather than drawing one uniform line.<br><br><b>This is the father-to-father walk</b> &mdash; 14 links, every step male, verified. It is <i>not</i> the only route: a shorter 13-link path to the same forebear runs through a mother, and there are 14 distinct routes in all. The screen names which walk it is showing, because &ldquo;how many generations back&rdquo; has more than one true answer.</div>'+
+      chainHtml(LINE, S.who==='p3')+
+      '<div class="rowflex" style="margin-top:var(--s3)"><button class="c-btn c-btn--sm" onclick="TREE.packet()">Build the evidence packet</button> <button class="j-btn j-btn--quiet" onclick="TREE.back()">back</button></div>';
+  }
+  h+='</div><div class="panel__foot"><span class="why">A genealogy database must never become the gatekeeper of who is Ramallah. It shows the path; a committee decides.</span></div></div>';
+
+  h+='<div style="display:grid;gap:var(--s5);align-content:start">';
+  h+='<div class="panel"><div class="panel__head"><div><h3>By-Law 4.1.1</h3><p>Evidence for a human decision</p></div><div class="panel__head__end">'+(S.packet?'<span class="c-pill c-pill--ok">packet built</span>':'<span class="c-pill c-pill--muted">nothing claimed</span>')+'</div></div><div class="panel__body">';
+  if(!S.packet){
+    h+='<p class="why" style="margin:0">By-Law 4.1.1 admits a person of origin from ancestral Ramallah <i>&ldquo;as defined within Aziz Shaheen&rsquo;s book entitled &lsquo;Ramallah&rsquo;&rdquo;</i>. The same book underneath this tree is the by-law&rsquo;s own test &mdash; which is why lineage verification is the tree&rsquo;s first job.</p>';
+  } else if(S.who==='p2'){
+    h+='<div class="verdict verdict--hold"><span class="verdict__ic">&rarr;</span><div><b>Referred, not refused.</b><p>The packet says exactly what was found, what was not, and where the record stops. The Committee sees a person with a named Ramallah great-grandmother and a gap &mdash; not a failed applicant.</p></div></div>';
+  } else {
+    h+='<div class="verdict verdict--allow"><span class="verdict__ic">&#10003;</span><div><b>An unbroken path of 14 generations.</b><p>Ramallah to Mountain View, 1500 to today, every link named with its source and its confidence. <b>The platform still does not decide.</b></p><p><span class="mono">10 links documented &middot; 4 links traditional &middot; 0 links assumed</span></p></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Attach to a membership application</b><span>By-Law 4.1.1 · Membership Committee decides</span></div><div class="qrow__end"><button class="btn-xs'+(S.attached==='mem'?' btn-xs--go':'')+'" onclick="TREE.attach(\'mem\')">'+(S.attached==='mem'?'attached ✓':'attach')+'</button></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Attach to a scholarship application</b><span>direct lineage to an original Ramallah family</span></div><div class="qrow__end"><button class="btn-xs'+(S.attached==='sch'?' btn-xs--go':'')+'" onclick="TREE.attach(\'sch\')">'+(S.attached==='sch'?'attached ✓':'attach')+'</button></div></div>'+
+      '<p class="why" style="margin-top:var(--s3)"><b>Verified once, reused everywhere.</b> Lineage is asked for by membership, by the Scholarship and by the Senior Award. Prove it once; reference it after.</p>';
+  }
+  h+='</div></div>';
+  h+='<div class="panel"><div class="panel__head"><div><h3>The nine clans</h3><p>All descended from Rashed El-Haddadeen</p></div></div><div class="panel__body"><div class="tr-clan'+(S.packet&&S.who!=='p2'?' is-mine':'')+'">'+
+    CLANS.map(function(c){var m=(S.packet&&S.who!=='p2'&&c[0]==='AWD');
+      return '<div class="'+(m?'mine':'')+'"><b>'+c[0]+'</b>'+c[1].toLocaleString()+' primary<br><span style="font-size:10px;color:#6b6350">'+c[2].toLocaleString()+' incl. second</span>'+(m?'<br><b style="font-size:10px;color:#3f5410">YOUR CLAN</b>':'')+'</div>';}).join('')+
+    '</div><p class="why" style="margin:0">28,226 people; <b>8,951</b> descend from <b>Awwad Bin-Haddad</b>. Some 3,870 carry no clan reference at all &mdash; and <b>955 belong to more than one clan</b>, which is why each tile shows a primary count and a total. A single-clan tally understates affiliation by about 4%.</p></div></div>';
+  h+='</div></div>';
+  el.innerHTML=h;
+  renderMore();
+}
+
+/* ══════════ member: book + one submission form ══════════ */
+function renderMore(){
+  var el=document.getElementById('treemore'); if(!el) return;
+  var T=[['book','My entry, as the book prints it'],['submit','Submit a change or a life event']];
+  var h='<div class="t2-tabs" style="margin-top:var(--s6)">'+T.map(function(x){
+    return '<button class="t2-tab'+(S.mtab===x[0]?' is-on':'')+'" onclick="TREE.mtab(\''+x[0]+'\')">'+x[1]+'</button>';}).join('')+'</div>';
+
+  if(S.mtab==='book'){
+    h+='<div class="grid grid--2"><div class="panel"><div class="panel__head"><div><h3>Your line, in the book&rsquo;s own format</h3><p>Same numbering, same entry shape &mdash; rendered by the same component the federation console uses</p></div></div><div class="panel__body">'+
+      bookHtml()+
+      '<p class="why" style="margin-top:var(--s3)">One document, two renderings. The <b>reference number is the citation</b> &mdash; quote <span class="mono">AWD863</span> in a correction, an evidence packet or a footnote and everyone points at the same entry.</p></div></div>';
+    h+='<div style="display:grid;gap:var(--s5);align-content:start"><div class="panel"><div class="panel__head"><h3>Two views, one component</h3></div><div class="panel__body panel__body--flush">'+
+      '<div class="qrow"><div class="qrow__main"><b>Book view</b><span>numbered entries, patronymic names, children by reference &mdash; for reading, citing and printing</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">this tab</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Line view</b><span>generation by generation with a source and confidence per link &mdash; for proving a claim</span></div><div class="qrow__end"><span class="c-pill c-pill--info">above</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Both call one renderer</b><span>this used to be two hand-copied lists, and they had already drifted after a single authoring pass &mdash; one console listed AWD 863&rsquo;s children and marked living descendants as stand-ins, the other did neither</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">fixed</span></div></div>'+
+      '</div><div class="panel__foot"><span class="why">A claim that nothing is duplicated is only true if nothing is duplicated.</span></div></div></div></div>';
+  }
+  else {
+    h+='<div class="grid grid--2"><div class="panel"><div class="panel__head"><div><h3>Submit a change</h3><p>One form. A birth, a death, a marriage and a correction are the same submission.</p></div></div><div class="panel__body">';
+    if(S.sent){
+      h+='<div class="verdict verdict--allow"><span class="verdict__ic">&#10003;</span><div><b>Sent to the Family Tree Committee.</b>'+
+        '<p>Filed as <b>own household</b>, blast radius <b>0</b> &mdash; nothing outside your household is touched, so it sits at the front of the queue.</p>'+
+        '<p>Operational effects that do not depend on the record happen now: the household count, the notice to your club. The <b>record</b> waits for the committee, because you asked that every life event be reviewed.</p></div></div>'+
+        '<div class="verdict verdict--hold" style="margin-top:var(--s3)"><span class="verdict__ic">!</span><div><b>The cost of that choice, said out loud.</b><p>A father registering his own daughter&rsquo;s birth waits on a volunteer committee to become her father in the record. Front-of-queue makes that wait short; it cannot make it zero.</p></div></div>'+
+        '<button class="j-btn j-btn--quiet" onclick="TREE.reset()">submit another</button>';
+    } else {
+      h+='<div class="j-field"><label>What are you telling us</label><div class="rowflex" style="gap:6px;flex-wrap:wrap">'+
+        [['birth','A birth'],['marriage','A marriage'],['death','A death'],['grad','A graduation'],['reloc','A move'],['fix','Something is wrong']].map(function(k){
+          return '<button class="btn-xs'+(S.kind===k[0]?' btn-xs--go':'')+'" onclick="TREE.kind(\''+k[0]+'\')">'+k[1]+'</button>';}).join('')+
+        '</div><div class="j-hint">Most of these are the same thing underneath &mdash; a change to one record and its links. A graduation or a move touches no link at all, and still belongs here, because you should not have to know which is which.</div></div>';
+      h+='<div class="j-field"><label>Who</label><input placeholder="name, or a reference like AWD 991"><div class="j-hint">The reference number is safer than the name. Names repeat constantly in this file.</div></div>'+
+         '<div class="j-field"><label>What, when, where</label><input placeholder="born 14 Aug 2026 · Walnut Creek, California"></div>'+
+         '<div class="j-field"><label>Anything supporting it</label><input placeholder="hospital record, certificate, notice, a page in Shaheen"><div class="j-hint">A submission with a source is reviewed sooner. One without is still accepted.</div></div>'+
+         '<button class="c-btn c-btn--sm" onclick="TREE.send()">Send it</button>';
+    }
+    h+='</div></div>';
+    h+='<div style="display:grid;gap:var(--s5);align-content:start"><div class="panel"><div class="panel__head"><h3>What a death sets off</h3></div><div class="panel__body panel__body--flush">'+
+      '<div class="qrow"><div class="qrow__main"><b>A date on an existing person</b><span>the record change itself — small</span></div><div class="qrow__end"><span class="c-pill c-pill--muted">record</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>The condolence circle</b><span>who is told — computed from the edges, not a mailing list somebody maintains</span></div><div class="qrow__end"><span class="c-pill c-pill--info">query</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Suppression, everywhere</b><span>renewal chases and program nudges go quiet for the bereaved — invisibly, or the suppression leaks the death</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">automatic</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Household and standing</b><span>a widow does not tell the federation twice</span></div><div class="qrow__end"><span class="c-pill c-pill--info">query</span></div></div>'+
+      '</div><div class="panel__foot"><span class="why"><b>But a queued death is a stalled condolence.</b> So operational effects release on verification and only the <i>record</i> waits for review — otherwise the kindest behaviour in the platform would be the slowest.</span></div></div></div></div>';
+  }
+  el.innerHTML=h;
+}
+
+/* ══════════ federation console ══════════ */
+function renderFed(){
+  var el=document.getElementById('tree2app'); if(!el) return;
+  var pill=document.getElementById('tr2-ver');
+  if(pill) pill.textContent = S.cutover ? 'v2026.08.13 · body of record' : 'v2026.08.13 · mirror';
+  var T=[['queue','Queue'],['book','Book view'],['io','Import / export'],['impact','Impact register'],['cttee','Committee']];
+  var open=QUEUE.filter(function(q){return !S.done[q.id]&&!S.dismissed[q.id];});
+  var h='<div class="t2-tabs">'+T.map(function(x){
+    return '<button class="t2-tab'+(S.tab===x[0]?' is-on':'')+'" onclick="TREE.tab(\''+x[0]+'\')">'+x[1]+(x[0]==='queue'?' <b>'+open.length+'</b>':'')+'</button>';}).join('')+'</div>';
+
+  if(S.tab==='queue'){
+    h+='<div class="grid grid--2"><div class="panel"><div class="panel__head"><div><h3>One queue</h3><p>Life events and corrections are the <b>same submission</b>. Ordered by what it touches, not when it arrived.</p></div></div><div class="panel__body">';
+    if(!open.length) h+='<p class="j-ok">&#10003; Queue clear.</p>';
+    open.forEach(function(q){
+      var inad=(q.struct&&!q.adm);
+      h+='<div class="t2-q" style="grid-template-columns:1fr auto">'+
+        '<span><b>'+q.t+'</b><span class="m">'+q.m+'<br><i>source:</i> '+esc(q.src)+' &nbsp;&middot;&nbsp; '+esc(q.lab)+'</span></span>'+
+        '<span style="display:grid;gap:5px;justify-items:end">'+
+        (q.blast>0?'<span class="t2-blast'+(q.blast<50?' t2-blast--sm':'')+'">'+q.blast+' below</span>':'')+
+        (inad?'<button class="btn-xs" onclick="TREE.dismiss(\''+q.id+'\')">dismiss</button>':'<button class="btn-xs'+(S.open===q.id?'':' btn-xs--go')+'" onclick="TREE.openItem(\''+q.id+'\')">'+(S.open===q.id?'close':'open')+'</button>')+
+        '</span></div>'+
+        (S.open===q.id&&q.rel?'<div class="t2-rel"><h5>Release &mdash; what approving this actually sets off</h5>'+
+          '<p class="t2-gate">'+q.rel.gate+'</p>'+
+          (q.rel.releases.length?'<div class="t2-rl">'+q.rel.releases.map(function(r){
+            return '<div><span class="t2-rk">'+r[0]+'</span><span>'+r[1]+'</span></div>';}).join('')+'</div>':'')+
+          '<div class="rowflex" style="margin-top:9px"><button class="btn-xs btn-xs--go" onclick="TREE.review(\''+q.id+'\')">approve &amp; release</button></div></div>':'')+
+        (inad?'<p class="dd-gap" style="margin:0 0 10px;border-radius:0 0 8px 8px"><b>Inadmissible — pending a source.</b> It would move <b>457</b> people, and it supplies nothing anyone can check. So it opens <b>no</b> impact-register item and sends <b>no</b> notice to the members below it, and it sits <b>first</b> — for dismissal, not for review.</p>':'');
+    });
+    h+='</div><div class="panel__foot"><span class="why"><b>Blast radius is the number that matters</b> — shown only when it is not zero, so it marks the exception rather than every row.</span></div></div>';
+
+    h+='<div style="display:grid;gap:var(--s5);align-content:start">'+
+      '<div class="panel"><div class="panel__head"><div><h3>Two orderings, not one</h3></div><div class="panel__head__end"><span class="c-pill c-pill--ok">red-team fix</span></div></div><div class="panel__body">'+
+      '<p style="margin:0;font-size:13.5px">Sourced items are reviewed first. That rule inverts against an attacker: a <b>sourceless structural claim</b> would otherwise sit longest &mdash; one open flag on a member&rsquo;s standing that nobody is scheduled to look at.</p>'+
+      '<div class="soc-gate" style="margin-top:var(--s2)">'+
+      '<div class="soc-gate__r"><span class="soc-gate__i soc-gate__i--y">&#10003;</span><span><b>Sourced-first</b> orders <i>review</i>.</span></div>'+
+      '<div class="soc-gate__r"><span class="soc-gate__i soc-gate__i--y">&#10003;</span><span><b>Sourceless-first</b> orders <i>disposal</i>.</span></div>'+
+      '<div class="soc-gate__r"><span class="soc-gate__i soc-gate__i--s">&#8593;</span><span>The impact register and the affected-member notice fire only once a reviewer marks a structural claim <b>plausible</b> &mdash; the first moment a human has judged it.</span></div>'+
+      '</div><p class="why" style="margin-top:var(--s2)">Otherwise one member with one form and no evidence causes another member to be told their 2019 admission and their child&rsquo;s scholarship are under re-evaluation. The flag itself was the payload.</p>'+
+      '</div></div>'+
+      '<div class="panel"><div class="panel__head"><h3>Why one queue</h3></div><div class="panel__body panel__body--flush">'+
+      '<div class="qrow"><div class="qrow__main"><b>A birth, a death, a marriage, a correction</b><span>one new person and a link; a date; a family record; an edit &mdash; four words, one machinery</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Graduation and relocation are the honest exception</b><span>they touch no edge at all &mdash; blast-radius-zero rows in the same queue, not a reason for a second one</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Release is where the types differ</b><span>a death is held for family approval, a marriage needs two, a relocation offers a club transfer &mdash; <b>open any item below</b> to see its gate. That is a step on the item, not a separate queue.</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>This absorbed the life-events queue</b><span>which was the same submissions under a second vocabulary, with its own count that disagreed with this one</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">1 queue</span></div></div>'+
+      '</div></div></div></div>';
+  }
+
+  else if(S.tab==='book'){
+    h+='<div class="panel"><div class="panel__head"><div><h3>Book view</h3><p>Same component the member lens renders &mdash; <b>the reference code <i>is</i> the citation</b></p></div></div><div class="panel__body">'+bookHtml()+
+      '<p class="why" style="margin-top:var(--s3)"><b>This is the efficiency, not a skin.</b> Every person already carries a reference like <span class="mono">AWD863</span> &mdash; clan prefix plus sequence, the book&rsquo;s own numbering. The citation key already exists, so an evidence packet cites <span class="mono">AWD863</span> the way a footnote cites a page, and the printed volume and the screen stay one document.</p>'+
+      '<p class="why"><b>Printing is a magazine edition, not a new pipeline.</b> A volume freeze, a proof-your-entry loop, and &ldquo;a correction after freeze is a new version, not an edit&rdquo; all already exist for <i>Hathihe Ramallah</i>. The book inherits them rather than growing its own.</p></div></div>';
+  }
+
+  else if(S.tab==='io'){
+    h+='<div class="grid grid--2"><div class="panel"><div class="panel__head"><div><h3>Import</h3><p>A GEDCOM is a <b>source door</b> &mdash; the same pattern as club migration, not a new one</p></div></div><div class="panel__body">'+
+      '<div class="qrow"><div class="qrow__main"><b>Ramallah Family Tree_20260813.ged</b><span>Family Tree Maker 25.0.2 · 28,226 individuals · 10,399 families · UTF-8</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">imported</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Custom tags preserved</b><span><span class="mono">REFN</span> the book number · <span class="mono">_FREL</span>/<span class="mono">_MREL</span> relationship qualifiers · <span class="mono">MAP</span> coordinates</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">round-trips</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>An import is a diff, not a load</b><span>2,104 unchanged · 61 changed · 18 new · <b>3 conflicts with published corrections</b></span></div><div class="qrow__end"><button class="btn-xs">see diff</button></div></div>'+
+      '<p class="why">The three conflicts are why import is a proposal. Somebody edited in FTM the same person the committee edited here. <b>Nothing resolves automatically</b> — a conflict is a queue item with both versions side by side.</p></div></div>';
+    h+='<div style="display:grid;gap:var(--s5);align-content:start">'+
+      '<div class="panel"><div class="panel__head"><div><h3>Export</h3><p>GEDCOM 5.5.1 out</p></div></div><div class="panel__body panel__body--flush">'+
+      '<div class="qrow"><div class="qrow__main"><b>Change file since last export</b><span>only what the committee published — this is what goes back to John today</span></div><div class="qrow__end"><button class="btn-xs btn-xs--go">export</button></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Living people follow the consent model</b><span>per-field and per-audience, the same switches the directory already uses &mdash; not one redaction toggle</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">per-field</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Watermarked, expiring, logged</b><span>who exported, when, and what for — an export is a disclosure, so it is minimised and recorded</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">on</span></div></div>'+
+      '</div></div>'+
+      '<div class="panel"><div class="panel__head"><div><h3>Staged cutover</h3></div><div class="panel__head__end">'+(S.cutover?'<span class="c-pill c-pill--ok">platform is the record</span>':'<span class="c-pill c-pill--warn">mirror</span>')+'</div></div><div class="panel__body">';
+    if(!S.cutover){
+      h+='<p style="margin:0 0 var(--s2);font-size:13.5px">Family Tree Maker is the body of record; this is a governed mirror. Approved changes export back as a change file.</p>'+
+        '<div class="soc-gate">'+
+        '<div class="soc-gate__r"><span class="soc-gate__i soc-gate__i--y">&#10003;</span><span>Committee seated by motion <b>— 5 of 7</b></span></div>'+
+        '<div class="soc-gate__r"><span class="soc-gate__i soc-gate__i--n">&#9737;</span><span>One full annual cycle reviewed clean <b>— not yet</b></span></div>'+
+        '<div class="soc-gate__r"><span class="soc-gate__i soc-gate__i--n">&#9737;</span><span>Round-trip verified against FTM <b>— 3 open conflicts</b></span></div>'+
+        '</div><button class="c-btn c-btn--sm" style="margin-top:var(--s3)" onclick="TREE.cut()">Simulate cutover</button>';
+    } else {
+      h+='<div class="verdict verdict--allow"><span class="verdict__ic">&#10003;</span><div><b>The platform is the body of record.</b><p>FTM becomes an export target. The custodian&rsquo;s laptop stops being a single point of failure, and every change carries a proposer, a reviewer, a source and a date — which the current workflow cannot produce.</p></div></div>'+
+        '<button class="btn-xs" onclick="TREE.cut()">revert to mirror</button>';
+    }
+    h+='</div></div></div></div>';
+  }
+
+  else if(S.tab==='impact'){
+    var un=IMPACT.filter(function(x){return x.st==='unwatched';}).length;
+    h+='<div class="panel"><div class="panel__head"><div><h3>Impact register</h3><p>Decisions and frozen lists that a published correction would change</p></div><div class="panel__head__end"><span class="c-pill c-pill--warn">'+un+' unwatched</span></div></div><div class="panel__body">'+
+      '<div class="verdict verdict--hold"><span class="verdict__ic">!</span><div><b>Flagged, never revoked.</b><p>A correction that touches a link a decision ran through opens an item here and <b>nothing changes on its own</b>. No membership lapses, no award is clawed back. A human decides, and the decision records which version of the tree it was made against.</p></div></div>';
+    IMPACT.forEach(function(x){
+      h+='<div class="qrow"><div class="qrow__main"><b>'+x.who+'</b><span>'+x.what+'</span></div><div class="qrow__end">'+
+        (x.st==='watched'?'<span class="c-pill c-pill--ok">watched</span>':'<span class="c-pill c-pill--danger">unwatched</span>')+'</div></div>';
+    });
+    h+='<div class="verdict verdict--deny" style="margin-top:var(--s3)"><span class="verdict__ic">&times;</span><div><b>Four consumers are unwatched, and that is the real gap.</b>'+
+      '<p>The register watches membership and scholarship. But Camp&rsquo;s eligible-age list, committee recusals, condolence circles and the turning-eighteen refresh all read the same graph &mdash; so a correction can retroactively change who was eligible for Camp 2026 with nobody flagged.</p>'+
+      '<p><b>Which corrects the design claim.</b> Not everything is a live query. Some consumers take a <b>dated snapshot</b> — and a snapshot is a store. The honest statement is <b>one graph, live queries <i>and</i> dated snapshots</b>, and every snapshot needs a row here.</p></div></div>';
+    h+='</div></div>';
+  }
+
+  else {
+    h+='<div class="grid grid--2"><div class="panel"><div class="panel__head"><div><h3>Family Tree Committee</h3><p>A row in the committee registry &mdash; not a second one</p></div><div class="panel__head__end"><span class="c-pill c-pill--warn">5 of 7</span></div></div><div class="panel__body panel__body--flush">';
+    SEATS.forEach(function(s){
+      h+='<div class="qrow"><div class="qrow__main"><b>'+esc(s.n)+'</b><span>'+s.r+'</span></div><div class="qrow__end">'+
+        (s.s==='seated'?'<span class="c-pill c-pill--ok">seated</span>':'<button class="btn-xs">seat by motion</button>')+'</div></div>';
+    });
+    h+='<div class="qrow"><div class="qrow__main"><b>Roster, terms, minutes and budget line</b><span>held in <a href="#/fed/committees">Committees</a> like every other committee — 8.1.3 appointment, 8.1.2 eligibility</span></div><div class="qrow__end"><a class="btn-xs" href="#/fed/committees">open</a></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Access is a grant on the seat</b><span>held in <a href="#/fed/roles">Roles &amp; permissions</a> with its grantor and expiry — losing the seat ends the access the same day</span></div><div class="qrow__end"><a class="btn-xs" href="#/fed/roles">open</a></div></div>';
+    h+='</div><div class="panel__foot"><span class="why">This tab is a view, not a registry. Two committee lists that do not know about each other is how a committee ends up with no minutes and no term limits.</span></div></div>';
+    h+='<div style="display:grid;gap:var(--s5);align-content:start">'+
+      '<div class="panel"><div class="panel__head"><h3>The power this committee holds</h3></div><div class="panel__body">'+
+      '<p style="margin:0 0 var(--s2);font-size:13.5px">A <b>volunteer committee that can change who is eligible</b> for membership and scholarships, and who counts as related to whom.</p>'+
+      '<div class="soc-gate">'+
+      '<div class="soc-gate__r"><span class="soc-gate__i soc-gate__i--y">&#10003;</span><span><b>Append-only.</b> A correction is a new entry; the superseded one stays readable with its date and author.</span></div>'+
+      '<div class="soc-gate__r"><span class="soc-gate__i soc-gate__i--y">&#10003;</span><span><b>Self-line recusal is automatic</b> — the graph knows the reviewer is in the affected line, and the item simply is not theirs to open.</span></div>'+
+      '<div class="soc-gate__r"><span class="soc-gate__i soc-gate__i--y">&#10003;</span><span><b>Structural changes need a quorum</b> once blast radius crosses a threshold.</span></div>'+
+      '<div class="soc-gate__r"><span class="soc-gate__i soc-gate__i--s">&#8593;</span><span><b>Every published change is attributable</b> — proposer, reviewer, source, date.</span></div>'+
+      '</div></div></div>'+
+      '<div class="panel"><div class="panel__head"><div><h3>What the graph answers elsewhere</h3></div><div class="panel__head__end"><span class="c-pill c-pill--info">queries and snapshots</span></div></div><div class="panel__body panel__body--flush">'+
+      '<div class="qrow"><div class="qrow__main"><b>Conflict of interest</b><span>a relatedness reading inside the scholarship review row — not a module of its own</span></div><div class="qrow__end"><span class="c-pill c-pill--info">query</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Condolence circle</b><span>who is told, and who goes quiet afterwards</span></div><div class="qrow__end"><span class="c-pill c-pill--info">query</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Camp eligible-age list</b><span>banded — and <b>frozen at arrival</b>, so it is a snapshot with a row in the impact register</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">snapshot</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Turning eighteen</b><span>fires off a birth date in the graph — the member&rsquo;s task lives on <a href="#/member/household">Household</a></span></div><div class="qrow__end"><span class="c-pill c-pill--warn">snapshot</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Duplicate people who are both members</b><span><b>raises</b> an item on the identity queue — it never performs a merge there, because that queue gates certification and a frozen electorate</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">raises only</span></div></div>'+
+      '<div class="qrow"><div class="qrow__main"><b>Households are <i>not</i> derived</b><span>billing, invitation and dated delegation are not in a parent edge, and households routinely contain people outside the tree and exclude kin inside it — <a href="#/member/household">Household</a> stays its own record</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">claim withdrawn</span></div></div>'+
+      '</div><div class="panel__foot"><span class="why">Four queries, two snapshots, one hand-off and one withdrawn claim. That is the honest version of &ldquo;one graph, many questions&rdquo;.</span></div></div></div></div>';
+  }
+  el.innerHTML=h;
+}
+
+window.TREE={
+  search:function(v){ S.q=v; var el=document.getElementById('tr-q');
+    var pos=el?el.selectionStart:0; renderMember();
+    var e2=document.getElementById('tr-q'); if(e2){ e2.focus(); try{e2.setSelectionRange(pos,pos);}catch(_){} } },
+  pick:function(id){ S.who=id; S.st='line'; S.packet=false; S.attached=null; renderMember(); },
+  packet:function(){ S.packet=true; renderMember(); },
+  attach:function(k){ S.attached=k; renderMember(); },
+  back:function(){ S.st='find'; S.who=null; S.packet=false; S.attached=null; renderMember(); },
+  mtab:function(t){ S.mtab=t; S.sent=null; renderMore(); },
+  kind:function(k){ S.kind=k; renderMore(); },
+  send:function(){ S.sent=true; renderMore(); },
+  reset:function(){ S.sent=null; renderMore(); },
+  tab:function(t){ S.tab=t; renderFed(); },
+  openItem:function(id){ S.open=(S.open===id?null:id); renderFed(); },
+  review:function(id){ S.done[id]=true; S.open=null; renderFed(); },
+  dismiss:function(id){ S.dismissed[id]=true; renderFed(); },
+  cut:function(){ S.cutover=!S.cutover; renderFed(); }
+};
+function all(){ try{renderMember();}catch(e){} try{renderFed();}catch(e){} }
+var prev=window.renderAll;
+window.renderAll=function(){ if(prev) prev.apply(this,arguments); all(); };
+if(document.readyState!=='loading') all();
+else document.addEventListener('DOMContentLoaded', all);
+})();
+</script>
+<style>
+/* ═══ release step ═══ */
+.t2-rel{background:var(--surface-2,#faf7ee);border:1px solid rgba(43,36,22,.14);border-radius:10px;padding:12px 14px;margin:0 0 12px}
+.t2-rel h5{margin:0 0 7px;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:#6b6350;font-weight:800}
+.t2-gate{margin:0 0 9px;font-size:13px;line-height:1.5}
+.t2-rl{display:grid;gap:6px}
+.t2-rl>div{display:grid;grid-template-columns:96px 1fr;gap:10px;font-size:12.6px;line-height:1.45}
+.t2-rk{font-weight:800;color:var(--green-800,#33430b)}
+</style>
 </body>
 </html>
