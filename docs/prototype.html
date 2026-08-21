@@ -1139,9 +1139,12 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 .j-clubs{display:grid;gap:8px;margin:var(--s3) 0}
 @media (min-width:760px){.j-clubs{grid-template-columns:1fr 1fr}}
 </style>
-<script>/* route-alias-head */(function(){var A={'club/remit':['money',6],
+<script>/* route-alias-head */(function(){var A={'club/events':['events',1],
+  'club/newevent':['events',3],
+  'club/remit':['money',6],
   'fed/board':['governance',0],
   'fed/boardroom':['governance',2],
+  'fed/calendar':['election',0],
   'fed/clubhealth':['clubs',1],
   'fed/clubs':['clubs',0],
   'fed/committees':['governance',1],
@@ -1150,7 +1153,9 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   'fed/convdesk':['convention',3],
   'fed/convention':['convention',0],
   'fed/convops':['convention',2],
+  'fed/credentialing':['election',1],
   'fed/directory':['directory',0],
+  'fed/events':['events',0],
   'fed/finance':['money',1],
   'fed/hsn':['institutions',2],
   'fed/identity':['people',1],
@@ -1158,20 +1163,31 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   'fed/institutions':['institutions',0],
   'fed/ledger':['money',0],
   'fed/lifeevents':['fed/tree',0],
+  'fed/mailedballot':['election',2],
   'fed/migration':['clubs',2],
   'fed/newinst':['institutions',3],
   'fed/qbo':['money',3],
+  'fed/results':['election',3],
   'fed/supportdesk':['people',2],
+  'member/ballot':['ballot',1],
+  'member/ballot/confirm':['ballot',2],
+  'member/ballot/sealed':['ballot',3],
   'member/convention':['convention',4],
   'member/convhelp':['convention',6],
   'member/convlive':['convention',5],
   'member/convstore':['convention',7],
   'member/directory':['directory',1],
   'member/dirinclusion':['directory',2],
+  'member/event/harvest':['event',2],
+  'member/event/lecture':['event',1],
+  'member/event/party':['event',0],
+  'member/events':['events',2],
   'member/lifeevent':['member/family',0],
+  'member/voting':['ballot',0],
   'program/budget':['money',4],
   'program/conflicts':['program/applications',0],
-  'program/disbursement':['money',5]};var k=(location.hash||'').replace(/^#\/?/,'');if(A[k]){window.__ALIAS_PENDING=A[k];try{history.replaceState(null,'','#/'+A[k][0]);}catch(e){location.hash='#/'+A[k][0];}}})();</script>
+  'program/disbursement':['money',5],
+  'program/newevent':['events',4]};var k=(location.hash||'').replace(/^#\/?/,'');if(A[k]){window.__ALIAS_PENDING=A[k];try{history.replaceState(null,'','#/'+A[k][0]);}catch(e){location.hash='#/'+A[k][0];}}})();</script>
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
@@ -1376,7 +1392,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" href="#/member/home">Home</a>
       <a class="l-nav-item" href="#/member/inbox">Inbox &mdash; notifications <span class="l-nav-item__badge" id="nav-inbox-badge">4</span></a>
       <a class="l-nav-item" href="#/member/pathway">My pathway &mdash; the rails <span class="l-nav-item__badge l-nav-item__badge--violet">live</span></a>
-      <a class="l-nav-item" href="#/member/voting">Voting <span class="l-nav-item__badge" id="nav-ballot-badge">1 open</span></a>
+      <a class="l-nav-item" data-go="ballot:0" href="#/ballot">Voting <span class="l-nav-item__badge" id="nav-ballot-badge">1 open</span></a>
       <a class="l-nav-item" href="#/member/scenarios">Guided scenarios <span class="l-nav-item__badge l-nav-item__badge--violet">16</span></a>
       <div class="l-nav-group">Membership &amp; finance</div>
       <a class="l-nav-item" href="#/member/membership">Membership &amp; dues</a>
@@ -1384,7 +1400,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" data-go="directory:2" href="#/directory">Directory inclusion</a>
       <a class="l-nav-item" href="#/member/payments">Payments &amp; giving</a>
       <div class="l-nav-group">Events &amp; convention</div>
-      <a class="l-nav-item" href="#/member/events">Events &amp; registration</a>
+      <a class="l-nav-item" data-go="events:2" href="#/events">Events &amp; registration</a>
       <a class="l-nav-item" data-go="convention:4" href="#/convention">Convention</a>
       <a class="l-nav-item" data-go="convention:5" href="#/convention">Convention week &mdash; live</a>
       <a class="l-nav-item" data-go="convention:7" href="#/convention">Convention store</a>
@@ -1413,8 +1429,8 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" href="#/club/roster">Roster</a>
       <a class="l-nav-item" href="#/club/households">Households</a>
       <div class="l-nav-group">Activity</div>
-      <a class="l-nav-item" href="#/club/events">Events &amp; check-in</a>
-      <a class="l-nav-item" href="#/club/newevent">Create an event <span class="l-nav-item__badge l-nav-item__badge--violet">works</span></a>
+      <a class="l-nav-item" data-go="events:1" href="#/events">Events &amp; check-in</a>
+      <a class="l-nav-item" data-go="events:3" href="#/events">Create an event <span class="l-nav-item__badge l-nav-item__badge--violet">works</span></a>
       <a class="l-nav-item" href="#/club/comms">Communications</a>
       <a class="l-nav-item" href="#/club/voting">Club voting</a>
       <div class="l-nav-group">Finance</div>
@@ -1430,7 +1446,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" href="#/program/overview">All programmes</a>
       <a class="l-nav-item" href="#/program/lifecycle">Lifecycle &amp; pipeline</a>
       <a class="l-nav-item" href="#/program/registry">Programme registry <span class="l-nav-item__badge l-nav-item__badge--violet">1 proposed</span></a>
-      <a class="l-nav-item" href="#/program/newevent">Create an event <span class="l-nav-item__badge l-nav-item__badge--violet">works</span></a>
+      <a class="l-nav-item" data-go="events:3" href="#/events">Create an event <span class="l-nav-item__badge l-nav-item__badge--violet">works</span></a>
       <div class="l-nav-group">Medical</div>
       <a class="l-nav-item" href="#/program/prog/medical">Medical Mission</a>
       <a class="l-nav-item" href="#/program/medops">Mission operations <span class="l-nav-item__badge l-nav-item__badge--muted">ARFHSN</span></a>
@@ -1463,7 +1479,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" data-go="convention:4" href="#/convention">Registration &mdash; member view</a>
       <a class="l-nav-item" data-go="convention:1" href="#/convention">Command dashboard</a>
       <a class="l-nav-item" data-go="convention:3" href="#/convention">Desk &amp; store</a>
-      <a class="l-nav-item" href="#/fed/credentialing">Credentialing &amp; quorum</a>
+      <a class="l-nav-item" data-go="election:1" href="#/election">Credentialing &amp; quorum</a>
       <div class="sidefoot">
         <div class="rolechip"><span class="c-avatar c-avatar--sm" style="background:var(--green-700);color:#fff">GM</span><span>Grace Mansour<small>sfc_admin &middot; entity:arfecf</small></span></div>
         <p class="why" style="padding:0 var(--s2)">ARFECF is a separate Michigan non-profit administered by AFRP staff for a 1% fee &mdash; the scope on this role is an entity, not a department.</p>
@@ -1492,22 +1508,22 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <a class="l-nav-item" data-go="convention:2" href="#/convention">Operations &amp; registration</a>
       <a class="l-nav-item" data-go="convention:1" href="#/convention">Command centre</a>
       <a class="l-nav-item" data-go="convention:3" href="#/convention">Desk &amp; store</a>
-      <a class="l-nav-item" href="#/fed/credentialing">Credentialing &amp; quorum</a>
+      <a class="l-nav-item" data-go="election:1" href="#/election">Credentialing &amp; quorum</a>
       <a class="l-nav-item" href="#/fed/floor">Live voting floor</a>
       <div class="l-nav-group">Governance</div>
       <a class="l-nav-item" data-go="governance:0" href="#/governance">Board &amp; officers</a>
       <a class="l-nav-item" data-go="governance:2" href="#/governance">Board workspace <span class="l-nav-item__badge l-nav-item__badge--violet">new</span></a>
       <a class="l-nav-item" data-go="governance:1" href="#/governance">Committees</a>
-      <a class="l-nav-item" href="#/fed/calendar">Election calendar</a>
-      <a class="l-nav-item" href="#/fed/mailedballot">Mailed ballot &mdash; CPA <span class="l-nav-item__badge l-nav-item__badge--violet">current law</span></a>
-      <a class="l-nav-item" href="#/fed/results">Results &amp; certification</a>
+      <a class="l-nav-item" data-go="election:0" href="#/election">Election calendar</a>
+      <a class="l-nav-item" data-go="election:2" href="#/election">Mailed ballot &mdash; CPA <span class="l-nav-item__badge l-nav-item__badge--violet">current law</span></a>
+      <a class="l-nav-item" data-go="election:3" href="#/election">Results &amp; certification</a>
       <div class="l-nav-group">Finance</div>
       <a class="l-nav-item" data-go="money:1" href="#/money">Daily close</a>
       <a class="l-nav-item" data-go="money:3" href="#/money">QuickBooks integration</a>
       <a class="l-nav-item" data-go="money:0" href="#/money">Multi-entity ledger</a>
       <a class="l-nav-item" data-go="money:2" href="#/money">Financial controls</a>
       <div class="l-nav-group">Operations</div>
-      <a class="l-nav-item" href="#/fed/events">Event management</a>
+      <a class="l-nav-item" data-go="events:0" href="#/events">Event management</a>
       <a class="l-nav-item" href="#/fed/comms">Communications centre</a>
       <a class="l-nav-item" data-go="people:2" href="#/people">Member support desk <span class="l-nav-item__badge l-nav-item__badge--violet">new</span></a>
       <div class="l-nav-group">Institutions</div>
@@ -1543,16 +1559,16 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <div class="panel">
       <div class="panel__head"><h3>Needs your attention</h3><div class="panel__head__end"><span class="c-pill c-pill--warn">3</span></div></div>
       <div class="panel__body panel__body--flush">
-        <a class="qrow" href="#/member/voting"><div class="qrow__main"><b>A ballot is open to you</b><span>Deputy President 2027 &middot; electronic secret ballot &middot; closes 20 Nov, 9:00&nbsp;pm Eastern</span></div><div class="qrow__end"><span class="c-pill c-pill--info">vote</span></div></a>
+        <a class="qrow" href="#/ballot"><div class="qrow__main"><b>A ballot is open to you</b><span>Deputy President 2027 &middot; electronic secret ballot &middot; closes 20 Nov, 9:00&nbsp;pm Eastern</span></div><div class="qrow__end"><span class="c-pill c-pill--info">vote</span></div></a>
         <a class="qrow" href="#/member/membership"><div class="qrow__main"><b>Your Detroit Club membership lapsed 30 Jun 2026</b><span>Rejoin for $40.00 &mdash; club events reprice, and club ballots reopen at the next freeze</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">lapsed</span></div></a>
         <a class="qrow" href="#/member/magazine"><div class="qrow__main"><b>Proof your magazine entry</b><span>Tarek&rsquo;s graduation is in the Winter issue &middot; copy freeze 1 Dec</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">27 days</span></div></a>
       </div>
       <div class="panel__foot"><span class="why">Every item names the rule or deadline behind it. Nothing here is a marketing nudge.</span></div>
     </div>
     <div class="panel">
-      <div class="panel__head"><h3>Coming up</h3><div class="panel__head__end"><a class="btn-xs" href="#/member/events">Calendar</a></div></div>
+      <div class="panel__head"><h3>Coming up</h3><div class="panel__head__end"><a class="btn-xs" href="#/events">Calendar</a></div></div>
       <div class="panel__body panel__body--flush">
-        <a class="qrow" href="#/member/event/harvest"><div class="qrow__main"><b>Detroit Harvest Dinner</b><span>Sat 14 Nov &middot; St&nbsp;Mary&rsquo;s Hall &middot; you pay the non-member rate while the club membership is lapsed</span></div><div class="qrow__end"><span class="mono">$40.00</span></div></a>
+        <a class="qrow" href="#/event"><div class="qrow__main"><b>Detroit Harvest Dinner</b><span>Sat 14 Nov &middot; St&nbsp;Mary&rsquo;s Hall &middot; you pay the non-member rate while the club membership is lapsed</span></div><div class="qrow__end"><span class="mono">$40.00</span></div></a>
         <a class="qrow" href="#/convention"><div class="qrow__main"><b>2027 Convention &mdash; San Francisco</b><span>8&ndash;11 Jul &middot; you are registered &middot; Relief Fund levy included</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">registered</span></div></a>
         <a class="qrow" href="#/member/family"><div class="qrow__main"><b>Tarek turns 18 on 2 Mar 2027</b><span>We will ask him what he wants &mdash; consent refresh, not ejection from the household</span></div><div class="qrow__end"><span class="c-pill c-pill--muted">scheduled</span></div></a>
       </div>
@@ -1675,7 +1691,90 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   </div>
 </section>
 
-<section class="screen" data-route="member/events" data-lens="member" aria-label="Events">
+<section class="screen" data-route="events" data-lens="fed" aria-label="Events">
+  <div class="page-head"><div><h1>Events</h1><p>Every event, and the builder that makes one. What you can do here follows the role you hold.</p></div><div class="page-head__end"><span class="c-pill c-pill--ok">5 surfaces, one object</span></div></div>
+  <div class="px-tabs" data-tabs="events"><button class="px-tab is-on" data-t="0" onclick="MRG.go('events',0)">All events</button><button class="px-tab" data-t="1" onclick="MRG.go('events',1)">Club events</button><button class="px-tab" data-t="2" onclick="MRG.go('events',2)">What&rsquo;s on</button><button class="px-tab" data-t="3" onclick="MRG.go('events',3)">Create &mdash; club</button><button class="px-tab" data-t="4" onclick="MRG.go('events',4)">Create &mdash; programme</button></div>
+<div class="px-tp" data-t="0">
+  <div class="page-head">
+    <div><h1>Event management</h1>
+    <p>Create it, price it, register it, check it in &mdash; and feed the attendance record that governance reads.</p></div>
+  </div>
+  <div class="grid grid--sideright">
+    <div class="stack">
+      <div class="panel">
+        <div class="panel__head"><h3>Events console</h3></div>
+        <div class="c-table-wrap" style="border:0;border-radius:0"><table class="c-table c-table--dense">
+          <thead><tr><th>Event</th><th>Scope</th><th class="num">Capacity</th><th class="num">Registered</th><th>Pricing</th><th>State</th></tr></thead>
+          <tbody>
+            <tr><td><b>Revision webinar</b><div class="why">19 Nov, 8 pm Eastern</div></td><td class="mono">fed</td><td class="num">500</td><td class="num">212</td><td class="why">free</td><td><span class="c-pill c-pill--ok">open</span></td></tr>
+            <tr><td><b>Harvest Dinner</b><div class="why">14 Nov &middot; run by Detroit, listed here</div></td><td class="mono">club:detroit</td><td class="num">180</td><td class="num">158</td><td class="why">$25 member &middot; $40 non-member &middot; $15 youth</td><td><span class="c-pill c-pill--warn">near capacity</span></td></tr>
+            <tr><td><b>2027 Convention</b><div class="why">8&ndash;11 Jul &middot; San Francisco</div></td><td class="mono">fed</td><td class="num">1,600</td><td class="num">418</td><td class="why">$385 early-bird to 8 Jun &middot; $435 after</td><td><span class="c-pill c-pill--ok">open</span></td></tr>
+          </tbody>
+        </table></div>
+        <div class="panel__foot"><span class="why">One calendar, two scopes: a club event and a federation event are the same object with a different scope, which is why the member sees them in one list and pricing reads the right membership.</span></div>
+      </div>
+      <div class="panel">
+        <div class="panel__head"><h3>Create an event</h3><p>What the form captures &mdash; the demo shows the shape, not a working editor.</p></div>
+        <div class="panel__body">
+          <dl class="kv">
+            <dt>Scope</dt><dd>federation &middot; or one club <small>sets whose membership prices it and whose books take the money</small></dd>
+            <dt>Ticket types</dt><dd>member / non-member / youth, per type pricing <small>member price reads standing at purchase time</small></dd>
+            <dt>Capacity &amp; waitlist</dt><dd>hard cap; waitlist promotes in order, notified by consented channel</dd>
+            <dt>Check-in</dt><dd>QR per household code <small>the same code across every event</small></dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="panel">
+        <div class="panel__head"><h3>Check-in console &mdash; live</h3></div>
+        <div class="panel__body">
+          <div class="calc">
+            <div class="calc__r"><span>Webinar joined</span><span class="calc__n">176</span></div>
+            <div class="calc__r"><span>Recorded as attendance<small>remote presence counts (10.3.1 &ldquo;or otherwise&rdquo;)</small></span><span class="calc__n">176</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel__head"><h3>Attendance feeds governance</h3><p>By-Law 6.3.1 &mdash; the first place attendance is a franchise input.</p></div>
+        <div class="panel__body">
+          <p class="why" style="margin:0">After the 2026 Convention closed, Past-President activity recomputed automatically: <b>9 active, 5 inactive</b> &mdash; 2 fell inactive having attended fewer than 3 of the preceding 5 conventions. The list prints in the Annual Committee Directory under &ldquo;Board members eligible to vote&rdquo;, and reinstatement needs a petition and 2/3 Board approval. Today this list is compiled by hand and argued about; here it is a report over check-ins &mdash; which is why historic convention attendance is worth importing alongside the scholarship history.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><div class="px-tp" data-t="1" hidden>
+  <div class="page-head">
+    <div><h1>Events &amp; check-in</h1>
+    <p>Harvest Dinner, Saturday 14 November &middot; 61 households registered.</p></div>
+  </div>
+  <div class="grid grid--sideright">
+    <div class="panel">
+      <div class="toolbar"><span class="toolbar__count">Check-in desk &middot; 3 of 61 households arrived (door opens 6:00 pm)</span></div>
+      <div class="c-table-wrap" style="border:0;border-radius:0"><table class="c-table c-table--dense">
+        <thead><tr><th>Household</th><th>Party</th><th>Code</th><th class="num">Arrived</th><th>Tags</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr class="is-good"><td><b>Khoury &mdash; Southfield</b></td><td class="why">Rima N. Khoury &middot; Layla Khoury</td><td class="mono">KHY-2210</td><td class="num">18:52</td><td><span class="c-pill c-pill--ok">printed &times;2</span></td><td class="why">Dietary: nut allergy on the child&rsquo;s tag</td></tr>
+          <tr class="is-good"><td><b>Salameh &mdash; Livonia</b></td><td class="why">Nadia F. Salameh &middot; +1</td><td class="mono">SLM-4417</td><td class="num">19:03</td><td><span class="c-pill c-pill--ok">printed &times;2</span></td><td class="why">&mdash;</td></tr>
+          <tr class="is-good"><td><b>Khoury &mdash; Dearborn</b></td><td class="why">Nadia Khoury &middot; Tarek Khoury</td><td class="mono">KHY-1104</td><td class="num">19:10</td><td><span class="c-pill c-pill--ok">printed &times;2</span></td><td class="why">Paid non-member rate &mdash; club membership lapsed</td></tr>
+          <tr><td><b>Yacoub &mdash; Detroit</b></td><td class="why">Samir F. Yacoub &middot; +3</td><td class="why">at desk</td><td class="num">&mdash;</td><td><span class="c-pill c-pill--muted">not yet</span></td><td class="why">Registered 4, one cancelled Thursday</td></tr>
+        </tbody>
+      </table></div>
+      <div class="panel__foot"><span class="why">Check-ins persist: attendance is a governance input (6.3.1) and a recruiting signal, not a door count thrown away at midnight.</span></div>
+    </div>
+    <div class="panel">
+      <div class="panel__head"><h3>Tonight&rsquo;s finance</h3></div>
+      <div class="panel__body">
+        <div class="calc">
+          <div class="calc__r"><span>Registrations, 61 households</span><span class="calc__n">$2,315.00</span></div>
+          <div class="calc__r"><span>Door, non-member rate difference<small>incl. Nadia Khoury&rsquo;s $15.00</small></span><span class="calc__n">$180.00</span></div>
+          <div class="calc__r calc__r--tot"><span>Club revenue<small>the club&rsquo;s money &mdash; not Federation, not agency</small></span><span class="calc__n">$2,495.00</span></div>
+        </div>
+        <p class="why" style="margin:var(--s3) 0 0">Contrast the three treatments on the Federation ledger: club dues held by HQ are an agency liability; convention money held by a host is Federation property; project funds route through HQ as a conduit (11.1.5).</p>
+      </div>
+    </div>
+  </div>
+</div><div class="px-tp" data-t="2" hidden>
   <div class="page-head">
     <div><h1>Events &amp; registration</h1>
     <p>One calendar, federation and club together. Prices come from membership scope, and refusals name their rule.</p></div>
@@ -1685,9 +1784,9 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <div class="panel__head"><h3>November &amp; December</h3></div>
       <div class="panel__body panel__body--flush">
         <div id="evlist-custom"></div>
-        <a class="qrow" href="#/member/event/party"><div class="qrow__main"><b>Detroit Club Christmas Party</b><span>Sat 19 Dec, 7:00 pm &middot; St Mary&rsquo;s Hall &middot; club event &middot; cross-listed by Project Hope</span></div><div class="qrow__end"><span class="mono">$100.00</span><span class="c-pill c-pill--warn" id="ev-party-pill">33 seats left</span></div></a>
-        <a class="qrow" href="#/member/event/lecture"><div class="qrow__main"><b>Reading Ottoman-era Ramallah records</b><span>Thu 3 Dec, 8:00 pm Eastern &middot; Preservation Project &middot; online &middot; ask-a-question</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">free</span><span class="c-pill c-pill--info" id="ev-lec-pill">61 of 80</span></div></a>
-        <a class="qrow" href="#/member/event/harvest"><div class="qrow__main"><b>Detroit Harvest Dinner</b><span>Sat 14 Nov, 6:30 pm &middot; St Mary&rsquo;s Hall &middot; club event</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">non-member rate</span></div></a>
+        <a class="qrow" href="#/event"><div class="qrow__main"><b>Detroit Club Christmas Party</b><span>Sat 19 Dec, 7:00 pm &middot; St Mary&rsquo;s Hall &middot; club event &middot; cross-listed by Project Hope</span></div><div class="qrow__end"><span class="mono">$100.00</span><span class="c-pill c-pill--warn" id="ev-party-pill">33 seats left</span></div></a>
+        <a class="qrow" href="#/event"><div class="qrow__main"><b>Reading Ottoman-era Ramallah records</b><span>Thu 3 Dec, 8:00 pm Eastern &middot; Preservation Project &middot; online &middot; ask-a-question</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">free</span><span class="c-pill c-pill--info" id="ev-lec-pill">61 of 80</span></div></a>
+        <a class="qrow" href="#/event"><div class="qrow__main"><b>Detroit Harvest Dinner</b><span>Sat 14 Nov, 6:30 pm &middot; St Mary&rsquo;s Hall &middot; club event</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">non-member rate</span></div></a>
         <div class="qrow"><div class="qrow__main"><b>Federation webinar &mdash; the 2027 revision, explained</b><span>Thu 19 Nov, 8:00 pm Eastern &middot; national event &middot; member rate applies</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">free</span></div></div>
         <div class="qrow"><div class="qrow__main"><b>Cleveland Club hafli</b><span>Sat 21 Nov &middot; open to all clubs &middot; guest pricing</span></div><div class="qrow__end"><span class="mono">$35.00</span></div></div>
       </div>
@@ -1701,12 +1800,49 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       </div>
     </div>
   </div>
-</section>
+</div><div class="px-tp" data-t="3" hidden>
+  <div class="page-head">
+    <div><h1>Create an event &mdash; Detroit Club</h1>
+    <p>The event builder, live: six steps from a blank form to a published event your members can open on the
+    member lens. The host is fixed &mdash; <b>this club owns the money, the capacity, the roster, and the comms</b>.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info">host: Ramallah Club of Detroit</span><span class="c-pill c-pill--warn">simulation</span></div>
+  </div>
+  <div id="evbuilder-club"></div>
+  <div id="purpose-club"></div>
+</div><div class="px-tp" data-t="4" hidden>
+  <div class="page-head">
+    <div><h1>Create an event &mdash; programme</h1>
+    <p>The same builder the clubs use, host prefilled to the programme: revenue posts to the programme&rsquo;s
+    budget line, and an ARFHSN programme&rsquo;s event receipts per-entity. One builder, one set of rules.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info">host: Preservation Project</span><span class="c-pill c-pill--warn">simulation</span></div>
+  </div>
+  <div id="evbuilder-program"></div>
+  <div id="purpose-program"></div>
+</div></section>
 
-<section class="screen" data-route="member/event/harvest" data-lens="member" aria-label="Event detail">
+<section class="screen" data-route="event" data-lens="member" aria-label="An event">
+  <div class="page-head"><div><h1>An event</h1><p>Three worked examples: a paid party, a free lecture, a club dinner.</p></div><div class="page-head__end"><span class="c-pill c-pill--ok">3 surfaces, one object</span></div></div>
+  <div class="px-tabs" data-tabs="event"><button class="px-tab is-on" data-t="0" onclick="MRG.go('event',0)">Christmas party</button><button class="px-tab" data-t="1" onclick="MRG.go('event',1)">Free lecture</button><button class="px-tab" data-t="2" onclick="MRG.go('event',2)">Harvest dinner</button></div>
+<div class="px-tp" data-t="0">
+  <div class="page-head">
+    <div><h1>Detroit Club Christmas Party</h1>
+    <p>Saturday 19 December 2026, 7:00 pm Eastern &middot; St Mary&rsquo;s Hall, Livonia &middot; all ages, 21+ bar area.
+    A <b>working signup</b> &mdash; register your household, pay, get your QR. Nothing is stored or charged.</p></div>
+    <div class="page-head__end" id="party-pills"></div>
+  </div>
+  <div id="evparty"></div>
+</div><div class="px-tp" data-t="1" hidden>
+  <div class="page-head">
+    <div><h1>Reading Ottoman-era Ramallah records</h1>
+    <p>Thursday 3 December 2026, 8:00 pm Eastern &middot; online &middot; free &middot; a Preservation Project lecture with
+    Dr.&nbsp;S. Muallem (fictional presenter). RSVP, then <b>ask a question</b> &mdash; attributed exactly as you choose.</p></div>
+    <div class="page-head__end" id="lec-pills"></div>
+  </div>
+  <div id="evlecture"></div>
+</div><div class="px-tp" data-t="2" hidden>
   <div class="page-head">
     <div><h1>Detroit Harvest Dinner</h1><p>Saturday 14 November 2026, 6:30 pm &middot; St Mary&rsquo;s Hall, Livonia &middot; hosted by the Detroit Club.</p></div>
-    <div class="page-head__end"><a class="btn-xs" href="#/member/events">&larr; All events</a></div>
+    <div class="page-head__end"><a class="btn-xs" href="#/events">&larr; All events</a></div>
   </div>
   <div class="grid grid--2">
     <div class="panel">
@@ -1728,7 +1864,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       </div>
     </div>
   </div>
-</section>
+</div></section>
 
 <section class="screen" data-route="convention" data-lens="fed" aria-label="Convention">
   <div class="page-head"><div><h1>Convention</h1><p>One convention, four chairs. What you can do here changes with the role you hold; the object does not.</p></div><div class="page-head__end"><span class="c-pill c-pill--ok">8 surfaces, one object</span></div></div>
@@ -1795,7 +1931,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
         <div class="qrow"><div class="qrow__main"><b>Detroit &middot; 88 registered &middot; 61 in &middot; 5/5 delegates</b><span>club system &middot; synced 9:58</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">live</span></div></div>
         <div class="qrow"><div class="qrow__main"><b>Chicago &middot; 104 &middot; 83 &middot; 6/6</b><span>club system &middot; synced 10:01</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">live</span></div></div>
         <div class="qrow"><div class="qrow__main"><b>Houston &middot; 44 &middot; 29 &middot; 3/4</b><span>manual roster &middot; filed at the desk, dated</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">manual</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>11 more clubs &middot; 294 &middot; 177 &middot; 54/59</b><span>mixed sources, every row labelled</span></div><div class="qrow__end"><a class="btn-xs" href="#/fed/credentialing">Credentials</a></div></div>
+        <div class="qrow"><div class="qrow__main"><b>11 more clubs &middot; 294 &middot; 177 &middot; 54/59</b><span>mixed sources, every row labelled</span></div><div class="qrow__end"><a class="btn-xs" href="#/election">Credentials</a></div></div>
       </div>
       <div class="panel__foot"><span class="why">A club integrates two ways and both are first-class: a live feed from its own system, or a dated roster upload. A disputed count is an argument about a <b>source</b>, not about this dashboard.</span></div>
     </div>
@@ -1806,7 +1942,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
         <div class="qrow"><div class="qrow__main"><b>12 accessibility seating holds</b><span>banquet floor plan v3 &middot; desk owns 9 of 12</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">open</span></div></div>
         <div class="qrow"><div class="qrow__main"><b>Help-desk queue &middot; 7 open</b><span>oldest 22 min &middot; target &lt; 60</span></div><div class="qrow__end"><a class="btn-xs" href="#/convention">Desk</a></div></div>
       </div>
-      <div class="panel__foot"><span class="why">The weighted-delegation arithmetic itself lives on <a href="#/fed/credentialing">credentialing</a> and the <a href="#/fed/floor">live floor</a> &mdash; command links to it, never re-implements it.</span></div>
+      <div class="panel__foot"><span class="why">The weighted-delegation arithmetic itself lives on <a href="#/election">credentialing</a> and the <a href="#/fed/floor">live floor</a> &mdash; command links to it, never re-implements it.</span></div>
     </div>
   </div>
 </div><div class="px-tp" data-t="2" hidden>
@@ -1914,7 +2050,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <div class="panel__body panel__body--flush">
         <div class="qrow"><div class="qrow__main"><b>You are not a Detroit delegate</b><span>The club names its delegation; each delegate carries certified members &divide; delegates sent</span></div><div class="qrow__end"><span class="mono">9.1.3</span></div></div>
         <div class="qrow"><div class="qrow__main"><b>You may still vote independently on the floor</b><span>Any certified member attending may extract their own vote, which re-divides the delegation&rsquo;s weight</span></div><div class="qrow__end"><a class="btn-xs" href="#/fed/floor">See the arithmetic</a></div></div>
-        <div class="qrow"><div class="qrow__main"><b>Whether you are certified depends on standing</b><span>Assessed at the record date against the active ruleset &mdash; the same rule that governs your ballot today</span></div><div class="qrow__end"><a class="btn-xs" href="#/member/voting">Check</a></div></div>
+        <div class="qrow"><div class="qrow__main"><b>Whether you are certified depends on standing</b><span>Assessed at the record date against the active ruleset &mdash; the same rule that governs your ballot today</span></div><div class="qrow__end"><a class="btn-xs" href="#/ballot">Check</a></div></div>
       </div>
       <div class="panel__foot"><span class="why">30 days before the convention the General Treasurer sends the host a list of members whose dues are paid (5.2) &mdash; a reconciliation handshake between two systems on a fixed clock.</span></div>
     </div>
@@ -2012,7 +2148,10 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   </div>
 </div></section>
 
-<section class="screen" data-route="member/voting" data-lens="member" aria-label="Voting">
+<section class="screen" data-route="ballot" data-lens="member" aria-label="Your ballot">
+  <div class="page-head"><div><h1>Your ballot</h1><p>Casting a vote is one act with three states &mdash; choose, confirm, sealed. Not three places.</p></div><div class="page-head__end"><span class="c-pill c-pill--ok">4 surfaces, one object</span></div></div>
+  <div class="px-tabs" data-tabs="ballot"><button class="px-tab is-on" data-t="0" onclick="MRG.go('ballot',0)">Voting</button><button class="px-tab" data-t="1" onclick="MRG.go('ballot',1)">The ballot</button><button class="px-tab" data-t="2" onclick="MRG.go('ballot',2)">Confirm</button><button class="px-tab" data-t="3" onclick="MRG.go('ballot',3)">Sealed</button></div>
+<div class="px-tp" data-t="0">
   <div class="page-head">
     <div><h1>Voting</h1>
     <p>Ballots open to you, and the one you may not vote in &mdash; a ballot is never hidden from the member it excludes.</p></div>
@@ -2065,13 +2204,11 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       </div>
     </div>
   </div>
-</section>
-
-<section class="screen" data-route="member/ballot" data-lens="member" aria-label="Ballot">
+</div><div class="px-tp" data-t="1" hidden>
   <div class="page-head">
     <div><h1>Deputy President 2027 &mdash; ballot</h1>
     <p>Select <b>one</b> candidate, or cast a deliberate blank. The interface will not let you select two.</p></div>
-    <div class="page-head__end"><a class="btn-xs" href="#/member/voting">&larr; Back to ballots</a></div>
+    <div class="page-head__end"><a class="btn-xs" href="#/ballot">&larr; Back to ballots</a></div>
   </div>
   <div class="grid grid--sideright">
     <div class="panel" id="ballot-detail-panel">
@@ -2094,9 +2231,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       </div>
     </div>
   </div>
-</section>
-
-<section class="screen" data-route="member/ballot/confirm" data-lens="member" aria-label="Confirm ballot">
+</div><div class="px-tp" data-t="2" hidden>
   <div class="page-head">
     <div><h1>Confirm your ballot</h1>
     <p>Once sealed it cannot be changed, and no one &mdash; including you &mdash; can retrieve its contents before opening.</p></div>
@@ -2110,7 +2245,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       </div>
       <div class="panel__foot">
         <button class="c-btn" type="button" onclick="castBallot()">Seal my ballot</button>
-        <a class="c-btn c-btn--secondary" href="#/member/ballot">Go back and change it</a>
+        <a class="c-btn c-btn--secondary" href="#/ballot">Go back and change it</a>
       </div>
     </div>
     <div class="panel">
@@ -2118,9 +2253,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <div class="panel__body"><p class="why" style="margin:0">Your identity is checked at the door, then separated from the vote &mdash; the digital equivalent of the double envelope in 9.2.2, where the outer envelope carried identity and the inner carried the vote. After sealing, the voter&rarr;ballot link is never stored, which is why a lost receipt cannot be reissued and a cast vote cannot be shown to anyone.</p></div>
     </div>
   </div>
-</section>
-
-<section class="screen" data-route="member/ballot/sealed" data-lens="member" aria-label="Ballot sealed">
+</div><div class="px-tp" data-t="3" hidden>
   <div class="page-head">
     <div><h1>Your ballot is sealed</h1>
     <p>It is in the box, and it stays sealed until opening day.</p></div>
@@ -2154,7 +2287,13 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       </div>
     </div>
   </div>
-</section>
+</div></section>
+
+
+
+
+
+
 
 <section class="screen" data-route="member/family" data-lens="member" aria-label="Family tree and life events">
   <div class="page-head">
@@ -2420,7 +2559,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <div class="panel">
       <div class="panel__head"><h3>Club events</h3></div>
       <div class="panel__body panel__body--flush">
-        <a class="qrow" href="#/member/event/harvest"><div class="qrow__main"><b>Harvest Dinner &middot; Sat 14 Nov</b><span>you pay the non-member rate while lapsed</span></div><div class="qrow__end"><span class="mono">$40.00</span></div></a>
+        <a class="qrow" href="#/event"><div class="qrow__main"><b>Harvest Dinner &middot; Sat 14 Nov</b><span>you pay the non-member rate while lapsed</span></div><div class="qrow__end"><span class="mono">$40.00</span></div></a>
         <div class="qrow"><div class="qrow__main"><b>Christmas hafli &middot; Sat 19 Dec</b><span>registration opens 20 Nov</span></div><div class="qrow__end"><span class="c-pill c-pill--muted">soon</span></div></div>
       </div>
     </div>
@@ -2523,38 +2662,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   </div>
 </section>
 
-<section class="screen" data-route="club/events" data-lens="club" aria-label="Club events">
-  <div class="page-head">
-    <div><h1>Events &amp; check-in</h1>
-    <p>Harvest Dinner, Saturday 14 November &middot; 61 households registered.</p></div>
-  </div>
-  <div class="grid grid--sideright">
-    <div class="panel">
-      <div class="toolbar"><span class="toolbar__count">Check-in desk &middot; 3 of 61 households arrived (door opens 6:00 pm)</span></div>
-      <div class="c-table-wrap" style="border:0;border-radius:0"><table class="c-table c-table--dense">
-        <thead><tr><th>Household</th><th>Party</th><th>Code</th><th class="num">Arrived</th><th>Tags</th><th>Notes</th></tr></thead>
-        <tbody>
-          <tr class="is-good"><td><b>Khoury &mdash; Southfield</b></td><td class="why">Rima N. Khoury &middot; Layla Khoury</td><td class="mono">KHY-2210</td><td class="num">18:52</td><td><span class="c-pill c-pill--ok">printed &times;2</span></td><td class="why">Dietary: nut allergy on the child&rsquo;s tag</td></tr>
-          <tr class="is-good"><td><b>Salameh &mdash; Livonia</b></td><td class="why">Nadia F. Salameh &middot; +1</td><td class="mono">SLM-4417</td><td class="num">19:03</td><td><span class="c-pill c-pill--ok">printed &times;2</span></td><td class="why">&mdash;</td></tr>
-          <tr class="is-good"><td><b>Khoury &mdash; Dearborn</b></td><td class="why">Nadia Khoury &middot; Tarek Khoury</td><td class="mono">KHY-1104</td><td class="num">19:10</td><td><span class="c-pill c-pill--ok">printed &times;2</span></td><td class="why">Paid non-member rate &mdash; club membership lapsed</td></tr>
-          <tr><td><b>Yacoub &mdash; Detroit</b></td><td class="why">Samir F. Yacoub &middot; +3</td><td class="why">at desk</td><td class="num">&mdash;</td><td><span class="c-pill c-pill--muted">not yet</span></td><td class="why">Registered 4, one cancelled Thursday</td></tr>
-        </tbody>
-      </table></div>
-      <div class="panel__foot"><span class="why">Check-ins persist: attendance is a governance input (6.3.1) and a recruiting signal, not a door count thrown away at midnight.</span></div>
-    </div>
-    <div class="panel">
-      <div class="panel__head"><h3>Tonight&rsquo;s finance</h3></div>
-      <div class="panel__body">
-        <div class="calc">
-          <div class="calc__r"><span>Registrations, 61 households</span><span class="calc__n">$2,315.00</span></div>
-          <div class="calc__r"><span>Door, non-member rate difference<small>incl. Nadia Khoury&rsquo;s $15.00</small></span><span class="calc__n">$180.00</span></div>
-          <div class="calc__r calc__r--tot"><span>Club revenue<small>the club&rsquo;s money &mdash; not Federation, not agency</small></span><span class="calc__n">$2,495.00</span></div>
-        </div>
-        <p class="why" style="margin:var(--s3) 0 0">Contrast the three treatments on the Federation ledger: club dues held by HQ are an agency liability; convention money held by a host is Federation property; project funds route through HQ as a conduit (11.1.5).</p>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <section class="screen" data-route="club/comms" data-lens="club" aria-label="Communications">
   <div class="page-head">
@@ -3375,7 +3483,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <div class="panel__head"><h3>Open items</h3></div>
       <div class="panel__body panel__body--flush">
         <a class="qrow" href="#/people"><div class="qrow__main"><b>14 probable duplicates unresolved</b><span>certification for the 2027 cycle is blocked until the queue clears</span></div><div class="qrow__end"><span class="c-pill c-pill--danger">gate</span></div></a>
-        <a class="qrow" href="#/fed/calendar"><div class="qrow__main"><b>Deputy President intentions due 1 Nov</b><span>3 received, postmark test &middot; Board evaluation within 15 days (9.3.4)</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">running</span></div></a>
+        <a class="qrow" href="#/election"><div class="qrow__main"><b>Deputy President intentions due 1 Nov</b><span>3 received, postmark test &middot; Board evaluation within 15 days (9.3.4)</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">running</span></div></a>
         <a class="qrow" href="#/money"><div class="qrow__main"><b>Presidential discretionary counter at 1 of 2</b><span>$2,000 limit, twice per term &mdash; 7.2.3, tracked as state, not memory</span></div><div class="qrow__end"><span class="c-pill c-pill--info">watch</span></div></a>
         <a class="qrow" href="#/fed/workbench"><div class="qrow__main"><b>bylaws-2027.1 draft &mdash; divergence report ready</b><span>San Jose loses its seat &middot; M-1 flips &middot; 340 members affected</span></div><div class="qrow__end"><span class="c-pill c-pill--new">draft</span></div></a>
       </div>
@@ -3503,7 +3611,10 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 
 
 
-<section class="screen" data-route="fed/calendar" data-lens="fed" aria-label="Election calendar">
+<section class="screen" data-route="election" data-lens="fed" aria-label="Election">
+  <div class="page-head"><div><h1>Election</h1><p>One election, from the calendar that starts it to the certificate that ends it. The live floor stays a room of its own.</p></div><div class="page-head__end"><span class="c-pill c-pill--ok">4 surfaces, one object</span></div></div>
+  <div class="px-tabs" data-tabs="election"><button class="px-tab is-on" data-t="0" onclick="MRG.go('election',0)">Calendar</button><button class="px-tab" data-t="1" onclick="MRG.go('election',1)">Credentialing &amp; quorum</button><button class="px-tab" data-t="2" onclick="MRG.go('election',2)">Mailed ballot</button><button class="px-tab" data-t="3" onclick="MRG.go('election',3)">Results &amp; certification</button></div>
+<div class="px-tp" data-t="0">
   <div class="page-head">
     <div><h1>Election calendar</h1>
     <p>Not a record date &mdash; a fixed annual clock with seven hard dates. The calendar is the real governance engine.</p></div>
@@ -3538,9 +3649,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       </div>
     </div>
   </div>
-</section>
-
-<section class="screen" data-route="fed/credentialing" data-lens="fed" aria-label="Credentialing and quorum">
+</div><div class="px-tp" data-t="1" hidden>
   <div class="page-head">
     <div><h1>Credentialing &amp; quorum</h1>
     <p>2026 Convention, Detroit &middot; the roll frozen 25 May 2026, stored, never recomputed.</p></div>
@@ -3582,7 +3691,108 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       </div>
     </div>
   </div>
-</section>
+</div><div class="px-tp" data-t="2" hidden>
+  <div class="page-head">
+    <div><h1>Mailed ballot &mdash; the CPA&rsquo;s election, the platform&rsquo;s roll</h1>
+    <p>The flow current law still requires. The platform&rsquo;s authority ends at the frozen roll and the
+    envelope IDs: <b>ballot content never enters it</b>. The Board has approved <b>full digital voting</b> as
+    the direction &mdash; the bylaw amendment awaits convention ratification, and until it ratifies, this
+    mailed flow remains the law and runs as the transitional channel.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--warn">transitional &middot; until ratification</span><span class="c-pill c-pill--info">Deputy President 2027</span><span class="c-pill c-pill--ok">roll frozen 15 Oct</span></div>
+  </div>
+  <div class="panel" style="margin-bottom:var(--s4)">
+    <div class="statbox">
+      <div class="stat"><span class="stat__k">On the frozen roll</span><span class="stat__v">2,847</span><span class="stat__d">record date 15 Oct &middot; never recomputed</span></div>
+      <div class="stat"><span class="stat__k">Mailed by CPA</span><span class="stat__v">2,847</span><span class="stat__d">22 Oct &middot; double-envelope standard</span></div>
+      <div class="stat"><span class="stat__k">Return envelopes received</span><span class="stat__v">1,204</span><span class="stat__d">scanned envelope IDs &mdash; inclusion, never content</span></div>
+      <div class="stat"><span class="stat__k">Exceptions</span><span class="stat__v">31</span><span class="stat__d">19 undeliverable &middot; 9 re-mails &middot; 3 duplicates</span></div>
+    </div>
+  </div>
+  <div class="grid grid--2">
+    <div class="panel">
+      <div class="panel__head"><h3>The flow</h3></div>
+      <div class="panel__body">
+        <ol class="trace">
+          <li class="is-pass"><b>Record date.</b> The electorate freezes as a snapshot; post-freeze reversals carry the S3 annotation, they never rewrite the roll.</li>
+          <li class="is-pass"><b>Address hygiene.</b> Undeliverable-flagged members prompted on operational rails. No valid address? The member stays ON the roll &mdash; surfaced, never dropped.</li>
+          <li class="is-pass"><b>Roll export to the CPA.</b> Names + addresses only. Watermarked, expiring, logged: who exported, when.</li>
+          <li class="is-pass"><b>Print &amp; mail (CPA).</b> Outer return envelope carries a scannable ID naming the VOTER; the inner envelope is anonymous and holds the ballot.</li>
+          <li><b>Returns.</b> Received-or-postmarked deadline per the ruleset in force, named on screen. Late envelopes logged, unopened, retained.</li>
+          <li><b>Count &amp; certify (CPA).</b> The platform imports certified totals and the certification artifact &mdash; it never claims to have counted.</li>
+        </ol>
+      </div>
+      <div class="panel__foot"><span class="why">Address fixed after export? It goes on the exception queue to the CPA &mdash; the export is never regenerated.</span></div>
+    </div>
+    <div class="stack" style="display:grid;gap:var(--s5)">
+      <div class="panel">
+        <div class="panel__head"><h3>Exception queue</h3><span class="c-pill c-pill--warn">3 open</span></div>
+        <div class="panel__body panel__body--flush">
+          <div class="qrow"><div class="qrow__main"><b>Duplicate return &mdash; envelope IDs 4471 &amp; 5502, same voter</b><span>first validly received counts; the later logged unopened &mdash; policy named</span></div><div class="qrow__end"><span class="c-pill c-pill--info">CPA</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>Undeliverable, address since fixed</b><span>re-mail before the cutoff (5 Nov, Board-set) only &mdash; the re-mail VOIDS the original envelope ID before a new one issues</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">re-mail</span></div></div>
+        <div class="qrow"><div class="qrow__main"><b>CPA scan-return channel</b><span>signed daily batch, validated against the frozen roll; unknown IDs rejected &amp; logged. A recount produces a second certification artifact &mdash; imported append-only, superseding, never editing</span></div><div class="qrow__end"><span class="c-pill c-pill--info">S5</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>Envelope ID scanned twice</b><span>cannot be marked received twice &mdash; refused, rule named</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">blocked</span></div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel__head"><h3>What the member sees</h3></div>
+        <div class="panel__body panel__body--flush">
+          <div class="qrow"><div class="qrow__main"><b>&ldquo;Your ballot was mailed 22 Oct&rdquo;</b><span>and &ldquo;your return envelope was received 30 Oct&rdquo; &mdash; their own row only. This is live inclusion STATUS, not a receipt: R14&rsquo;s one-time receipt belongs to the electronic flow</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">status</span></div></div>
+          <div class="qrow"><div class="qrow__main"><b>Never their vote, never anyone else&rsquo;s status</b><span>credentialing sees counts; club officers see nothing per-member</span></div><div class="qrow__end"><span class="c-pill c-pill--info">R14</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><div class="px-tp" data-t="3" hidden>
+  <div class="page-head">
+    <div><h1>Results &amp; certification</h1>
+    <p>Motion M-1, 2026 Convention &mdash; and the abstention question, made visible instead of assumed.</p></div>
+    <div class="page-head__end"><span class="c-pill c-pill--info mono">bylaws-2012.2</span></div>
+  </div>
+  <div class="grid grid--sideright">
+    <div class="stack">
+      <div class="panel">
+        <div class="panel__head"><div><h3>M-1 &middot; Align the convention accounting deadline at 90 days</h3><p>Amends By-Law 10.1.7 to match the Convention Contract &middot; weighted delegate vote &middot; threshold 2/3</p></div>
+          <div class="panel__head__end" id="m1-verdict-pill"></div></div>
+        <div class="panel__body">
+          <div class="calc">
+            <div class="calc__r"><span>For &mdash; 9 delegations<small>Detroit 214.00 (216.00 less 2.00 extracted by independents) &middot; San Francisco 132.00 &middot; Cleveland 78.00 &middot; Houston 63.00 &middot; Jacksonville 47.00 &middot; Birmingham 31.00 &middot; San Diego 26.00 &middot; Knoxville 22.00 &middot; San Jose 9.00</small></span><span class="calc__n">622.00</span></div>
+            <div class="calc__r"><span>Against &mdash; 4 delegations<small>New York 118.00 &middot; Washington D.C. 74.00 &middot; Louisville/Lexington 39.00 &middot; Los Angeles 26.00</small></span><span class="calc__n">257.00</span></div>
+            <div class="calc__r"><span>Abstain<small>Chicago&rsquo;s delegation abstained, 90.00 &middot; two Detroit members voted independently and cast blanks, 2.00</small></span><span class="calc__n">92.00</span></div>
+            <div class="calc__r calc__r--tot"><span>Ballots weighed<small>the full 971.00-vote floor was present for the question</small></span><span class="calc__n">971.00</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel" id="m1-panel">
+        <div class="panel__head"><div><h3>The two-thirds test, under the active ruleset</h3><p>Abstentions in or out of the denominator &mdash; flip it from the gear icon and watch the outcome change.</p></div></div>
+        <div class="panel__body">
+          <div class="calc" id="m1-calc"></div>
+          <div id="m1-verdict" style="margin-top:var(--s4)"></div>
+        </div>
+        <div class="panel__foot"><span class="why"><b>The by-laws are silent on Assembly abstentions</b> &mdash; only Board polls are covered (6.2.4, where a non-reply counts as an abstention and therefore effectively a No on 2/3-of-all-members questions). Until the revision speaks, this software setting <i>is</i> the governance decision, which is exactly why it is surfaced here and not buried in code.</span></div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="panel">
+        <div class="panel__head"><h3>Certification</h3></div>
+        <div class="panel__body">
+          <dl class="kv kv--tight">
+            <dt>Certified</dt><dd>11 Jul 2026 &middot; Credentials Committee</dd>
+            <dt>Ruleset</dt><dd class="mono">bylaws-2012.2 &middot; abstentions excluded</dd>
+            <dt>Roll</dt><dd>971 certified &middot; frozen 25 May 2026</dd>
+            <dt>Result hash</dt><dd><span class="hash">sha256:7c1f 90ae 22d4 5b8e 61c0 f3a9 8d17 44be 09e2 c5d6 3a7f 1b48 e690 2d3c ab51 f704</span></dd>
+          </dl>
+          <p class="why" style="margin:var(--s3) 0 0">Anyone can re-verify the tally against the sealed inputs and this hash &mdash; a losing side gets something to <b>check</b>, not something to allege. The toggled recount above is a what-if under the active setting; the certified 2026 result itself is immutable, stamped with the version that governed it.</p>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel__head"><h3>Ties are never broken silently</h3></div>
+        <div class="panel__body"><p class="why" style="margin:0">A tied result is reported <b>undecided and tied</b>, named to By-Law 9.2.4 / 8.12.1, and handed to the Election Committee Chairman for a <b>draw from a bag</b> &mdash; a physical lot a room full of people can verify without trusting anything, which no random number generator offers. The engine refuses to break ties; that refusal is the integrity floor, not a missing feature.</p></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+
 
 <section class="screen" data-route="fed/floor" data-lens="fed" aria-label="Live voting floor">
   <div class="page-head">
@@ -3635,7 +3845,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <div class="panel">
         <div class="panel__head"><h3>Motions on today&rsquo;s order paper</h3></div>
         <div class="panel__body panel__body--flush">
-          <a class="qrow" href="#/fed/results"><div class="qrow__main"><b>M-1 &middot; Align convention accounting at 90 days</b><span>By-Law amendment &rarr; weighted delegate vote, 2/3 &middot; amends 10.1.7 to match the contract</span></div><div class="qrow__end"><span class="c-pill c-pill--info">tallied</span></div></a>
+          <a class="qrow" href="#/election"><div class="qrow__main"><b>M-1 &middot; Align convention accounting at 90 days</b><span>By-Law amendment &rarr; weighted delegate vote, 2/3 &middot; amends 10.1.7 to match the contract</span></div><div class="qrow__end"><span class="c-pill c-pill--info">tallied</span></div></a>
           <div class="qrow"><div class="qrow__main"><b>M-2 &middot; Adjourn to 2:00 pm</b><span>procedural &rarr; voice vote &middot; carried on the chair&rsquo;s call</span></div><div class="qrow__end"><span class="c-pill c-pill--muted">carried</span></div></div>
           <div class="qrow"><div class="qrow__main"><b>M-3 &middot; Adopt the digital-voting amendment</b><span>By-Law amendment &rarr; weighted delegate vote, 2/3 &middot; the S4 rule enforced live below</span></div><div class="qrow__end"><span id="m3-paper-pill"><span class="c-pill c-pill--warn">before the floor</span></span></div></div>
         </div>
@@ -3644,55 +3854,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   </div>
 </section>
 
-<section class="screen" data-route="fed/results" data-lens="fed" aria-label="Results and certification">
-  <div class="page-head">
-    <div><h1>Results &amp; certification</h1>
-    <p>Motion M-1, 2026 Convention &mdash; and the abstention question, made visible instead of assumed.</p></div>
-    <div class="page-head__end"><span class="c-pill c-pill--info mono">bylaws-2012.2</span></div>
-  </div>
-  <div class="grid grid--sideright">
-    <div class="stack">
-      <div class="panel">
-        <div class="panel__head"><div><h3>M-1 &middot; Align the convention accounting deadline at 90 days</h3><p>Amends By-Law 10.1.7 to match the Convention Contract &middot; weighted delegate vote &middot; threshold 2/3</p></div>
-          <div class="panel__head__end" id="m1-verdict-pill"></div></div>
-        <div class="panel__body">
-          <div class="calc">
-            <div class="calc__r"><span>For &mdash; 9 delegations<small>Detroit 214.00 (216.00 less 2.00 extracted by independents) &middot; San Francisco 132.00 &middot; Cleveland 78.00 &middot; Houston 63.00 &middot; Jacksonville 47.00 &middot; Birmingham 31.00 &middot; San Diego 26.00 &middot; Knoxville 22.00 &middot; San Jose 9.00</small></span><span class="calc__n">622.00</span></div>
-            <div class="calc__r"><span>Against &mdash; 4 delegations<small>New York 118.00 &middot; Washington D.C. 74.00 &middot; Louisville/Lexington 39.00 &middot; Los Angeles 26.00</small></span><span class="calc__n">257.00</span></div>
-            <div class="calc__r"><span>Abstain<small>Chicago&rsquo;s delegation abstained, 90.00 &middot; two Detroit members voted independently and cast blanks, 2.00</small></span><span class="calc__n">92.00</span></div>
-            <div class="calc__r calc__r--tot"><span>Ballots weighed<small>the full 971.00-vote floor was present for the question</small></span><span class="calc__n">971.00</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="panel" id="m1-panel">
-        <div class="panel__head"><div><h3>The two-thirds test, under the active ruleset</h3><p>Abstentions in or out of the denominator &mdash; flip it from the gear icon and watch the outcome change.</p></div></div>
-        <div class="panel__body">
-          <div class="calc" id="m1-calc"></div>
-          <div id="m1-verdict" style="margin-top:var(--s4)"></div>
-        </div>
-        <div class="panel__foot"><span class="why"><b>The by-laws are silent on Assembly abstentions</b> &mdash; only Board polls are covered (6.2.4, where a non-reply counts as an abstention and therefore effectively a No on 2/3-of-all-members questions). Until the revision speaks, this software setting <i>is</i> the governance decision, which is exactly why it is surfaced here and not buried in code.</span></div>
-      </div>
-    </div>
-    <div class="stack">
-      <div class="panel">
-        <div class="panel__head"><h3>Certification</h3></div>
-        <div class="panel__body">
-          <dl class="kv kv--tight">
-            <dt>Certified</dt><dd>11 Jul 2026 &middot; Credentials Committee</dd>
-            <dt>Ruleset</dt><dd class="mono">bylaws-2012.2 &middot; abstentions excluded</dd>
-            <dt>Roll</dt><dd>971 certified &middot; frozen 25 May 2026</dd>
-            <dt>Result hash</dt><dd><span class="hash">sha256:7c1f 90ae 22d4 5b8e 61c0 f3a9 8d17 44be 09e2 c5d6 3a7f 1b48 e690 2d3c ab51 f704</span></dd>
-          </dl>
-          <p class="why" style="margin:var(--s3) 0 0">Anyone can re-verify the tally against the sealed inputs and this hash &mdash; a losing side gets something to <b>check</b>, not something to allege. The toggled recount above is a what-if under the active setting; the certified 2026 result itself is immutable, stamped with the version that governed it.</p>
-        </div>
-      </div>
-      <div class="panel">
-        <div class="panel__head"><h3>Ties are never broken silently</h3></div>
-        <div class="panel__body"><p class="why" style="margin:0">A tied result is reported <b>undecided and tied</b>, named to By-Law 9.2.4 / 8.12.1, and handed to the Election Committee Chairman for a <b>draw from a bag</b> &mdash; a physical lot a room full of people can verify without trusting anything, which no random number generator offers. The engine refuses to break ties; that refusal is the integrity floor, not a missing feature.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 
 
@@ -3706,7 +3868,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
   <div class="page-head">
     <div><h1>Ruleset workbench</h1>
     <p>The Constitution Committee drafts a ruleset and runs it against real history &mdash; consequences quantified before the vote, not after.</p></div>
-    <div class="page-head__end"><a class="btn-xs" href="#/fed/results">Re-tally M-1</a></div>
+    <div class="page-head__end"><a class="btn-xs" href="#/election">Re-tally M-1</a></div>
   </div>
   <div class="grid grid--sideright">
     <div class="stack">
@@ -3972,56 +4134,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 
 
 
-<section class="screen" data-route="fed/events" data-lens="fed" aria-label="Event management">
-  <div class="page-head">
-    <div><h1>Event management</h1>
-    <p>Create it, price it, register it, check it in &mdash; and feed the attendance record that governance reads.</p></div>
-  </div>
-  <div class="grid grid--sideright">
-    <div class="stack">
-      <div class="panel">
-        <div class="panel__head"><h3>Events console</h3></div>
-        <div class="c-table-wrap" style="border:0;border-radius:0"><table class="c-table c-table--dense">
-          <thead><tr><th>Event</th><th>Scope</th><th class="num">Capacity</th><th class="num">Registered</th><th>Pricing</th><th>State</th></tr></thead>
-          <tbody>
-            <tr><td><b>Revision webinar</b><div class="why">19 Nov, 8 pm Eastern</div></td><td class="mono">fed</td><td class="num">500</td><td class="num">212</td><td class="why">free</td><td><span class="c-pill c-pill--ok">open</span></td></tr>
-            <tr><td><b>Harvest Dinner</b><div class="why">14 Nov &middot; run by Detroit, listed here</div></td><td class="mono">club:detroit</td><td class="num">180</td><td class="num">158</td><td class="why">$25 member &middot; $40 non-member &middot; $15 youth</td><td><span class="c-pill c-pill--warn">near capacity</span></td></tr>
-            <tr><td><b>2027 Convention</b><div class="why">8&ndash;11 Jul &middot; San Francisco</div></td><td class="mono">fed</td><td class="num">1,600</td><td class="num">418</td><td class="why">$385 early-bird to 8 Jun &middot; $435 after</td><td><span class="c-pill c-pill--ok">open</span></td></tr>
-          </tbody>
-        </table></div>
-        <div class="panel__foot"><span class="why">One calendar, two scopes: a club event and a federation event are the same object with a different scope, which is why the member sees them in one list and pricing reads the right membership.</span></div>
-      </div>
-      <div class="panel">
-        <div class="panel__head"><h3>Create an event</h3><p>What the form captures &mdash; the demo shows the shape, not a working editor.</p></div>
-        <div class="panel__body">
-          <dl class="kv">
-            <dt>Scope</dt><dd>federation &middot; or one club <small>sets whose membership prices it and whose books take the money</small></dd>
-            <dt>Ticket types</dt><dd>member / non-member / youth, per type pricing <small>member price reads standing at purchase time</small></dd>
-            <dt>Capacity &amp; waitlist</dt><dd>hard cap; waitlist promotes in order, notified by consented channel</dd>
-            <dt>Check-in</dt><dd>QR per household code <small>the same code across every event</small></dd>
-          </dl>
-        </div>
-      </div>
-    </div>
-    <div class="stack">
-      <div class="panel">
-        <div class="panel__head"><h3>Check-in console &mdash; live</h3></div>
-        <div class="panel__body">
-          <div class="calc">
-            <div class="calc__r"><span>Webinar joined</span><span class="calc__n">176</span></div>
-            <div class="calc__r"><span>Recorded as attendance<small>remote presence counts (10.3.1 &ldquo;or otherwise&rdquo;)</small></span><span class="calc__n">176</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="panel">
-        <div class="panel__head"><h3>Attendance feeds governance</h3><p>By-Law 6.3.1 &mdash; the first place attendance is a franchise input.</p></div>
-        <div class="panel__body">
-          <p class="why" style="margin:0">After the 2026 Convention closed, Past-President activity recomputed automatically: <b>9 active, 5 inactive</b> &mdash; 2 fell inactive having attended fewer than 3 of the preceding 5 conventions. The list prints in the Annual Committee Directory under &ldquo;Board members eligible to vote&rdquo;, and reinstatement needs a petition and 2/3 Board approval. Today this list is compiled by hand and argued about; here it is a report over check-ins &mdash; which is why historic convention attendance is worth importing alongside the scholarship history.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <section class="screen" data-route="fed/comms" data-lens="fed" aria-label="Communications centre">
   <div class="page-head">
@@ -4178,7 +4291,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
           <div class="qrow"><div class="qrow__main"><b>2 &middot; Officers &amp; roles</b><span>president, treasurer, correspondent &mdash; grants scoped to this club only</span></div><div class="qrow__end"><span class="mono">&#10003;</span></div></div>
           <div class="qrow"><div class="qrow__main"><b>3 &middot; Money</b><span>dues schedule, remittance mode, QuickBooks class &mdash; club dues are a liability until remitted</span></div><div class="qrow__end"><a class="btn-xs" href="#/money">Remit</a></div></div>
           <div class="qrow"><div class="qrow__main"><b>4 &middot; Integration</b><span>live club-system feed or manual roster &mdash; switchable later, always labelled</span></div><div class="qrow__end"><span class="mono">&#10003;</span></div></div>
-          <div class="qrow"><div class="qrow__main"><b>5 &middot; Electorate</b><span>the club&rsquo;s certified roll for conventions &mdash; frozen at record dates, never recomputed</span></div><div class="qrow__end"><a class="btn-xs" href="#/fed/credentialing">Rolls</a></div></div>
+          <div class="qrow"><div class="qrow__main"><b>5 &middot; Electorate</b><span>the club&rsquo;s certified roll for conventions &mdash; frozen at record dates, never recomputed</span></div><div class="qrow__end"><a class="btn-xs" href="#/election">Rolls</a></div></div>
         </div>
       </div>
       <div class="panel">
@@ -4224,7 +4337,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <div class="c-table-wrap" style="border:0;border-radius:0"><table class="c-table c-table--dense">
       <thead><tr><th>Club</th><th>Integration door</th><th>Roster as of</th><th>Remittance</th><th style="text-align:right">Certified 2026</th><th></th></tr></thead>
       <tbody>
-        <tr><td><b>Ramallah Club of Houston</b><br><small>Houston, TX</small></td><td><span class="c-pill c-pill--ok">live feed</span></td><td class="mono">nightly &middot; 03:00</td><td><span class="c-pill c-pill--danger">Aug unposted</span></td><td class="mono" style="text-align:right">312</td><td><a class="btn-xs" href="#/fed/credentialing">gate</a></td></tr>
+        <tr><td><b>Ramallah Club of Houston</b><br><small>Houston, TX</small></td><td><span class="c-pill c-pill--ok">live feed</span></td><td class="mono">nightly &middot; 03:00</td><td><span class="c-pill c-pill--danger">Aug unposted</span></td><td class="mono" style="text-align:right">312</td><td><a class="btn-xs" href="#/election">gate</a></td></tr>
         <tr><td><b>Ramallah Club of Phoenix</b><br><small>Phoenix, AZ</small></td><td><span class="c-pill c-pill--warn">manual roster</span></td><td class="mono">14 Jun &middot; <em>stale</em></td><td><span class="c-pill c-pill--ok">current</span></td><td class="mono" style="text-align:right">64</td><td><a class="btn-xs" href="#/clubs">request</a></td></tr>
         <tr><td><b>Ramallah Club of San Francisco</b><br><small>San Francisco, CA</small></td><td><span class="c-pill c-pill--warn">manual roster</span></td><td class="mono">02 Aug &middot; in window</td><td><span class="c-pill c-pill--ok">current</span></td><td class="mono" style="text-align:right">128</td><td><a class="btn-xs" href="#/clubs">open</a></td></tr>
         <tr><td><b>Ramallah Club of San Jose</b><br><small>San Jose, CA</small></td><td><span class="c-pill c-pill--ok">live feed</span></td><td class="mono">nightly &middot; 03:00</td><td><span class="c-pill c-pill--ok">current</span></td><td class="mono" style="text-align:right">141</td><td><a class="btn-xs" href="#/clubs">open</a></td></tr>
@@ -4341,7 +4454,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
       <div class="panel__head"><h3>Operations &amp; governance journeys</h3></div>
       <div class="panel__body panel__body--flush">
 <div class="qrow"><div class="qrow__main"><b>J04 · A death in the family</b><span>Operational effects immediately; publications only after family approval</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j04">Journey</a><a class="btn-xs" href="#/fed/tree" style="margin-left:6px">Start</a></div></div>
-<div class="qrow"><div class="qrow__main"><b>J05 · Convention end-to-end</b><span>Registration, refused credentials with the rule named, the frozen floor</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j05">Journey</a><a class="btn-xs" href="#/fed/credentialing" style="margin-left:6px">Start</a></div></div>
+<div class="qrow"><div class="qrow__main"><b>J05 · Convention end-to-end</b><span>Registration, refused credentials with the rule named, the frozen floor</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j05">Journey</a><a class="btn-xs" href="#/election" style="margin-left:6px">Start</a></div></div>
 <div class="qrow"><div class="qrow__main"><b>J06 · Scholarship cycle</b><span>Three degrees, median ranking, capacity-gated budget — tested sound</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j06">Journey</a><a class="btn-xs" href="#/program/applications" style="margin-left:6px">Start</a></div></div>
 <div class="qrow"><div class="qrow__main"><b>J08 · Treasurer’s year</b><span>Dead QuickBooks token, queued postings, the remittance-credential interlock — tested sound</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j08">Journey</a><a class="btn-xs" href="#/money" style="margin-left:6px">Start</a></div></div>
 <div class="qrow"><div class="qrow__main"><b>J09 · Magazine freeze</b><span>Held-not-wrong disputes, and an archive that honors consent</span></div><div class="qrow__end"><a class="btn-xs" href="AFRP-Platform-Experience.html#j09">Journey</a><a class="btn-xs" href="#/program/magazine" style="margin-left:6px">Start</a></div></div>
@@ -4464,58 +4577,7 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 
 <!-- ═══════════════ NEW · federation screens ═══════════════ -->
 
-<section class="screen" data-route="fed/mailedballot" data-lens="fed" aria-label="Mailed ballot">
-  <div class="page-head">
-    <div><h1>Mailed ballot &mdash; the CPA&rsquo;s election, the platform&rsquo;s roll</h1>
-    <p>The flow current law still requires. The platform&rsquo;s authority ends at the frozen roll and the
-    envelope IDs: <b>ballot content never enters it</b>. The Board has approved <b>full digital voting</b> as
-    the direction &mdash; the bylaw amendment awaits convention ratification, and until it ratifies, this
-    mailed flow remains the law and runs as the transitional channel.</p></div>
-    <div class="page-head__end"><span class="c-pill c-pill--warn">transitional &middot; until ratification</span><span class="c-pill c-pill--info">Deputy President 2027</span><span class="c-pill c-pill--ok">roll frozen 15 Oct</span></div>
-  </div>
-  <div class="panel" style="margin-bottom:var(--s4)">
-    <div class="statbox">
-      <div class="stat"><span class="stat__k">On the frozen roll</span><span class="stat__v">2,847</span><span class="stat__d">record date 15 Oct &middot; never recomputed</span></div>
-      <div class="stat"><span class="stat__k">Mailed by CPA</span><span class="stat__v">2,847</span><span class="stat__d">22 Oct &middot; double-envelope standard</span></div>
-      <div class="stat"><span class="stat__k">Return envelopes received</span><span class="stat__v">1,204</span><span class="stat__d">scanned envelope IDs &mdash; inclusion, never content</span></div>
-      <div class="stat"><span class="stat__k">Exceptions</span><span class="stat__v">31</span><span class="stat__d">19 undeliverable &middot; 9 re-mails &middot; 3 duplicates</span></div>
-    </div>
-  </div>
-  <div class="grid grid--2">
-    <div class="panel">
-      <div class="panel__head"><h3>The flow</h3></div>
-      <div class="panel__body">
-        <ol class="trace">
-          <li class="is-pass"><b>Record date.</b> The electorate freezes as a snapshot; post-freeze reversals carry the S3 annotation, they never rewrite the roll.</li>
-          <li class="is-pass"><b>Address hygiene.</b> Undeliverable-flagged members prompted on operational rails. No valid address? The member stays ON the roll &mdash; surfaced, never dropped.</li>
-          <li class="is-pass"><b>Roll export to the CPA.</b> Names + addresses only. Watermarked, expiring, logged: who exported, when.</li>
-          <li class="is-pass"><b>Print &amp; mail (CPA).</b> Outer return envelope carries a scannable ID naming the VOTER; the inner envelope is anonymous and holds the ballot.</li>
-          <li><b>Returns.</b> Received-or-postmarked deadline per the ruleset in force, named on screen. Late envelopes logged, unopened, retained.</li>
-          <li><b>Count &amp; certify (CPA).</b> The platform imports certified totals and the certification artifact &mdash; it never claims to have counted.</li>
-        </ol>
-      </div>
-      <div class="panel__foot"><span class="why">Address fixed after export? It goes on the exception queue to the CPA &mdash; the export is never regenerated.</span></div>
-    </div>
-    <div class="stack" style="display:grid;gap:var(--s5)">
-      <div class="panel">
-        <div class="panel__head"><h3>Exception queue</h3><span class="c-pill c-pill--warn">3 open</span></div>
-        <div class="panel__body panel__body--flush">
-          <div class="qrow"><div class="qrow__main"><b>Duplicate return &mdash; envelope IDs 4471 &amp; 5502, same voter</b><span>first validly received counts; the later logged unopened &mdash; policy named</span></div><div class="qrow__end"><span class="c-pill c-pill--info">CPA</span></div></div>
-          <div class="qrow"><div class="qrow__main"><b>Undeliverable, address since fixed</b><span>re-mail before the cutoff (5 Nov, Board-set) only &mdash; the re-mail VOIDS the original envelope ID before a new one issues</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">re-mail</span></div></div>
-        <div class="qrow"><div class="qrow__main"><b>CPA scan-return channel</b><span>signed daily batch, validated against the frozen roll; unknown IDs rejected &amp; logged. A recount produces a second certification artifact &mdash; imported append-only, superseding, never editing</span></div><div class="qrow__end"><span class="c-pill c-pill--info">S5</span></div></div>
-          <div class="qrow"><div class="qrow__main"><b>Envelope ID scanned twice</b><span>cannot be marked received twice &mdash; refused, rule named</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">blocked</span></div></div>
-        </div>
-      </div>
-      <div class="panel">
-        <div class="panel__head"><h3>What the member sees</h3></div>
-        <div class="panel__body panel__body--flush">
-          <div class="qrow"><div class="qrow__main"><b>&ldquo;Your ballot was mailed 22 Oct&rdquo;</b><span>and &ldquo;your return envelope was received 30 Oct&rdquo; &mdash; their own row only. This is live inclusion STATUS, not a receipt: R14&rsquo;s one-time receipt belongs to the electronic flow</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">status</span></div></div>
-          <div class="qrow"><div class="qrow__main"><b>Never their vote, never anyone else&rsquo;s status</b><span>credentialing sees counts; club officers see nothing per-member</span></div><div class="qrow__end"><span class="c-pill c-pill--info">R14</span></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 
 
@@ -4675,47 +4737,13 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
 
 <!-- ═══════════════ EVENTS · builder + live examples ═══════════════ -->
 
-<section class="screen" data-route="member/event/party" data-lens="member" aria-label="Christmas party">
-  <div class="page-head">
-    <div><h1>Detroit Club Christmas Party</h1>
-    <p>Saturday 19 December 2026, 7:00 pm Eastern &middot; St Mary&rsquo;s Hall, Livonia &middot; all ages, 21+ bar area.
-    A <b>working signup</b> &mdash; register your household, pay, get your QR. Nothing is stored or charged.</p></div>
-    <div class="page-head__end" id="party-pills"></div>
-  </div>
-  <div id="evparty"></div>
-</section>
 
-<section class="screen" data-route="member/event/lecture" data-lens="member" aria-label="Free lecture">
-  <div class="page-head">
-    <div><h1>Reading Ottoman-era Ramallah records</h1>
-    <p>Thursday 3 December 2026, 8:00 pm Eastern &middot; online &middot; free &middot; a Preservation Project lecture with
-    Dr.&nbsp;S. Muallem (fictional presenter). RSVP, then <b>ask a question</b> &mdash; attributed exactly as you choose.</p></div>
-    <div class="page-head__end" id="lec-pills"></div>
-  </div>
-  <div id="evlecture"></div>
-</section>
 
-<section class="screen" data-route="club/newevent" data-lens="club" aria-label="Create an event">
-  <div class="page-head">
-    <div><h1>Create an event &mdash; Detroit Club</h1>
-    <p>The event builder, live: six steps from a blank form to a published event your members can open on the
-    member lens. The host is fixed &mdash; <b>this club owns the money, the capacity, the roster, and the comms</b>.</p></div>
-    <div class="page-head__end"><span class="c-pill c-pill--info">host: Ramallah Club of Detroit</span><span class="c-pill c-pill--warn">simulation</span></div>
-  </div>
-  <div id="evbuilder-club"></div>
-  <div id="purpose-club"></div>
-</section>
 
-<section class="screen" data-route="program/newevent" data-lens="program" aria-label="Create an event">
-  <div class="page-head">
-    <div><h1>Create an event &mdash; programme</h1>
-    <p>The same builder the clubs use, host prefilled to the programme: revenue posts to the programme&rsquo;s
-    budget line, and an ARFHSN programme&rsquo;s event receipts per-entity. One builder, one set of rules.</p></div>
-    <div class="page-head__end"><span class="c-pill c-pill--info">host: Preservation Project</span><span class="c-pill c-pill--warn">simulation</span></div>
-  </div>
-  <div id="evbuilder-program"></div>
-  <div id="purpose-program"></div>
-</section>
+
+
+
+
 
 
 <!-- ═══════════════ INSTITUTION MANAGEMENT ═══════════════ -->
@@ -4741,25 +4769,25 @@ body.register-member .page-head h1{font-size:clamp(28px, 2.2vw + 21px, 40px)}
     <div class="panel">
       <div class="panel__head"><h3>Member lens &mdash; participation</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/member/home">Home</a><a class="btn-xs" href="#/member/inbox">Inbox</a><a class="btn-xs" href="#/member/pathway">My pathway</a><a class="btn-xs" href="#/member/scenarios">Guided scenarios</a><a class="btn-xs" href="#/member/voting">Voting</a><a class="btn-xs" href="#/member/membership">Membership &amp; dues</a><a class="btn-xs" href="#/member/household">My household</a><a class="btn-xs" href="#/member/payments">Payments &amp; giving</a><a class="btn-xs" href="#/member/events">Events</a><a class="btn-xs" href="#/convention">Convention</a><a class="btn-xs" href="#/convention">Convention live</a><a class="btn-xs" href="#/convention">Convention store</a><a class="btn-xs" href="#/convention">Help desk</a><a class="btn-xs" href="#/directory">Directory inclusion</a><a class="btn-xs" href="#/member/family">Report a life event</a><a class="btn-xs" href="#/member/ads">Advertise</a><a class="btn-xs" href="#/member/programs">My programmes</a><a class="btn-xs" href="#/member/club">My club</a><a class="btn-xs" href="#/member/family">Family tree</a><a class="btn-xs" href="#/directory">Directory</a><a class="btn-xs" href="#/member/rbpn">Professional network</a><a class="btn-xs" href="#/member/magazine">Magazine</a><a class="btn-xs" href="#/member/bookstore">Bookstore</a>
+        <a class="btn-xs" href="#/member/home">Home</a><a class="btn-xs" href="#/member/inbox">Inbox</a><a class="btn-xs" href="#/member/pathway">My pathway</a><a class="btn-xs" href="#/member/scenarios">Guided scenarios</a><a class="btn-xs" href="#/ballot">Voting</a><a class="btn-xs" href="#/member/membership">Membership &amp; dues</a><a class="btn-xs" href="#/member/household">My household</a><a class="btn-xs" href="#/member/payments">Payments &amp; giving</a><a class="btn-xs" href="#/events">Events</a><a class="btn-xs" href="#/convention">Convention</a><a class="btn-xs" href="#/convention">Convention live</a><a class="btn-xs" href="#/convention">Convention store</a><a class="btn-xs" href="#/convention">Help desk</a><a class="btn-xs" href="#/directory">Directory inclusion</a><a class="btn-xs" href="#/member/family">Report a life event</a><a class="btn-xs" href="#/member/ads">Advertise</a><a class="btn-xs" href="#/member/programs">My programmes</a><a class="btn-xs" href="#/member/club">My club</a><a class="btn-xs" href="#/member/family">Family tree</a><a class="btn-xs" href="#/directory">Directory</a><a class="btn-xs" href="#/member/rbpn">Professional network</a><a class="btn-xs" href="#/member/magazine">Magazine</a><a class="btn-xs" href="#/member/bookstore">Bookstore</a>
       </div>
     </div>
     <div class="panel">
       <div class="panel__head"><h3>Club lens &mdash; running Detroit</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/club/dashboard">Dashboard</a><a class="btn-xs" href="#/club/officers">Officers &amp; affiliation</a><a class="btn-xs" href="#/club/roster">Roster</a><a class="btn-xs" href="#/club/households">Households</a><a class="btn-xs" href="#/club/events">Events &amp; check-in</a><a class="btn-xs" href="#/club/newevent">Create an event</a><a class="btn-xs" href="#/club/comms">Communications</a><a class="btn-xs" href="#/club/voting">Club voting</a><a class="btn-xs" href="#/money">Remittance &amp; ledger</a>
+        <a class="btn-xs" href="#/club/dashboard">Dashboard</a><a class="btn-xs" href="#/club/officers">Officers &amp; affiliation</a><a class="btn-xs" href="#/club/roster">Roster</a><a class="btn-xs" href="#/club/households">Households</a><a class="btn-xs" href="#/events">Events &amp; check-in</a><a class="btn-xs" href="#/events">Create an event</a><a class="btn-xs" href="#/club/comms">Communications</a><a class="btn-xs" href="#/club/voting">Club voting</a><a class="btn-xs" href="#/money">Remittance &amp; ledger</a>
       </div>
     </div>
     <div class="panel">
       <div class="panel__head"><h3>Program lens &mdash; running the programmes</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/program/overview">All programmes</a><a class="btn-xs" href="#/program/lifecycle">Lifecycle &amp; pipeline</a><a class="btn-xs" href="#/program/registry">Programme registry</a><a class="btn-xs" href="#/program/newevent">Create an event</a><a class="btn-xs" href="#/program/prog/camp">Camp Ramallah</a><a class="btn-xs btn-xs--retired" href="#/program/prog/award">HS Senior Award (retired)</a><a class="btn-xs" href="#/program/prog/hope">Project Hope</a><a class="btn-xs" href="#/program/prog/medical">Medical Mission</a><a class="btn-xs" href="#/program/prog/leadership">Leadership Ramallah</a><a class="btn-xs" href="#/program/prog/exchange">Exchange Mission</a><a class="btn-xs" href="#/program/prog/congress">Congressional Outreach</a><a class="btn-xs" href="#/program/prog/action">Day of Action</a><a class="btn-xs" href="#/program/prog/arabic">Arabic Course</a><a class="btn-xs" href="#/program/prog/women">Women to Women</a><a class="btn-xs" href="#/program/prog/preservation">Preservation Project</a><a class="btn-xs" href="#/program/senior">Senior Living campaign</a><a class="btn-xs" href="#/program/applications">Scholarship applications</a><a class="btn-xs" href="#/program/applications">Conflict of interest</a><a class="btn-xs" href="#/money">Budget &amp; endowment</a><a class="btn-xs" href="#/program/endowment">Endowment management</a><a class="btn-xs" href="#/program/medops">Mission operations</a><a class="btn-xs" href="#/program/intake">Human services intake</a><a class="btn-xs" href="#/money">Disbursement</a><a class="btn-xs" href="#/program/alumni">Alumni &amp; recruiting</a><a class="btn-xs" href="#/program/magazine">Magazine ops</a><a class="btn-xs" href="#/program/bookstore">Bookstore ops</a><a class="btn-xs" href="#/program/rbpn">RBPN &amp; sponsorship</a>
+        <a class="btn-xs" href="#/program/overview">All programmes</a><a class="btn-xs" href="#/program/lifecycle">Lifecycle &amp; pipeline</a><a class="btn-xs" href="#/program/registry">Programme registry</a><a class="btn-xs" href="#/events">Create an event</a><a class="btn-xs" href="#/program/prog/camp">Camp Ramallah</a><a class="btn-xs btn-xs--retired" href="#/program/prog/award">HS Senior Award (retired)</a><a class="btn-xs" href="#/program/prog/hope">Project Hope</a><a class="btn-xs" href="#/program/prog/medical">Medical Mission</a><a class="btn-xs" href="#/program/prog/leadership">Leadership Ramallah</a><a class="btn-xs" href="#/program/prog/exchange">Exchange Mission</a><a class="btn-xs" href="#/program/prog/congress">Congressional Outreach</a><a class="btn-xs" href="#/program/prog/action">Day of Action</a><a class="btn-xs" href="#/program/prog/arabic">Arabic Course</a><a class="btn-xs" href="#/program/prog/women">Women to Women</a><a class="btn-xs" href="#/program/prog/preservation">Preservation Project</a><a class="btn-xs" href="#/program/senior">Senior Living campaign</a><a class="btn-xs" href="#/program/applications">Scholarship applications</a><a class="btn-xs" href="#/program/applications">Conflict of interest</a><a class="btn-xs" href="#/money">Budget &amp; endowment</a><a class="btn-xs" href="#/program/endowment">Endowment management</a><a class="btn-xs" href="#/program/medops">Mission operations</a><a class="btn-xs" href="#/program/intake">Human services intake</a><a class="btn-xs" href="#/money">Disbursement</a><a class="btn-xs" href="#/program/alumni">Alumni &amp; recruiting</a><a class="btn-xs" href="#/program/magazine">Magazine ops</a><a class="btn-xs" href="#/program/bookstore">Bookstore ops</a><a class="btn-xs" href="#/program/rbpn">RBPN &amp; sponsorship</a>
       </div>
     </div>
     <div class="panel">
       <div class="panel__head"><h3>Federation lens &mdash; running the Federation</h3></div>
       <div class="panel__body pillrow" style="gap:var(--s2)">
-        <a class="btn-xs" href="#/fed/dashboard">Dashboard</a><a class="btn-xs" href="#/fed/crm">The CRM today</a><a class="btn-xs" href="#/people">Member 360</a><a class="btn-xs" href="#/clubs">Club registry &amp; setup</a><a class="btn-xs" href="#/clubs">Club health &amp; integration</a><a class="btn-xs" href="#/clubs">Onboarding &amp; migration</a><a class="btn-xs" href="#/governance">Board workspace</a><a class="btn-xs" href="#/fed/mailedballot">Mailed ballot (CPA)</a><a class="btn-xs" href="#/people">Support desk</a><a class="btn-xs" href="#/institutions">Institution registry</a><a class="btn-xs" href="#/institutions">Institution detail</a><a class="btn-xs" href="#/institutions">Add an institution</a><a class="btn-xs" href="#/institutions">ARFHSN trustees</a><a class="btn-xs" href="#/people">Identity &amp; merge queue</a><a class="btn-xs" href="#/fed/tree">Family tree console</a><a class="btn-xs" href="#/directory">Directory &amp; consent</a><a class="btn-xs" href="#/fed/roles">Roles &amp; permissions</a><a class="btn-xs" href="#/governance">Board &amp; officers</a><a class="btn-xs" href="#/governance">Committees</a><a class="btn-xs" href="#/fed/calendar">Election calendar</a><a class="btn-xs" href="#/fed/credentialing">Credentialing &amp; quorum</a><a class="btn-xs" href="#/fed/floor">Live voting floor</a><a class="btn-xs" href="#/fed/results">Results &amp; certification</a><a class="btn-xs" href="#/money">Daily close</a><a class="btn-xs" href="#/money">QuickBooks integration</a><a class="btn-xs" href="#/money">Multi-entity ledger</a><a class="btn-xs" href="#/money">Financial controls</a><a class="btn-xs" href="#/fed/events">Event management</a><a class="btn-xs" href="#/fed/comms">Communications centre</a><a class="btn-xs" href="#/convention">Convention &mdash; contract</a><a class="btn-xs" href="#/convention">Convention command</a><a class="btn-xs" href="#/convention">Convention desk</a><a class="btn-xs" href="#/fed/tree">Life events queue</a><a class="btn-xs" href="#/convention">Convention &mdash; operations</a><a class="btn-xs" href="#/fed/workbench">Ruleset workbench</a>
+        <a class="btn-xs" href="#/fed/dashboard">Dashboard</a><a class="btn-xs" href="#/fed/crm">The CRM today</a><a class="btn-xs" href="#/people">Member 360</a><a class="btn-xs" href="#/clubs">Club registry &amp; setup</a><a class="btn-xs" href="#/clubs">Club health &amp; integration</a><a class="btn-xs" href="#/clubs">Onboarding &amp; migration</a><a class="btn-xs" href="#/governance">Board workspace</a><a class="btn-xs" href="#/election">Mailed ballot (CPA)</a><a class="btn-xs" href="#/people">Support desk</a><a class="btn-xs" href="#/institutions">Institution registry</a><a class="btn-xs" href="#/institutions">Institution detail</a><a class="btn-xs" href="#/institutions">Add an institution</a><a class="btn-xs" href="#/institutions">ARFHSN trustees</a><a class="btn-xs" href="#/people">Identity &amp; merge queue</a><a class="btn-xs" href="#/fed/tree">Family tree console</a><a class="btn-xs" href="#/directory">Directory &amp; consent</a><a class="btn-xs" href="#/fed/roles">Roles &amp; permissions</a><a class="btn-xs" href="#/governance">Board &amp; officers</a><a class="btn-xs" href="#/governance">Committees</a><a class="btn-xs" href="#/election">Election calendar</a><a class="btn-xs" href="#/election">Credentialing &amp; quorum</a><a class="btn-xs" href="#/fed/floor">Live voting floor</a><a class="btn-xs" href="#/election">Results &amp; certification</a><a class="btn-xs" href="#/money">Daily close</a><a class="btn-xs" href="#/money">QuickBooks integration</a><a class="btn-xs" href="#/money">Multi-entity ledger</a><a class="btn-xs" href="#/money">Financial controls</a><a class="btn-xs" href="#/events">Event management</a><a class="btn-xs" href="#/fed/comms">Communications centre</a><a class="btn-xs" href="#/convention">Convention &mdash; contract</a><a class="btn-xs" href="#/convention">Convention command</a><a class="btn-xs" href="#/convention">Convention desk</a><a class="btn-xs" href="#/fed/tree">Life events queue</a><a class="btn-xs" href="#/convention">Convention &mdash; operations</a><a class="btn-xs" href="#/fed/workbench">Ruleset workbench</a>
       </div>
     </div>
   </div>
@@ -5051,11 +5079,11 @@ function renderEligibility(){
   if (S.ballot.cast){
     html = '<div class="verdict verdict--allow"><span class="verdict__ic">&#10003;</span><div>' +
       '<b>Your ballot is cast and sealed.</b><p>Cast while eligible; the electorate froze at the record date, so a later rules change does not reopen the seal.</p></div></div>' +
-      '<div class="rowflex" style="margin-top:var(--s3)"><a class="btn-xs" href="#/member/ballot/sealed">View your receipt</a></div>';
+      '<div class="rowflex" style="margin-top:var(--s3)"><a class="btn-xs" href="#/ballot">View your receipt</a></div>';
   } else if (eligible){
     html = allowHTML() +
       '<div class="rowflex" style="margin-top:var(--s4)">' +
-      '<a class="c-btn c-btn--sm" href="#/member/ballot">Open the ballot</a>' +
+      '<a class="c-btn c-btn--sm" href="#/ballot">Open the ballot</a>' +
       '<span class="why">Two candidates certified by Credentials, 31 Dec 2026 · or cast a deliberate blank.</span></div>';
   } else {
     html = refusalHTML() +
@@ -5090,13 +5118,13 @@ function renderBallot(){
   if (S.ballot.cast){
     body.innerHTML = '<div class="verdict verdict--allow"><span class="verdict__ic">&#10003;</span><div>' +
       '<b>Already cast and sealed.</b><p>A sealed ballot cannot be changed — and no re-vote is configured for this poll. ' +
-      '<a href="#/member/ballot/sealed">Your receipt</a>.</p></div></div>';
+      '<a href="#/ballot">Your receipt</a>.</p></div></div>';
     btn.disabled = true; why.textContent = 'This ballot is complete.';
     return;
   }
   if (!eligible){
     body.innerHTML = refusalHTML() +
-      '<p class="why" style="margin:var(--s3) 0 0">The ballot itself refuses too — eligibility is checked at the door, not only in the list. <a href="#/member/voting">Back to ballots</a>.</p>';
+      '<p class="why" style="margin:var(--s3) 0 0">The ballot itself refuses too — eligibility is checked at the door, not only in the list. <a href="#/ballot">Back to ballots</a>.</p>';
     btn.disabled = true;
     why.textContent = 'Not eligible under the active ruleset — the refusal above names the rule.';
     return;
@@ -5121,8 +5149,8 @@ function goConfirm(){ if (S.ballot.choice && !S.ballot.cast) navigate('member/ba
 function renderConfirm(){
   var el = document.getElementById('confirm-choice');
   if (!el) return;
-  if (S.ballot.cast){ el.innerHTML = 'Already sealed — <a href="#/member/ballot/sealed">your receipt</a>.'; return; }
-  if (!S.ballot.choice){ el.innerHTML = 'No choice made yet — <a href="#/member/ballot">go back to the ballot</a>.'; return; }
+  if (S.ballot.cast){ el.innerHTML = 'Already sealed — <a href="#/ballot">your receipt</a>.'; return; }
+  if (!S.ballot.choice){ el.innerHTML = 'No choice made yet — <a href="#/ballot">go back to the ballot</a>.'; return; }
   el.textContent = (S.ballot.choice === 'blank') ? 'A deliberate blank ballot' : 'One vote: ' + choiceLabel(S.ballot.choice);
 }
 
@@ -5265,7 +5293,7 @@ var SOURCES = {
 var M360_LINKS = {
   nadia: [['#/member/home','Member lens — her own portal, today','the same standing engine renders both'],
           ['#/club/roster','Detroit roster row','club lapsed · national current'],
-          ['#/member/voting','Her ballot, live under the active ruleset','demo 2']],
+          ['#/ballot','Her ballot, live under the active ruleset','demo 2']],
   rima:  [['#/club/roster','Detroit roster row','club lapsed · national current · Patron'],
           ['#/money','Her $1,000.00 gift in the 15 Aug daily close','three lines, fees gross'],
           ['#/program/applications','The kinship path that recused a reviewer of her daughter','degree 3']],
@@ -5943,11 +5971,11 @@ function crumbHTML(route, base, lens){
   var here = entry ? entry.title : base;
   /* deeper trails for sub-screens */
   if (route.indexOf('member/ballot') === 0 && route !== 'member/voting'){
-    h += '<span class="sep">›</span><a href="#/member/voting">Voting</a>';
+    h += '<span class="sep">›</span><a href="#/ballot">Voting</a>';
     here = route === 'member/ballot' ? 'Ballot — Deputy President 2027'
          : route === 'member/ballot/confirm' ? 'Confirm' : 'Sealed';
   } else if (route.indexOf('member/event/') === 0){
-    h += '<span class="sep">›</span><a href="#/member/events">Events</a>';
+    h += '<span class="sep">›</span><a href="#/events">Events</a>';
     here = 'Harvest Dinner';
   } else if (base === 'fed/member360'){
     here = (PEOPLE[S.persona] ? PEOPLE[S.persona].name : 'Member') + ' — 360';
@@ -6454,7 +6482,7 @@ function fH(n){ return fmtH(n); }
 window.SIM = {
   inbox: [
     { id:'renew',  cls:'operational', when:'today 09:02', title:'Your national renewal receipt', sub:'Patron · $1,000.00 · posted gross', unread:false },
-    { id:'ballot', cls:'operational', when:'yesterday',   title:'Ballot open: Deputy President 2027', sub:'digital secret ballot · closes 20 Nov, 9:00 pm Eastern', unread:true, href:'#/member/voting' },
+    { id:'ballot', cls:'operational', when:'yesterday',   title:'Ballot open: Deputy President 2027', sub:'digital secret ballot · closes 20 Nov, 9:00 pm Eastern', unread:true, href:'#/ballot' },
     { id:'rbpn',   cls:'invitation',  when:'Mon',         title:'RBPN — list your practice?', sub:'Your Leadership Ramallah cohort qualifies you for a professional listing. Opt-in storefront, relay-first.', unread:true, state:null, rail:'youth', node:'rbpn' },
     { id:'mktg',   cls:'marketing',   when:'Sun',         title:'Convention early-bird ends Friday', sub:'held — your marketing class is muted', unread:false },
     { id:'relay',  cls:'relay',       when:'12 Aug',      title:'A member asked to reach you via the directory', sub:'staff can see THAT it happened, never what it said', unread:true }
@@ -6637,10 +6665,10 @@ function renderRenew(){
       (reversed
         ? '<div class="qrow"><div class="qrow__main"><b>Reversing journal lines — never edits</b><span>the original posting stands; the reversal is its own entry (R24)</span></div><div class="qrow__end"><span class="mono">S3</span></div></div>' +
           '<div class="qrow"><div class="qrow__main"><b>Detroit already got the remittance</b><span>so the reversal creates a <b>receivable on Detroit&rsquo;s next statement</b> — never a negative liability</span></div><div class="qrow__end"><span class="mono">recv-118</span></div></div>' +
-          '<div class="qrow"><div class="qrow__main"><b>Standing reverted, effective-dated</b><span>your ballot eligibility recomputed the moment it happened — check <a href="#/member/voting">Voting</a></span></div><div class="qrow__end"><span class="c-pill c-pill--danger">effective today</span></div></div>' +
+          '<div class="qrow"><div class="qrow__main"><b>Standing reverted, effective-dated</b><span>your ballot eligibility recomputed the moment it happened — check <a href="#/ballot">Voting</a></span></div><div class="qrow__end"><span class="c-pill c-pill--danger">effective today</span></div></div>' +
           '<div class="qrow"><div class="qrow__main"><b>Any roll frozen in between</b><span>stays frozen — annotated &ldquo;payment reversed post-freeze&rdquo;, honored by credentialing, never recomputed</span></div><div class="qrow__end"><span class="mono">R43</span></div></div>'
         : '<div class="qrow"><div class="qrow__main"><b>Journal: clearing $40.00 / fee $1.46 / Detroit liability $40.00</b><span>into tonight&rsquo;s daily close, idempotent batch key</span></div><div class="qrow__end"><span class="mono">R20 · R22</span></div></div>' +
-          '<div class="qrow"><div class="qrow__main"><b>Your standing recomputed everywhere</b><span>home, Member 360, the club roster — and <b>your Deputy President ballot reopened</b>: 4.3.1 conjunctive standing is satisfied now</span></div><div class="qrow__end"><a class="btn-xs btn-xs--go" href="#/member/voting">Voting &rarr;</a></div></div>' +
+          '<div class="qrow"><div class="qrow__main"><b>Your standing recomputed everywhere</b><span>home, Member 360, the club roster — and <b>your Deputy President ballot reopened</b>: 4.3.1 conjunctive standing is satisfied now</span></div><div class="qrow__end"><a class="btn-xs btn-xs--go" href="#/ballot">Voting &rarr;</a></div></div>' +
           '<div class="qrow"><div class="qrow__main"><b>Try the hard part</b><span>what if this card charges back AFTER Detroit gets its remittance? The red team asked; S3 answers.</span></div><div class="qrow__end"><button class="btn-xs" onclick="SIMS2.chargeback()">simulate: chargeback</button></div></div>') +
       '</div><div class="panel__foot"><span class="why">' + (reversed
         ? 'One reversal model for dues, gifts, store and conduit money — born from the round-1 breaks in J02, J04 and J12.'
@@ -7089,7 +7117,7 @@ function renderBuilder(kind){
   } else {
     body = '<div class="j-welcome" style="padding:var(--s5)"><h2 style="font-size:22px">Published.</h2>' +
       '<p class="j-sub" style="margin:0 auto var(--s3);max-width:52ch"><b>' + esc(EVT.published[EVT.published.length-1].title) + '</b> is live on the member lens — open it, register for it, and watch the same rails you just configured do their work.</p>' +
-      '<div class="j-row" style="justify-content:center"><a class="c-btn c-btn--sm" href="#/member/events">See it on Events</a><button class="j-btn j-btn--ghost" onclick="EVTB.again()">Create another</button></div></div>';
+      '<div class="j-row" style="justify-content:center"><a class="c-btn c-btn--sm" href="#/events">See it on Events</a><button class="j-btn j-btn--ghost" onclick="EVTB.again()">Create another</button></div></div>';
   }
   el.innerHTML = st + '<div class="j-card">' + body + '</div>';
 }
@@ -7336,7 +7364,7 @@ function tabBylaws(e){
         '<div class="qrow"><div class="qrow__main"><b>Dues schedule for 2028</b><span>authority moves to the Board under 2024.1</span></div><div class="qrow__end"><span class="c-pill c-pill--warn">moves to 2024.1</span></div></div>' +
         '</div><div class="rowflex" style="margin-top:var(--s3)"><button class="c-btn c-btn--sm" onclick="INSTS.adopt()">Adopt &mdash; effective today</button><button class="btn-xs" onclick="INSTS.cancelAdopt()">not yet</button></div>';
     } else {
-      h2 += '<div class="verdict verdict--allow"><span class="verdict__ic">&#10003;</span><div><b>bylaws-2024.1 is in force.</b><p>The governed-by chip in the top bar changed, and live rules moved with it. Check the <a href="#/fed/credentialing">credentialing</a> and <a href="#/member/voting">voting</a> screens &mdash; and note what did <i>not</i> move: the frozen 2026 roll still reads 971 under <span class="mono">bylaws-2012.2</span>, because a snapshot keeps the ruleset it froze under. Nothing was recomputed.</p></div></div>' +
+      h2 += '<div class="verdict verdict--allow"><span class="verdict__ic">&#10003;</span><div><b>bylaws-2024.1 is in force.</b><p>The governed-by chip in the top bar changed, and live rules moved with it. Check the <a href="#/election">credentialing</a> and <a href="#/ballot">voting</a> screens &mdash; and note what did <i>not</i> move: the frozen 2026 roll still reads 971 under <span class="mono">bylaws-2012.2</span>, because a snapshot keeps the ruleset it froze under. Nothing was recomputed.</p></div></div>' +
         '<div class="rowflex" style="margin-top:var(--s3)"><button class="btn-xs" onclick="INSTS.unadopt()">rewind the demo</button><a class="btn-xs" href="#/fed/workbench">open the workbench</a></div>';
     }
     h2 += '</div></div>';
@@ -8105,7 +8133,8 @@ function renderMore(){ window.__renderMore=renderMore;
   else if(S.mtab==='book'){
     h+='<div class="grid grid--2"><div class="panel"><div class="panel__head"><div><h3>Your line, in the book&rsquo;s own format</h3><p>Same numbering, same entry shape &mdash; rendered by the same component the federation console uses</p></div></div><div class="panel__body">'+
       bookHtml()+
-      '<p class="why" style="margin-top:var(--s3)">One document, two renderings. The <b>reference number is the citation</b> &mdash; quote <span class="mono">AWD863</span> in a correction, an evidence packet or a footnote and everyone points at the same entry.</p></div></div>';
+      '<p class="why" style="margin-top:var(--s3)"><b>The book prints living people&rsquo;s dates; this page does not.</b> A volume in a few hundred homes and a crawlable web page are not the same exposure, so signed out the living show a name and a position in the line and nothing else. Deceased people are unaffected &mdash; they are already published in Shaheen 1982, and the heritage this tree exists for is almost entirely theirs.</p>'+
+      '<p class="why">One document, two renderings. The <b>reference number is the citation</b> &mdash; quote <span class="mono">AWD863</span> in a correction, an evidence packet or a footnote and everyone points at the same entry.</p></div></div>';
     h+='<div style="display:grid;gap:var(--s5);align-content:start"><div class="panel"><div class="panel__head"><h3>Two views, one component</h3></div><div class="panel__body panel__body--flush">'+
       '<div class="qrow"><div class="qrow__main"><b>Book view</b><span>numbered entries, patronymic names, children by reference &mdash; for reading, citing and printing</span></div><div class="qrow__end"><span class="c-pill c-pill--ok">this tab</span></div></div>'+
       '<div class="qrow"><div class="qrow__main"><b>Line view</b><span>generation by generation with a source and confidence per link &mdash; for proving a claim</span></div><div class="qrow__end"><span class="c-pill c-pill--info">above</span></div></div>'+
@@ -8400,6 +8429,7 @@ function treeHtml(){
     row.forEach(function(n,ci){ pos[n.id]={x:off+ci*W+9, y:ri*H+12}; });
   });
   var h='<div class="tv-bar"><span class="c-pill c-pill--info">hourglass &middot; click any person to re-centre</span>'+
+    (window.LIVEGATE?LIVEGATE.note()+'<button class="btn-xs" onclick="LIVEGATE.toggle()">'+(LIVEGATE.signedIn()?'view signed out':'sign in')+'</button>':'')+
     (V.draft.length?'<span class="c-pill c-pill--muted">'+V.draft.length+' unsubmitted change'+(V.draft.length>1?'s':'')+'</span>':'')+
     (V.pending.length?'<span class="c-pill c-pill--warn">'+V.pending.length+' awaiting the committee</span>':'')+'</div>';
 
@@ -8421,7 +8451,9 @@ function treeHtml(){
     var st=nodeState(n.id);
     h+='<button class="tv-n'+(V.focus===n.id?' is-focus':'')+(st?' is-'+st:'')+'" style="left:'+pos[n.id].x+'px;top:'+pos[n.id].y+'px" onclick="TV.sel(\''+n.id+'\')">'+
       (st==='pending'?'<span class="tv-badge">pending</span>':st==='draft'?'<span class="tv-badge tv-badge--d">draft</span>':'')+
-      '<b>'+esc(p.n)+'</b><span class="tv-ref">'+esc(p.ref||'—')+'</span><span>'+esc(p.d||'')+(p.pl?' · '+esc(p.pl):'')+'</span>'+
+      '<b>'+esc(p.n)+'</b><span class="tv-ref">'+esc(p.ref||'—')+'</span><span>'+
+      (function(){var d=(window.LIVEGATE?LIVEGATE.dates(p):(p.d||''));
+        return d? esc(d)+(p.pl?' · '+esc(p.pl):'') : (p.real? esc(p.pl||'') : '<i>living &middot; sign in</i>');})()+'</span>'+
       (p.med&&p.med.length?'<span class="tv-med">&#9634; '+p.med.length+'</span>':'')+
       '</button>';
   });
@@ -8437,8 +8469,9 @@ function treeHtml(){
 function detailPanel(){
   var id=V.sel||V.focus, p=personOf(id); if(!p) return '';
   var st=nodeState(id);
+  var vd=(window.LIVEGATE?LIVEGATE.dates(p):(p.d||''));
   var h='<div class="panel"><div class="panel__head"><div><h3>'+esc(p.n)+'</h3>'+
-    '<p>'+esc(p.ref||'no reference')+' &middot; '+esc(p.d||'')+(p.pl?' &middot; '+esc(p.pl):'')+'</p></div>'+
+    '<p>'+esc(p.ref||'no reference')+(vd?' &middot; '+esc(vd):' &middot; <i>dates hidden while signed out</i>')+(p.pl?' &middot; '+esc(p.pl):'')+'</p></div>'+
     '<div class="panel__head__end">'+(p.real?'<span class="c-pill c-pill--ok">in the record</span>':
       st==='draft'?'<span class="c-pill c-pill--info">your draft</span>':
       st==='pending'?'<span class="c-pill c-pill--warn">pending</span>':'<span class="c-pill c-pill--muted">stand-in</span>')+'</div></div><div class="panel__body">';
@@ -8744,18 +8777,6 @@ window.MRG={go:function(route,i){
   sec.querySelectorAll(':scope > .px-tp').forEach(function(p){ p.hidden = (+p.dataset.t!==i); });
 }};
 </script>
-<script>
-/* ═══ Nav deep-tabs — one route, many doors ═══
-   Seven surfaces absorbed thirty-one routes. The sidebar keeps the task-shaped
-   labels people actually look for ("Convention store", "QuickBooks") and each
-   opens the tab it used to be a route for. Simple list, tabbed surface. */
-document.addEventListener('click', function(e){
-  var a=e.target.closest && e.target.closest('a.l-nav-item[data-go]');
-  if(!a) return;
-  var parts=a.getAttribute('data-go').split(':');
-  setTimeout(function(){ if(window.MRG) window.MRG.go(parts[0], +parts[1]); }, 40);
-}, true);
-</script>
 <style>
 /* ═══ purpose ═══ */
 .pu-step{display:flex;align-items:center;gap:9px;margin:var(--s6) 0 var(--s3)}
@@ -8970,9 +8991,12 @@ if(document.readyState!=='loading') R(); else document.addEventListener('DOMCont
    route too. One table, consulted by the router, covers all of them. */
 (function(){
 var ALIAS={
+  'club/events':['events',1],
+  'club/newevent':['events',3],
   'club/remit':['money',6],
   'fed/board':['governance',0],
   'fed/boardroom':['governance',2],
+  'fed/calendar':['election',0],
   'fed/clubhealth':['clubs',1],
   'fed/clubs':['clubs',0],
   'fed/committees':['governance',1],
@@ -8981,7 +9005,9 @@ var ALIAS={
   'fed/convdesk':['convention',3],
   'fed/convention':['convention',0],
   'fed/convops':['convention',2],
+  'fed/credentialing':['election',1],
   'fed/directory':['directory',0],
+  'fed/events':['events',0],
   'fed/finance':['money',1],
   'fed/hsn':['institutions',2],
   'fed/identity':['people',1],
@@ -8989,20 +9015,31 @@ var ALIAS={
   'fed/institutions':['institutions',0],
   'fed/ledger':['money',0],
   'fed/lifeevents':['fed/tree',0],
+  'fed/mailedballot':['election',2],
   'fed/migration':['clubs',2],
   'fed/newinst':['institutions',3],
   'fed/qbo':['money',3],
+  'fed/results':['election',3],
   'fed/supportdesk':['people',2],
+  'member/ballot':['ballot',1],
+  'member/ballot/confirm':['ballot',2],
+  'member/ballot/sealed':['ballot',3],
   'member/convention':['convention',4],
   'member/convhelp':['convention',6],
   'member/convlive':['convention',5],
   'member/convstore':['convention',7],
   'member/directory':['directory',1],
   'member/dirinclusion':['directory',2],
+  'member/event/harvest':['event',2],
+  'member/event/lecture':['event',1],
+  'member/event/party':['event',0],
+  'member/events':['events',2],
   'member/lifeevent':['member/family',0],
+  'member/voting':['ballot',0],
   'program/budget':['money',4],
   'program/conflicts':['program/applications',0],
-  'program/disbursement':['money',5]
+  'program/disbursement':['money',5],
+  'program/newevent':['events',4]
 };
 var pending=window.__ALIAS_PENDING||null;
 function key(r){ return String(r||'').replace(/^#?\/?/,''); }
@@ -9038,6 +9075,45 @@ function fromHash(){
 window.addEventListener('hashchange',fromHash);
 if(document.readyState!=='loading') fromHash(); else document.addEventListener('DOMContentLoaded',fromHash);
 window.__ROUTE_ALIAS=ALIAS;
+})();
+</script>
+<script>
+/* ═══ Nav deep-tabs — one route, many doors ═══
+   Seven surfaces absorbed thirty-one routes. The sidebar keeps the task-shaped
+   labels people actually look for ("Convention store", "QuickBooks") and each
+   opens the tab it used to be a route for. Simple list, tabbed surface. */
+document.addEventListener('click', function(e){
+  var a=e.target.closest && e.target.closest('a.l-nav-item[data-go]');
+  if(!a) return;
+  var parts=a.getAttribute('data-go').split(':');
+  setTimeout(function(){ if(window.MRG) window.MRG.go(parts[0], +parts[1]); }, 40);
+}, true);
+</script>
+<script>
+/* ═══ Living-date gate — nothing for the living without sign-in ═══════════
+   The printed book carries living people's birth dates. A signed-out web page
+   is a different exposure, so signed out the living show name and position
+   only. Deceased people are unaffected: they are already published, and the
+   heritage the tree exists for is almost entirely theirs. */
+(function(){
+var S={signedIn:false};
+function isLiving(p){ return !(p && (p.real || /d\.\s|deceased|–\s*\d{4}/i.test(p.d||''))); }
+window.LIVEGATE={
+  on:function(){ return !S.signedIn; },
+  toggle:function(){ S.signedIn=!S.signedIn; if(window.__renderMore) window.__renderMore(); },
+  signedIn:function(){ return S.signedIn; },
+  /* a person's dates, as this viewer may see them */
+  dates:function(p){
+    if(!p) return '';
+    if(S.signedIn || !isLiving(p)) return p.d||'';
+    return '';
+  },
+  note:function(){
+    return S.signedIn
+      ? '<span class="c-pill c-pill--ok">signed in &middot; full record</span>'
+      : '<span class="c-pill c-pill--warn">signed out &middot; living people show name only</span>';
+  }
+};
 })();
 </script>
 </body>
